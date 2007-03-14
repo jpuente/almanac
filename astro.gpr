@@ -1,0 +1,26 @@
+with "../ephemeris/ephemeris.gpr";
+
+project Astro is
+
+   for Source_Dirs use ("include", "src");
+   for Object_Dir use "obj";
+   for Exec_Dir use "bin";
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("-A1", "-A2", "-A3");
+   end Pretty_Printer;
+
+   package Builder is
+      for Default_Switches ("ada") use ("-m");
+   end Builder;
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-g", "-gnat05");
+   end Compiler;
+
+   package Linker is
+      for Default_Switches ("ada") use ("-g");
+   end Linker;
+
+end Astro;
+
