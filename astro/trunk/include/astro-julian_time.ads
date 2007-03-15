@@ -22,9 +22,9 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
-with Numerics;
+--with Numerics;
 with Ada.Calendar;
-package Julian_Time is
+package Astro.Julian_Time is
    -- Julian time is counted in days from noon on January 1, 4713 BC.
    -- This way of counting time was proposed by J. J. Scaliger
    -- in 1583 and is commonly used in astronomical calculations.
@@ -36,4 +36,4 @@ package Julian_Time is
    function Date_Of (T : Ada.Calendar.Time) return Date;
    function Time_Of (D : Date) return Ada.Calendar.Time;
 
-end Julian_Time;
+end Astro.Julian_Time;
