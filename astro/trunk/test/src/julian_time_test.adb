@@ -1,20 +1,22 @@
-with AUnit.Test_Cases.Registration;
-use AUnit.Test_Cases.Registration;
-with AUnit.Assertions; use AUnit.Assertions;
+with AUnit;
+-- use AUnit.Test_Cases.Registration;
+-- use AUnit.Assertions;
 
-with Julian_Time;
+with Astro.Generic_Julian_Time;
 with Ada.Calendar;
 
-package body PR_Julian_Time_000 is
+package body Julian_Time_Test is
+   use Assertions;
 
+   package Julian_Time is
+     new Astro.Generic_Julian_Time (Long_Long_Float);
    use Julian_Time;
    use Ada.Calendar;
 
+-- Fixture elements;
+
    Noon     : constant Day_Duration := 43_200.0;
    Midnight : constant Day_Duration := 0.0;
-
-   -- Fixture elements;
-
    T0, T1, T2 : Time;
    D0, D1, D2 : Date;
 
@@ -31,8 +33,8 @@ package body PR_Julian_Time_000 is
      (T : in out Aunit.Test_Cases.Test_Case'Class) is
    begin
       Assert((Date_Of(T0) = D0)
-        and (Date_Of(T1) = D1)
-        and (Date_Of(T2) = D2),
+        and  (Date_Of(T1) = D1)
+        and  (Date_Of(T2) = D2),
       "conversion to Julian date is incorrect");
    end Test_Date;
 
@@ -40,8 +42,8 @@ package body PR_Julian_Time_000 is
      (T : in out Aunit.Test_Cases.Test_Case'Class) is
    begin
       Assert((Time_Of(D0) = T0)
-        and (Time_Of(D1) = T1)
-        and (Time_Of(D2) = T2),
+        and  (Time_Of(D1) = T1)
+        and  (Time_Of(D2) = T2),
       "conversion from Julian date is incorrect");
    end Test_Time;
 
@@ -49,9 +51,9 @@ package body PR_Julian_Time_000 is
    -- Name --
    ----------
 
-   function Name (T : Test_Case) return String_Access is
+   function Name (T : Test_Case) return AUnit.Test_String is
    begin
-      return new String'("Test Julian_time package");
+      return Format ("Test Julian_time package");
    end Name;
 
    --------------------
@@ -59,6 +61,7 @@ package body PR_Julian_Time_000 is
    --------------------
 
    procedure Register_Tests (T : in out Test_Case) is
+      use Test_Cases.Registration;
    begin
       Register_Routine
         (T, Test_Date'Access, "Test conversion to Julian date");
@@ -66,4 +69,4 @@ package body PR_Julian_Time_000 is
         (T, Test_Time'Access, "Test conversion from Julian date");
    end Register_Tests;
 
-end PR_Julian_Time_000;
+end Julian_Time_Test;

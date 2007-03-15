@@ -22,7 +22,7 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
-package body Julian_Time is
+package body Astro.Generic_Julian_Time is
    use Ada.Calendar;
 
    -- Reference : Fliegel & Van Flandern, Comm. ACM. vol. 11, no. 10,
@@ -84,4 +84,4 @@ package body Julian_Time is
       return Time_Of(Year,Month,Day,Seconds);
    end Time_Of;
 
-end Julian_Time;
+end Astro.Generic_Julian_Time;

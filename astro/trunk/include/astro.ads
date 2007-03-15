@@ -1,10 +1,10 @@
------------------------------------------------------------------------
+----------------------------------------------------------------------
 -- Astro - Ada 2005 library for astrometry.                          --
 --                                                                   --
 -- This package provides abstractions for Julian time.               --
 --                                                                   --
 -----------------------------------------------------------------------
---  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
+--  Copyright (C) 2007 Juan A. de la Puente  <jpuente@dit.upm.es>    --
 --  This unit was originally developed by Juan A. de la Puente.      --
 -----------------------------------------------------------------------
 -- This library is free software; you can redistribute it and/or     --
@@ -22,18 +22,15 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
---with Numerics;
-with Ada.Calendar;
-package Astro.Julian_Time is
-   -- Julian time is counted in days from noon on January 1, 4713 BC.
-   -- This way of counting time was proposed by J. J. Scaliger
-   -- in 1583 and is commonly used in astronomical calculations.
+with Ephemeris;
+package Astro is
+   pragma Pure (Astro);
 
-   subtype Date is Numerics.Real range 0.0 .. 3_000_000.0;
+   Ephemeris_Error : exception renames Ephemeris.Ephemeris_Error;
+   Date_Error      : exception renames Ephemeris.Date_Error;
 
-   Epoch: constant Date := 2_451_545.0;   -- J2000.0 epoch
+   type Object is new Ephemeris.Object;
+   --     (Mercury, Venus,  Earth,   Mars,  Jupiter,
+   --      Saturn,  Uranus, Neptune, Pluto, Moon, Sun);
 
-   function Date_Of (T : Ada.Calendar.Time) return Date;
-   function Time_Of (D : Date) return Ada.Calendar.Time;
-
-end Astro.Julian_Time;
+end Astro;
