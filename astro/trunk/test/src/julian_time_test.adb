@@ -53,7 +53,7 @@ package body Julian_Time_Test is
 
    function Name (T : Test_Case) return AUnit.Test_String is
    begin
-      return Format ("Test Julian_time package");
+      return Format ("Julian_time");
    end Name;
 
    --------------------
@@ -64,9 +64,9 @@ package body Julian_Time_Test is
       use Test_Cases.Registration;
    begin
       Register_Routine
-        (T, Test_Date'Access, "Test conversion to Julian date");
+        (T, Test_Date'Access, "Conversion to Julian date");
       Register_Routine
-        (T, Test_Time'Access, "Test conversion from Julian date");
+        (T, Test_Time'Access, "Conversion from Julian date");
    end Register_Tests;
 
 end Julian_Time_Test;

@@ -6,15 +6,15 @@ project Test is
    for Source_Dirs use ("test/src");
    for Object_Dir use "test/obj";
    for Exec_Dir use "test/bin";
-   for Main use ("harness.adb");
-
-   package Compiler is
-      for Default_Switches ("ada") use ("-g", "-gnat05");
-   end Compiler;
+   for Main use ("test.adb");
 
    package Linker is
       for Default_Switches ("ada") use ("-g");
    end Linker;
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-g", "-gnat05");
+   end Compiler;
 
 end Test;
 
