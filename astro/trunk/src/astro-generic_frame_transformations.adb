@@ -1,8 +1,5 @@
 -----------------------------------------------------------------------
 -- Astro - Ada 2005 library for astrometry.                          --
---                                                                   --
--- This package provides frame transformation procedures.            --
---                                                                   --
 -----------------------------------------------------------------------
 --  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
 --  This unit was originally developed by Juan A. de la Puente.      --
@@ -22,12 +19,15 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
-with Numerics;
+with Astro.Constants;
 
-package body Frame_Transformations is
+package body Astro.Generic_Frame_Transformations is
 
-   use Numerics;
+   use Astro.Constants;
    use Real_Functions;
+
+   -- subtype Vector is Real_Arrays.Real_Vector(1..3);
+   subtype Matrix is Real_Arrays.Real_Matrix(1..3,1..3);
 
    ------------------------------
    -- Correct light deflection --
@@ -42,16 +42,17 @@ package body Frame_Transformations is
    is
       use type Real_Arrays.Real_Vector;
 
-      C  : constant := Numerics.C*1000.0;     -- Light speed in m/s
-      Mu : constant := Numerics.Mu;           -- Gravitational constant m3/s2
+      C  : constant := Constants.C*1000.0;     -- Light speed in m/s
+      Mu : constant := Constants.Mu;           -- Gravitational constant m3/s2
+      AU : constant := Constants.AU;           -- Astronomical Unit in km
 
       U1, Q1, E1 : Vector; -- unit vectors
       Em, G1, G2 : Real;
       UQ, EU     : Real;
    begin
-      U1 := U/abs(U);
-      Q1 := Q/abs(Q);
-      E1 := EH/abs(EH);
+      U1 := U/abs(U);           -- geocentric direction of the body
+      Q1 := Q/abs(Q);           -- heliocentric direction of the body
+      E1 := EH/abs(EH);         -- heliocentric direction of Earth
       Em := abs(EH)*AU*1000.0;  -- Earth-Sun distance in m
       G1 := 2.0*Mu/(C**2*Em);
       G2 := 1.0 + Q1*E1;
@@ -67,19 +68,20 @@ package body Frame_Transformations is
 
    -- Reference: Explanatory Supplement to the Astronomical Almanac, 3.317.
 
-   procedure Correct_Aberration (U       : in out Vector;
-                                 VEB     :        Vector)
+   procedure Correct_Aberration (U       : in out Vector; -- geo. position
+                                 VEB     :        Vector) -- bary. Earth vel.
    is
       use type Real_Arrays.Real_Vector;
 
-      C :constant := Numerics.C/AU*86400.0; -- Light speed in AU/day
+      AU : constant := Constants.AU;           -- Astronomical Unit in km
+      C  : constant := Constants.C/AU*86400.0; -- Light speed in AU/day
 
       P, V   : Vector;
       Beta   : Real;
       F1, F2 : Real;
 
    begin
-      P     := U/abs(U);     -- Unit vector on the dircetion of U.
+      P     := U/abs(U);         -- Unit vector on the direction of U.
       V     := VEB/C;            -- Earth velocity in units of C.
       Beta  := sqrt(1.0 - V*V);
       F1    := P*V;
@@ -212,4 +214,4 @@ package body Frame_Transformations is
         + 0.0002*cos(200.9 + 1.97129*T,deg);
    end Get_Nutation_Angles;
 
-end Frame_Transformations;
+end Astro.Generic_Frame_Transformations;

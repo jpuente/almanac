@@ -22,13 +22,12 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
-with Frame_Transformations;
-with Numerics;
-package body Sidereal_Time is
+
+package body Astro.Generic_Sidereal_Time is
    -- Reference: Explanatory Supplemment to the Astronomical Almanac (ESAA),
    -- pp. 50-53 & 109-120
 
-   use Numerics;
+   -- use Numerics;
    package Julian renames Julian_Time;
    use type Julian.Date;
 
@@ -67,8 +66,8 @@ package body Sidereal_Time is
    function Equinoxes(D: Julian.Date) return Real
    is
       use Frame_Transformations;
-      use Numerics.Real_Functions;
-      subtype Real is Numerics.Real;
+      use Real_Functions;
+
       deg : constant := 360.0;
 
       Epsilon, Epsilon_0       : Real;
@@ -101,4 +100,4 @@ package body Sidereal_Time is
       return Theta;
    end GST;
 
-end Sidereal_Time;
+end Astro.Generic_Sidereal_Time;

@@ -22,8 +22,9 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
-
 with Astro.Generic_Julian_Time;
+with Astro.Generic_Frame_Transformations;
+with Ada.Numerics.Generic_Real_Arrays;
 
 -- This unit provides a framework for the instantiation of the Astro
 -- library components for a particular floating point type and
@@ -31,9 +32,20 @@ with Astro.Generic_Julian_Time;
 
 generic
    type Real is digits <>;
+   with package Real_Functions is
+     new Ada.Numerics.Generic_Elementary_Functions (Real);
+   with package Real_Arrays is
+     new Ada.Numerics.Generic_Real_Arrays (Real);
 package Astro.Framework is
 
    package Julian_Time is
      new Astro.Generic_Julian_Time(Real);
+
+   package Frame_Transformations is
+     new Astro.Generic_Frame_Transformations
+       (Real,
+        Real_Functins,
+        Real_Arrays,
+        Julian_Time);
 
 end Astro.Framework;

@@ -1,8 +1,5 @@
 -----------------------------------------------------------------------
--- Astro - Ada 2005 library for astrometry.                          --
---                                                                   --
--- This package provides frame transformation procedures.            --
---                                                                   --
+--  Astro - Ada 2005 library for astrometry.                          --
 -----------------------------------------------------------------------
 --  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
 --  This unit was originally developed by Juan A. de la Puente.      --
@@ -24,7 +21,15 @@
 -----------------------------------------------------------------------
 with Ada.Numerics.Generic_Elementary_Functions;
 with Ada.Numerics.Generic_Real_Arrays;
+
 with Astro.Generic_Julian_Time;
+
+-- This package provides frame transformations for position
+-- and velocity vectors.
+
+-- Reference: P.K. Seildemann (ed.), Explanatory Supplement to the
+-- Astronomical Almanac, ch. 3.
+
 generic
    type Real is digits <>;
    with package Real_Functions is
@@ -40,13 +45,13 @@ package Astro.Generic_Frame_Transformations is
    package Julian renames Julian_Time;
 
    procedure Correct_Light_Deflection
-     (U  : in out Vector;  -- geocentric position of the body
-      Q  :        Vector;  -- heliocentric position of the body
-      EH :        Vector);  -- heliocentric position of the Earth
+     (U  : in out Vector;               -- geocentric position of the body
+      Q  :        Vector;               -- heliocentric position of the body
+      EH :        Vector);              -- heliocentric position of the Earth
 
    procedure Correct_Aberration
-     (U       : in out Vector;  -- geocentric position vector
-      VEB     :        Vector); -- barycentric Earth velocity vector
+     (U       : in out Vector;          -- geocentric position vector
+      VEB     :        Vector);         -- barycentric Earth velocity vector
 
    procedure Precess
      (U    : in out Vector;             -- geocentric position vector

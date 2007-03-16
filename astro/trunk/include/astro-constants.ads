@@ -1,13 +1,8 @@
 -----------------------------------------------------------------------
--- Astro - Ada 2005 library for astrometric calculations             --
---                                                                   --
--- This package provides numerics data types and functions used      --
--- in other packages.    --
---                                                                   --
--- WARNING: The astro library relies on the ephemeris library.       --
------------------------------------------------------------------------
---  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
---  This unit was originally developed by Juan A. de la Puente.      --
+--  Astro - Ada 2005 library for astrometric calculations             --
+----------------------------------------------------------------------
+-- Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
+-- This unit was originally developed by Juan A. de la Puente.      --
 -----------------------------------------------------------------------
 -- This library is free software; you can redistribute it and/or     --
 -- modify it under the terms of the GNU General Public               --
@@ -24,22 +19,12 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
-with Ada.Numerics.Generic_Elementary_Functions;
---with Ada.Numerics.Generic_Real_Arrays;
-with Generic_Real_Arrays;
-package Numerics is
+with Ada.Numerics;
 
-   -- Numeric data types
-   subtype Real   is Long_long_Float;
+-- This package provides numerics constants used in other packages.
 
-   package Real_Functions is
-     new Ada.Numerics.Generic_Elementary_Functions (Real);
-   package Real_Arrays is
-     --new Ada.Generic_Real_Arrays (Real);
-     new Generic_Real_Arrays (Real);
-
-   subtype Vector is Real_Arrays.Real_Vector(1..3);
-   subtype Matrix is Real_Arrays.Real_Matrix(1..3,1..3);
+package Astro.Constants is
+   pragma Pure (Astro.Constants);
 
    -- Constants
    Pi : constant := Ada.Numerics.Pi;
@@ -51,4 +36,4 @@ package Numerics is
    R  : constant := 6378.140;                  -- Earth radius in km
    F  : constant := 0.00335281;                -- Earth flattening factor
 
-end Numerics;
+end Astro.Constants;

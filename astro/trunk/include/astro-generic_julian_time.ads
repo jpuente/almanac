@@ -1,8 +1,5 @@
 -----------------------------------------------------------------------
--- Astro - Ada 2005 library for astrometry.                          --
---                                                                   --
--- This package provides abstractions for Julian time.               --
---                                                                   --
+--  Astro - Ada 2005 library for astrometry.                          --
 -----------------------------------------------------------------------
 --  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
 --  This unit was originally developed by Juan A. de la Puente.      --
@@ -23,6 +20,9 @@
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
 with Ada.Calendar;
+
+-- This package provides abstractions for Julian time.
+
 generic
    type Real is digits <>;
 package Astro.Generic_Julian_Time is
