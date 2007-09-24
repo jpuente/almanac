@@ -1,0 +1,71 @@
+% -*- coding: utf-8 -*-
+%======================================================================
+% $Id: $ Identificación de control de versiones
+%== preámbulo =========================================================
+\documentclass[a4paper,twoside,12pt]{book}
+\usepackage{times}                         % tipos PostScript
+\usepackage[spanish,english]{babel}        % idiomas
+\usepackage[utf8]{inputenc}             % caracteres acentuados
+\usepackage{graphicx}                      % figuras
+\usepackage{url}                                 % referencias en internet
+\usepackage{listings}                         % listados
+\usepackage{color}                             % texto de colores
+\usepackage{pfc}                                 % formato de proyecto fin de carrera
+\listfiles
+%-- órdenes y otras definiciones --------------------------------------
+\graphicspath{{logos/}{figuras/}}
+\renewcommand{\lstlistingname}{Listado}
+%\renewcommand{\thelstlisting}{\arabic{lstlisting}}
+\newcommand{\prog}[1]
+  {\lstinline[basicstyle=\small\ttfamily,
+              keywordstyle=\mdseries]$#1$}
+
+%-- datos de identificación
+\titulo{Sistema de navegación de un robot móvil}
+\autor{Paloma de la Puente Yusty}
+\tutor{Diego Rodríguez-Losada González}
+%\ponente{Nombre y apellidos del ponente}
+\fecha{noviembre de 2007}
+\copyrightnote{Copyright \copyright 2007 by Paloma de la Puente Yusty}
+%== documento =========================================================
+\begin{document}
+\selectlanguage{spanish}
+%== páginas iniciales  ================================================
+\thispagestyle{empty}\pagestyle{empty}
+\maketitle             % página inicial y portada
+
+\frontmatter \pagestyle{plain}
+
+%\include{resumen}
+%\include{agradecimientos}
+\tableofcontents
+\listoffigures
+%\listoftables
+%\include{glosario}
+%== cuerpo ============================================================
+\mainmatter\pagestyle{fancy}
+
+\part{Preliminares}
+\include{01_introduccion}
+\include{02_estado_del_arte}
+
+\part{Desarrollo}
+\include{03_arquitectura}
+%\include{04_localizacion}
+%\include{05_movimiento}
+%\include{06_integracion}
+
+%\part{Información Complementaria}
+
+\appendix
+\include{a1_apendice}
+\include{a2_presupuesto}
+
+\bibliographystyle{unsrt}
+\bibliography{biblio}
+%\nocite{*}
+
+% firma
+
+\end{document}
+

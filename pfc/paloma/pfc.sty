@@ -1,0 +1,151 @@
+x%======================================================================
+% $Id: pfc.sty 2 2007-05-28 11:48:44Z jpuente $ 
+% Identificación de control de versiones
+%======================================================================
+% Estilo de LaTeX para proyectos fin de carrera del DISAM/UPM
+%
+% Juan A. de la Puente <jpuente@dit.upm.es>
+%======================================================================
+\NeedsTeXFormat{LaTeX2e}%[2005/12/01]
+\ProvidesPackage{pfc}[2007/09/17 v1.0 (DISAM/UPM)]
+
+\RequirePackage{graphicx}
+\RequirePackage[spanish]{babel}
+\RequirePackage{ifthen}
+\RequirePackage{fancyhdr}
+%\RequirePackage{geometry}
+
+%----------------------------------------------------------------------
+% Órdenes para la portada
+%----------------------------------------------------------------------
+\newboolean{PFC@externo}\setboolean{PFC@externo}{false}
+
+\newcommand*{\PFC@titulo}{Falta el t\'{\i}tulo del proyecto}
+\newcommand*{\PFC@autor}{Falta el nombre del autor}
+\newcommand*{\PFC@tutor}{Falta el nombre del tutor}
+\newcommand*{\PFC@ponente}{Falta el nombre del ponente}
+\newcommand*{\PFC@fecha}{Falta la fecha}
+\newcommand{\PFC@copyrightnote}{Falta la nota de copyright}
+
+\newcommand{\titulo}[1]{\renewcommand*{\PFC@titulo}{#1}}
+\newcommand{\autor}[1]{\renewcommand*{\PFC@autor}{#1}}
+\newcommand{\tutor}[1]{\renewcommand*{\PFC@tutor}{#1}}
+\newcommand{\ponente}[1]{\renewcommand*{\PFC@ponente}{#1}%
+  \setboolean{PFC@externo}{true}}
+
+\newcommand{\fecha}[1]{\renewcommand*{\PFC@fecha}{#1}}
+\newcommand{\copyrightnote}[1]{\renewcommand{\PFC@copyrightnote}{#1}}
+%----------------------------------------------------------------------
+% Portada y copyright
+%----------------------------------------------------------------------
+\renewcommand\maketitle{
+\begin{titlepage}
+    \begin{center}
+      {\large\bfseries UNIVERSIDAD POLIT\'{E}CNICA DE MADRID}\\[1.0cm]
+     	 \begin{tabular}{cc}
+      		\begin{minipage}{6cm}\centering
+      			\includegraphics[width=4cm]{logoupm} 
+      		\end{minipage}
+      &
+      		\begin{minipage}{8cm}\centering\bfseries
+      			DEPARTAMENTO DE AUTOM\'{A}TICA\\
+			INGENIER\'{I}A ELECTR\'{O}NICA\\
+			E INFORM\'{A}TICA INDUSTRIAL
+      	           \end{minipage}
+	\end{tabular}
+      
+     	 \vspace{3cm}
+      
+     	 {\Large\bfseries División de Ingenier\'{i}a de Sistemas\\
+                   		   y Autom\'{a}tica (DISAM)}
+                    
+      	\vspace{6cm}
+      	
+	{\large\bfseries
+	\begin{tabular*}{\textwidth}{p{6cm}ll}
+	&\multicolumn{2}{p{10cm}}{\Large\itshape \PFC@titulo}\\
+	&AUTOR: & \PFC@autor\\
+	&TUTOR: & \PFC@tutor\\
+	 \ifthenelse{\boolean{PFC@externo}}{
+      	    &PONENTE: & \PFC@ponente\\}{}
+	\end{tabular*}}
+	
+	\vfill
+		
+	\begin{tabular*}{\textwidth}{lr}
+		\begin{minipage}{8cm}
+			ESCUELA T\'{E}CNICA SUPERIOR\\
+			DE INGENIEROS INDUSTRIALES\\
+			José Guti\'{e}rrez Abascal, 2\\
+			28006 Madrid
+		\end{minipage}
+		& Madrid, \PFC@fecha
+	\end{tabular*}
+      
+
+   \end{center}
+\end{titlepage}
+  
+  \clearpage
+  {\small  \PFC@copyrightnote}
+
+%----------------------------------------------------------------------
+% limpieza
+%----------------------------------------------------------------------
+
+  \global\let\maketitle\relax
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\@title\@empty
+  \global\let\@copyrightnote\@empty
+  \global\let\title\relax
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+}
+
+%----------------------------------------------------------------------
+% Formato de páginas y encabezamientos
+%----------------------------------------------------------------------
+%\geometry{top=3cm, bottom=3cm, inner=3cm, outer=2.5cm}
+
+% definir encabezados y pies
+
+\fancyhf{}
+\fancyhead[RO]{\textsl{\rightmark}}
+\fancyhead[LE]{\textsl{\leftmark}}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancyfoot[LE,RO]{\thepage}
+\fancyfoot[LO,RE]{DISAM-UPM}
+\fancyfoot[C]{\textsl\PFC@autor}
+
+\fancypagestyle{plain}{  % página inicial del capítulo
+	\fancyhead{}            % sin encabezados
+	\renewcommand{\headrulewidth}{0pt} 
+	}
+
+
+%== para emacs ========================================================
+%%% Local Variables:
+%%% mode: latex
+%%% mode: flyspell
+%%% TeX-master: t
+%%% End:
+
+
+
+% \newcommand\frontmatter{%
+%     \cleardoublepage
+%   \@mainmatterfalse
+%   \pagenumbering{roman}}
+% \newcommand\mainmatter{%
+%     \cleardoublepage
+%   \@mainmattertrue
+%   \pagenumbering{arabic}}
+% \newcommand\backmatter{%
+%   \if@openright
+%     \cleardoublepage
+%   \else
+%     \clearpage
+%   \fi
+%   \@mainmatterfalse}
