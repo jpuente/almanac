@@ -1,24 +1,19 @@
 % -*- coding: utf-8 -*-
-
 %======================================================================
 % $Id: $ Identificación de control de versiones
 %== preámbulo =========================================================
-\documentclass[a4paper,12pt]{book}
+\documentclass[a4paper,twoside,12pt]{book}
 \usepackage{times}                         % tipos PostScript
 \usepackage[spanish,english]{babel}        % idiomas
-\usepackage[utf8]{inputenc}                % caracteres acentuados
+\usepackage[utf8]{inputenc}             % caracteres acentuados
 \usepackage{graphicx}                      % figuras
-\usepackage{url}                           % referencias en internet
-\usepackage{listings}                      % listados
-\usepackage{color}                         % texto de colores
-\usepackage{pfc}                           % definiciones específicas
-\usepackage[pdftex,
-            % colorlinks,
-            pdfpagemode=UseOutlines,
-            bookmarks,bookmarksopen
-            ]{hyperref}
+\usepackage{url}                                 % referencias en internet
+\usepackage{listings}                         % listados
+\usepackage{color}                             % texto de colores
+\usepackage{pfc}                                 % formato de proyecto fin de carrera
 
-\listfiles
+%\listfiles
+
 %-- órdenes y otras definiciones --------------------------------------
 \graphicspath{{logos/}{figuras/}}
 \renewcommand{\lstlistingname}{Listado}
@@ -28,71 +23,51 @@
               keywordstyle=\mdseries]$#1$}
 
 %-- datos de identificación
-\titulo{}
+\titulo{Sistema de navegación de un robot móvil}
 \autor{Paloma de la Puente Yusty}
 \tutor{Diego Rodríguez-Losada González}
 %\ponente{Nombre y apellidos del ponente}
-%-- tribunal
-\presidente{D. Nombre y apellidos del presidente}
-\vocal{D. Nombre y apellidos del vocal}
-\secretario{D. Nombre y apellidos del secretario}
-\suplente{D. Nombre y apellidos del suplente}
-%-- fecha y copyright
-\fecha{Septiembre de 2007}
+\fecha{noviembre de 2007}
 \copyrightnote{Copyright \copyright 2007 by Paloma de la Puente Yusty}
 %== documento =========================================================
-%\includeonly{03_arquitectura}
-
 \begin{document}
 \selectlanguage{spanish}
-%== páginas iniciales  ================================================
-\thispagestyle{empty}\pagestyle{empty}
-%\maketitle             % página inicial y portada
+%== páginas iniciales  ====================================================
+\pagestyle{empty}
+%\currentpage\pagedesign
+\maketitle             % página inicial y portada
 
 \frontmatter
-\include{resumen}
-\include{agradecimientos}
+%\include{resumen}
+%\include{agradecimientos}
 \tableofcontents
 \listoffigures
-\listoftables
-\include{glosario}
+%\listoftables
+%\include{glosario}
 %== cuerpo ============================================================
-\mainmatter
+\mainmatter\pfchdr
 
 \part{Preliminares}
 \include{01_introduccion}
-\include{02_estado_del_arte}
+%\include{02_estado_del_arte}
 
 \part{Desarrollo}
-\include{03_arquitectura}
-\include{04_localizacion}
-\include{05_movimiento}
-\include{06_integracion}
-\part{Información Complementaria}
-\include{07_conclusiones}
+%\include{03_arquitectura}
+%\include{04_localizacion}
+%\include{05_movimiento}
+%\include{06_integracion}
 
+%\part{Información Complementaria}
 
-%== final =============================================================
 \appendix
 \include{a1_apendice}
-\include{a2_apendice}
-\include{a3_apendice}
-\include{a4_presupuesto}
+\include{a2_presupuesto}
 
 \bibliographystyle{unsrt}
 \bibliography{biblio}
-\nocite{*}
+%\nocite{*}
 
-% firma\textbf{Programas empleados}
-
-\begin{itemize}
-  \item Microsoft Visual C++ 6.0 y  Visual Studio .NET 2005 (Visual Studio 8) para el desarrollo del software.
-  \item Editor de \LaTeX WinEdt para la elaboraci\'{o}n del presente documento.
-  \item Microsoft Project para la obtenci\'{o}n de figuras y diagramas de planificaci\'{o}n del proyecto.
-  \item Microsoft Office PowerPoint para la creaci\'{o}n de figuras y esquemas generales a incluir en esta documentaci\'{o}n.
-  \item Subversion como controlador de versiones.
-\end{itemize}
-
+firma
 
 \end{document}
 
