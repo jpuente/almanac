@@ -1,7 +1,9 @@
 % -*- coding: utf-8 -*-
-
-\chapter{Introducción}
-
+%======================================================================
+% $Id: $ Identificación de control de versiones
+%======================================================================
+\chapter{Introducción}\label{ch:introduccion}
+%---------------------------------------------------------------------------------------------------------------------------
 \section{Preámbulo}
 
 La robótica móvil es un campo de investigación relativamente reciente que actualmente ocupa importantes líneas de trabajo en laboratorios y centros técnicos de todo el mundo. Su desarrollo supone la integración de numerosas disciplinas entre las que se encuentran la automática, la electrónica, la ingeniería mecánica, la informática, la inteligencia artificial, la estadística \ldots
@@ -17,34 +19,32 @@ Los robots móviles presentan la gran ventaja de poder emplear sus habilidades p
 
 Algunos ejemplos de robots de este tipo son los cortacésped, los robots aspiradora, los \emph{Rovers} de Marte, los robots guía \ldots
 
-Los robots cortacésped suelen utilizar algún medio que delimite la superficie a recorrer (como puede ser un cable que sirva de frontera para cerrar un recinto). Una vez señalada el área de césped a cortar, hacen un barrido irregular de toda la superficie.
+Los robots cortacésped (figura \ref{fg:cortacesped}) suelen utilizar algún medio que delimite la superficie a recorrer (como puede ser un cable que sirva de frontera para cerrar un recinto). Una vez señalada el área de césped a cortar, hacen un barrido irregular de toda la superficie.
 
 \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[width=0.4\textwidth]{Cortacesped}\\
   \caption{Robot cortacésped Automower Husqvarna}\label{fg:cortacesped}
 \end{figure}
 
-Los robots aspiradores son capaces de realizar la limpieza de todo tipo de suelos. Suelen constar de dos ruedas traseras motrices y una rueda delantera directriz. Hay modelos básicos que se mueven de forma aleatoria, sin cubrir normalmente la totalidad del espacio a limpiar, y modelos avanzados que incorporan las últimas técnicas de mapeo para lograr una alta eficiencia de funcionamiento.
+Los robots aspiradores (figura \ref{fg:aspirador})  son capaces de realizar la limpieza de todo tipo de suelos. Suelen constar de dos ruedas traseras motrices y una rueda delantera directriz. Hay modelos básicos que se mueven de forma aleatoria, sin cubrir normalmente la totalidad del espacio a limpiar, y modelos avanzados que incorporan las últimas técnicas de mapeo para lograr una alta eficiencia de funcionamiento.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[width=0.4\textwidth]{aspirador}\\
   \caption{Robot aspirador RoboMaxx }\label{fg:aspirador}
 \end{figure}
 
-Los \emph{rovers} constan de un cuerpo central que se desplaza sobre seis ruedas y tienen una cabeza y un cuello para que las cámaras puedan tener una mejor perspectiva. Estas cámaras se utilizan para la construcción de mapas que les permitan guiarse por el territorio así como para enviar imágenes a la Tierra. Estos robots también cuentan con un un brazo robótico y un gran número de sistemas térmicos, además de los sistemas de baterías y de comunicaciones.
+Los \emph{rovers} constan de un cuerpo central que se desplaza sobre seis ruedas y tienen una cabeza y un cuello para que las cámaras puedan tener una mejor perspectiva (figura \ref{fg:rover}). Estas cámaras se utilizan para la construcción de mapas que les permitan guiarse por el territorio así como para enviar imágenes a la Tierra. Estos robots también cuentan con un un brazo robótico y un gran número de sistemas térmicos, además de los sistemas de baterías y de comunicaciones.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[scale=0.5]{MarsRover2}\\
   \caption{Rover sobre la superficie de Marte}\label{fg:rover}
 \end{figure}
 
-Los rovers \emph{Spirit} y su "gemelo" \emph{Opportunity} aterrizaron en el planeta rojo el 4 y el 25 de enero de 2004, respectivamente. Tienen una capacidad de movilidad mucho mayor que su antecesor el rover \emph{Pathfinder}.
+Los rovers \emph{Spirit} y su ''gemelo''  \emph{Opportunity} aterrizaron en el planeta rojo el 4 y el 25 de enero de 2004, respectivamente. Tienen una capacidad de movilidad mucho mayor que su antecesor el rover \emph{Pathfinder}.
 
-Los robot guía son un tipo de robots móviles que han de tener amplio conocimiento sobre su entorno. Sus requisitos primordiales están orientados a la interacción con las personas, pero también es imprescindible en ellos un buen sistema de navegación que les permita desplazarse de forma autónoma en exposiciones, ferias y museos. Uno de estos robots es \emph{Urbano} (ver \ref{UrbanoProject}, \ref{Urbano}, Anexo B), un robot inteligente que ha sido empleado en el presente proyecto.
+Los robots guía son un tipo de robots móviles que han de tener amplio conocimiento sobre su entorno. Sus requisitos primordiales están orientados a la interacción con las personas, pero también es imprescindible en ellos un buen sistema de navegación que les permita desplazarse de forma autónoma en exposiciones, ferias y museos. Uno de estos robots es \emph{Urbano} (ver los apartados \ref{UrbanoProject}, página \pageref{UrbanoProject},  y \ref{Urbano}, página \pageref{Urbano}, así como el Anexo \ref{B}), un robot inteligente que ha sido empleado en el presente proyecto.
 
+%---------------------------------------------------------------------------------------------------------------
 \section{Antecedentes}
 
 En el grupo de Control Inteligente de la Universidad Politécnica de Madrid, en el cual se ha realizado este proyecto, trabaja un equipo de profesores e ingenieros con elevada experiencia en el campo de los robots móviles.
@@ -53,52 +53,47 @@ En el grupo de Control Inteligente de la Universidad Politécnica de Madrid, en 
 Los proyectos dentro de esta área que más significativamente han contribuido al nivel alcanzado se describen a continuación por orden de antigüedad. En la siguiente sección se describirá el hardware de los robots empleados.
 
 \subsubsection{Panorama (1989-1993)}
-Financiado por la Unión Europea (Proyecto ESPRIT 2483), consiste en la elaboración de un sistema avanzado de percepción y navegación para vehículos industriales dentro de entornos parcialmente estructurados y parcialmente conocidos. El proyecto estuvo orientado a demostrar la viabilidad de sistemas de transporte autónomos que pudieran sustituir a vehículos controlados por conductor en un amplio rango de aplicaciones.
+Financiado por la Unión Europea (Proyecto ESPRIT 2483), consiste en la elaboración de un sistema avanzado de percepción y navegación para vehículos industriales dentro de entornos parcialmente estructurados y parcialmente conocidos. El proyecto estuvo orientado a demostrar la viabilidad de sistemas de transporte autónomos que pudieran sustituir a vehículos controlados por conductor en un amplio rango de aplicaciones (figura \ref{fg:panorama}).
 
 \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[width=0.5\textwidth]{Panorama}\\
   \caption{Proyecto Panorama}\label{fg:panorama}
 \end{figure}
 
 
 \subsubsection{RM-III (1994-1996)}
-Sistema central de control para un sistema industrial de transporte basado en múltiples robots móviles autónomos dotados de inteligencia. Los vehículos tienen un alto grado de autonomía que les permite evitar obstáculos y buscar en cada caso el mejor camino a seguir. Los obstáculos pueden ser tanto fijos como móviles, con lo que la dificultad aumenta. Un componente adicional en la autonomía de los vehículos lo constituye su capacidad para gestionar el nivel de carga de sus baterías, trasladándose y conectándose automáticamente a los puntos de suministro de energía al considerarlo conveniente. Este proyecto fue financiado por la Comisión Interministerial de Ciencia y Tecnología y contó con la participación de UPM-DISAM y de la Universidad Carlos III.
+Sistema central de control para un sistema industrial de transporte basado en múltiples robots móviles autónomos dotados de inteligencia (figura \ref{fg:RM-III}). Los vehículos tienen un alto grado de autonomía que les permite evitar obstáculos y buscar en cada caso el mejor camino a seguir. Los obstáculos pueden ser tanto fijos como móviles, con lo que la dificultad aumenta. Un componente adicional en la autonomía de los vehículos lo constituye su capacidad para gestionar el nivel de carga de sus baterías, trasladándose y conectándose automáticamente a los puntos de suministro de energía al considerarlo conveniente. Este proyecto fue financiado por la Comisión Interministerial de Ciencia y Tecnología y contó con la participación de UPM-DISAM y de la Universidad Carlos III.
 
 \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[width=0.5\textwidth]{Robotica3}\\
   \caption{Proyecto RM-III}\label{fg:RM-III}
 \end{figure}
 
 
 \subsubsection{EVS (1996-1999)}
-Desarrollo de un entorno de ingeniería para facilitar el diseño y la implementación de sistemas autónomos distribuidos con aplicación en robótica móvil y en procesos continuos. Este entorno proporciona herramientas para el prototipado rápido y la experimentación, por medio de un sistema de realidad virtual que modela el sistema en desarrollo y su entorno.
+Desarrollo de un entorno de ingeniería para facilitar el diseño y la implementación de sistemas autónomos distribuidos con aplicación en robótica móvil y en procesos continuos. Este entorno proporciona herramientas para el prototipado rápido y la experimentación, por medio de un sistema de realidad virtual que modela el sistema en desarrollo y su entorno (figura \ref{fg:EVS}).
 
 \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[width=0.5\textwidth]{EVS}\\
   \caption{Proyecto EVS}\label{fg:EVS}
 \end{figure}
 
 
 \subsubsection{Mobinet (1996-2000)}
-Trabajo científico de un amplio conjunto de investigadores europeos en el diseño de un prototipo de robot móvil inteligente y completamente autónomo, con alta capacidad de maniobrabilidad y manipulación. Destinado a servir de ayuda a personas discapacitadas, la interacción con el usuario se lleva a cabo a través de comandos de muy alto nivel. El proyecto fue financiado por la Unión Europea bajo programa TMR (Training and Mobility of Researchers).
+Trabajo científico de un amplio conjunto de investigadores europeos en el diseño de un prototipo de robot móvil inteligente y completamente autónomo, con alta capacidad de maniobrabilidad y manipulación (figura \ref{fg:mobinet}). Destinado a servir de ayuda a personas discapacitadas, la interacción con el usuario se lleva a cabo a través de comandos de muy alto nivel. El proyecto fue financiado por la Unión Europea bajo programa TMR (Training and Mobility of Researchers).
 
 \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
  \centering\includegraphics[scale=1.0]{MobiNet}\\
   \caption{Proyecto MobiNet}\label{fg:mobinet}
 \end{figure}
 
 
 \subsubsection{Blacky (2000-2001)}
-Diseño de un prototipo de robot móvil para navegación en entornos parcialmente estructurados y con un elevado número de personas.El objetivo del proyecto es desarrollar un robot capaz de moverse en entornos complicados, tipo recintos feriales, e interaccionar con las personas que allí se encuentren.
+Diseño de un prototipo de robot móvil para navegación en entornos parcialmente estructurados y con un elevado número de personas (figura \ref{fg:blacky}).El objetivo del proyecto es desarrollar un robot capaz de moverse en entornos complicados, tipo recintos feriales, e interaccionar con las personas que allí se encuentren.
 Desde el punto de vista del control reactivo, los obstáculos no sólo no son fijos, sino que su movimiento es
 totalmente imprevisible. Desde el punto de vista de la localización, se empleaba un sistema de marcas fijas en las paredes. El robot se encuentra con bastante frecuencia totalmente rodeado por personas, lo que complicaba la determinación de su posicionamiento.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[width=0.5\textwidth]{Blacky}\\
   \caption{Proyecto Blacky}\label{fg:blacky}
 \end{figure}
@@ -107,19 +102,17 @@ totalmente imprevisible. Desde el punto de vista de la localización, se empleab
 \subsubsection{WebFair (2001-2004)}
 Proyecto Europeo Ref: IST-2000-29456.
 
-Desarrollo y validación de un sistema de tele-presencia basado en robots móviles, capaz de facilitar el acceso de individuos a grandes exhibiciones y ferias comerciales a través de internet. La construcción de mapas y demás pruebas se realizaron en el Castillo de Belgioso, Italia, dedicado a la celebración de exposiciones.
+Desarrollo y validación de un sistema de tele-presencia basado en robots móviles, capaz de facilitar el acceso de individuos a grandes exhibiciones y ferias comerciales a través de Internet. La construcción de mapas y demás pruebas se realizaron en el Castillo de Belgioso, Italia, dedicado a la celebración de exposiciones (figura \ref{fg:WebFair}).
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[width=0.5\textwidth]{WebFair}\\
   \caption{Proyecto WebFair}\label{fg:WebFair}
 \end{figure}
 
 \subsubsection{Guido (2004)}
-Sistema de navegación robusto para un robot de la empresa Haptica que sirva de ayuda a la movilidad de personas débiles o con problemas de visión. Un punto a destacar entre las mejoras introducidas es la utilización de la información proporcionada por los bordes de segmentos del mapa, lo cual evita redundancias y permite así disminuir el coste computacional \cite{RodriguezLosada05}. Muy buenos resultados en casos reales empleando un ordenador portátil auxiliar.
+Sistema de navegación robusto para un robot de la empresa Haptica que sirva de ayuda a la movilidad de personas débiles o con problemas de visión (figura \ref{fg:guido}). Un punto a destacar entre las mejoras introducidas es la utilización de la información proporcionada por los bordes de segmentos del mapa, lo cual evita redundancias y permite así disminuir el coste computacional \cite{RodriguezLosada05}. Muy buenos resultados en casos reales empleando un ordenador portátil auxiliar.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[scale=0.8]{GuidoProject}\\
   \caption{Proyecto Guido}\label{fg:guido}
 \end{figure}
@@ -127,21 +120,24 @@ Sistema de navegación robusto para un robot de la empresa Haptica que sirva de 
 \subsubsection{Urbano(2001-2004)}\label{UrbanoProject}
 Proyecto de investigación nacional Ref: DPI2001-3652C0201.
 
-Proyecto financiado por el Ministerio de Ciencia y Tecnología y supervisado por la Ciudad de las Artes y las Ciencias de Valencia (CACSA), donde el robot se ha probado con éxito. El módulo de navegación fue desarrollado por Diego Rodríguez-Losada en el marco de su Tesis Doctoral,\cite{Rodriguez-Losada04}
+Proyecto financiado por el Ministerio de Ciencia y Tecnología y supervisado por la Ciudad de las Artes y las Ciencias de Valencia (CACSA), donde el robot se ha probado con éxito (figura \ref{fg:urbano}). El módulo de navegación fue desarrollado por Diego Rodríguez-Losada en el marco de su Tesis Doctoral \cite{Rodriguez-Losada04}.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[width=0.5\textwidth]{UrbanoValencia}\\
   \caption{Proyecto Urbano}\label{fg:urbano}
 \end{figure}
 
 \clearpage
+
 \subsubsection{RobInt (2004-2007)}
 Ref: DOI 2004-007908C0201.
 
 Modelado, diseño de una tecnología de diseño e implementación de comportamientos inteligentes en robots guía. Se trata de un proyecto financiado por el Ministerio de Ciencia y Tecnología que da continuidad al proyecto Urbano introduciendo mejoras en los módulos de navegación, consciencia y emociones, conocimiento y diálogo.
 
+%%%%%%%%%%%%%%%%%%%%%%% 	aqui %%%%%%%%%%%%%%%%%%%%
+
 \subsection{Robots}
+
 \subsubsection{ROBUTER}
 Fabricado por Robosoft, consiste en una plataforma con elevada capacidad sensorial pensada para trabajo de experimentación. El modo de locomoción es diferencial y cuenta con un computador principal de Motorola con sistema operativo Albatros. Tiene también un computador secundario Sun Sparc. Los sensores de proximidad que posee son 24 sensores de ultrasonidos. También presenta capacidad de visión y Wireless Ethernet. Este robot se utilizó en los proyectos RM-III y EVS.
 
@@ -177,7 +173,7 @@ Guido es un robot de cuatro ruedas con dos motores para hacer girar las dos dela
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{Guido1}\\
-  \caption{Robot Guido}\label{fg:guido}
+  \caption{Robot Guido}\label{fg:guido1}
 \end{figure}
 
 

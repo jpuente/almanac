@@ -11,7 +11,9 @@
 \usepackage{listings}                         % listados
 \usepackage{color}                             % texto de colores
 \usepackage{pfc}                                 % formato de proyecto fin de carrera
-\listfiles
+
+%\listfiles
+
 %-- órdenes y otras definiciones --------------------------------------
 \graphicspath{{logos/}{figuras/}}
 \renewcommand{\lstlistingname}{Listado}
@@ -30,12 +32,12 @@
 %== documento =========================================================
 \begin{document}
 \selectlanguage{spanish}
-%== páginas iniciales  ================================================
-\thispagestyle{empty}\pagestyle{empty}
+%== páginas iniciales  ====================================================
+\pagestyle{empty}
+%\currentpage\pagedesign
 \maketitle             % página inicial y portada
 
-\frontmatter \pagestyle{plain}
-
+\frontmatter
 %\include{resumen}
 %\include{agradecimientos}
 \tableofcontents
@@ -43,14 +45,14 @@
 %\listoftables
 %\include{glosario}
 %== cuerpo ============================================================
-\mainmatter\pagestyle{fancy}
+\mainmatter\pfchdr
 
 \part{Preliminares}
 \include{01_introduccion}
-\include{02_estado_del_arte}
+%\include{02_estado_del_arte}
 
 \part{Desarrollo}
-\include{03_arquitectura}
+%\include{03_arquitectura}
 %\include{04_localizacion}
 %\include{05_movimiento}
 %\include{06_integracion}
@@ -65,7 +67,7 @@
 \bibliography{biblio}
 %\nocite{*}
 
-% firma
+firma
 
 \end{document}
 

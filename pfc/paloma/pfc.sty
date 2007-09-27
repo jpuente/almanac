@@ -1,4 +1,4 @@
-x%======================================================================
+%======================================================================
 % $Id: pfc.sty 2 2007-05-28 11:48:44Z jpuente $ 
 % Identificación de control de versiones
 %======================================================================
@@ -35,16 +35,18 @@ x%======================================================================
 
 \newcommand{\fecha}[1]{\renewcommand*{\PFC@fecha}{#1}}
 \newcommand{\copyrightnote}[1]{\renewcommand{\PFC@copyrightnote}{#1}}
+
 %----------------------------------------------------------------------
 % Portada y copyright
 %----------------------------------------------------------------------
+
 \renewcommand\maketitle{
 \begin{titlepage}
     \begin{center}
       {\large\bfseries UNIVERSIDAD POLIT\'{E}CNICA DE MADRID}\\[1.0cm]
      	 \begin{tabular}{cc}
       		\begin{minipage}{6cm}\centering
-      			\includegraphics[width=4cm]{logoupm} 
+      			\includegraphics[width=4cm]{disam} 
       		\end{minipage}
       &
       		\begin{minipage}{8cm}\centering\bfseries
@@ -59,7 +61,7 @@ x%======================================================================
      	 {\Large\bfseries División de Ingenier\'{i}a de Sistemas\\
                    		   y Autom\'{a}tica (DISAM)}
                     
-      	\vspace{6cm}
+      	\vspace{4cm}
       	
 	{\large\bfseries
 	\begin{tabular*}{\textwidth}{p{6cm}ll}
@@ -109,20 +111,20 @@ x%======================================================================
 %----------------------------------------------------------------------
 %\geometry{top=3cm, bottom=3cm, inner=3cm, outer=2.5cm}
 
-% definir encabezados y pies
-
-\fancyhf{}
-\fancyhead[RO]{\textsl{\rightmark}}
-\fancyhead[LE]{\textsl{\leftmark}}
-\renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot[LE,RO]{\thepage}
-\fancyfoot[LO,RE]{DISAM-UPM}
-\fancyfoot[C]{\textsl\PFC@autor}
-
-\fancypagestyle{plain}{  % página inicial del capítulo
-	\fancyhead{}            % sin encabezados
-	\renewcommand{\headrulewidth}{0pt} 
+\newcommand\pfchdr{
+	\pagestyle{fancy}
+	\fancyhf{}
+	\fancyhead[RO]{\textsl{\rightmark}}
+	\fancyhead[LE]{\textsl{\leftmark}}
+	\renewcommand{\footrulewidth}{0.4pt}
+	\fancyfoot[LE,RO]{\thepage}
+	\fancyfoot[LO,RE]{DISAM-UPM}
+	\fancyfoot[C]{\textsl\PFC@autor}
+	\fancypagestyle{plain}{  % página inicial del capítulo
+	    \fancyhead{}            % sin encabezados
+	    \renewcommand\headrulewidth{0pt} 
 	}
+}
 
 
 %== para emacs ========================================================
