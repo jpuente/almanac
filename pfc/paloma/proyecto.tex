@@ -2,15 +2,16 @@
 %======================================================================
 % $Id: $ Identificación de control de versiones
 %== preámbulo =========================================================
-\documentclass[a4paper,twoside,12pt]{book}
-\usepackage{times}                         % tipos PostScript
+\documentclass[a4paper,oneside,12pt]{book}
+%\usepackage{times}                         % tipos PostScript
 \usepackage[spanish,english]{babel}        % idiomas
 \usepackage[utf8]{inputenc}             % caracteres acentuados
 \usepackage{graphicx}                      % figuras
 \usepackage{url}                                 % referencias en internet
 \usepackage{listings}                         % listados
-\usepackage{color}                             % texto de colores
+\usepackage[usenames]{color}         % texto de colores
 \usepackage{pfc}                                 % formato de proyecto fin de carrera
+\usepackage[pdftex, pdfpagemode=UseOutlines,bookmarks,bookmarksopen ]{hyperref}
 
 %\listfiles
 
@@ -34,7 +35,6 @@
 \selectlanguage{spanish}
 %== páginas iniciales  ====================================================
 \pagestyle{empty}
-%\currentpage\pagedesign
 \maketitle             % página inicial y portada
 
 \frontmatter
@@ -51,23 +51,28 @@
 \include{01_introduccion}
 %\include{02_estado_del_arte}
 
-\part{Desarrollo}
+%\part{Desarrollo}
 %\include{03_arquitectura}
 %\include{04_localizacion}
 %\include{05_movimiento}
 %\include{06_integracion}
 
 %\part{Información Complementaria}
+%\include{07_conclusiones}
 
+%== final =============================================================
 \appendix
 \include{a1_apendice}
-\include{a2_presupuesto}
+\include{a2_apendice}
+\include{a3_apendice}
+\include{a4_presupuesto}
 
+%== bibliografía ========================================================
 \bibliographystyle{unsrt}
 \bibliography{biblio}
 %\nocite{*}
 
-firma
-
+%== otros datos ========================================================
+\include{programas}
 \end{document}
 

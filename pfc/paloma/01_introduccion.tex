@@ -10,7 +10,7 @@ La robótica móvil es un campo de investigación relativamente reciente que act
 
 Para ser considerado como tal, un robot móvil precisa de un sistema de locomoción que le permita desplazarse. Existen numerosas posibilidades al respecto, ya que podemos encontrar robots que andan, saltan, reptan o se mueven sobre ruedas y también robots aéreos o submarinos cuyo sistema motriz se basa en impulsion fluidomecánica. La mayor parte de estos mecanismos de locomoción surge como imitación de los modos de movimiento que se pueden observar en la naturaleza. La principal excepción es la rueda, ampliamente utilizada por sus buenas características sobre suelo plano.
 
-Dentro de los robots móviles, los robots autónomos son aquellos que no necesitan la intervención humana para mantener el sentido de la orientación y la capacidad de navegación. Como indica Smithers, la idea principal del concepto de autonomía se obtiene de su etimología: \emph{auto} (propio) y \emph{nomos} (ley o regla). Los sistemas automáticos se autorregulan pero no son capaces de generar las leyes que deben tratar de seguir sus reguladores. A diferencia de ellos, los sistemas autónomos han de poder determinar sus estrategias, o leyes, de conducta y modificar sus pautas de comportamiento al mismo tiempo que operan en el entorno. Por lo tanto, queda claro que la autonomía añade requisitos sobre el concepto de automatismo.
+Dentro de los robots móviles, los robots autónomos son aquellos que no necesitan la intervención humana para mantener el sentido de la orientación y la capacidad de navegación. Como indica \textcolor{red}{Smithers}, la idea principal del concepto de autonomía se obtiene de su etimología: \emph{auto} (propio) y \emph{nomos} (ley o regla). Los sistemas automáticos se autorregulan pero no son capaces de generar las leyes que deben tratar de seguir sus reguladores. A diferencia de ellos, los sistemas autónomos han de poder determinar sus estrategias, o leyes, de conducta y modificar sus pautas de comportamiento al mismo tiempo que operan en el entorno. Por lo tanto, queda claro que la autonomía añade requisitos sobre el concepto de automatismo.
 
 Los robots autónomos deben ser capaces de adquirir información sobre el entorno. Para ello han de contar con sensores que proporcionen las medidas y datos necesarios. Aunque no son estrictamente imprescindibles, los robots móviles suelen incorporar sensores propioceptivos que suministran medidas relativas a su estado: velocidad, incremento de posición y aceleraciones. Los encoders situados en las ruedas del robot, por ejemplo, re\-gistran el número de revoluciones de las mismas y permiten obtener la llamada posición odométrica a partir de la estimación del movimiento relativo incremental. Aunque esta aproximación presenta una buena precisión a corto plazo, la acumulación de errores a medida que aumenta el recorrido causa grandes diferencias con la posición real. Por este y otros motivos hace falta disponer de sensores estereoceptivos para percibir los aspectos externos al robot. Los sensores de este tipo más comunes en robótica móvil avanzada son los de ultrasonidos, infrarrojos, los láseres y las cámaras.
 Asimismo, el robot ha de poseer computadores o microprocesadores para el procesamiento de la información y la ejecución de los algoritmos de control del sistema de navegación.
@@ -42,7 +42,7 @@ Los \emph{rovers} constan de un cuerpo central que se desplaza sobre seis ruedas
 
 Los rovers \emph{Spirit} y su ''gemelo''  \emph{Opportunity} aterrizaron en el planeta rojo el 4 y el 25 de enero de 2004, respectivamente. Tienen una capacidad de movilidad mucho mayor que su antecesor el rover \emph{Pathfinder}.
 
-Los robots guía son un tipo de robots móviles que han de tener amplio conocimiento sobre su entorno. Sus requisitos primordiales están orientados a la interacción con las personas, pero también es imprescindible en ellos un buen sistema de navegación que les permita desplazarse de forma autónoma en exposiciones, ferias y museos. Uno de estos robots es \emph{Urbano} (ver los apartados \ref{UrbanoProject}, página \pageref{UrbanoProject},  y \ref{Urbano}, página \pageref{Urbano}, así como el Anexo \ref{B}), un robot inteligente que ha sido empleado en el presente proyecto.
+Los robots guía son un tipo de robots móviles que han de tener amplio conocimiento sobre su entorno. Sus requisitos primordiales están orientados a la interacción con las personas, pero también es imprescindible en ellos un buen sistema de navegación que les permita desplazarse de forma autónoma en exposiciones, ferias y museos. Uno de estos robots es \emph{Urbano} (ver los apartados \ref{UrbanoProject}, página \pageref{UrbanoProject},  y \ref{Urbano}, página \pageref{Urbano}, así como el Anexo \ref{ap:hardware}), un robot inteligente que ha sido empleado en el presente proyecto.
 
 %---------------------------------------------------------------------------------------------------------------
 \section{Antecedentes}
@@ -104,7 +104,7 @@ Proyecto Europeo Ref: IST-2000-29456.
 
 Desarrollo y validación de un sistema de tele-presencia basado en robots móviles, capaz de facilitar el acceso de individuos a grandes exhibiciones y ferias comerciales a través de Internet. La construcción de mapas y demás pruebas se realizaron en el Castillo de Belgioso, Italia, dedicado a la celebración de exposiciones (figura \ref{fg:WebFair}).
 
-\begin{figure}[hbt]
+\begin{figure}[bt]
   \centering\includegraphics[width=0.5\textwidth]{WebFair}\\
   \caption{Proyecto WebFair}\label{fg:WebFair}
 \end{figure}
@@ -122,76 +122,81 @@ Proyecto de investigación nacional Ref: DPI2001-3652C0201.
 
 Proyecto financiado por el Ministerio de Ciencia y Tecnología y supervisado por la Ciudad de las Artes y las Ciencias de Valencia (CACSA), donde el robot se ha probado con éxito (figura \ref{fg:urbano}). El módulo de navegación fue desarrollado por Diego Rodríguez-Losada en el marco de su Tesis Doctoral \cite{Rodriguez-Losada04}.
 
-\begin{figure}[hbt]
+\begin{figure}[bt]
   \centering\includegraphics[width=0.5\textwidth]{UrbanoValencia}\\
   \caption{Proyecto Urbano}\label{fg:urbano}
 \end{figure}
 
-\clearpage
+%\clearpage
 
 \subsubsection{RobInt (2004-2007)}
 Ref: DOI 2004-007908C0201.
 
 Modelado, diseño de una tecnología de diseño e implementación de comportamientos inteligentes en robots guía. Se trata de un proyecto financiado por el Ministerio de Ciencia y Tecnología que da continuidad al proyecto Urbano introduciendo mejoras en los módulos de navegación, consciencia y emociones, conocimiento y diálogo.
 
-%%%%%%%%%%%%%%%%%%%%%%% 	aqui %%%%%%%%%%%%%%%%%%%%
-
+%------------------------------------------------------------------------------------------------------------------
 \subsection{Robots}
-
 \subsubsection{ROBUTER}
-Fabricado por Robosoft, consiste en una plataforma con elevada capacidad sensorial pensada para trabajo de experimentación. El modo de locomoción es diferencial y cuenta con un computador principal de Motorola con sistema operativo Albatros. Tiene también un computador secundario Sun Sparc. Los sensores de proximidad que posee son 24 sensores de ultrasonidos. También presenta capacidad de visión y Wireless Ethernet. Este robot se utilizó en los proyectos RM-III y EVS.
+Fabricado por Robosoft, consiste en una plataforma con elevada capacidad sensorial pensada para trabajo de experimentación (figura \ref{fg:robuter}). El modo de locomoción es diferencial y cuenta con un computador principal de Motorola con sistema operativo Albatros. Tiene también un computador secundario Sun Sparc. Los sensores de proximidad que posee son 24 sensores de ultrasonidos. También presenta capacidad de visión y Wireless Ethernet. Este robot se utilizó en los proyectos RM-III y EVS.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[scale = 0.2]{ROBUTER}\\
   \caption{Robot ROBUTER}\label{fg:robuter}
 \end{figure}
 
 \subsubsection{BLACKY}
-Plataforma MRV-4 de Denning Branch Int. Robotics dotada de un PC Pentium con sistema operativo Linux y un láser rotatorio para la localización con balizas reflectantes. También posee 24 sensores de ultrasonidos y Ethernet Wireless radio. Es el robot utilizado en el proyecto del mismo nombre.
+Plataforma MRV-4 de Denning Branch Int. Robotics dotada de un PC Pentium con sistema operativo Linux y un láser rotatorio para la localización con balizas reflectantes. También posee 24 sensores de ultrasonidos y Ethernet Wireless radio. Es el robot utilizado en el proyecto del mismo nombre (figura \ref{fg:mrv4}).
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[scale = 0.2]{MRV-4}\\
   \caption{Robot BLACKY}\label{fg:mrv4}
 \end{figure}
 
 \subsubsection{URBANO}\label{Urbano}
-Plataforma B21r del fabricante iRobot. El computador base es un PC Pentium con sistema operativo Linux; el computador secundario es un PC Pentium con Windows. Dispone de un láser SICK LM300 para la localización. También posee 24 sensores de ultrasonidos e infrarrojos y Ethernet Wireless radio. En DISAM-UPM se han desarrollado una cabeza y un brazo con los que el robot puede hacer gestos e interaccionar con personas. Este robot se ha empleado en los proyectos WebFair, Urbano y RobInt.
+Plataforma B21r del fabricante iRobot (figura \ref{fg:urbanor}). El computador base es un PC Pentium con sistema operativo Linux; el computador secundario es un PC Pentium con Windows. Dispone de un láser SICK LMS200 para la localización. También posee 24 sensores de ultrasonidos e infrarrojos y Ethernet Wireless radio. En DISAM-UPM se han desarrollado una cabeza y un brazo con los que el robot puede hacer gestos e interaccionar con personas. Este robot se ha empleado en los proyectos WebFair, Urbano y RobInt.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[scale=1]{Urbano}\\
-  \caption{Robot Urbano}\label{fg:b21r}
+  \caption{Robot Urbano}\label{fg:urbanor}
 \end{figure}
 
-Dado que este robot ha sido asimismo utilizado en el desarrollo de este proyecto, puede consultarse más información sobre él en el Anexo B.
+Dado que este robot ha sido asimismo utilizado en el desarrollo de este proyecto, puede consultarse más información sobre él en el Anexo \ref{ap:hardware}.
 
 \subsubsection{GUIDO}
-Guido es un robot de cuatro ruedas con dos motores para hacer girar las dos delanteras, pero ha de ser empujado para moverse \cite{Rodriguez-Losada05}. Tiene un sensor láser para percibir el entorno y en el manillar hay un sensor de medida de fuerza para detectar el comando de giro. El computador de a bordo es un PC104 300~MHz Geode con 32~MB de disco duro y 32~MB de RAM, con sistema operativo Haptica-TinyDCLinux. Tiene disponible un puerto Ethernet para las comunicaciones y se alimenta a 24V suministrados por cuatro baterías.
+Guido (figura \ref{fg:guidor}) es un robot de cuatro ruedas con dos motores para hacer girar las dos delanteras, pero ha de ser empujado para moverse \cite{Rodriguez-Losada05}. Tiene un sensor láser para percibir el entorno y en el manillar hay un sensor de medida de fuerza para detectar el comando de giro. El computador de a bordo es un PC104 300~MHz Geode con 32~MB de disco duro y 32~MB de RAM, con sistema operativo Haptica-TinyDCLinux. Tiene disponible un puerto Ethernet para las comunicaciones y se alimenta a 24V suministrados por cuatro baterías.
 
 \begin{figure}[h]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{Guido1}\\
-  \caption{Robot Guido}\label{fg:guido1}
+  \caption{Robot Guido}\label{fg:guidor}
 \end{figure}
 
-
+%------------------------------------------------------------------------------------------
 \section{Marco del proyecto}
+
 Este proyecto se ha llevado a cabo bajo beca de colaboración concedida por el Ministerio de Educación y Ciencia en el Departamento de Automática, Ingeniería Electrónica e Informática Industrial de la Escuela Técnica Superior de Ingenieros Industriales de la Universidad Politécnica de Madrid, dentro del grupo de Control Inteligente.
 
+%------------------------------------------------------------------------------------------
 \section{Objetivos del proyecto}
-El objetivo del proyecto consiste en la realización de un sistema de navegación para un robot móvil. Se ha trabajado en control de movimiento, planificación de trayectorias, control reactivo, localización y construcción de mapas.
 
+El objetivo del proyecto consiste en la realización de un sistema de navegación para un robot móvil. La eficiencia de este sistema y el grado de conocimiento del entorno que proporcione han de permitir que el robot lleve a cabo sus tareas con precisión y flexibilidad. Se ha trabajado en control de movimiento, planificación de trayectorias, control reactivo, localización y construcción de mapas.
+
+%------------------------------------------------------------------------------------------
 \section{Alcance del proyecto}
+
 Los principales elementos de trabajo en este proyecto son los siguientes:
 \begin{itemize}
   \item \textbf{Formación previa.} En primer lugar se requería un asentamiento de conocimientos sobre programación y algorítmica, el aprendizaje de C++ y Visual C++. Posteriormente fue necesaria la comprensión de la base de software de navegación existente. Otra parte importante era la puesta en funcionamiento del robot Pioneer P3AT y el estudio de las librerías de la distribución Aria.
   \item \textbf{Desarrollo del control de movimiento.} Programación de un regulador proporcional con planificación de ganancia, empleando tanto los parámetros de Urbano como los correspondientes al Pioneer. Generación de una trayectoria suave en los puntos de paso de una trayectoria definida. Algoritmo para evitar desviaciones sobre la trayectoria programada. Control reactivo: deformación de la trayectoria por la presencia de obstáculos y paredes cercanas al camino inicial a seguir por el robot.
   \item \textbf{Localización y construcción de mapas.} Estudio del filtro de Kalman y del filtro extendido de Kalman (EKF). Aplicación a la la localización del robot a partir de los puntos de medida proporcionados por el láser. Modificación del modelo para el caso de disponer únicamente de medidas de distancia, que no se utiliza debido a su peor comportamiento. Programación de las fases de predicción y corrección del algoritmo. Análisis del coste computacional y reducción del tiempo de procesamiento. Obtención y actualización de mapas de puntos a partir de los datos registrados por el láser. Utilización de mapas ya realizados para efectuar la localización. Borrado de los puntos correspondientes a obstáculos dinámicos del mapa que se encuentren cercanos a la posición del robot en cada momento.
-      Con el Pioneer sólo es utilizable la parte del proyecto relativa al control de movimiento, planificación de trayectorias y control reactivo ya que al no poderse utilizar el láser no era posible realizar tareas de localización.
+      Con el Pioneer sólo se ha empleado hasta el momento la parte del proyecto relativa al control de movimiento y planificación de trayectorias ya que al no poderse utilizar el láser no era posible realizar tareas de localización.
   \item \textbf{Integración.} Funcionamiento conjunto e intercambio de información entre los componentes anteriormente indicados.
   \item \textbf{Pruebas.} Pruebas de funcionamiento en modo simulación y con los robots reales. Corrección, depuración y posibles mejoras a partir de los resultados de dichas pruebas.
 
   Paralelamente se iba desarrollando un cuadro de diálogo para facilitar la ejecución y la selección de opciones en la misma.
 \end{itemize}
+
+La estructura de descomposición del proyecto (EDP), la programación temporal seguida para llevar a cabo las tareas correspondientes a las distintas fases del mismo así como la estimación del presupuesto se incluyen en los apéndices. 
+
+
+
+
