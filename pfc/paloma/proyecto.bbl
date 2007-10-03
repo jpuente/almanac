@@ -6,24 +6,25 @@ Dieter Fox, Wolfram Burgard, and Sebastian Thrun.
 \newblock {\em Journal of Artificial Intelligence Research}, 11:391--427, 1999.
 
 \bibitem{Arranz06}
-Alvaro Arranz, Jorge Bali{\~n}as, Sebastian Bronte, Josue Garcia, Daniel
-  Gonzalez, Javier Gutierrez, Angel Llamazares, Fernando Rojas, and Victor
-  Sanz.
-\newblock Aplicaciones de robots moviles.
-\newblock Technical report, Universidad de Alcala, 2006.
+{\'A}lvaro Arranz, Jorge Bali{\~n}as, Sebasti{\'a}n Bronte, Josu{\'e}
+  Garc{\'\i}a, Daniel Gonz{\'a}lez, Javier Guti{\'e}rrez, {\'A}ngel Llamazares,
+  Fernando Rojas, and V{\'\i}ctor Sanz.
+\newblock Aplicaciones de robots m{\'o}viles.
+\newblock Technical report, Universidad de Alcal{\'a}, 2006.
 
 \bibitem{RodriguezLosada05}
-Diego Rodriguez-Losada, Fernando Matia, Agustin Jimenez, Ramon Galan, and
-  Gerard Lacey.
-\newblock Implementing map based navigation in guido, the robotic smartwalker.
+Diego Rodr{\'\i}guez-Losada, Fernando Mat{\'\i}a, Agust{\'\i}n Jim{\'e}nez,
+  Ram{\'o}n Gal{\'a}n, and Gerard Lacey.
+\newblock Implementing map based navigation in {G}uido, the robotic
+  smartwalker.
 \newblock In {\em IEEE International Conference on Robotics and Automation},
   2005.
 
 \bibitem{Rodriguez-Losada04}
-Diego Rodriguez-Losada.
-\newblock {\em SLAM Geometrico en Tiempo Real para Robots Moviles en Interiores
-  basado en EKF}.
-\newblock PhD thesis, Universidad Politecnica de Madrid, ETSI Industriales,
+Diego Rodr{\'\i}guez-Losada.
+\newblock {\em {SLAM} Geom{\'e}trico en Tiempo Real para Robots M{\'o}viles en
+  Interiores basado en EKF}.
+\newblock PhD thesis, Universidad Polit{\'e}cnica de Madrid, ETSI Industriales,
   2004.
 
 \bibitem{Rodriguez-Losada05}
@@ -89,43 +90,5 @@ Peter~S. Maybeck.
 \bibitem{Schutter99}
 Joris~De Schutter, Jan~De Geeter, Tine Lefebvre, and Herman Bruyninckx.
 \newblock {\em Kalman Filters: A Tutorial}, 1999.
-
-\bibitem{Minguez_04}
-Javier Minguez, Javier Osuna, and Luis Montano.
-\newblock A "divide and conquer" strategy based on situations to achieve
-  reactive collision avoidance in troublesome scenarios.
-\newblock In {\em Proc. of the IEEE International Conference on Robotics and
-  Automation (ICRA)}, 2004.
-
-\bibitem{Gonzalez04}
-Jesus Gonzalez.
-\newblock Simulacion y control de un robot movil.
-\newblock Proyecto fin de carrera, DISAM, 2004.
-
-\bibitem{Kernighan}
-Brian~W. Kernighan and Dennis~M. Ritchie.
-\newblock {\em The C Programming Language}.
-\newblock Prentice Hall, 1988.
-
-\bibitem{Kopka}
-Helmut Kopka and Patrick W.Daly.
-\newblock {\em Guide to LaTeX}.
-\newblock Addison Wesley, 2004.
-
-\bibitem{21days}
-Teach yourself visual c++ in 21 days: \prog{http://newdata.box.sk/bx/c}.
-
-\bibitem{mobilerobots}
-Mobilerobots.inc: \prog{http://www.mobilerobots.com}.
-
-\bibitem{disam}
-Departamento de automatica de la etsii: \prog{http://www.disam.upm.es}.
-
-\bibitem{msdn}
-Ayuda oficial de microsoft para la programacion:
-  \prog{http://www.msdn.microsoft.es}.
-
-\bibitem{player}
-Player project: \prog{http://www.playerstage.sourceforge.net}.
 
 \end{thebibliography}

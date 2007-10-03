@@ -11,7 +11,7 @@
 \usepackage{listings}                         % listados
 \usepackage[usenames]{color}         % texto de colores
 \usepackage{pfc}                                 % formato de proyecto fin de carrera
-\usepackage[pdftex, pdfpagemode=UseOutlines,bookmarks,bookmarksopen ]{hyperref}
+%\usepackage[pdftex, pdfpagemode=UseOutlines,bookmarks,bookmarksopen ]{hyperref}
 
 %\listfiles
 
@@ -34,7 +34,7 @@
 \begin{document}
 \selectlanguage{spanish}
 %== páginas iniciales  ====================================================
-\pagestyle{empty}
+\pagestyle{empty}\thispagestyle{empty}
 \maketitle             % página inicial y portada
 
 \frontmatter
@@ -42,23 +42,23 @@
 %\include{agradecimientos}
 \tableofcontents
 \listoffigures
-%\listoftables
+\listoftables
 %\include{glosario}
 %== cuerpo ============================================================
-\mainmatter\pfchdr
+\mainmatter%\pfchdr
 
 \part{Preliminares}
 \include{01_introduccion}
-%\include{02_estado_del_arte}
+\include{02_estado_del_arte}
 
-%\part{Desarrollo}
-%\include{03_arquitectura}
-%\include{04_localizacion}
-%\include{05_movimiento}
-%\include{06_integracion}
+\part{Desarrollo}
+\include{03_arquitectura}
+\include{04_localizacion}
+\include{05_movimiento}
+\include{06_integracion}
 
-%\part{Información Complementaria}
-%\include{07_conclusiones}
+\part{Información Complementaria}
+\include{07_conclusiones}
 
 %== final =============================================================
 \appendix

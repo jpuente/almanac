@@ -2,6 +2,7 @@
 
 \chapter{Arquitectura del sistema}
 
+La arquitectura del sistema describe la estructura global del mismo. Incluye su división en componentes, el reparto de responsabilidades entre dichos componentes, la colaboración entre ellos y el flujo de control.
 \section{Plataformas de desarrollo y ejecución}
 
 En la realización de este proyecto se ha utilizado una estación de trabajo PC con una configuración de software acorde con las prácticas habituales del grupo de robótica móvil:
@@ -23,9 +24,11 @@ El modo de operación puede ser de tipo \emph{simulación}, \emph{fichero} o \em
 
 Respecto a la plataforma de ejecución para el modo real, en diferentes fases del ciclo de vida del proyecto se han utilizado los robots Pioneer y Urbano. A este último corresponde la implementado el sistema completo y con él se ha llevado a cabo la mayor parte de las pruebas.
 
-En el caso del Pioneer P3AT, la puesta en funcionamiento se ha basado en comunicación con cable serie entre un computador portátil y el robot.
+En el caso del Pioneer P3AT la puesta en funcionamiento se ha basado en comunicación con cable serie entre un computador portátil y el robot.
 
-Como se ha visto en la introducción, el computador base de Urbano es un PC Pentium con sistema operativo GNU/Linux. También cuenta con un computador secundario que es un PC Pentium con Windows XP. La conexión entre la plataforma de desarrollo y el robot se realiza con un ordenador portátil mediante conexión \emph{telnet} a través de cable Ethernet.
+Como se ha visto en la introducción, el computador base de Urbano es un PC Pentium con sistema operativo GNU/Linux. También cuenta con un computador secundario que es un PC Pentium con Windows XP. La conexión entre la plataforma de desarrollo y el robot se realiza con un ordenador portátil mediante conexión con el protocolo \emph{telnet} a través de cable Ethernet.
+
+Para más información acerca de estos robots y del resto de hardware utilizado puede consultarse el Anexo C.
 
 \section{Bibliotecas empleadas}
 Para el desarrollo del software del proyecto se ha hecho uso de varias bibliotecas existentes.
@@ -58,7 +61,7 @@ Biblioteca desarrollada por Diego Rodríguez-Losada para facilitar el tratamient
 
 \subsection{Biblioteca Aria}
 
-Aria (Advanced Robot Interface for Applications) es una interfaz para el uso de los robots de la firma MobileRobots.Inc que puede usarse sobre las APIs de Linux y Win32. Integra software para establecer las comunicaciones, para controlar la velocidad y la orientación de los robots, para la utilización de diferentes sensores y accesorios\ldots Se trata de una biblioteca escrita en C++, pero también puede ser ampliamente utilizada en Java o Phyton mediante \emph{wrappers}.
+Aria (Advanced Robot Interface for Applications) es una interfaz para el uso de los robots de la firma MobileRobots.Inc que puede usarse sobre las APIs de Linux y Win32. Integra software para establecer las comunicaciones, para controlar la velocidad y la orientación de los robots, para la utilización de diferentes sensores y accesorios\ldots Se trata de una biblioteca escrita en C++, pero también puede ser ampliamente utilizada en Java o Phyton mediante \emph{wrappers}. Se encuentra publicada bajo licencia GPL.
 
 En el proyecto se han utilizado únicamente las funciones básicas que permiten la conexión y desconexión sencilla del robot, el envío de comandos de movimiento de bajo nivel (velocidades de avance y giro) y la lectura de los datos proporcionados por los encóders. La mayor parte de estas funciones se encapsulan dentro de la clases \prog{ArRobot} y \prog{ArSimpleConnector}.
 
@@ -89,17 +92,16 @@ En la figura \ref{fg:uml} se puede ver el diagrama UML de las clases que conform
   \caption{Diagrama de clases del sistema}\label{fg:uml}
 \end{figure}
 
-En el diagrama no se muestran las dependencias de las bibliotecas anteriormente descritas. Las clases que han sido implementadas en el presente proyecto aparecen en color rosa. El color gris se ha utilizado para las clases que existían previamente. La clase \prog{CProcLaserData} forma parte de este último grupo, pero ha sido ligeramente modificada.
+\clearpage
+En el diagrama no se muestran las dependencias de las bibliotecas anteriormente descritas. Como puede observarse, se ha realizado un diseño modular con relaciones claras entre sus elementos. Las clases que han sido implementadas en el presente proyecto aparecen en color rosa. El color gris se ha utilizado para las clases que existían previamente. La clase \prog{CProcLaserData} forma parte de este último grupo, pero ha sido ligeramente modificada.
 
 A continuación se explica el uso que se ha hecho de estas clases mientras que las clases nuevas serán tratadas en posteriores capítulos, después de que se estudien los algoritmos incorporados.
-
-\clearpage
 
 \subsection{La clase \prog{CRawLaserData}}
 Esta clase se encarga principalmente de leer y escribir ficheros con los datos procedentes del láser y de ajustar dicha información al formato correspondiente para ser enviada o tras ser recibida por un socket. También define una macro con el máximo número de medidas que puede proporcionar el láser, 361.
 Sus métodos son los siguientes:
 
-\subsubsection{Load}
+\subsubsection{\prog{Load}}
 
 \noindent
 \prog{int Load(FILE* source\_file)}
@@ -125,7 +127,7 @@ Estos datos han de ir seguidos de dos puntos, :, y detrás han de aparecer las m
 \noindent
 Si hay algún fallo en la lectura de los parámetros o de las medidas se devuelve $-1$. Si el fichero tiene el formato adecuado y se lee sin ningún problema se devuelve $0$.
 
-\subsubsection{Save}
+\subsubsection{\prog{Save}}
 
 \prog{void Save(FILE* log\_file)}
 
@@ -139,9 +141,9 @@ Esta función se emplea para escribir en un fichero los datos correspondientes a
 \noindent
 Se escribe el término LASER\_RANGE seguido del contenido de las variables \prog{time_stamp_seconds}, \prog{time_stamp_useconds}, \prog{id_laser}, \prog{num_med}, \prog{scan_angle}, \prog{scan\_resolution)} y \prog{max\_range} y dos puntos (':'). Después se escriben los valores de las diferentes medidas almacenadas en el vector \prog{med}. Todos los datos van separados por un espacio en blanco. En resumen, una llamada a esta función escribe una línea de fichero con el formato mostrado en \ref{fg:ficherolaser}.
 
-\subsubsection {Serialize}
+\subsubsection {\prog{Serialize}}
 \prog{int Serialize(char* cad,int\& l,int size) const}
-\subsubsection {DeSerialize}
+\subsubsection {\prog{DeSerialize}}
 \prog{int DeSerialize(char* cad,int\& l,int size)}
 
 \vspace{0.2cm}
@@ -151,7 +153,7 @@ Estas dos funciones no se han utilizado directamente, por lo que no se entra en 
 \subsection{La clase \prog{CProcLaserData}}
 Se trata de una clase para el procesamiento y manejo de la información del láser. Sus métodos más utilizados son:
 
-\subsubsection {SetOffset}
+\subsubsection {\prog{SetOffset}}
 
 \prog{void SetOffset(float offx, float offy, float offz)}
 
@@ -169,7 +171,7 @@ En el robot Urbano el offset del láser viene dado por (0.168, 0.0, 1.2) y en el
 
 Estos parámetros se pasan a las variables miembro \prog{off\_x}, \prog{off\_y} y \prog{off\_z}. Además, en ella se calculan las razones trigonométricas seno y coseno de los ángulos correspondientes a todas las diferentes medidas que pueden tomarse (intervalos de $0,5º$) y se guardan en sendos vectores \prog{cos\_alfa} y \prog{sen\_alfa}, de tamaño igual al máximo número de medidas posibles.
 
-\subsubsection {DefineData}
+\subsubsection {\prog{DefineData}}
 
 \prog{int DefineData(const CRawLaserData\& d)}
 
@@ -223,7 +225,7 @@ La función devuelve un $0$ si el número de medidas es distinto de $181$ o de $
 
 Esta clase es similar a la clase prog{CRawLaserData} pero se encarga del tratamiento de la información referente a la odometría. Dispone de variables miembro públicas en las que almacenar la posición odométrica y las velocidades del robot (\prog{posx}, \prog{posy}, \prog{posth}, \prog{vel_drive}, \prog{vel_steer}). Sus métodos son:
 
-\subsubsection{Load}
+\subsubsection{\prog{Load}}
 
 \noindent
 \prog{int Load(FILE* source\_file)}
@@ -249,7 +251,7 @@ En el ejemplo de la figura \ref{fg:ficheropos} se muestra cómo ha de ser el for
 \noindent
 Si hay algún fallo en la lectura de los parámetros o de las medidas se devuelve $-1$. Si el fichero tiene el formato adecuado y se lee sin ningún problema se devuelve $0$.
 
-\subsubsection{Save}
+\subsubsection{\prog{Save}}
 
 \prog{void Save(FILE* log\_file)}
 
@@ -263,9 +265,9 @@ Esta función se emplea para escribir en un fichero los datos correspondientes a
 \noindent
 Se escribe el término POS seguido del contenido de las variables \prog{pos_temp} y \prog{pos_time_ms} y dos puntos (':'). Después se escriben los valores de \prog{posx}, \prog{posy}, \prog{posth}, \prog{vel_drive} y \prog{vel_steer}. Todos los datos van separados por un espacio en blanco. En resumen, una llamada a esta función escribe una línea de fichero con el formato mostrado en \ref{fg:ficheropos}.
 
-\subsubsection {Serialize}
+\subsubsection {\prog{Serialize}}
 \prog{int Serialize(char* cad,int\& l,int size) const}
-\subsubsection {DeSerialize}
+\subsubsection {\prog{DeSerialize}}
 \prog{int DeSerialize(char* cad,int\& l,int size)}
 
 \vspace{0.2cm}
@@ -275,7 +277,7 @@ Al igual que en la clase \prog{CRawLaserData}, estas dos funciones no se han uti
 \subsection{La clase \prog{CRobotData}}
 Esta clase se emplea para definir en cuál de los tres modos posibles se ha de conectar el robot y para procesar la información que permite su funcionamiento en los modos \emph{simulación} y \emph{fichero}. En ella se definen una serie de macros para indicar tipos de conexión (\prog{SIMU_CONN}, \prog{FILE_CONN}, \prog{REAL_CONN}) , tipos de datos (\prog{DATA_CONN_ERROR}, \prog{DATA_NONE}, \prog{DATA_ODOM}, \prog{DATA_LASER}, \prog{DATA_ODOM_LASER}, \prog{DATA_ODOM_INIT}) y tipos de estado (\prog{STATUS_NOT_INIT}, \prog{STATUS_CONNECTION_ERROR}, \prog{STATUS_CONNECTED}. Dentro de la clase se tienen dos variables miembro para el manejo de los datos de la odometría y del láser: \prog{odom_data}, de la clase \prog{CPosData}, y \prog{laser_data}, de la clase \prog{CRawLaserData}. Las principales funciones que se utilizan son las siguientes:
 
-\subsubsection{Init}
+\subsubsection{\prog{Init}}
 
 \noindent
 \prog{bool Init(int typ,const char* source)}
@@ -291,7 +293,7 @@ Esta función se define como \prog{virtual} (para que pueda reescribirse en clas
 \noindent
 En primer lugar se copia el parámetro \prog{source} en la cadena \prog{source_name}, variable miembro de la clase. Si la conexión es de tipo fichero, se abre el fichero de nombre \prog{source_name} en modo lectura. Si el fichero no existe la función devuelve \prog{false}. En caso contrario se guarda el modo de funcionamiento en la variable entera \prog{type}, también miembro de la clase, con los posibles valores \prog{FILE_CONN} (1), \prog{SIMU_CONN} (2) o \prog{SIMU_REAL} (3) y la función devuelve \prog{true}.
 
-\subsubsection{SpeedValues}
+\subsubsection{\prog{SpeedValues}}
 
 \noindent
 \prog{void SpeedValues(float vel_drive, float vel_steer)}
@@ -308,7 +310,7 @@ Esta función se emplea para ajustar las velocidades al formato y rango adecuado
 Si la velocidad de avance es superior a 100 se le da valor 100 y si es menor que 0 se le da valor 0. Con la velocidad de giro se hace lo mismo en el intervalo [-100,100]. Ambos resultados se convierten a tipo \prog{char} y se almacenan en las variables de clase \prog{com_drive} y \prog{com_steer}.
 
 
-\subsubsection{LoadData()}
+\subsubsection{\prog{LoadData()}}
 
 \noindent
 \prog{int LoadData()}
@@ -322,7 +324,7 @@ En líneas generales, se lee la primera palabra de la línea del fichero abierto
 \noindent
 Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM}, \prog{DATA_LA}\prog{SER}\ldots).
 
-\subsubsection{Simulate}
+\subsubsection{\prog{Simulate}}
 
 \noindent
 \prog{int Simulate()}
@@ -331,12 +333,12 @@ Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM},
 Esta función se emplea para actualizar la información de la odometría y del láser en el modo simulación.
 
 \noindent
-Respecto a la odometría, su actualización se realiza mediante composición de la posición odométrica anterior (accesible mediante \prog{odom_data}) con un vector de incrementos definido a partir de las velocidades \prog{com_drive} y \prog{com_steer}. Esta nueva posición obtenida se emplea para actualizar las variables \prog{posx}, \prog{posy} y \prog{posth} de \prog{odom_data}, de forma que queda disponible para la siguiente llamada. En lo relativo al láser, en la simulación se establece que el número de medidas es 181, que el ángulo que se cubre es de 180º, que las medidas se toman cada 1º y que el valor de todas ellas es \prog{laser_data.med[i]} $= 8000$.
+Respecto a la odometría, su actualización se realiza mediante composición de la posición odométrica anterior (accesible mediante \prog{odom_data}) con un vector de incrementos definido a partir de las velocidades \prog{com_drive} y \prog{com_steer}. Esta nueva posición obtenida se emplea para actualizar las variables \prog{posx}, \prog{posy} y \prog{posth} de \prog{odom_data}, de forma que queda disponible para la siguiente llamada. En lo relativo al láser, en la simulación se establece que el número de medidas es 181, que el ángulo que se cubre es de 180º, que las medidas se toman cada 1º y que el valor de todas ellas es \prog{laser_data.med[i]} $= 8000$ (límite de alcance).
 
 \noindent
 El valor que se devuelve es siempre \prog{DATA_ODOM_LASER}.
 
-\subsubsection{UpdateData}
+\subsubsection{\prog{UpdateData}}
 
 \noindent
 \prog{int UpdateData()}
@@ -350,13 +352,13 @@ Si el tipo de conexión es \prog{FILE_CONN} se efectúa una llamada a la funció
 \vspace{0.2cm}
 Otras funciones de la clase que se utilizan para guardar en un fichero los datos de la odometría y del láser son \prog{StartLogData} (crea y abre el fichero en el que escribir los datos), \prog{Log} (que a su vez llama a las funciones \prog{Save} de las variables \prog{odom_data} o \prog{laser_data} según corresponda) y \prog{StopLogData}.
 
-\subsection{La clase CSocketNode}
+\subsection{La clase \prog{CSocketNode}}
 Es la clase encargada de establecer las comunicaciones con el robot real mediante el uso de sockets. No se ha utilizado directamente.
 
-\subsection{La clase CRobotDataReal}
+\subsection{La clase \prog{CRobotDataReal}}
 Como se puede ver en el diagrama \ref{fg:uml}, esta clase hereda de \prog{CRobotData}y \prog{CSocketNode}. Es la clase necesaria para el funcionamiento del robot en modo real. Sus métodos más importantes son los siguientes:
 
-\subsubsection{Init}
+\subsubsection{\prog{Init}}
 
 \noindent
 \prog{bool Init(int typ,const char* source)}
@@ -371,7 +373,7 @@ Esta función se emplea para establecer el modo de funcionamiento del robot y ef
 \noindent
 En ella se hace una llamada a la función \prog{Init} de la clase \prog{CRobotData}, de forma que sólo es necesario añadir la funcionalidad de establecer conexión en modo real. En ese caso, se leen del parámetro \prog{source} la dirección IP y el puerto de escucha del servidor con el que se ha de realizar la conexión. Una vez se tienen estos datos, se inicia un socket cliente y se lanza el thread que se encarga de la comunicación entre éste y el servidor. Para ello se utilizan funciones de \prog{CSocketNode}. El valor de retorno es siempre \prog{true}.
 
-\subsubsection{TransferData}
+\subsubsection{\prog{TransferData}}
 
 \noindent
 \prog{int TransferData()}
@@ -383,7 +385,7 @@ Esta función se emplea para enviar los valores de velocidad al robot y recibir 
 Los datos de velocidad se envían en el formato "TransferData 100 -10", donde 100 sería la velocidad de avance y -10, la velocidad de giro. Los datos de odometría y del láser que se reciben se pasan a las variables \prog{odom_data} y \prog{laser_data} por medio de sus métodos \prog{DeSerialize}, de modo que quedan procesados para su utilización en el resto del programa.
 
 
-\subsubsection{UpdateData}
+\subsubsection{\prog{UpdateData}}
 
 \noindent
 \prog{int UpdateData()}

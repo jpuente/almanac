@@ -21,7 +21,7 @@ De acuerdo con esto, la predicción del estado dada por \ref{eq:x_predictionEKF}
      \pmatrix{\hat{x}_{R_{k-1}}+u_{x}cos\hat{\theta}_{R_{k-1}}-u_{y}sen\hat{\theta}_{R_{k-1}}\cr \hat{y}_{R_{k-1}}+u_{x}sen\hat{\theta}_{R_{k-1}}+u_{y}cos\hat{\theta}_{R_{k-1}} \cr \hat{\theta}_{R_{k-1}}+\theta_{u}}
 \end{equation}
 
-Para la matriz de covarianza de $x_{k}$ la ecuación \ref{eq:P_predictionEKF} varía ligeramente ya que lo que se conoce no es la matriz de covarianza del proceso conjunto, $Q_{p}$,sino la covarianza del ruido presente en la odometría $\vec{u}$. Si esta variable gaussiana se representa por $\vec{u}_{k}\sim N(\hat{\vec{u}}_{k},Q)$ (tomaremos un valor constante para la covarianza del ruido de los encoders) la predicción de la covarianza del estado será:
+Para la matriz de covarianza de $x_{k}$ la ecuación \ref{eq:P_predictionEKF} varía ligeramente ya que lo que se conoce no es la matriz de covarianza del proceso conjunto, $Q_{p}$,sino la covarianza del ruido presente en la odometría $\vec{u}$. Si esta variable gaussiana se representa por $\vec{u}_{k}\sim N(\hat{\vec{u}}_{k},Q)$ (tomaremos un valor constante para la covarianza del ruido en el incremento de odometría medido a partir de los datos de los encoders) la predicción de la covarianza del estado será:
 
 \begin{equation}\label{eq:P_prediction_robot}
     \tilde{P}_{k} = F_{x}\hat{P}_{k-1}F_{x}^{T}+F_{u}QF_{u}^{T},
@@ -154,7 +154,7 @@ De este modo, para cada punto del mapa sólo ha de calcularse un ángulo. Esto p
 \section{La clase \prog{CKalman\_ Loc}}
 Esta clase se ha creado para gestionar las operaciones relacionadas con el tratamiento de los mapas de puntos que se utilizan y, fundamentalmente, la localización del robot en cada instante. Aparte del constructor, contiene las funciones que se describen brevemente a continuación.
 
-\subsection{KalmanPos}
+\subsection{\prog{KalmanPos}}
 
 \prog{void KalmanPos(float inc\_ odom\_x, float inc\_ odom\_ y, float } \prog{inc\_ odom\_ theta)}
 
@@ -168,7 +168,7 @@ En esta función se realizan los cálculos correspondientes a la fase de predicc
 
 La posición resultante se almacena en una variable miembro de tipo \prog{Matrix} llamada \prog{pos_robot_kalman}.
 
-\subsection{KalmanUpdate}
+\subsection{\prog{KalmanUpdate}}
 
 \prog{void KalmanUpdate(const std::vector<Point2D>\& v)}
 
@@ -185,7 +185,7 @@ Inicialmente el mapa (vector de la STL que almacena objetos de la clase Point2D)
 %Para los puntos del mapa que no se asocian a una observación, pero se encuentran cercanos a ella o a la mejor estimación de la posición del robot en ese momento,
 Para cada uno de los puntos del mapa se comprueba si están en el interior del polígono de observaciones mediante \ref{PuntoEnPol}. En caso afirmativo, y si así lo indica la variable miembro \prog{borrar}, se eliminan del vector \prog{mapa}. Esto es posible porque el polígono es previamente calculado en cada iteración mediante un objeto de la clase \prog{CProcLaserData} perteneciente a la clase \prog{CRobot}. Sus puntos se almacenan en un vector de la STL al cual apunta un puntero miembro de \prog{CKalmanLoc}, \prog{pol}.
 
-\subsection{GuardarMapa}\label{GuardarMapa}
+\subsection{\prog{GuardarMapa}}\label{GuardarMapa}
 
 \textbf{void GuardarMapa(LPTSTR path)}
 
@@ -195,7 +195,7 @@ Esta función sirve para guardar un fichero de puntos del mapa de forma que si s
   \item path:  \emph{path} en el que guardar un fichero de texto que contendrá dos columnas con las coordenadas de los puntos de un mapa
 \end{itemize}
 
-\subsection{LeerMapa}
+\subsection{\prog{LeerMapa}}
 
 \prog{void LeerMapa(LPTSTR path)}
 
@@ -210,7 +210,7 @@ A medida que se van leyendo puntos se guardan en el vector \prog{mapa}.
 \subsubsection{}
 Para que las dos funciones anteriores se ejecuten adecuadamente en Visual Studio .NET 2005 en los \emph{Settings} o \emph{Propiedades} del proyecto no debe marcarse la utilización del juego de caracteres Unicode.
 
-\subsection{PuntoEnPol}\label{PuntoEnPol}
+\subsection{\prog{PuntoEnPol}}\label{PuntoEnPol}
 
 \prog{int PuntoEnPol(int k)}
 
@@ -226,14 +226,14 @@ Si el punto $k$ del vector \prog{mapa} está en el interior del polígono de obs
 \section { Otras funciones de la clase \prog{CProcLaserData}}
 
 
-\subsection {CalculaPol}
+\subsection {\prog{CalculaPol}}
 
 \prog{void CalculaPol()}
 
 Esta función se utiliza para crear un polígono envolvente de las observaciones realizadas por el láser.
 Inicializa el número de puntos que lo forman a 0 y después hace una llamada a la función recursiva \prog{Split}, que se describe a continuación.
 
-\subsection {Split}
+\subsection {\prog{Split}}
 
 \prog{void Split(int primer, int segun)}
 
@@ -250,7 +250,7 @@ Se trata de la implementación del proceso descrito al principio de \ref{poligon
 \noindent
 Estas dos funciones no han sido realizadas dentro del proyecto. Se incluyen en este capítulo en lugar de en el anterior para que pueda comprenderse mejor su utilización.
 
-\subsection{ConviertePol}
+\subsection{\prog{ConviertePol}}
 
 \prog{void ConviertePol(Matrix pos)}
 
@@ -261,7 +261,7 @@ Esta función calcula las coordenadas de los vértices del polígono en el siste
 \end{itemize}
 
 Se utiliza principalmente para trazar el dibujo del polígono y para medir distancias de los puntos del mapa a los lados del mismo.
-\subsection{PolAng}
+\subsection{\prog{PolAng}}
 
 \noindent
 \prog{void PolAng(Matrix pos)}
@@ -278,7 +278,7 @@ Se aplica un coeficiente de acercamiento de los vértices del polígono al robot
 Las pruebas relativas a la localización y a la construcción de mapas de puntos se han efectuado en los modos fichero y real. En simulación las medidas del láser se consideran con alcance constante, por lo que no aportan información que permita la localización.
 
 \subsection{Pruebas en modo \emph{fichero}}
-En estas pruebas, se han empleado datos de odometría y del láser obtenidos con diferentes robots y en diferentes entornos por Diego Rodríguez-Losada en el marco de su tesis doctoral. Se ha estudiado el funcionamiento del algoritmo implementado por medio de ficheros que contienen esos datos alternando líneas de tipo representado en la figura \ref{fg:ficheropos} (datos de la odometría) y líneas del tipo representado en la figura \ref{fg:ficherolaser} (datos de medidas del láser). Estas pruebas resultan de mucha utilidad ya que utilizan gran variedad de datos y permiten evaluar el funcionamiento del sistema en entornos muy distintos y con medidas de diferentes características..
+En estas pruebas, se han empleado datos de odometría y del láser obtenidos con diferentes robots y en diferentes entornos por Diego Rodríguez-Losada y otros investigadores que han trabajado con él. Se ha estudiado el funcionamiento del algoritmo implementado por medio de ficheros que contienen esa información sensorial sin procesar. En ellos se alternan líneas del tipo representado en la figura \ref{fg:ficheropos} (datos de la odometría) y líneas del tipo representado en la figura \ref{fg:ficherolaser} (datos de medidas del láser). Estas pruebas resultan de mucha utilidad ya que utilizan gran variedad de datos y permiten evaluar el funcionamiento del sistema en entornos muy distintos y con medidas de diferentes características.
 
 \subsubsection{Utilización de datos tomados en el laboratorio de DISAM-UPM}
 En este caso, los datos empleados contienen 181 medidas del láser cada vez. Debe recordarse que, por motivos de coste computacional, el algoritmo de localización emplea una de cada dos de ellas. Como estos datos fueron obtenidos con el robot Urbano, no es necesario modificar el \emph{offset} del láser utilizado en el programa.
@@ -331,7 +331,6 @@ Al no ser excesivamente malos los datos de la odometría, no se logran demasiada
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria es: 3.22min. La disminución del tiempo de ejecución es resultado de la mejor asociación de observaciones a puntos del mapa, que hace que éste tenga un menor tamaño.
 
-\vspace{5cm}
 \noindent
 \textbf{3.} \textbf{En esta prueba se han utilizado los siguientes parámetros:}
 \begin{itemize}
@@ -405,7 +404,6 @@ Se puede observar que las medidas odométricas presentan un alto grado de error.
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 6.8min.
 
-\vspace{5cm}
 \noindent
 \textbf{2.} \textbf{En esta prueba se han utilizado los siguientes parámetros:}
 \begin{itemize}
@@ -500,5 +498,5 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
 \noindent
 Como puede observarse, la presencia de personas en el museo afecta a la construcción del mapa y a la localización. Esto puede corregirse mediante el borrado de puntos del mapa, con lo que se logra un resultado realmente bueno. A pesar de la gran longitud de la trayectoria seguida, con el correspondiente incremento de errores en las medidas de los encoders, el sistema mantiene una correcta estimación de la posición del robot hasta el final del recorrido efectuado.
 
-
-
+\subsection{Pruebas en modo \emph{real}}
+Como ya se ha mencionado, en estas pruebas se ha trabajado con el robot móvil Urbano. A continuación se muestran algunos de los mapas obtenidos en el laboratorio del departamento llevando al robot en modo teleoperado. Los mapas realizados mediante movimiento planificado, empleando el control diseñado, se incluyen en el capítulo 6.

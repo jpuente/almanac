@@ -5,7 +5,7 @@ El funcionamiento del sistema requiere la integración de sus distintos componen
 
 La interacción entre el módulo de localización y el de control de movimiento se lleva a cabo mediante la clase \prog{CRobot}, como puede apreciarse en el diagrama \ref{fg:uml}. Desde las clases \prog{CRobotGLWnd} y \prog{CControl3GUIDlg} se realiza la transferencia de información desde la interfaz gráfica al resto del programa. En esta última se tiene el objeto \prog{gl_wnd}, de la clase \prog{CRobotGLWnd}, el objeto \prog{robot}, de la clase \prog{CRobot} y el objeto \prog{control}, de la clase \prog{CMoveControl}. Desde \prog{robot} se tiene un puntero al objeto \prog{control}. Desde \prog{gl_wnd} se tienen punteros a  \prog{robot} y a \prog{control} (para simplificar las llamadas a sus métodos y no tener que utilizarlos a través del puntero al objeto \prog{robot}).
 
-\section{La clase CRobot}
+\section{La clase \prog{CRobot}}
 El papel de esta clase consiste en integrar:
 \begin{itemize}
   \item la obtención de los datos de odometría y del láser
@@ -58,7 +58,7 @@ También posee una variable puntero a un objeto de tipo \prog{CPioneer}, para la
 %\noindent
 %Esta función sirve para desconectar el robot Pioneer en caso de que se esté utilizando.
 
-\subsection{ProcessData}
+\subsection{\prog{ProcessData}}
 
 \noindent
 \prog{int ProcessData()}
@@ -78,13 +78,13 @@ La posición resultante de esta actualización se guarda en un vector de la STL 
 
 Esta nueva posición es la que ha de utilizar el control de movimiento. Como las variables \prog{x} y \prog{y} de la clase \prog{CMoveControl} son públicas, basta con asignarles el valor correspondiente a la posición corregida con el filtro de Kalman.
 
-Lo último que se hace es pasarle a la variable \prog{control} el vector de puntos del mapa (actualizado en la llamada a \prog{ KalmanUpdate}) como vector que contiene los obstáculos a evitar por el control reactivo y efectuar la deformación de la trayectoria mediante \prog{control.ComputeElasticTray()}.
+Lo último que se hace es pasarle a la variable \prog{control} el vector con aquellos puntos del mapa (actualizado en la llamada a \prog{ KalmanUpdate}) suficientemente cercanos al robot como vector que contiene los obstáculos a evitar por el control reactivo y efectuar la deformación de la trayectoria mediante \prog{control.ComputeElasticTray()}.
 
 El valor de retorno es 1 si se han actualizado datos de odometría o del láser y 0 en caso contrario.
 
 Esta función va a ejecutarse a modo de bucle, dentro de un \emph{timer} que se define en la clase \prog{CControl3GUIDlg}.
 
-\section{La clase CControl3GUIDlg}
+\section{La clase \prog{CControl3GUIDlg}}
 Esta clase hereda de la clase pública \prog{CDialog}, perteneciente a las MFC. En ella comienza el hilo principal de ejecución del programa. Desde esta clase se crea el cuadro de diálogo, al que han de añadirse los diferentes botones para realizar el paso de información del usuario a los distintos componentes del sistema. En ella se tiene la variable \prog{gl_wnd} para crear la ventana gráfica y asociarla a él. Como se ha mencionado, proporciona el modo de controlar el ciclo de tareas que ha de realizar el robot mediante un temporizador o \emph{timer} que permite la repetición de una serie de acciones periódicamente. La variable \prog{robot}, de acuerdo con lo visto, es necesaria para obtener la posición corregida y el mapa y hacer posible su utilización desde el control de movimiento en cada momento. La variable \prog{control} se emplea para facilitar el acceso a aquél. %Las principales funciones editadas en esta clase son:
 
 \section{Interfaz de usuario}
@@ -92,7 +92,7 @@ Aunque ya se ha mostrado en otras figuras, a continuación se presenta el aspect
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{interfaz}\\
+  \centering\includegraphics[scale=0.4]{interfazNueva}\\
   \caption{Interfaz de usuario}\label{fg:interfaz}
 \end{figure}
 
@@ -106,12 +106,12 @@ Siempre que se pulse alguno de estos botones se cierra la interfaz de usuario y 
 
 \subsubsection{Reset}
 \noindent
-Se emplea para anular la definición de una trayectoria y de una serie de obstáculos realizada mediante el ratón.
+Se emplea para anular la definición de una trayectoria y de una serie de obstáculos realizados mediante el ratón.
 
 \subsubsection{Guardar Mapa}
 
 \noindent
-Se utiliza para guardar los puntos de un mapa en un fichero. Al ser pulsado se abre el típico cuadro de Windows \emph{Guardar Como} para seleccionar el directorio y el nombre. De esta forma que no tienen que realizarse nuevos mapas cada vez sino que pueden ser leídos mediante \emph{Leer mapa}:
+Se utiliza para guardar los puntos de un mapa en un fichero. Ha de ser pulsado tras finalizar el recorrido del robot por el entorno que se desee representar. Al ser marcado se abre el típico cuadro de Windows \emph{Guardar Como} para seleccionar el directorio y el nombre del fichero. De esta forma, no tienen que realizarse nuevos mapas cada vez sino que pueden ser leídos mediante \emph{Leer mapa}:
 
 \subsubsection{LeerMapa}
 
@@ -173,7 +173,13 @@ Con este botón se inicia un temporizador para que se ejecute el ciclo de tareas
 \subsubsection{Pause}
 Este botón mata el temporizador y con ello dejan de realizarse las actualizaciones del ciclo, por lo que el sistema se mantiene estático hasta que vuelva a lanzarse el ciclo de tareas pulsando de nuevo el botón \emph{Start}.
 
-\subsection{Selección de opciones mediante ratón o teclado}
+\subsubsection{Radio}
+El valor que se introduzca en esta \emph{edit box} se utilizará como radio de curvatura para suavizar la trayectoria. Si no se escribe nada en ella el valor por defecto es 1m.
+
+\subsubsection{Orientación final}
+Esta \emph{edit box} se utiliza si se desea concretar una orientación del robot en el punto final de la trayectoria. Si se ha pulsado la opción de \emph{Volver} la orientación final será por defecto la que tenía el robot en el momento en que se comenzó a guardar la trayectoria. En caso contrario el robot mantendrá la orientación con la que llegue al destino.
+
+\subsection{Selección de opciones mediante ratón o teclado} \label{opciones}
 Por medio del ratón pueden realizarse los siguientes cambios relativos a la visualización:
 \begin{itemize}
   \item Acercamiento y alejamiento del punto de vista mediante giro de la rueda del ratón en uno u otro sentido. El mismo resultado se obtiene moviendo el ratón con el botón derecho pulsado.
@@ -192,4 +198,36 @@ A través del uso único del teclado pueden hacerse más modificaciones:
   \item Mostrar o no mostrar la trayectoria definida, la trayectoria modificada y los obstáculos mediante las teclas correspondientes a las letras 'T', 'E' y 'O' respectivamente
   \item Aumentar y disminuir el tamaño de las celdas de la cuadrícula por medio de las teclas correspondientes a las letras 'M' y 'L'
   \item Movimiento del robot en modo teleoperado. La letra 'W' se utiliza para aumentar la velocidad de avance; la 'S', para disminuir la velocidad de avance; la 'D', para incrementar la velocidad de giro (sentido de las agujas del reloj, figura \ref{fg:velocidades}); la 'A' para disminuir la velocidad de giro (o incrementarla en sentido antihorario) y la barra de espaciado se emplea para hacer nulas las velocidades del robot y que éste se detenga.
-\end{itemize} 
+\end{itemize}
+
+\section{Pruebas y resultados}
+En estas pruebas se pone de manifiesto la interacción entre las dos partes principales del sistema desarrollado.
+
+\subsection{Pruebas en modo \emph{simulación}}
+Como ya se ha visto, en este modo de funcionamiento no se realiza localización del robot por no haber disponibilidad de medidas del láser. Sin embargo, sí que permite evaluar la deformación de trayectorias en entornos densos en obstáculos mediante el uso de mapas.
+
+\subsubsection{Deformación de trayectorias ante los obstáculos definidos por los puntos de un mapa}
+A continuación se utilizan mapas obtenidos por los métodos descritos en el capítulo 4 de modo que sus puntos sean los que sirvan para deformar la trayectoria. La trayectoria inicial se dibuja en color azul y la deformada, en color verde. Se ha tomado un rango de 1m a la posición del robot para considerar los puntos del mapa como obstáculos. La máxima desviación permitida se ha establecido en 0.3m para evitar deformaciones excesivas y no entrar en situación de bloqueo con demasiada facilidad.%Se puede ver que con una desviación máxima de 0.6m la trayectoria deformada (dibujada en color verde), se corta antes de que termine la trayectoria inicial (color azul), lo que significa que se ha producido bloqueo.
+
+\begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{reactivo1}\\
+  \hspace{0.5cm}\includegraphics[scale=0.4]{reactivo2}
+  \caption{Deformación de trayectorias definidas en el laboratorio de DISAM-UPM}\label{fg:react3}
+\end{figure}
+
+Aquí puede verse la utilidad del borrado de puntos dinámicos del mapa. En los casos anteriores, hay obstáculos que impiden el avance del robot en una cierta zona (situación de bloqueo). Dichos obstáculos, sin embargo, no son puntos reales del mapa sino que corresponden probablemente a sucesivas posiciones de una persona en el momento de la toma de datos. Si el mapa hubiera sido obtenido con la opción de borrado activada, como resultaría conveniente, el robot podría llegar hasta el final del recorrido planificado:
+
+\begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{reactivo3}\\
+  \caption{Deformación de trayectorias en un mapa obtenido con borrado de puntos dinámicos}\label{fg:react3}
+\end{figure}
+
+El número de obstáculos considerados en este tipo de situaciones es significativamente alto, por lo que la trayectoria deformada difiere de la original. En caso de que se desee que el robot regrese al punto de origen de su movimiento se empleará como trayectoria nominal sobre la que realizar los cambios oportunos la trayectoria seguida en el camino de ida, siendo ésta una trayectoria deformada en base a la trayectoria nominal inicial. En la figura \ref{fg:vuelta_map} se muestra en color azul la trayectoria seguida durante la ida (trayectoria nominal del camino de vuelta) y en color rosa la trayectoria modificada durante el camino de regreso.
+
+\begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.8]{vuelta_map}\\
+  \caption{Trayectoria deformada en el camino de ida y nuevas deformaciones en el camino de vuelta}\label{fg:vuelta_map}
+\end{figure} 
