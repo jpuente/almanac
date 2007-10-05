@@ -143,7 +143,7 @@ Dentro de este grupo de botones de tipo \emph{check-box} se ofrecen algunas alte
 \subsubsection{Modo}
 Este grupo de botones \emph{radio-box} se emplea para seleccionar el tipo de conexión que se desea.
 \begin{itemize}
-  \item Simulacion: establece el funcionamiento del sistema en modo simulación
+  \item Simulación: establece el funcionamiento del sistema en modo simulación
   \item Fichero: establece el funcionamiento del sistema en modo fichero
   \item Real: establece el funcionamiento del sistema en modo real
 \end{itemize}
@@ -179,6 +179,15 @@ El valor que se introduzca en esta \emph{edit box} se utilizará como radio de c
 \subsubsection{Orientación final}
 Esta \emph{edit box} se utiliza si se desea concretar una orientación del robot en el punto final de la trayectoria. Si se ha pulsado la opción de \emph{Volver} la orientación final será por defecto la que tenía el robot en el momento en que se comenzó a guardar la trayectoria. En caso contrario el robot mantendrá la orientación con la que llegue al destino.
 
+\subsubsection{Robot}
+Este grupo de botones se utiliza para escoger el tipo de robot que se va a emplear.
+\begin{itemize}
+  \item Urbano: opciones correspondientes al robot Urbano (B21r de iRobot).
+  \item Pioneer: opciones correspondientes al robot Pioneer (P3AT de ActivMedia Robotics).
+\end{itemize}
+
+Las principales diferencias entre seleccionar uno u otro robot se hallan en el modo en que se realiza la conexión, en la forma en que se envían los comandos de velocidad y se recibe la información de la odometría y del láser y en los parámetros del control de movimiento. La separación de ambos casos se realiza, por lo tanto, en las clases \prog{CControl3GUIDlg} (conexión en el botón \emph{Start} y envío de comandos en el \emph{timer}), \prog{CRobot} (obtención de las medidas del sistema odométrico y de las observaciones proporcionadas por el láser) y \prog{CMoveControl} (regulador para seguir la trayectoria).
+
 \subsection{Selección de opciones mediante ratón o teclado} \label{opciones}
 Por medio del ratón pueden realizarse los siguientes cambios relativos a la visualización:
 \begin{itemize}
@@ -204,9 +213,9 @@ A través del uso único del teclado pueden hacerse más modificaciones:
 En estas pruebas se pone de manifiesto la interacción entre las dos partes principales del sistema desarrollado.
 
 \subsection{Pruebas en modo \emph{simulación}}
-Como ya se ha visto, en este modo de funcionamiento no se realiza localización del robot por no haber disponibilidad de medidas del láser. Sin embargo, sí que permite evaluar la deformación de trayectorias en entornos densos en obstáculos mediante el uso de mapas.
+Como ya se ha visto, en este modo de funcionamiento no se realiza localización del robot por no haber disponibilidad de medidas del láser para el robot Urbano. Sin embargo, sí que permite evaluar la deformación de trayectorias en entornos densos en obstáculos mediante el uso de mapas.
 
-\subsubsection{Deformación de trayectorias ante los obstáculos definidos por los puntos de un mapa}
+\subsubsection{Movimiento sobre trayectoria deformada ante los obstáculos definidos por los puntos de un mapa}
 A continuación se utilizan mapas obtenidos por los métodos descritos en el capítulo 4 de modo que sus puntos sean los que sirvan para deformar la trayectoria. La trayectoria inicial se dibuja en color azul y la deformada, en color verde. Se ha tomado un rango de 1m a la posición del robot para considerar los puntos del mapa como obstáculos. La máxima desviación permitida se ha establecido en 0.3m para evitar deformaciones excesivas y no entrar en situación de bloqueo con demasiada facilidad.%Se puede ver que con una desviación máxima de 0.6m la trayectoria deformada (dibujada en color verde), se corta antes de que termine la trayectoria inicial (color azul), lo que significa que se ha producido bloqueo.
 
 \begin{figure}[h]
@@ -231,3 +240,24 @@ El número de obstáculos considerados en este tipo de situaciones es significat
   \centering\includegraphics[scale=0.8]{vuelta_map}\\
   \caption{Trayectoria deformada en el camino de ida y nuevas deformaciones en el camino de vuelta}\label{fg:vuelta_map}
 \end{figure} 
+
+\subsubsection{Construcción de un mapa mediante movimiento controlado del robot y deformación de la trayectoria ante los puntos del mismo con el robot Pioneer}
+
+Con este robot, el simulador proporcionado por el fabricante permite disponer de las medidas ficticias del láser en un entorno hipotético representado en el mismo por medio de un mapa geométrico de líneas. Así, puede verse el comportamiento del sistema desarrollado a la hora de construir el mapa de puntos de un entorno como el dado por aquél mapa. En la  figura \ref{fg:pioneerSim1} se muestran los resultados de un primer experimento. En ella pueden apreciarse algunos detalles interesantes. 
+\begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{pioneer3}\\
+  \hspace{0.5cm}\includegraphics[scale=0.7]{pioneer3_sim}
+  \caption{Primer experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1}
+\end{figure}
+ 
+ Como primera conclusión podría destacarse la insuficiencia de un valor de 0.1 en la estimación del ruido de la odometría, lo que afecta a la construcción del mapa y hace que se creen paredes dobles en algunos casos. La posición corregida por el filtro aparece en color rojo, mientras que la de la odometría es la que se dibuja en color verde. Al final del recorrido empieza a apreciarse la desviación en la posición odométrica. La trayectoria azul es la nominal, definida por el usuario mediante el ratón, y la trayectoria deformada no se muestra, pero es bastante similar a la trayectoria real seguida(trayectoria roja). Puede verse que se deforma adecuadamente en los puntos cercanos a las paredes o muebles.
+ 
+ En un segundo experimento se mejoró la estimación del ruido de la odometría (estableciéndose en un valor de 0.5), con lo que aumenta la calidad del mapa construido. Posiblemente se obtendrían mejores resultados incrementando algo más dicho valor. Los colores empleados son los mismos que en el caso anterior, pero sólo se representa el último tramo de la trayectoria nominal definida. De nuevo se puede observar la deformación de la trayectoria en las cercanías de los obstáculos y el efecto de la localización, más fácilmente apreciable en observación simultánea en tiempo real de ambos simuladores.
+ 
+ \begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{pioneer2}\\
+  \hspace{0.5cm}\includegraphics[scale=0.7]{pioneer2_sim}
+  \caption{Segundo experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1}
+\end{figure}

@@ -75,15 +75,21 @@ Como puede verse en la figura \ref{fg:err_ang}, el ángulo resultante de esa dif
 
 donde todas las magnitudes están expresadas en el Sistema Internacional salvo cuando se especifica lo contrario.
 
-Al aumentar la duración del ciclo de tareas cuando se utiliza el robot real Urbano, los comandos de velocidad enviados de acuerdo con la tabla \ref{vel1} llegaban con retraso y el robot daba algunos bandazos. Para solucionar este problema se modificó el regulador de forma que se contemplara también la orientación de la trayectoria en el tramo en que se encuentra el robot en cada instante y la orientación en el tramos siguiente, a modo de control predictivo. Los nuevos ángulos sobre los que también se actúa se denominarán err\_ang2 y err\_ang3, respectivamente, y se muestran en la figura \ref{}. La acción de control resultante es una combinación lineal de las acciones sobre estos tres ángulos. Se ha utilizado un peso de 0.3 para regular err\_ang, un peso de 0.2 para regular err\_ang2 y un peso de 0.5 para regular err\_ang3. El regulador final obtenido utiliza los valores y ganancias que aparecen en la tabla \ref{vel2}. Con el robot Pioneer los valores del cuadro \ref{vel1} están bastante bien ajustados, ya que se obtuvieron con periodos de ejecución más realistas y posteriormente se probaron con el P3AT.
-
+Al aumentar la duración del ciclo de tareas cuando se utiliza el robot real Urbano, los comandos de velocidad enviados de acuerdo con la tabla \ref{vel1} llegaban con retraso y el robot daba algunos bandazos. Para solucionar este problema se modificó el regulador de forma que se contemplara también la orientación de la trayectoria en el tramo en que se encuentra el robot en cada instante y la orientación en el tramos siguiente, a modo de control predictivo. Los nuevos ángulos sobre los que también se actúa se denominarán err\_ang2 y err\_ang3, respectivamente, y se muestran en la figura \ref{}.
+\begin{figure}[hbt]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.5]{err_ang23}\\
+  \caption{Nuevos errores incorporados al regulador}\label{fg:err_ang23}
+\end{figure} 
+ 
+La acción de control resultante es una combinación lineal de las acciones sobre estos tres ángulos. Se ha utilizado un peso de 0.3 para regular err\_ang, un peso de 0.2 para regular err\_ang2 y un peso de 0.5 para regular err\_ang3. El regulador final obtenido utiliza los valores y ganancias que aparecen en la tabla \ref{vel2}. Con el robot Pioneer los pesos son los mismos y se mantienen las ganancias del cuadro \ref{vel1}.
 \begin{table} \label{vel2}
 \begin{itemize}
 
   \item 160º$<err\_ang(º)$
 
         \begin{tabbing}
-        Urbano:\\  
+        Urbano:\\
         $v_{d}=0$ \\
         $v_{s}=30err\_ang$
         \end{tabbing}
@@ -517,7 +523,7 @@ En la figura \ref{fg:react3} se ha plasmado en color verde la trayectoria seguid
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{react2}\\
   \caption{Primer experimento de control reactivo}\label{fg:react3}
-\end{figure} 
+\end{figure}
 
 
 \subsection{Pruebas en modo \emph{real}}
