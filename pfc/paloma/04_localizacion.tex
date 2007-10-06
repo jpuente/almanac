@@ -72,12 +72,15 @@ Según se van asociando observaciones, se tienen más medidas que utilizar. Por 
 
 Para un número t de observaciones asociadas en la iteración k, se tiene:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{equation}
+\mbox{dim}  h_{k}            =   2t \times 1 
+\end{equation}
+
 
 \begin{eqnarray*}
-dim  h_{k}             &=  & 2t \times 1 \\
-dim  H_{x_{k}}     & = & 2t \times 3 \\
-dim H_{z_{k}}      & = & 2t \times 2t \\
-dim R_{k}             & = & 2t \times 2t
+\mbox{dim}  H_{x_{k}}     & = & 2t \times 3 \\
+\mbox{dim}  H_{z_{k}}     & = & 2t \times 2t \\
+\mbox{dim}  R_{k}            & = & 2t \times 2t
 \end{eqnarray*}
 
 %\begin{center}
@@ -92,7 +95,6 @@ dim R_{k}             & = & 2t \times 2t
 
 
 Con lo que la matriz S global calculada a partir de ellas por medio de \ref{eq:SEKF_im} será:
-
 \begin{equation}\label{eq:S_robot}
     S_{k} = H_{x_{k}}\tilde{P}_{k}H_{x_{k}}^{T}+H_{z_{k}}RH_{z_{k}}^{T}
 \end{equation}
