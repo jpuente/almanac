@@ -63,10 +63,10 @@ Biblioteca desarrollada por Diego Rodríguez-Losada para facilitar el tratamient
 
 Aria (Advanced Robot Interface for Applications) es una interfaz para el uso de los robots de la firma MobileRobots.Inc que puede usarse sobre las APIs de Linux y Win32. Integra software para establecer las comunicaciones, para controlar la velocidad y la orientación de los robots, para la utilización de diferentes sensores y accesorios\ldots Se trata de una biblioteca escrita en C++, pero también puede ser ampliamente utilizada en Java o Phyton mediante \emph{wrappers}. Se encuentra publicada bajo licencia GPL.
 
-En el proyecto se han utilizado únicamente las funciones básicas que permiten la conexión y desconexión sencilla del robot, el envío de comandos de movimiento de bajo nivel (velocidades de avance y giro) y la lectura de los datos proporcionados por los encóders. La mayor parte de estas funciones se encapsulan dentro de la clases \prog{ArRobot} y \prog{ArSimpleConnector}.
+En el proyecto se han utilizado únicamente las funciones básicas que permiten la conexión y desconexión sencilla del robot, el envío de comandos de movimiento de bajo nivel (velocidades de avance y giro) y la lectura de los datos proporcionados por los encóders y el láser (todavía no disponible en operación con el robot real). La mayor parte de estas funciones se encapsulan dentro de las clases \prog{ArRobot} y \prog{ArSimpleConnector}.
 
 El equivalente a las funciones indicadas ha sido implementado en la clase \prog{CPioneer} para no tener dependencias de Aria fuera de dicha clase.
-Además, se utilizan como variables miembro punteros a void, que primeramente se inicializan a NULL para después hacer un cast a vectores que apuntan a los objetos correspondientes (\prog{ArRobot}, \prog{ArSimpleConnector}). Con esto se evita que al ejecutarse la aplicación sea necesario tener instalado el software de Aria.
+Además, se utilizan como variables miembro punteros a void, que primeramente se inicializan a NULL para después hacer un cast a vectores que apuntan a los objetos correspondientes (\prog{ArRobot}, \prog{ArSimpleConnector}, \prog{ArSick}). Con esto se evita que al ejecutarse la aplicación sea necesario tener instalado el software de Aria.
 
 \section{Funciones auxiliares utilizadas}
 A lo largo del desarrollo del proyecto se han creado algunas funciones de carácter auxiliar para realizar ciertas operaciones. Su declaración y contenido se pueden encontrar en los ficheros \prog{tools.h} y \prog{tools.cpp} Las más destacadas son:
@@ -94,7 +94,7 @@ En la figura \ref{fg:uml} se puede ver el diagrama UML de las clases que conform
 
 En el diagrama no se muestran las dependencias de las bibliotecas anteriormente descritas. Como puede observarse, se ha realizado un diseño modular con relaciones claras entre sus elementos. Las clases que han sido implementadas en el presente proyecto aparecen en color rosa. El color gris se ha utilizado para las clases que existían previamente. La clase \prog{CProcLaserData} forma parte de este último grupo, pero ha sido ligeramente modificada.
 
-A continuación se explica el uso que se ha hecho de estas clases mientras que las clases nuevas serán tratadas en posteriores capítulos, después de que se estudien los algoritmos incorporados.
+A continuación se explica el uso que se ha hecho de estas clases y de la clase \prog{CPioneer} mientras que el resto de las clases nuevas serán tratadas en posteriores capítulos, después de que se estudien los algoritmos incorporados.
 
 \subsection{La clase \prog{CRawLaserData}}
 Esta clase se encarga principalmente de leer y escribir ficheros con los datos procedentes del láser y de ajustar dicha información al formato correspondiente para ser enviada o tras ser recibida por un socket. También define una macro con el máximo número de medidas que puede proporcionar el láser, igual a 361.
@@ -397,6 +397,21 @@ Si el tipo de conexión es \prog{REAL_CONN} se efectúa una llamada a la funció
 
 \noindent
 Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM}, \prog{DATA_} \prog{LASER}, \prog{DATA_ODOM_LASER} o \prog{DATA_NONE}).
+
+\subsection{La clase \prog{CPioneer}} \label{CPioneer}
+En esta clase se realiza una encapsulación de los métodos de Aria que permiten la conexión con el robot, el envío de comandos de bajo nivel así como la recepción y el procesamiento de datos de los encoders y del láser. 
+
+La función \prog{CPioneer::init()} es la encargada de establecer la conexión con el robot o, si no hay esa posibilidad, con el simulador MobileSim, incluido en el software proporcionado por el fabricante. El puerto seleccionado para la conexión serie es el COM3, aunque esto puede cambiarse modificando el código.
+
+Las funciones \prog{CPioneer::GetX()}, \prog{CPioneer::GetY()} y \prog{CPioneer::GetTh()} se emplean para leer la posición odométrica del robot. Las funciones de Aria proporcionan estas medidas en mm y radianes, respectivamente, por lo que se realiza el paso al S.I para tener coherencia con el resto del programa e independencia de la plataforma robótica en el mismo. Para enviar los comandos de avance y giro se realiza la operación inversa en las funciones \prog{CPioneer::go()} y \prog{CPioneer::turn()}. El robot puede pararse de forma directa mediante \prog{CPioneer::stop()}.
+
+La función \prog{CPioneer::PrintInfo()} sirve para escribir en pantalla algunos datos sobre el estado del robot. Finalmente no se utiliza, pero resultó de utilidad en etapas iniciales del proyecto relacionadas con la conexión con el robot.
+
+\prog{CPioneer::AttachSick()} se emplea básicamente para crear un puntero a un objeto \prog{ArSick} de Aria y vincular éste al robot definido. Esto permite manejar la información procedente del láser. La función \prog{CPioneer::GetObs()} utiliza el método \prog{ArSick::GetRawReadings} (que permite obtener todas las medidas del láser, sin filtrar) para devolver un vector con los puntos detectados (objetos CPoint2D). Parte de los datos procesados aquí se pasarán a la clase \prog{CProcLaserData} para su posterior utilización.
+
+Por último, la función \prog{CPioneer::shutdown()} permite desconectar el robot y salir de los procesos necesarios adecuadamente.
+
+
 
 
 
