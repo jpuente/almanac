@@ -16,9 +16,9 @@ Con ello se consigue la compatibilidad con otros trabajos del grupo y se tiene u
 
 Algunas de las ventajas del lenguaje C++ son su buena capacidad de cálculo, el hecho de que es un lenguaje orientado a objetos y que se trata de un lenguaje de alto nivel con flexibilidad y potencia expresiva. Todo ello permite reducir el tamaño y la complejidad del código. Además, al tratarse de un lenguaje compilado, presenta una buena eficiencia en tiempos de ejecución frente a los lenguajes interpretados. También cabe destacar que gran parte de los entornos de programación distribuidos por los fabricantes de robots móviles están escritos en este lenguaje. Por supuesto, también es compatible con plataformas de desarrollo libre (como la herramienta Player/Stage/Gazebo, que proporciona software gratuito para el desarrollo de aplicaciones con robots y sensores sin imponer un lenguaje de programación determinado).
 
-Respecto al sistema operativo, el uso de Visual Studio impone utilizar Windows. Este entorno simplifica la creación y compilación de código y, sobre todo, permite el tratamiento de cuadros de diálogo e interfaces gráficas para aplicaciones Windows de un modo sencillo. No obstante, son muy abundantes los trabajos en robótica móvil desarrollados con Linux$^{®}$ (Player \& Stage, por ejemplo, no se puede emplear en Windows).
+Respecto al sistema operativo, el uso de Visual Studio impone utilizar Windows. Este entorno simplifica la creación y compilación de código y, sobre todo, permite el tratamiento de cuadros de diálogo e interfaces gráficas para aplicaciones Windows de un modo sencillo. No obstante, son muy abundantes los trabajos en robótica móvil desarrollados con GNU/Linux (Player \& Stage, por ejemplo, no se puede emplear en Windows).
 
-Se han realizado versiones iniciales en modo consola (sobre todo cuando se empleaba simultáneamente el simulador \emph{MobileSim} del robot Pioneer) y finalmente se ha optado por aplicaciones de tipo MFC (ver \ref{mfc} basadas en cuadros de diálogo.
+Se han realizado versiones iniciales en modo consola (sobre todo cuando se empleaba simultáneamente el simulador \emph{MobileSim} del robot Pioneer) y finalmente se ha optado por aplicaciones de tipo MFC (\emph{Microsoft Foundation Classes}, ver  \ref{mfc}) basadas en cuadros de diálogo.
 
 El modo de operación puede ser de tipo \emph{simulación}, \emph{fichero} o \emph{real}. La simulación permite observar en pantalla el movimiento teórico de un robot ficticio ante instrucciones que se le dan por medio del ratón o del teclado. Con el modo fichero se muestra de forma similar el comportamiento del sistema al utilizar unos datos de odometría y de medidas del láser guardados previamente en un fichero. El modo real es el que se emplea con el robot verdadero y también permite visualizar los resultados sobre la interfaz gráfica.
 
@@ -28,7 +28,7 @@ En el caso del Pioneer P3AT la puesta en funcionamiento se ha basado en comunica
 
 Como se ha visto en la introducción, el computador base de Urbano es un PC Pentium con sistema operativo GNU/Linux. También cuenta con un computador secundario que es un PC Pentium con Windows XP. La conexión entre la plataforma de desarrollo y el robot se realiza con un ordenador portátil mediante conexión con el protocolo \emph{telnet} a través de cable Ethernet.
 
-Para más información acerca de estos robots y del resto de hardware utilizado puede consultarse el Anexo C.
+Para más información acerca de estos robots y del resto de hardware utilizado puede consultarse el Anexo \ref{ap:hardware}.
 
 \section{Bibliotecas empleadas}
 Para el desarrollo del software del proyecto se ha hecho uso de varias bibliotecas existentes.
@@ -52,7 +52,7 @@ En el tipo de proyecto empleado se crea una interfaz gráfica constituida por un
 
 Biblioteca de funciones estándar para el dibujo de gráficos 2D y 3D. Permite variar los colores, el tamaño y la posición de los objetos, el grosor de las líneas, los focos de luz, los puntos de vista, etc.
 
-En este proyecto se ha utilizado la clase \prog{COpenGLWnd}, implementada por Diego Rodríguez-Losada, como clase base de una nueva clase llamada \prog{CRobotMo-} \prog{veGLWnd}. \prog{COpenGLWnd} hereda de la clase \prog{CWnd} de las MFC y permite crear una ventana con fondo negro sobre el que se dibuja una cuadrícula de color magenta y los ejes de un sistema de referencia global para el movimiento sobre un plano. También incluye diversas funcionalidades para cambiar el punto de vista por medio del ratón o el teclado y sirve para dibujar diferentes tipos de robots. En la clase \prog{CRobotMoveGLWnd} se maneja el dibujo de trayectorias, obstáculos, puntos del mapa, polígonos\ldots Se ha reprogramado la función virtual \prog{OnKeyDown} de la clase \prog{COpenGLWnd} para modificar las opciones de visualización desde el teclado y para hacer funcionar al robot en modo teleoperado. Desde ella se realiza también el desplazamiento del dibujo del robot de acuerdo con el movimiento del mismo.
+En este proyecto se ha utilizado la clase \prog{COpenGLWnd}, implementada por Diego Rodríguez-Losada, como clase base de una nueva clase llamada \prog{CRobot} \prog{MoveGLWnd}. \prog{COpenGLWnd} hereda de la clase \prog{CWnd} de las MFC y permite crear una ventana con fondo negro sobre el que se dibuja una cuadrícula de color magenta y los ejes de un sistema de referencia global para el movimiento sobre un plano. También incluye diversas funcionalidades para cambiar el punto de vista por medio del ratón o el teclado y sirve para dibujar diferentes tipos de robots. En la clase \prog{CRobot\-MoveGLWnd} se maneja el dibujo de trayectorias, obstáculos, puntos del mapa, polígonos\ldots Se ha reprogramado la función virtual \prog{OnKeyDown} de la clase \prog{COpenGLWnd} para modificar las opciones de visualización desde el teclado y para hacer funcionar al robot en modo teleoperado. Desde ella se realiza también el desplazamiento del dibujo del robot de acuerdo con el movimiento del mismo.
 
 \subsection{Biblioteca Mathematics}
 Biblioteca desarrollada por Diego Rodríguez-Losada para facilitar el tratamiento de la geometría y distintos tipos de operaciones. En el proyecto se utiliza principalmente para la definición de puntos y segmentos (clases \prog{Point2D} y \prog{Segment2D}). También se dispone de los ficheros \prog{maths.h}, \prog{maths.cpp}, \prog{matrix.h},  \prog{matrix.cpp}, del mismo autor, para definir matrices y operar con ellas.
@@ -72,13 +72,14 @@ Además, se utilizan como variables miembro punteros a void, que primeramente se
 A lo largo del desarrollo del proyecto se han creado algunas funciones de carácter auxiliar para realizar ciertas operaciones. Su declaración y contenido se pueden encontrar en los ficheros \prog{tools.h} y \prog{tools.cpp} Las más destacadas son:
 
 \begin{itemize}
-  \item \prog{AngRango}: se emplea para convertir un ángulo dado en su equivalente dentro del intervalo [-PI, PI]
-  \item \prog{ErrAng}: sirve para calcular el ángulo perteneciente a [-PI, PI] que separa un ángulo de partida de un ángulo de destino por el camino más corto
-  \item \prog{Comp}: se utiliza para realizar la composición de dos transformaciones relativas (Ver Anexo A)
-  \item \prog{J1}: sirve para calcular la matriz jacobiana de una composición de dos transformaciones relativas respecto de la primera variable (Ver Anexo A)
-  \item \prog{J2}: se emplea para obtener la matriz jacobiana de una composición de dos transformaciones relativas respecto de la segunda variable (Ver Anexo A)
+  \item \prog{AngRango}: se emplea para convertir un ángulo dado en su equivalente dentro del intervalo
+   [-$\pi$, $\pi$].
+  \item \prog{ErrAng}: sirve para calcular el ángulo perteneciente a [-$\pi$, $\pi$] que separa un ángulo de partida de un ángulo de destino por el camino más corto.
+  \item \prog{Comp}: se utiliza para realizar la composición de dos transformaciones relativas (Ver Anexo \ref{ap:transformaciones}).
+  \item \prog{J1}: sirve para calcular la matriz jacobiana de una composición de dos transformaciones relativas respecto de la primera variable  (Ver Anexo \ref{ap:transformaciones}).
+  \item \prog{J2}: se emplea para obtener la matriz jacobiana de una composición de dos transformaciones relativas respecto de la segunda variable  (Ver Anexo \ref{ap:transformaciones}).
   \item \prog{eye}: sirve para crear una matiz identidad de las dimensiones que queramos
-  \item \prog{InvTrans}: permite calcular la inversión de una transformación relativa entre dos sistemas de referencia (Ver Anexo A)
+  \item \prog{InvTrans}: permite calcular la inversión de una transformación relativa entre dos sistemas de referencia  (Ver Anexo \ref{ap:transformaciones}).
 \end{itemize}
 
 Las dos primeras funciones resultan de utilidad en el control, la planificación de trayectorias y el control reactivo. El resto se utilizan principalmente para la localización y en el tratamiento de los mapas.
@@ -86,19 +87,17 @@ Las dos primeras funciones resultan de utilidad en el control, la planificación
 \section{ Estructura de clases}
 En la figura \ref{fg:uml} se puede ver el diagrama UML de las clases que conforman el sistema.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.7]{clases4}\\
+\begin{figure}[tbp]
+  \centering\includegraphics[scale=0.65]{clases4}\\
   \caption{Diagrama de clases del sistema}\label{fg:uml}
 \end{figure}
 
-\clearpage
 En el diagrama no se muestran las dependencias de las bibliotecas anteriormente descritas. Como puede observarse, se ha realizado un diseño modular con relaciones claras entre sus elementos. Las clases que han sido implementadas en el presente proyecto aparecen en color rosa. El color gris se ha utilizado para las clases que existían previamente. La clase \prog{CProcLaserData} forma parte de este último grupo, pero ha sido ligeramente modificada.
 
 A continuación se explica el uso que se ha hecho de estas clases mientras que las clases nuevas serán tratadas en posteriores capítulos, después de que se estudien los algoritmos incorporados.
 
 \subsection{La clase \prog{CRawLaserData}}
-Esta clase se encarga principalmente de leer y escribir ficheros con los datos procedentes del láser y de ajustar dicha información al formato correspondiente para ser enviada o tras ser recibida por un socket. También define una macro con el máximo número de medidas que puede proporcionar el láser, 361.
+Esta clase se encarga principalmente de leer y escribir ficheros con los datos procedentes del láser y de ajustar dicha información al formato correspondiente para ser enviada o tras ser recibida por un socket. También define una macro con el máximo número de medidas que puede proporcionar el láser, igual a 361.
 Sus métodos son los siguientes:
 
 \subsubsection{\prog{Load}}
@@ -187,11 +186,11 @@ A partir del alcance de las medidas realizadas se ajusta el valor de las distanc
 \noindent
 Con el offset del láser y dichas medidas de distancia se obtienen las coordenadas de cada punto $i$ detectado mediante trigonometría:
 
-$\mbox{med\_x}[i] = \mbox{off\_x}+fmed[i]\mbox{cos\_alfa}[istep]$
-
-$\mbox{med\_y}[i] = \mbox{off\_y}+fmed[i]\mbox{sen\_alfa}[istep]$
-
-$\mbox{med\_z}[i] = \mbox{off\_z}$,
+\begin{eqnarray*}
+\mbox{med\_x}[i] &= &\mbox{off\_x}+\mbox{fmed}[i]\mbox{cos\_alfa}[istep] \\
+\mbox{med\_y}[i] &= &\mbox{off\_y}+\mbox{fmed[}i]\mbox{sen\_alfa}[istep] \\
+\mbox{med\_z}[i] &= &\mbox{off\_z}
+\end{eqnarray*}
 
 \noindent
 donde el valor de la variable \prog{step} puede ser $1$ ó $2$, viniendo dado por el número de medidas. De este modo se toman los ángulos de $0,5º$ en $0,5º$ o de $1º$ en $1º$.
@@ -275,7 +274,7 @@ Se escribe el término POS seguido del contenido de las variables \prog{pos_temp
 Al igual que en la clase \prog{CRawLaserData}, estas dos funciones no se han utilizado directamente, por lo que no se entra en detalles sobre su funcionamiento.
 
 \subsection{La clase \prog{CRobotData}}
-Esta clase se emplea para definir en cuál de los tres modos posibles se ha de conectar el robot y para procesar la información que permite su funcionamiento en los modos \emph{simulación} y \emph{fichero}. En ella se definen una serie de macros para indicar tipos de conexión (\prog{SIMU_CONN}, \prog{FILE_CONN}, \prog{REAL_CONN}) , tipos de datos (\prog{DATA_CONN_ERROR}, \prog{DATA_NONE}, \prog{DATA_ODOM}, \prog{DATA_LASER}, \prog{DATA_ODOM_LASER}, \prog{DATA_ODOM_INIT}) y tipos de estado (\prog{STATUS_NOT_INIT}, \prog{STATUS_CONNECTION_ERROR}, \prog{STATUS_CONNECTED}. Dentro de la clase se tienen dos variables miembro para el manejo de los datos de la odometría y del láser: \prog{odom_data}, de la clase \prog{CPosData}, y \prog{laser_data}, de la clase \prog{CRawLaserData}. Las principales funciones que se utilizan son las siguientes:
+Esta clase se emplea para definir en cuál de los tres modos posibles se ha de conectar el robot y para procesar la información que permite su funcionamiento en los modos \emph{simulación} y \emph{fichero}. En ella se definen una serie de macros para indicar tipos de conexión (\prog{SIMU_CONN}, \prog{FILE_CONN}, \prog{REAL_CONN}) , tipos de datos (\prog{DATA_CONN_ERROR}, \prog{DATA_NONE}, \prog{DATA_ODOM}, \prog{DATA_LASER}, \prog{DATA_ODOM_LASER}, \prog{DATA_ODOM_INIT}) y tipos de estado (\prog{STATUS_NOT_INIT}, \prog{STATUS_CONNECTION_} \prog{ERROR}, \prog{STATUS_CONNECTED}. Dentro de la clase se tienen dos variables miembro para el manejo de los datos de la odometría y del láser: \prog{odom_data}, de la clase \prog{CPosData}, y \prog{laser_data}, de la clase \prog{CRawLaserData}. Las principales funciones que se utilizan son las siguientes:
 
 \subsubsection{\prog{Init}}
 
@@ -322,7 +321,7 @@ Esta función se emplea para leer de un fichero los datos correspondientes a las
 En líneas generales, se lee la primera palabra de la línea del fichero abierto en la llamada a \prog{Init} en la que estemos y se mira si es igual a las cadenas "POS" o "LASER-RANGE". En el primer caso, se llama a la función \prog{Load} sobre el objeto \prog{pos_data} y en el segundo, a la función \prog{Load} del objeto \prog{laser_data}.
 
 \noindent
-Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM}, \prog{DATA_LA}\prog{SER}\ldots).
+Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM}, \prog{DATA_} \prog{LASER}\ldots).
 
 \subsubsection{\prog{Simulate}}
 
@@ -347,7 +346,7 @@ El valor que se devuelve es siempre \prog{DATA_ODOM_LASER}.
 Esta función es de tipo \prog{virtual} y se emplea para actualizar los datos de la odometría y del láser en los modos simulación y fichero.
 
 \noindent
-Si el tipo de conexión es \prog{FILE_CONN} se efectúa una llamada a la función \prog{LoadData}. Si el tipo de conexión es \prog{SIMU_CONN} se llama a la función \prog{Simulate}. En estos casos se devuelve el resultado de estas llamadas. Por defecto se devolverá \prog{DATA_CONN_ERROR} (tras realizarse la actualización del estado a \prog{STATUS_CONNECTION_ERROR}).
+Si el tipo de conexión es \prog{FILE_CONN} se efectúa una llamada a la función \prog{LoadData}. Si el tipo de conexión es \prog{SIMU_CONN} se llama a la función \prog{Simulate}. En estos casos se devuelve el resultado de estas llamadas. Por defecto se devolverá \prog{DATA_CONN_ERROR} (tras realizarse la actualización del estado a \prog{STATUS_} \prog{CONNECTION_ERROR}).
 
 \vspace{0.2cm}
 Otras funciones de la clase que se utilizan para guardar en un fichero los datos de la odometría y del láser son \prog{StartLogData} (crea y abre el fichero en el que escribir los datos), \prog{Log} (que a su vez llama a las funciones \prog{Save} de las variables \prog{odom_data} o \prog{laser_data} según corresponda) y \prog{StopLogData}.
@@ -397,7 +396,7 @@ Esta función se emplea para actualizar los datos de la odometría y del láser 
 Si el tipo de conexión es \prog{REAL_CONN} se efectúa una llamada a la función \prog{TransferData} y posteriormente a \prog{Log} para guardar los datos obtenidos en un fichero (siempre que previamente se haya empleado \prog{StartLogData}). En caso contrario (\prog{SIMU_CONN} o \prog{FILE_CONN}) se llama a la función \prog{Update} de la clase \prog{CRobotData}.
 
 \noindent
-Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM}, \prog{DATA_LASER}, \prog{DATA_ODOM_LASER} o \prog{DATA_NONE}).
+Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM}, \prog{DATA_} \prog{LASER}, \prog{DATA_ODOM_LASER} o \prog{DATA_NONE}).
 
 
 

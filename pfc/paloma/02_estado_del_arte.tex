@@ -12,7 +12,7 @@ Consiste en el seguimiento de una trayectoria definida por un perfil de puntos o
 \subsubsection{Control con realimentación}
 Una manera más apropiada de tratar el control de movimiento de un robot móvil es el control mediante \emph{feedback} de su posición. Con un controlador de este tipo, la planificación de trayectorias se reduce a la obtención de una serie de puntos intermedios que determinen el camino a seguir entre los puntos origen y destino.
 
-\subsection{Aptitudes para la navegación: planificación y reacción}
+\subsection{Aptitudes para la navegación: planificación y\\ reacción}
 En navegación de alto nivel juegan un papel fundamental las habilidades de planificación y reacción del robot. Ambos sistemas son igualmente importantes y han de integrarse adecuadamente. De nada sirve que el robot disponga de un conjunto de acciones a realizar para alcanzar un objetivo dado (plan), si durante la ejecución del mismo se encuentra con condiciones no previstas a las que no sabe cómo hacer frente. Tampoco tiene sentido que el robot sea capaz de reaccionar ante diferentes circunstancias si no puede guiarse para llegar al destino deseado. La solución teórica ideal lleva a la fusión de ambos conceptos, de modo que constantemente se elabora o actualiza un plan que reaccione en tiempo real a la información más inmediata que se tenga para describir el entorno.
 
 Se dice que el sistema de un robot es completo si y sólo si para todos los posibles problemas que puedan encontrarse (diferentes estados de partida, mapas o destinos\ldots), cuando exista alguna trayectoria entre el estado inicial y el final, el sistema llegará al estado final. Por lo tanto, si un sistema es incompleto significa que existe al menos un problema que tiene solución para el cual el sistema no encuentra solución. Siendo una propiedad enormemente difícil de conseguir, a menudo se renuncia a la completitud por razones de coste computacional.
@@ -51,7 +51,7 @@ El origen de las dificultades en la localización y la construcción de mapas se
   \item En multitud de casos es necesaria la representación de mapas de tamaño grande, lo cual supone un mayor coste computacional y una mayor imprecisión en la odometría según aumentan los desplazamientos del robot.
   \item Los entornos suelen ser dinámicos, sobre todo en el caso de robots guía o domésticos. Si se considera que las observaciones corresponden a puntos fijos representados con carácter permanente en el mapa se simplifica el problema, pero se tienen discrepancias con la realidad. Una aproximación parcialmente eficiente consiste en ir borrando objetos transitorios del mapa a lo largo del tiempo, tratándolos a modo de ruido. El rápido avance de la visión artificial y el desarrollo de dispositivos sensores que diferencien entre obstáculos móviles y estructuras estáticas dentro de un marco de referencia móvil permitirán notables mejoras en este aspecto.
   \item La asociación de las observaciones con los objetos del mapa puede resultar compleja si éstos son parecidos entre sí. En muchos casos no puede efectuarse la correspondencia de forma determinista y ha de emplearse una formulación probabilista. Algunas mejoras para abordar este problema y descartar las asociaciones erróneas se han presentado en \cite{Rodriguez-Losada07}.
-  \item Los entornos son tridimensionales pero contemplar este aspecto introduce un mayor grado de complejidad y ha de tenerse en cuenta que generalmente los sensores están configurados para una percepción plana horizontal. Aunque existen algunos trabajos en la representación de mapas tridimensionales, la mayor parte de los algoritmos más empleados hasta el momento aceptan la hipótesis de bidimensionalidad del entorno. El paso a modelos en tres dimensiones es uno de los próximos objetivos a seguir (capítulo 7).
+  \item Los entornos son tridimensionales pero contemplar este aspecto introduce un mayor grado de complejidad y ha de tenerse en cuenta que generalmente los sensores están configurados para una percepción plana horizontal. Aunque existen algunos trabajos en la representación de mapas tridimensionales, la mayor parte de los algoritmos más empleados hasta el momento aceptan la hipótesis de bidimensionalidad del entorno. El paso a modelos en tres dimensiones es uno de los próximos objetivos a seguir (capítulo \ref{ch:conclusiones}).
 \end{itemize}
 
 \subsection{Tipos de mapas}\label{mapas}
@@ -63,7 +63,6 @@ El nivel métrico consiste en representar las coordenadas y propiedades de los o
 Así, los mapas métricos geométricos representan objetos con determinadas características geométricas y diferentes grados de complejidad dependiendo de las capacidades sensoriales y de extracción de información. En la figura \ref{fg:geometricos} se muestran dos mapas geométricos que reflejan propiedades características de los entornos de interiores. En el mapa de la izquierda se representan las paredes mediante segmentos y en el de la derecha puede apreciarse que las esquinas y objetos delgados, como patas de mobiliario, se representan como puntos.
 
 \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[width=0.5\textwidth]{mapas_geometricos}\\
   \caption{Mapas métricos geométricos}\label{fg:geometricos}
 \end{figure}
@@ -73,28 +72,28 @@ Este tipo de mapas es ampliamente utilizado en entornos estructurados debido pri
 En los mapas métricos discretizados,se utiliza la información de los sensores sin segmentar y se construye una función de densidad de probabilidad de ocupación del espacio. Como ésta no puede cubrir todo el espacio de forma continua, se efectúa una descomposición en celdillas y se asigna una probabilidad a que cada una esté ocupada o libre. Esta división puede ser exacta, manteniendo las fronteras de los obstáculos como bordes de las celdillas, o mediante celdillas de dimensiones fijas que se reparten por todo el espacio \cite{Siegwart04}. En las figuras \ref{fg:exactas} y \ref{fg:fijas} pueden verse ejemplos de ambos tipos de descomposición. En la división en celdillas fijas se aprecia que un estrecho paso entre dos obstáculos puede perderse con esta representación.
 
  \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[width=0.5\textwidth]{celdas_exactas}\\
   \caption{Descomposición en celdillas exactas}\label{fg:exactas}
 \end{figure}
 
 \begin{figure}[hbt]
-  % Requires \usepackage{graphicx}
   \centering{\includegraphics[width=0.4\textwidth]{celdas_fijas1}
   \hspace{0.1cm} \includegraphics[width=0.4\textwidth]{celdas_fijas2}}  \\
   \caption{Descomposición en celdillas fijas}\label{fg:fijas}
 \end{figure}
 
-
- En este caso no se analiza la pertenencia de cada celdilla a un objeto individual, por lo que aunque el espacio esté discretizado se logra su representación de forma continua. En la figura \ref{fg:discretizado} se puede ver un mapa discretizado o de ocupación de celdillas de un entorno con formas irregulares que haría complicada la representación geométrica.
-
-\begin{figure}[hbtp]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbt]
   \centering\includegraphics[scale=0.4]{mapa_discretizado}\\
   \caption{Mapa métrico discretizado}\label{fg:discretizado}
 \end{figure}
 
+
+ En este caso no se analiza la pertenencia de cada celdilla a un objeto individual, por lo que aunque el espacio esté discretizado se logra su representación de forma continua. En la figura \ref{fg:discretizado} se puede ver un mapa discretizado o de ocupación de celdillas de un entorno con formas irregulares que haría complicada la representación geométrica.
+
 Este tipo de mapas puede precisar de una alta capacidad de almacenamiento, tanto mayor cuanta más resolución se requiera. Por otra parte, permite representaciones continuas y completas incluso a partir de datos de sensores con mucho ruido como los de ultrasonidos, lo que los hace especialmente prácticos.
+
+\clearpage
+
 
 El nivel de representación topológico se centra en definir nodos (en ocasiones llamados \emph{lugares distintivos}) y las conexiones entre ellos. Los mapas topológicos a menudo se elaboran a partir de mapas geométricos pero también pueden obtenerse directamente. Un concepto importante en estos modelos es el de nodos adyacentes. Los nodos adyacentes son aquellos que el robot puede alcanzar sucesivamente sin pasar por ningún otro nodo intermedio. Dentro de este nivel son muy comunes las representaciones basadas en el Diagrama de Voronoi o el Gráfico de Voronoi Generalizado (GVG)como las que se presentan en \cite{Choset01} y se muestran en la figura \ref{fg:topologicos}.
 
@@ -126,7 +125,7 @@ La formulación probabilística rigurosa del problema SLAM se conoce comúnmente
 
 En la construcción de un mapa por un robot móvil se tienen dos tipos de medidas: las que provienen de los sensores propioceptivos (odometría) y las de los sensores estereoceptivos (observaciones). Se puede suponer sin pérdida de generalidad que estas medidas llegan secuencial y alternativamente en el tiempo:
 
-\begin{equation}\label{eq:medidas}
+\begin{equation}\label{eq:medidas-sensores}
     u_{1},z_{1},u_{2},z_{2}...u_{t},z_{t}
 \end{equation}
 
@@ -145,7 +144,6 @@ El teorema de Bayes permite conocer la probabilidad de dicho estado condicionada
 
 
 \begin{eqnarray}
-% \nonumber to remove numbering (before each equation)
     z^{t} = z_{1},z_{2}...z_{t} \nonumber\\
     u^{t} = u_{1},u_{2}...u_{t}
 \end{eqnarray}
@@ -157,21 +155,26 @@ Aceptando que el único estado que existe es el definido por $s_{t}$ y $m_{t}$ (
 \end{equation}
 
 El segundo factor puede expresarse en base al teorema de la probabilidad total como:
-\begin{equation}\label{eq:prob_total}
-    p(s_{t},m_{t}\mid z^{t-1},u^{t}) = \int\int p(s_{t},m_{t}\mid z^{t-1},u^{t},s_{t-1},m_{t-1})p(s_{t-1},m_{t-1}\mid z^{t-1},u^{t})ds_{t-1}dm_{t-1}
-\end{equation}
+\begin{eqnarray}\label{eq:prob_total}
+  \lefteqn{p(s_{t},m_{t}\mid z^{t-1},u^{t}) =} \\
+	&&  \int\int p(s_{t},m_{t}\mid z^{t-1},u^{t},s_{t-1},m_{t-1}) 
+ 	\cdot p(s_{t-1},m_{t-1}\mid z^{t-1},u^{t}) ds_{t-1}dm_{t-1}  \nonumber
+\end{eqnarray}
 
 Aplicando otra vez la hipótesis de Markov y el hecho de que es lógico pensar que el movimiento del robot es independiente del mapa, se tiene:
 
 \begin{equation}\label{eq:termino2}
-    p(s_{t},m_{t}\mid z^{t-1},u^{t}) = \int p(s_{t}\mid u_{t-1},s_{t-1})p(s_{t-1},m\mid z^{t-1},u^{t-1})ds_{t-1}
+    p(s_{t},m_{t}\mid z^{t-1},u^{t}) = \int p(s_{t}\mid u_{t-1},s_{t-1})
+    \cdot p(s_{t-1},m\mid z^{t-1},u^{t-1})ds_{t-1}
 \end{equation}
 
 
 Con lo que finalmente queda:
-\begin{equation}\label{eq:filtroBayes}
-  p(s_{t},m\mid z^{t},u^{t}) = \eta p(z_{t}\mid s_{t},m_{t})\int p(s_{t}\mid u_{t},s_{t-1})p(s_{t-1},m\mid z^{t-1},u^{t-1})ds_{t-1}
-\end{equation}
+\begin{eqnarray}\label{eq:filtroBayes}
+  \lefteqn{p(s_{t},m\mid z^{t},u^{t}) = } \\
+  && \eta p(z_{t}\mid s_{t},m_{t})\int p(s_{t}\mid u_{t},s_{t-1})
+  \cdot p(s_{t-1},m\mid z^{t-1},u^{t-1})ds_{t-1} \nonumber
+\end{eqnarray}
 
 Esta expresión \ref{eq:filtroBayes} es la que se conoce como Filtro de Bayes en el problema SLAM. El problema así planteado puede abordarse recursivamente si se conocen en cada instante las medidas sensoriales de ese instante (con su probabilidad) junto con la función de probabilidad del estado en el instante anterior.
 Hacen falta, por lo tanto, dos funciones de probabilidad correspondientes a datos sensoriales: la relativa a la odometría, $p(s_{t}\mid u_{t},s_{t-1})$, y la de las medidas efectuadas por el sistema estereoceptivo, $p(z_{t}\mid s_{t},m_{t})$.
@@ -192,7 +195,7 @@ En 1994 se celebró el concurso \emph{1994 American Association for Artificial I
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.8]{Markov}\\
-  \caption{ Trayectorias odométrica y corregida mediante localización de Markov en un mapa de ocupación de celdillas \cite{Fox99}}\label{fg:MarkovGrid}
+  \caption{ Trayectorias odométrica y corregida mediante localización de Markov en un mapa de ocupación de celdillas \cite{Fox99}.}\label{fg:MarkovGrid}
 \end{figure}
 
 Las técnicas de localización de Markov con mapas topológicos son difíciles de aplicar en entornos no estructurados. En otro tipo de casos, sin embargo, puede ser más adecuado. El ganador de la competición de robots móviles de la AAAI de 1994, llamado Dervish, empleaba localización probabilística de Markov sobre representación topológica del entorno. En la figura \ref{fg:MarkovTop} se muestra un ejemplo de representación topológica de un entorno de oficinas similar al del concurso. Dervish detectaba las puertas cerradas y las puertas abiertas, guardando la información para relacionarla con la conectividad de nodos del mapa. Posteriores desarrollos pueden encontrarse en \cite{Simmons95} y \cite{Kaebling96}.
@@ -342,7 +345,7 @@ No siempre es posible despejar $z$ en la forma de \ref{eq:measurement}. En su lu
 \begin{equation}\label{eq:implicit}
     h(x,z)+\rho_{m}=c,
 \end{equation}
-con c vector de constantes.
+con $c$ vector de constantes.
 En este caso, las ecuaciones anteriores varían del siguiente modo:
 
 

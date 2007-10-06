@@ -37,7 +37,7 @@
 %== páginas iniciales  ====================================================
 \pagestyle{empty}\thispagestyle{empty}
 \maketitle 
-\frontmatter
+\frontmatter\pagestyle{plain}
 %\include{resumen}
 %\include{agradecimientos}
 \tableofcontents
@@ -48,18 +48,18 @@
 \mainmatter
 
 \pagestyle{fancy}
-	\fancyhf{}
-%	\fancyhead[RO]{\textsl{\rightmark}}
-%	\fancyhead[LE]{\textsl{\leftmark}}
+	%\fancyhf{}
+         \lhead{\leftmark}
+	\rhead{}
 	\renewcommand{\footrulewidth}{0.4pt}
-	\fancyfoot[RO]{\thepage}
-	\fancyfoot[LO]{DISAM-UPM}
-	\fancyfoot[C]{Paloma de la Puente Yusty}
-%	\fancypagestyle{plain}{  % pÃ¡gina inicial del capÃ­tulo
-%	    \fancyhead{}            % sin encabezados
-%	    \renewcommand\headrulewidth{0pt}
-%	}
-%}
+	\lfoot{DISAM-UPM}
+	\cfoot{Paloma de la Puente Yusty}
+	\rfoot{\thepage}
+	\fancypagestyle{plain}{  % página inicial del capítulo
+	    \fancyhead{}                 % sin encabezados
+	    \renewcommand\headrulewidth{0pt}
+	}
+
 
 \part{Preliminares}
 \include{01_introduccion}

@@ -12,9 +12,10 @@ En el problema que se trata, el estado queda definido por la posición del robot
     \vec{x}_{R_{k}} = \vec{x}_{R_{k-1}}\oplus \vec{u} +\vec{\rho}_{\rho},
  \end{equation}
 
- siendo $\oplus$ el operador composición de transformaciones relativas.
+\noindent
+siendo $\oplus$ el operador composición de transformaciones relativas.
 
-\textbf{Etapa de predicción}
+\paragraph{Etapa de predicción.}
 De acuerdo con esto, la predicción del estado dada por \ref{eq:x_predictionEKF} será:
 \begin{equation}\label{eq:x_prediction_robot}
      \pmatrix{\tilde{x}_{R_{k}}\cr \tilde{y}_{R_{k}}\cr \tilde{\theta}_{R_{k}}} =
@@ -27,25 +28,27 @@ Para la matriz de covarianza de $x_{k}$ la ecuación \ref{eq:P_predictionEKF} va
     \tilde{P}_{k} = F_{x}\hat{P}_{k-1}F_{x}^{T}+F_{u}QF_{u}^{T},
 \end{equation}
 
+\noindent
 donde $F_{x} = \frac{\delta f}{\delta x}\mid _{\tilde{x}_k}$ y $F_{u} = \frac{\delta f}{\delta u}\mid _{\tilde{x}_k}$ (se emplea la mejor estimación del estado disponible hasta el momento).
 
-El resultado del cálculo de estas matrices jacobianas se incluye en el Anexo A.
+El resultado del cálculo de estas matrices jacobianas se incluye en el Anexo~\ref{ap:transformaciones}.
 
 El algoritmo se inicia partiendo de $\hat{x}_{0} = 0, \hat{P}_{0} = 0$.
 
-\textbf{Etapa de corrección}
+\paragraph{Etapa de corrección.}
 Las medidas, observaciones realizadas por el láser, se relacionan con el estado de forma implícita mediante composición con él y comparación con los puntos del mapa que se utilice. Como puede verse en la figura \ref{fg:medidas}, la expresión que liga idealmente el estado con la observación i por medio del punto del mapa j asociado a ella será:
 
 \begin{equation}\label{eq:medidas}
     \vec{h_{ij}} = \vec{x_{R}} \oplus \vec{o_{i}} - \vec{l_{j}} = \vec{0},
 \end{equation}
 
-Aplicando la definición del operador $\oplus$ (Anexo A), \ref{eq:medidas} queda:
+Aplicando la definición del operador $\oplus$ (Anexo \ref{ap:transformaciones}), la ecuación \ref{eq:medidas} queda:
 
 \begin{equation}\label{eq:hij}
     \vec{h_{ij}} = \pmatrix{-x_{lj}+x_{R}+o_{ix}cos\theta_{R}-o_{iy}sen\theta_{R}\cr -y_{lj}+y_{R}+o_{ix}sen\theta_{R}+o_{iy}cos\theta_{R}} = \vec{0},
 \end{equation}
 
+\noindent
 como puede obtenerse a partir de la figura \ref{fg:medidas}.
 
 \begin{figure}[h]
@@ -61,23 +64,31 @@ Denotando $H_{x_{ij_{k}}} = \frac{\delta \vec{h_{ij}}}{\delta \vec{x}}\mid _{\ti
     S_{ij_{k}} = H_{x_{ij_{k}}}\tilde{P}_{k}H_{x_{ij_{k}}}^{T}+H_{z_{ij_{k}}}RH_{z_{ij_{k}}}^{T}
 \end{equation}
 
-Como puede verse en \ref{eq:Sij_robot}, la covarianza en las medidas del láser también se tomará como constante.
+Como puede verse en la ecuación \ref{eq:Sij_robot}, la covarianza en las medidas del láser también se tomará como constante.
 
 El cálculo de la distancia de Mahalanobis de la innovación $h_{ij_{k}}$ mediante esta matriz $S_{k}$ permitirá realizar la asociación de cada observación \emph{i} al punto del mapa \emph{j} para el cual esa distancia sea mínima. Si dicha asociación supera el test de Mahalanobis, se tendrá en cuenta para corregir la posición del robot, en caso contrario se podrá añadir la observación como nuevo punto del mapa.De entre todas las matrices $h_{ij}, H_{x_{ij}} y H_{z{ij}}$ calculadas para cada observación asociada a un punto del mapa se utilizarán únicamente las correspondientes a dicho punto. Estas matrices se denotarán $hi_{min}, Hxi_{min}, Hzi_{min}$.
 
 Según se van asociando observaciones, se tienen más medidas que utilizar. Por ello, las dimensiones de las matrices $h, H_{x}, H_{z} y R$ irán creciendo al irse añadiendo datos. Su tamaño final en cada iteración determinará las dimensiones de S y K.
 
 Para un número t de observaciones asociadas en la iteración k, se tiene:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{center}
-dim($h_{k}$)= $2t \times 1$,
+\begin{eqnarray*}
+dim  h_{k}             &=  & 2t \times 1 \\
+dim  H_{x_{k}}     & = & 2t \times 3 \\
+dim H_{z_{k}}      & = & 2t \times 2t \\
+dim R_{k}             & = & 2t \times 2t
+\end{eqnarray*}
 
-dim($H_{x_{k}}$) = $2t \times 3$,
+%\begin{center}
+%dim($h_{k}$)= $2t \times 1$,
 
-dim($H_{z_{k}}$) = $2t \times 2t$,
+%dim($H_{x_{k}}$) = $2t \times 3$,
 
-dim($R_{k}$) = $2t \times 2t$
-\end{center}
+%dim($H_{z_{k}}$) = $2t \times 2t$,
+
+%dim($R_{k}$) = $2t \times 2t$
+%\end{center}
 
 
 Con lo que la matriz S global calculada a partir de ellas por medio de \ref{eq:SEKF_im} será:
