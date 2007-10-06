@@ -188,14 +188,14 @@ Los principales elementos de trabajo en este proyecto son los siguientes:
   \item \textbf{Formación previa.} En primer lugar se requería un asentamiento de conocimientos sobre programación y algorítmica, el aprendizaje de C++ y Visual C++. Posteriormente fue necesaria la comprensión de la base de software de navegación existente. Otra parte importante era la puesta en funcionamiento del robot Pioneer P3AT y el estudio de las librerías de la distribución Aria.
   \item \textbf{Desarrollo del control de movimiento.} Programación de un regulador proporcional con planificación de ganancia, empleando tanto los parámetros de Urbano como los correspondientes al Pioneer. Generación de una trayectoria suave en los puntos de paso de una trayectoria definida. Algoritmo para evitar desviaciones sobre la trayectoria programada. Control reactivo: deformación de la trayectoria por la presencia de obstáculos y paredes cercanas al camino inicial a seguir por el robot.
   \item \textbf{Localización y construcción de mapas.} Estudio del filtro de Kalman y del filtro extendido de Kalman (EKF). Aplicación a la la localización del robot a partir de los puntos de medida proporcionados por el láser. Modificación del modelo para el caso de disponer únicamente de medidas de distancia, que no se utiliza debido a su peor comportamiento. Programación de las fases de predicción y corrección del algoritmo. Análisis del coste computacional y reducción del tiempo de procesamiento. Obtención y actualización de mapas de puntos a partir de los datos registrados por el láser. Utilización de mapas ya realizados para efectuar la localización. Borrado de los puntos correspondientes a obstáculos dinámicos del mapa que se encuentren cercanos a la posición del robot en cada momento.
-      Con el Pioneer sólo se ha empleado hasta el momento la parte del proyecto relativa al control de movimiento y planificación de trayectorias ya que al no poderse utilizar el láser no era posible realizar tareas de localización.
+      Con el Pioneer sólo se ha empleado hasta el momento la parte del proyecto relativa al control de movimiento y planificación de trayectorias ya que al no poderse utilizar el láser no era posible realizar tareas de localización. Se ha utilizado el sistema con este robot en modo simulación.
   \item \textbf{Integración.} Funcionamiento conjunto e intercambio de información entre los componentes anteriormente indicados.
   \item \textbf{Pruebas.} Pruebas de funcionamiento en modo simulación y con los robots reales. Corrección, depuración y posibles mejoras a partir de los resultados de dichas pruebas.
 
   Paralelamente se iba desarrollando un cuadro de diálogo para facilitar la ejecución y la selección de opciones en la misma.
 \end{itemize}
 
-La estructura de descomposición del proyecto (EDP), la programación temporal seguida para llevar a cabo las tareas correspondientes a las distintas fases del mismo así como la estimación del presupuesto se incluyen en los apéndices. 
+La estructura de descomposición del proyecto (EDP), la programación temporal seguida para llevar a cabo las tareas correspondientes a las distintas fases del mismo así como la estimación del presupuesto se incluyen en los apéndices.
 
 
 
