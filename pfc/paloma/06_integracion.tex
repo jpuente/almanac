@@ -1,6 +1,7 @@
 % -*- coding: utf-8 -*-
 
-\chapter{Integración}
+\chapter{Integración}\label{ch:integracion}
+
 El funcionamiento del sistema requiere la integración de sus distintos componentes. El robot debe combinar su capacidad para localizarse correctamente en el entorno con el seguimiento de una trayectoria adecuada, resultante de la planificación y el control reactivo. La localización resulta imprescindible para el buen funcionamiento del control y, particularmente, para situaciones en que el robot quede alejado de la trayectoria definida (como en la figura \ref{fg:reg}).
 
 La interacción entre el módulo de localización y el de control de movimiento se lleva a cabo mediante la clase \prog{CRobot}, como puede apreciarse en el diagrama \ref{fg:uml}. Desde las clases \prog{CRobotGLWnd} y \prog{CControl3GUIDlg} se realiza la transferencia de información desde la interfaz gráfica al resto del programa. En esta última se tiene el objeto \prog{gl_wnd}, de la clase \prog{CRobotGLWnd}, el objeto \prog{robot}, de la clase \prog{CRobot} y el objeto \prog{control}, de la clase \prog{CMoveControl}. Desde \prog{robot} se tiene un puntero al objeto \prog{control}. Desde \prog{gl_wnd} se tienen punteros a  \prog{robot} y a \prog{control} (para simplificar las llamadas a sus métodos y no tener que utilizarlos a través del puntero al objeto \prog{robot}).

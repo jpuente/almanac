@@ -71,45 +71,34 @@ El cálculo de la distancia de Mahalanobis de la innovación $h_{ij_{k}}$ median
 Según se van asociando observaciones, se tienen más medidas que utilizar. Por ello, las dimensiones de las matrices $h, H_{x}, H_{z} y R$ irán creciendo al irse añadiendo datos. Su tamaño final en cada iteración determinará las dimensiones de S y K.
 
 Para un número t de observaciones asociadas en la iteración k, se tiene:
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \[ \mbox{dim}  h_{k}            =   2t \times 1 \]
+\[ \mbox{dim}  H_{x_{k}}     =  2t \times 3 \]
+\[ \mbox{dim}  H_{z_{k}}     =  2t \times 2t \]
+\[ \mbox{dim}  R_{k}            =  2t \times 2t \]
 
-
-\begin{eqnarray*}
-\mbox{dim}  H_{x_{k}}     & = & 2t \times 3 \\
-\mbox{dim}  H_{z_{k}}     & = & 2t \times 2t \\
-\mbox{dim}  R_{k}            & = & 2t \times 2t
-\end{eqnarray*}
-
-
-
-Con lo que la matriz S global calculada a partir de ellas por medio de \ref{eq:SEKF_im} será:
+Con lo que la matriz S global calculada a partir de ellas por medio de la ecuación~\ref{eq:SEKF_im} será:
 \begin{equation}\label{eq:S_robot}
     S_{k} = H_{x_{k}}\tilde{P}_{k}H_{x_{k}}^{T}+H_{z_{k}}RH_{z_{k}}^{T}
 \end{equation}
-
 y tendrá dimensión ($2t \times 2t$).
 
 La matriz de Kalman del sistema, viene dada por \ref{eq:KEKF_im}:
-
 \begin{equation}\label{eq:K_robot}
     K_{k} = \tilde{P}_{k}H_{x_{k}}^{T}S_{k}^{-1}
 \end{equation}
-
 por lo que su tamaño será ($3 \times 2t$).
 
 Finalmente, los valores corregidos de la posición del robot y su covarianza se obtienen a partir de la predicción de acuerdo con \ref{eq:x_estimationIm} y \ref{eq:P_estimationEKF_im}:
-
 \begin{equation}\label{eq:x_robot}
     \hat{x}_{k} = \tilde{x}_{k} - K_{k}h_{k}
 \end{equation}
-
 \begin{equation}\label{eq:P_robot}
     \hat{P}_{k} = (I-K_{k}H_{x_{k}})\tilde{P}_{k}
 \end{equation}
 
 
-\section{Consideraciones sobre el coste computacional de la localización} \label{computacional}
+\section{Consideraciones sobre el coste \\ computacional de la localización} \label{computacional}
 
 El coste computacional de la etapa de corrección del algoritmo puede llevar a tiempos de procesamiento altos, lo que conduce a un comportamiento del sistema poco eficaz. A continuación se realiza un análisis del mismo y se identifican las principales fuentes de retardo en el cómputo de la posición corregida.
 
@@ -127,7 +116,7 @@ Respecto al segundo punto, también se hace una reserva inicial de memoria para 
 
 La última mejora introducida se centra en la obtención de la matriz $S$ (definida al comienzo de la etapa de corrección sin especificación de tamaño) y se basa en el hecho de que $H_{z}$ y $R$ son matrices diagonales por bloques, por lo que tienen muchas componentes nulas. El primer término de $S$ se calcula a partir de la matriz $PHt = \tilde{P}_{k}H_{x_{k}}^{T}$, que puede ser posteriormente utilizada en el cálculo de $K$. A continuación se va sumando a cada bloque ($2 \times 2$) de la diagonal principal el producto $H_{z}RH_{z}^{T}$ de cada observación, efectuándose así la operación únicamente sobre las componentes que sufren alguna modificación.
 
-\section{Algoritmo de borrado de puntos dinámicos del mapa} \label{poligono}
+\section{Algoritmo de borrado de puntos \\dinámicos del mapa} \label{poligono}
 Para eliminar los puntos que se añadieron al mapa en un momento dado pero dejan de corresponder a asociaciones con las medidas del láser (dejan de observarse), se construye un polígono a partir de estas medidas de modo que los puntos que quedan dentro del mismo pueden ser borrados.
 
 La obtención del polígono se hace de forma recursiva, empleándose en líneas generales el siguiente procedimiento:
@@ -158,8 +147,14 @@ Esta clase se ha creado para gestionar las operaciones relacionadas con el trata
 
 \subsection{\prog{KalmanPos}}
 
-\prog{void KalmanPos(float inc\_ odom\_x, float inc\_ odom\_ y, float } \prog{inc\_ odom\_ theta)}
+%\prog{void KalmanPos(float inc_odom_x, float inc_ odom_ y, float inc_odom_theta}
 
+\begin{lstlisting}[basicstyle=\small\ttfamily,language=C]
+void KalmanPos(float inc_odom_x, float inc_ odom_ y,
+         float inc_odom_theta)
+\end{lstlisting}
+
+\noindent
 En esta función se realizan los cálculos correspondientes a la fase de predicción del algoritmo de localización.
 
 \begin{itemize}
@@ -174,6 +169,7 @@ La posición resultante se almacena en una variable miembro de tipo \prog{Matrix
 
 \prog{void KalmanUpdate(const std::vector<Point2D>\& v)}
 
+\noindent
 Esta función efectúa la fase de corrección de la localización a partir de la posición obtenida mediante la predicción y de las observaciones que se le pasan.
 
 \begin{itemize}
@@ -185,12 +181,13 @@ El resultado se guarda nuevamente en la variable \prog{pos\_robot\_kalman}.
 Inicialmente el mapa (vector de la STL que almacena objetos de la clase Point2D) se encontrará vacío si no se utiliza uno ya realizado. Como ya se ha explicado, las observaciones que no se asocian a ningún punto del mapa se añaden como puntos del mismo si así se selecciona mediante la variable miembro \prog{actualiza} (controlable desde el cuadro de diálogo mediante un \emph{Check box})
 
 %Para los puntos del mapa que no se asocian a una observación, pero se encuentran cercanos a ella o a la mejor estimación de la posición del robot en ese momento,
-Para cada uno de los puntos del mapa se comprueba si están en el interior del polígono de observaciones mediante \ref{PuntoEnPol}. En caso afirmativo, y si así lo indica la variable miembro \prog{borrar}, se eliminan del vector \prog{mapa}. Esto es posible porque el polígono es previamente calculado en cada iteración mediante un objeto de la clase \prog{CProcLaserData} perteneciente a la clase \prog{CRobot}. Sus puntos se almacenan en un vector de la STL al cual apunta un puntero miembro de \prog{CKalmanLoc}, \prog{pol}.
+Para cada uno de los puntos del mapa se comprueba si están en el interior del polígono de observaciones mediante la función \prog{PuntoEnPol} (\ref{PuntoEnPol}). En caso afirmativo, y si así lo indica la variable miembro \prog{borrar}, se eliminan del vector \prog{mapa}. Esto es posible porque el polígono es previamente calculado en cada iteración mediante un objeto de la clase \prog{CProcLaserData} perteneciente a la clase \prog{CRobot}. Sus puntos se almacenan en un vector de la STL al cual apunta un puntero miembro de \prog{CKalmanLoc}, \prog{pol}.
 
 \subsection{\prog{GuardarMapa}}\label{GuardarMapa}
 
-\textbf{void GuardarMapa(LPTSTR path)}
+\prog{void GuardarMapa(LPTSTR path)}
 
+\noindent
 Esta función sirve para guardar un fichero de puntos del mapa de forma que si se dispone de un buen mapa no sea necesario realizar uno nuevo. También resulta útil para examinar los mapas generados o para agilizar algunas pruebas.
 
 \begin{itemize}
@@ -201,7 +198,8 @@ Esta función sirve para guardar un fichero de puntos del mapa de forma que si s
 
 \prog{void LeerMapa(LPTSTR path)}
 
-Esta función se emplea para descargar un mapa ya creado (por medio de \ref{GuardarMapa}, generalmente).
+\noindent
+Esta función se emplea para descargar un mapa ya creado (por medio de \prog{GuardarMapa}, \ref{GuardarMapa}, generalmente).
 
 \begin{itemize}
   \item \prog{path}:  \emph{path} de un fichero de texto ya existente en el que se definen los puntos de un mapa mediante dos columnas de coordenadas
@@ -209,13 +207,14 @@ Esta función se emplea para descargar un mapa ya creado (por medio de \ref{Guar
 
 A medida que se van leyendo puntos se guardan en el vector \prog{mapa}.
 
-\subsubsection{}
+\paragraph{Nota.}
 Para que las dos funciones anteriores se ejecuten adecuadamente en Visual Studio .NET 2005 en los \emph{Settings} o \emph{Propiedades} del proyecto no debe marcarse la utilización del juego de caracteres Unicode.
 
 \subsection{\prog{PuntoEnPol}}\label{PuntoEnPol}
 
 \prog{int PuntoEnPol(int k)}
 
+\noindent
 Esta función sirve para determinar si un punto del mapa se encuentra en el interior del polígono al que apunta el puntero \prog{pol}.
 
 \begin{itemize}
@@ -227,11 +226,11 @@ Si el punto $k$ del vector \prog{mapa} está en el interior del polígono de obs
 
 \section { Otras funciones de la clase \prog{CProcLaserData}}
 
-
 \subsection {\prog{CalculaPol}}
 
 \prog{void CalculaPol()}
 
+\noindent
 Esta función se utiliza para crear un polígono envolvente de las observaciones realizadas por el láser.
 Inicializa el número de puntos que lo forman a 0 y después hace una llamada a la función recursiva \prog{Split}, que se describe a continuación.
 
@@ -239,6 +238,7 @@ Inicializa el número de puntos que lo forman a 0 y después hace una llamada a 
 
 \prog{void Split(int primer, int segun)}
 
+\noindent
 Función recursiva que permite ir obteniendo los segmentos que formarán el polígono con las propiedades mencionadas.
 
 \begin{itemize}
@@ -248,14 +248,14 @@ Función recursiva que permite ir obteniendo los segmentos que formarán el pol�
 
 Se trata de la implementación del proceso descrito al principio de \ref{poligono}.
 
-\vspace{0.2cm}
-\noindent
-Estas dos funciones no han sido realizadas dentro del proyecto. Se incluyen en este capítulo en lugar de en el anterior para que pueda comprenderse mejor su utilización.
+\paragraph{Nota.}
+Las dos últimas funciones no han sido realizadas dentro del proyecto. Se incluyen en este capítulo en lugar de en el anterior para que pueda comprenderse mejor su utilización.
 
 \subsection{\prog{ConviertePol}}
 
 \prog{void ConviertePol(Matrix pos)}
 
+\noindent
 Esta función calcula las coordenadas de los vértices del polígono en el sistema de referencia global.
 
 \begin{itemize}
@@ -263,11 +263,12 @@ Esta función calcula las coordenadas de los vértices del polígono en el siste
 \end{itemize}
 
 Se utiliza principalmente para trazar el dibujo del polígono y para medir distancias de los puntos del mapa a los lados del mismo.
+
 \subsection{\prog{PolAng}}
 
-\noindent
 \prog{void PolAng(Matrix pos)}
 
+\noindent
 Método que se emplea para calcular los ángulos $\alpha$ de la figura \ref{fg:poligono}.
 
 \begin{itemize}
@@ -285,8 +286,8 @@ En estas pruebas, se han empleado datos de odometría y del láser obtenidos con
 \subsubsection{Utilización de datos tomados en el laboratorio de DISAM-UPM}
 En este caso, los datos empleados contienen 181 medidas del láser cada vez. Debe recordarse que, por motivos de coste computacional, el algoritmo de localización emplea una de cada dos de ellas. Como estos datos fueron obtenidos con el robot Urbano, no es necesario modificar el \emph{offset} del láser utilizado en el programa.
 
-\noindent
-\textbf{\textbf{1.} En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 1.}
+En esta prueba se han utilizado los siguientes parámetros:
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.1$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -296,9 +297,9 @@ En este caso, los datos empleados contienen 181 medidas del láser cada vez. Deb
 \end{itemize}
 
 
-\textbf{Resultados:}
+\paragraph{Resultados:}
 
-En la siguiente figura se puede ver el resultado de la ejecución del programa con las condiciones indicadas. Las sucesivas posiciones del robot según los datos de odometría disponibles serían las representadas en color verde, mientras que la trayectoria corregida mediante el filtro de Kalman es la mostrada en color rojo. Los puntos del mapa creado aparecen en color negro.
+En la figura \ref{fg:labo1} se puede ver el resultado de la ejecución del programa con las condiciones indicadas. Las sucesivas posiciones del robot según los datos de odometría disponibles serían las representadas en color verde, mientras que la trayectoria corregida mediante el filtro de Kalman es la mostrada en color rojo. Los puntos del mapa creado aparecen en color negro.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -310,8 +311,8 @@ Se puede apreciar el buen funcionamiento del algoritmo, que permite situar el ro
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 3.54min.
 
-\noindent
-\textbf{2.} \textbf{En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 2.}
+En esta prueba se han utilizado los siguientes parámetros:
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.3$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -321,7 +322,7 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
 \end{itemize}
 
 
-\textbf{Resultados:}
+\paragraph{Resultados:}
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -329,12 +330,12 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
   \caption{Segundo experimento con datos del laboratorio}\label{fg:labo2}
 \end{figure}
 
-Al no ser excesivamente malos los datos de la odometría, no se logran demasiadas mejoras en la localización tras otorgar una mayor importancia a las medidas del láser frente a dichos datos. Sin embargo, puede verse que la parte izquierda del mapa obtenido en este caso es más precisa.
+Al no ser excesivamente malos los datos de la odometría, no se logran demasiadas mejoras en la localización tras otorgar una mayor importancia a las medidas del láser frente a dichos datos. Sin embargo, puede verse que la parte izquierda del mapa obtenido en este caso es más precisa (figura \ref{fg:labo2}).
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria es: 3.22min. La disminución del tiempo de ejecución es resultado de la mejor asociación de observaciones a puntos del mapa, que hace que éste tenga un menor tamaño.
 
-\noindent
-\textbf{3.} \textbf{En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 3.}
+En esta prueba se han utilizado los siguientes parámetros:
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.3$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -344,7 +345,7 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
 \end{itemize}
 
 
-\textbf{Resultados:}
+\paragraph{Resultados:}
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -352,11 +353,13 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
   \caption{Tercer experimento con datos del laboratorio}\label{fg:labo3}
 \end{figure}
 
-Puede verse que cuando se tomaron estos datos había algunas personas moviéndose cerca del recorrido realizado por el robot. Esta opción de ejecución permite borrar del mapa los puntos correspondientes a las posiciones que fueron ocupando (puntos de color cyan en la figura). La localización no resulta afectada de manera significativa por el borrado de dichos puntos. En la figura queda representado el polígono envolvente de las medidas del láser correspondiente a la última posición del robot.
+En la figura \ref{fg:labo3} puede verse que cuando se tomaron estos datos había algunas personas moviéndose cerca del recorrido realizado por el robot. Esta opción de ejecución permite borrar del mapa los puntos correspondientes a las posiciones que fueron ocupando (puntos de color cyan en la figura). La localización no resulta afectada de manera significativa por el borrado de dichos puntos. En la figura queda representado el polígono envolvente de las medidas del láser correspondiente a la última posición del robot.
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 3.63min. El cálculo de los puntos del polígono, el de los ángulos necesarios para aplicar el algoritmo de borrado y el análisis de los puntos del mapa no asociados a cada observación en las sucesivas iteraciones( llamadas al método \prog{KalmanUpdate}) provocan un cierto retardo en la ejecución del programa. Este tiempo, no obstante, es considerablemente inferior al correspondiente a otros algoritmos para examinar si un punto pertenece o no a un polígono (algoritmo de Jordan, algoritmo radial\ldots). Además, cada observación nueva ha de compararse con un número menor de puntos del mapa, con lo que en algunos casos el retardo puede quedar prácticamente compensado.
 
-\textbf{4.} \textbf{En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 4.} 
+En esta prueba se han utilizado los siguientes parámetros:
+
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.6$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -365,25 +368,24 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
   \item incorporación de nuevos puntos al mapa: $actualiza = true$
 \end{itemize}
 
-
-\textbf{Resultados:}
+\paragraph{Resultados:}
 
 \begin{figure}[h]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{labo4}\\
   \caption{Cuarto experimento con datos del laboratorio}\label{fg:labo4}
 \end{figure}
 
-Al inyectarse algo de ruido añadido en las medidas odométricas, la posición del robot estimada en base a dichas medidas está muy alejada de la real. Sin embargo, mediante el algoritmo de localización se sigue obteniendo un buen resultado con sólo volver a incrementar el parámetro considerado en el EKF como varianza del ruido de la odometría.
+Como puede verse en la figura \ref{fg:labo4}, al inyectarse algo de ruido añadido en las medidas odométricas, la posición del robot estimada en base a dichas medidas está muy alejada de la real. Sin embargo, mediante el algoritmo de localización se sigue obteniendo un buen resultado con sólo volver a incrementar el parámetro considerado en el EKF como varianza del ruido de la odometría.
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 3.15min. Tras tenerse en cuenta que la varianza del ruido de la odometría debe ser algo superior, se mejora la asociación de datos y con ello disminuye el tiempo de procesamiento.
 
-
+\clearpage
 \subsubsection{Utilización de datos de Intel}
+
 Con estos datos, el número de medidas del láser disponibles en cada momento es 361. Esto repercute en el tiempo de procesamiento.
 
-\noindent
-\textbf{\textbf{1.} En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 1.}
+En esta prueba se han utilizado los siguientes parámetros:
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.1$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -393,8 +395,7 @@ Con estos datos, el número de medidas del láser disponibles en cada momento es
 \end{itemize}
 
 
-\textbf{Resultados:}
-
+\paragraph{Resultados:}
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -402,12 +403,12 @@ Con estos datos, el número de medidas del láser disponibles en cada momento es
   \caption{Primer experimento con datos de Intel}\label{fg:intel1}
 \end{figure}
 
-Se puede observar que las medidas odométricas presentan un alto grado de error. Por ello, es muy probable que la varianza introducida en el filtro de Kalman para dichas medidas sea demasiado pequeña y, por lo tanto, la elaboración del mapa no sea la correcta.
+En la figura \ref{fg:intel1} se puede observar que las medidas odométricas presentan un alto grado de error. Por ello, es muy probable que la varianza introducida en el filtro de Kalman para dichas medidas sea demasiado pequeña y, por lo tanto, la elaboración del mapa no sea la correcta.
 
-El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 6.8min.
+El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 6.8~min.
 
-\noindent
-\textbf{2.} \textbf{En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 2.}
+En esta prueba se han utilizado los siguientes parámetros:
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.8$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -416,23 +417,20 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
   \item incorporación de nuevos puntos al mapa: $actualiza = true$
 \end{itemize}
 
-
-\textbf{Resultados:}
+\paragraph{Resultados:}
 
 \begin{figure}[h]
-  % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{intel2}\\
   \caption{Segundo experimento con datos de Intel}\label{fg:intel2}
 \end{figure}
 
-En este caso, la varianza del ruido de las medidas de odometría estimada para la utilización del filtro de Kalman resulta más adecuada y, como puede observarse, conduce a un resultado excelente a pesar de la poca calidad de los datos odométricos disponibles.
+En este caso, la varianza del ruido de las medidas de odometría estimada para la utilización del filtro de Kalman resulta más adecuada y, como puede observarse, conduce a un resultado excelente a pesar de la poca calidad de los datos odométricos disponibles (figura \ref{fg:intel2}).
 
-El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 5.71min.
+El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 5.71~min.
 
-%\vspace{0.4cm}
-%\vspace{0.4cm}
-\noindent
-\textbf{3.} \textbf{En esta prueba se han utilizado los siguientes parámetros:}
+\pagebreak[4]
+\paragraph{Prueba 3.}
+En esta prueba se han utilizado los siguientes parámetros:\nopagebreak[4]
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 1$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -441,22 +439,22 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
   \item incorporación de nuevos puntos al mapa: $actualiza = true$
 \end{itemize}
 
+\paragraph{Resultados:} 
 
-\textbf{Resultados:}
-
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
+\begin{figure}[hbtp]
   \centering\includegraphics[scale=0.4]{intel3}\\
   \caption{Tercer experimento con datos de Intel}\label{fg:intel3}
 \end{figure}
 
-El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 6.61min.
+Ver figura \ref{fg:intel3}. El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 6.61min.
 
+\clearpage
 \subsubsection{Utilización de datos del Museo de las Ciencias Príncipe Felipe de Valencia}
+
 Estos datos incluyen 181 medidas del láser en cada momento. Por esta razón su procesamiento resulta más ágil que el del caso anterior. No obstante, dada la gran extensión del mapa elaborado y la exhaustiva exploración del entorno para la realización del mismo, el tiempo total consumido es notablemente superior por serlo también la duración del recorrido de toma de datos.
 
-\noindent
-\textbf{\textbf{1.} En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 1.}
+En esta prueba se han utilizado los siguientes parámetros:
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.9$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -466,18 +464,16 @@ Estos datos incluyen 181 medidas del láser en cada momento. Por esta razón su 
 \end{itemize}
 
 
-\textbf{Resultados:}
+\paragraph{Resultados:} 
 \begin{figure}[h]
-  % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{val3}\\
+  \centering\includegraphics[scale=0.5]{val3}\\
   \caption{Primer experimento con datos del Museo de las Ciencias Príncipe Felipe de Valencia}\label{fg:val3}
 \end{figure}
 
-El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 26.54min.
+Figura \ref{fg:val3}. El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 26.54~min.
 
 
-\noindent
-\textbf{\textbf{2.} En esta prueba se han utilizado los siguientes parámetros:}
+\paragraph{Prueba 2.} En esta prueba se han utilizado los siguientes parámetros:
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.9$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -486,19 +482,16 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
   \item incorporación de nuevos puntos al mapa: $actualiza = true$
 \end{itemize}
 
-
-\textbf{Resultados:}
+\paragraph{Resultados:}
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{val2}\\
   \caption{Segundo experimento con datos del Museo de las Ciencias Príncipe Felipe de Valencia}\label{fg:val2}
 \end{figure}
 
-El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 36.01min.
+Figura \ref{fg:val2}.El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 36.01~min.
 
-\vspace{0.2cm}
-\noindent
 Como puede observarse, la presencia de personas en el museo afecta a la construcción del mapa y a la localización. Esto puede corregirse mediante el borrado de puntos del mapa, con lo que se logra un resultado realmente bueno. A pesar de la gran longitud de la trayectoria seguida, con el correspondiente incremento de errores en las medidas de los encoders, el sistema mantiene una correcta estimación de la posición del robot hasta el final del recorrido efectuado.
 
 \subsection{Pruebas en modo \emph{real}}
-Como ya se ha mencionado, en estas pruebas se ha trabajado con el robot móvil Urbano. A continuación se muestran algunos de los mapas obtenidos en el laboratorio del departamento llevando al robot en modo teleoperado. Los mapas realizados mediante movimiento planificado, empleando el control diseñado, se incluyen en el capítulo 6.
+Como ya se ha mencionado, en estas pruebas se ha trabajado con el robot móvil Urbano. A continuación se muestran algunos de los mapas obtenidos en el laboratorio del departamento llevando al robot en modo teleoperado. Los mapas realizados mediante movimiento planificado, empleando el control diseñado, se incluyen en el capítulo \ref{ch:integracion}.
