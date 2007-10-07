@@ -4,7 +4,7 @@
 Aunque ya se han introducido algunas descripciones del hardware empleado, a continuación se añade algo más de información sobre sus características.
 
 \section{Plataforma móvil B21r}
-La plataforma más usada en los experimentos del proyecto corresponde al modelo B21r de la empresa iRobot. Se trata de una plataforma holonómica cuyo sistema motriz es de tipo synchro-drive con cuatro ruedas directrices y motrices. Los sensores de infrarrojos y de ultrasonidos que posee no se han utilizado por su menor precisión, fiabilidad y rango respecto al escáner láser LMS200 (sección \ref{laser}).
+La plataforma más usada en los experimentos del proyecto corresponde al modelo B21r de la empresa iRobot. Se trata de una plataforma holonómica cuyo sistema motriz es de tipo synchro-drive con cuatro ruedas directrices y motrices. Los sensores de infrarrojos y de ultrasonidos que posee no se han utilizado por su menor precisión, fiabilidad y rango respecto al escáner láser LMS200 (apartado \ref{laser}).
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -13,64 +13,43 @@ La plataforma más usada en los experimentos del proyecto corresponde al modelo 
 \end{figure}
 
 En la parte superior del robot hay dos pulsadores rojos que sirven para activar los frenos del robot en caso necesario. Pueden quitarse pulsando nuevamente alguno de estos botones o a través del panel de control del robot girando el botón negro situado junto a él.
-Las principales características de este robot se presentan en la siguiente tabla:
+Las principales características de este robot se presentan en la tabla \ref{tb:b21r}.
+
 \begin{table}[h]
 \begin{center}
+\caption{Características del robot B21r de iRobot}\label{tb:b21r}
+
+\vspace{5mm}
+
 \begin{tabular}{|l|c|} \hline
-Característica & B21r\\
-\hline
-\hline
-Diámetro & 52cm\\
-\hline
-Altura & 106cm\\
-\hline
-Distancia al suelo & 2.54cm\\
-\hline
-Peso & 122.5kg\\
-\hline
-Capacidad de carga & 90kg\\
-\hline
-Baterías & 4x12V estancas plomo-ácido\\
-\hline
-\hline
-Autonomía & 6 h\\
-\hline
-Sistema Motriz & Synchro-drive 4 ruedas\\
-\hline
-Motores & 4 servomotores 24V\\
-\hline
-Ruedas & Goma maciza\\
-\hline
-\hline
-Diámetro ruedas & 11cm\\
-\hline
-Ancho ruedas & 3cm\\
-\hline
-Sistema de giro & Synchro-drive 4 ruedas\\
-\hline
-Radio máxima curvatura & 0cm\\
-\hline
-Radio giro & 0cm (robot holonómico)\\
-\hline
-\hline
-Máxima velocidad avance & 0.9m/seg.\\
-\hline
-Máxima velocidad de giro & 167º/seg.\\
-\hline
-Terreno & Interiores planos y uniformes\\
-\hline
-Resolución avance & 1mm\\
-\hline
-Resolución giro & 0.35º\\
-\hline
+Característica & B21r\\ \hline\hline
+Diámetro & 52cm\\ \hline
+Altura & 106cm\\ \hline
+Distancia al suelo & 2.54cm\\ \hline
+Peso & 122.5kg\\ \hline
+Capacidad de carga & 90kg\\ \hline
+Baterías & 4x12V estancas plomo-ácido\\ \hline\hline
+Autonomía & 6 h\\ \hline
+Sistema Motriz & Synchro-drive 4 ruedas\\\hline
+Motores & 4 servomotores 24V\\ \hline
+Ruedas & Goma maciza\\ \hline\hline
+Diámetro ruedas & 11cm\\ \hline
+Ancho ruedas & 3cm\\ \hline
+Sistema de giro & Synchro-drive 4 ruedas\\ \hline
+Radio máxima curvatura & 0cm\\ \hline
+Radio giro & 0cm (robot holonómico)\\ \hline\hline
+Máxima velocidad avance & 0.9m/seg.\\ \hline
+Máxima velocidad de giro & 167º/seg.\\ \hline
+Terreno & Interiores planos y uniformes\\ \hline
+Resolución avance & 1mm\\ \hline
+Resolución giro & 0.35º\\ \hline
 \end{tabular}
 \end{center}
-\caption{Características del robot B21r de iRobot}
 \end{table}
 
 El robot tiene un PC base con Red Hat Linux. También dispone de un PC secundario con sistema operativo Windows. El acceso de bajo nivel al hardware del robot lo llevan a cabo unos programas servidores incluidos en el software proporcionado por iRobot (denominado \emph{Mobility} y basado en el estándar de programación distribuida CORBA). El único de estos servidores que se ha utilizado es el b21server (alias base), encargado del manejo de los motores y de la obtención de medidas de los sensores.
 
-\section{Plataforma móvil Pioneer P3-AT de MobileRobots/ActivMedia Robotics}
+\section{Plataforma móvil Pioneer P3-AT de \\MobileRobots/ActivMedia Robotics}
 Este robot no ha podido ser utilizado en la mayor parte de las pruebas por no disponer de sensor láser para detectar obstáculos, construir mapas y situarse correctamente en su entorno de operación. Sin embargo, la utilización del sistema implementado será prácticamente inmediata tan pronto como se tenga un láser instalado.
 
 Se trata de una plataforma utilizable en todo tipo de terrenos (AT son las siglas de \emph{All Terrain}) También permite un alto grado de carga.Posee tracción a las cuatro ruedas y la realización de giros se basa en el deslizamiento. Esto repercute en la estimación de la odometría, resultando ser bastante peor que la proporcionada por el B21r.
@@ -89,9 +68,14 @@ El cuerpo del robot es de aluminio y su parte delantera se puede desmontar con f
   \caption{Panel de control}\label{fg:panel}
 \end{figure}
 
-A continuación se resumen en una tabla las principales características de este robot:
+A continuación se resumen en una tabla (cuadro \ref{tb:p3at}) las principales características de este robot.
+
 \begin{table}[h]
 \begin{center}
+\caption{Características del robot Pioneer P3-AT de MobileRobots}\label{tb:p3at}
+
+\vspace{5mm}
+
 \begin{tabular}{|l|c|} \hline
 Característica & Pioneer P3-AT\\
 \hline
@@ -147,7 +131,6 @@ Procesador & Hitachi H8S\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Características del robot Pioneer P3-AT de MobileRobots}
 \end{table}
 
 
@@ -166,10 +149,14 @@ Utiliza un haz láser infrarrojo de clase I (inofensivo para el ojo humano inclu
 
 Presenta varias opciones de funcionamiento que permiten variar el alcance, la precisión y el número de medidas en cada barrido del láser.
 
-La siguiente tabla contiene sus principales características:
+La tabla \ref{tb:laser} contiene sus principales características.
 
 \begin{table}[h]
 \begin{center}
+\caption{Características del láser SICK LMS-200}\label{tb:laser}
+
+\vspace{5mm}
+
 \begin{tabular}{|l|c|} \hline
 Característica & LMS-200\\
 \hline
@@ -208,7 +195,6 @@ Profundo & 156mm\\
 \hline
 \end{tabular}
 \end{center}
-\caption{Características del láser SICK LMS-200}
 \end{table}
 
 

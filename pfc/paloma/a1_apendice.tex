@@ -4,7 +4,7 @@
 
 La transformación relativa entre el sistema de referencia $i$ y el sistema de referencia $j$ viene dado por
 \begin{equation}\label{eq:ij}
-\vec{x_{ij}} = [x_{ij} y_{ij} \theta_{ij}]^{T}
+\vec{x_{ij}} = \left [ x_{ij} y_{ij} \theta_{ij} \right ] ^{T}
 \end{equation}
 
 El operador composición $\oplus$ entre dos transformaciones relativas se define como:
@@ -29,6 +29,7 @@ Si se calcula su jacobiana respecto de la primera transformación se obtiene:
 \right)
 \end{equation}
 
+\pagebreak
 La jacobiana respecto a la segunda transformación será:
 
 \begin{equation}\label{eq:J2}
@@ -57,8 +58,8 @@ Si $x_{ij}$, $x_{jk}$ y $x_{ik}$ son tres transformaciones relativas tales que $
 
 \begin{eqnarray}
 % \nonumber to remove numbering (before each equation)
-    x_{ik} \neq x_{jk} \oplus x_{ij} \nonumber\\
-    x_{ij} = x_{ik} \ominus x_{jk} \nonumber\\
-    x_{jk} = \ominus x_{ij} \oplus x_{ik} \nonumber\\
-    \ominus x_{ik} = \ominus(x_{ij}\oplus x_{jk}) = \ominus x_{ij} \oplus (\ominus x_{jk})
+    x_{ik} & \neq & x_{jk}  \oplus x_{ij} \nonumber\\
+    x_{ij}  & =       &x_{ik} \ominus x_{jk} \nonumber\\
+    x_{jk} & =       & \ominus x_{ij} \oplus x_{ik} \nonumber\\
+    \ominus x_{ik} &=  &\ominus(x_{ij}\oplus x_{jk}) = \ominus x_{ij} \oplus (\ominus x_{jk})
 \end{eqnarray} 

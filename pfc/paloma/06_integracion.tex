@@ -2,27 +2,29 @@
 
 \chapter{Integración}\label{ch:integracion}
 
-El funcionamiento del sistema requiere la integración de sus distintos componentes. El robot debe combinar su capacidad para localizarse correctamente en el entorno con el seguimiento de una trayectoria adecuada, resultante de la planificación y el control reactivo. La localización resulta imprescindible para el buen funcionamiento del control y, particularmente, para situaciones en que el robot quede alejado de la trayectoria definida (como en la figura \ref{fg:reg}).
+El funcionamiento del sistema requiere la integración de sus distintos componentes. El robot debe combinar su capacidad para localizarse correctamente en el entorno con el seguimiento de una trayectoria adecuada, resultante de la planificación y el control reactivo. La localización resulta imprescindible para el buen funcionamiento del control y, particularmente, para situaciones en que el robot quede alejado de la trayectoria definida (como en la figura \ref{fg:reg}%
+%\footnote{Página \pageref{fg:reg}}%
+).
 
-La interacción entre el módulo de localización y el de control de movimiento se lleva a cabo mediante la clase \prog{CRobot}, como puede apreciarse en el diagrama \ref{fg:uml}. Desde las clases \prog{CRobotGLWnd} y \prog{CControl3GUIDlg} se realiza la transferencia de información desde la interfaz gráfica al resto del programa. En esta última se tiene el objeto \prog{gl_wnd}, de la clase \prog{CRobotGLWnd}, el objeto \prog{robot}, de la clase \prog{CRobot} y el objeto \prog{control}, de la clase \prog{CMoveControl}. Desde \prog{robot} se tiene un puntero al objeto \prog{control}. Desde \prog{gl_wnd} se tienen punteros a  \prog{robot} y a \prog{control} (para simplificar las llamadas a sus métodos y no tener que utilizarlos a través del puntero al objeto \prog{robot}).
+La interacción entre el módulo de localización y el de control de movimiento se lleva a cabo mediante la clase \prog{CRobot}, como puede apreciarse en el diagrama \ref{fg:uml}.%
+%\footnote{Página \pageref{fg:uml}}
+Desde las clases \prog{CRobotGLWnd} y \prog{CControl3GUIDlg} se realiza la transferencia de información desde la interfaz gráfica al resto del programa. En esta última se tiene el objeto \prog{gl_wnd}, de la clase \prog{CRobotGLWnd}, el objeto \prog{robot}, de la clase \prog{CRobot} y el objeto \prog{control}, de la clase \prog{CMoveControl}. Desde \prog{robot} se tiene un puntero al objeto \prog{control}. Desde \prog{gl_wnd} se tienen punteros a  \prog{robot} y a \prog{control} (para simplificar las llamadas a sus métodos y no tener que utilizarlos a través del puntero al objeto \prog{robot}).
 
-\section{La clase \prog{CRobot}}
+\section{La clase \texttt{CRobot}}
 El papel de esta clase consiste en integrar:
 \begin{itemize}
   \item la obtención de los datos de odometría y del láser
   \item la estimación o/y corrección de la posición mediante el filtro de Kalman y la actualización del mapa
   \item el paso de la posición corregida y del mapa de obstáculos al módulo de control de movimiento
 \end{itemize}
-
 Para ello se dispone de algunas variables miembro importantes:
 \begin{itemize}
   \item \prog{robotdata}, de la clase \prog{CRobotDataReal}
   \item \prog {proc_laser_data}, de la clase \prog{CProc_Laser_Data}
   \item \prog{loc}, de la clase \prog{CKalman_Loc}
-  \item \prog{control}, puntero a un objeto de la clase \prog{CMoveControl} (que habrá de apuntar al objeto \prog{control} miembro del diálogo \prog{CControl3GUIDlg})
+  \item \prog{control}, puntero a un objeto de la clase \prog{CMoveControl} (que habrá de apuntar al objeto \prog{control} miembro del diálogo \prog{CControl3GUIDlg}).
 \end{itemize}
-
-\noindent
+%\noindent
 También posee una variable puntero a un objeto de tipo \prog{CPioneer}, para las pruebas de control que se han hecho con el robot P3AT.
 
 %Las funciones que forman parte de la clase son las siguientes:
@@ -59,7 +61,7 @@ También posee una variable puntero a un objeto de tipo \prog{CPioneer}, para la
 %\noindent
 %Esta función sirve para desconectar el robot Pioneer en caso de que se esté utilizando.
 
-\subsection{\prog{ProcessData}}
+\subsection{\texttt{ProcessData}}
 
 \noindent
 \prog{int ProcessData()}
@@ -85,11 +87,11 @@ El valor de retorno es 1 si se han actualizado datos de odometría o del láser 
 
 Esta función va a ejecutarse a modo de bucle, dentro de un \emph{timer} que se define en la clase \prog{CControl3GUIDlg}.
 
-\section{La clase \prog{CControl3GUIDlg}}
+\section{La clase \texttt{CControl3GUIDlg}}
 Esta clase hereda de la clase pública \prog{CDialog}, perteneciente a las MFC. En ella comienza el hilo principal de ejecución del programa. Desde esta clase se crea el cuadro de diálogo, al que han de añadirse los diferentes botones para realizar el paso de información del usuario a los distintos componentes del sistema. En ella se tiene la variable \prog{gl_wnd} para crear la ventana gráfica y asociarla a él. Como se ha mencionado, proporciona el modo de controlar el ciclo de tareas que ha de realizar el robot mediante un temporizador o \emph{timer} que permite la repetición de una serie de acciones periódicamente. La variable \prog{robot}, de acuerdo con lo visto, es necesaria para obtener la posición corregida y el mapa y hacer posible su utilización desde el control de movimiento en cada momento. La variable \prog{control} se emplea para facilitar el acceso a aquél. %Las principales funciones editadas en esta clase son:
 
 \section{Interfaz de usuario}
-Aunque ya se ha mostrado en otras figuras, a continuación se presenta el aspecto de la interfaz de usuario desarrollada. En esta imagen se ve tal y como aparece al iniciarse la ejecución del programa (salvo los colores de fondo y cuadrícula, que por defecto son negro y magenta pero pueden cambiarse pulsando en el teclado la letra 'F'). Seguidamente se describirán sus propiedades y la utilidad de sus botones.
+Aunque ya se ha mostrado en otras figuras, a continuación se presenta el aspecto de la interfaz de usuario desarrollada (figura \ref{fg:interfaz}. En esta imagen se ve tal y como aparece al iniciarse la ejecución del programa (salvo los colores de fondo y cuadrícula, que por defecto son negro y magenta pero pueden cambiarse pulsando en el teclado la letra 'F'). Seguidamente se describirán sus propiedades y la utilidad de sus botones.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -102,26 +104,26 @@ Aunque ya se ha mostrado en otras figuras, a continuación se presenta el aspect
 
 \subsubsection{OK y Cancelar}
 
-\noindent
+%\noindent
 Siempre que se pulse alguno de estos botones se cierra la interfaz de usuario y finaliza la ejecución del programa.
 
 \subsubsection{Reset}
-\noindent
+%\noindent
 Se emplea para anular la definición de una trayectoria y de una serie de obstáculos realizados mediante el ratón.
 
 \subsubsection{Guardar Mapa}
 
-\noindent
+%\noindent
 Se utiliza para guardar los puntos de un mapa en un fichero. Ha de ser pulsado tras finalizar el recorrido del robot por el entorno que se desee representar. Al ser marcado se abre el típico cuadro de Windows \emph{Guardar Como} para seleccionar el directorio y el nombre del fichero. De esta forma, no tienen que realizarse nuevos mapas cada vez sino que pueden ser leídos mediante \emph{Leer mapa}:
 
 \subsubsection{LeerMapa}
 
-\noindent
+%\noindent
 Muestra un cuadro de Windows tipo \emph{Abrir} para establecer como mapa los puntos leídos de un fichero creado mediante \emph{Guardar Mapa}.
 
 \subsubsection{Ir a punto}
 
-\noindent
+%\noindent
 Se emplea para que el robot siga una trayectoria definida sobre la interfaz gráfica mediante el ratón.
 
 \subsubsection{Guardar Tray}
@@ -131,7 +133,7 @@ Permite guardar la trayectoria que sigue el robot, para que luego pueda regresar
 
 \subsubsection{Volver}
 
-\noindent
+%\noindent
 Cuando se pulsa este botón el robot emprende el camino de regreso por la misma trayectoria seguida hasta el momento.
 
 \subsubsection{Opciones}
@@ -155,8 +157,9 @@ Permite guardar en un fichero los datos de odometría y del láser mediante la l
 \subsubsection{StopLogData}
 Se utiliza para cerrar el fichero anterior y de este modo dejar de registrar los datos. Básicamente realiza una llamada a \prog{StopLogData} de la clase \prog{CRobotData}.
 
-\vspace{0.2cm}
-\noindent
+%\vspace{0.2cm}
+%\noindent
+\paragraph{Nota:} 
 Lógicamente, los dos botones anteriores no se encuentran activados si el modo de funcionamiento es tipo fichero.
 
 \subsubsection{Desviación típica de odometría}
@@ -217,24 +220,28 @@ En estas pruebas se pone de manifiesto la interacción entre las dos partes prin
 Como ya se ha visto, en este modo de funcionamiento no se realiza localización del robot por no haber disponibilidad de medidas del láser para el robot Urbano. Sin embargo, sí que permite evaluar la deformación de trayectorias en entornos densos en obstáculos mediante el uso de mapas.
 
 \subsubsection{Movimiento sobre trayectoria deformada ante los obstáculos definidos por los puntos de un mapa}
-A continuación se utilizan mapas obtenidos por los métodos descritos en el capítulo 4 de modo que sus puntos sean los que sirvan para deformar la trayectoria. La trayectoria inicial se dibuja en color azul y la deformada, en color verde. Se ha tomado un rango de 1m a la posición del robot para considerar los puntos del mapa como obstáculos. La máxima desviación permitida se ha establecido en 0.3m para evitar deformaciones excesivas y no entrar en situación de bloqueo con demasiada facilidad.%Se puede ver que con una desviación máxima de 0.6m la trayectoria deformada (dibujada en color verde), se corta antes de que termine la trayectoria inicial (color azul), lo que significa que se ha producido bloqueo.
+A continuación se utilizan mapas obtenidos por los métodos descritos en el capítulo \ref{ch:localizacion} de modo que sus puntos sean los que sirvan para deformar la trayectoria. La trayectoria inicial se dibuja en color azul y la deformada, en color verde. Se ha tomado un rango de 1m a la posición del robot para considerar los puntos del mapa como obstáculos. La máxima desviación permitida se ha establecido en 0.3m para evitar deformaciones excesivas y no entrar en situación de bloqueo con demasiada facilidad.%Se puede ver que con una desviación máxima de 0.6m la trayectoria deformada (dibujada en color verde), se corta antes de que termine la trayectoria inicial (color azul), lo que significa que se ha producido bloqueo.
 
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{reactivo1}\\
-  \hspace{0.5cm}\includegraphics[scale=0.4]{reactivo2}
-  \caption{Deformación de trayectorias definidas en el laboratorio de DISAM-UPM}\label{fg:react3}
+\begin{figure}[htb]
+  \centering\includegraphics[scale=0.4]{reactivo1}
+   \caption{Deformación de trayectorias definidas en el laboratorio de DISAM-UPM (a)}\label{fg:react3a}
+\end{figure}
+  
+\begin{figure}[htb]
+  \centering\includegraphics[scale=0.4]{reactivo2}
+  \caption{Deformación de trayectorias definidas en el laboratorio de DISAM-UPM (b)}\label{fg:react3b}
 \end{figure}
 
-Aquí puede verse la utilidad del borrado de puntos dinámicos del mapa. En los casos anteriores, hay obstáculos que impiden el avance del robot en una cierta zona (situación de bloqueo). Dichos obstáculos, sin embargo, no son puntos reales del mapa sino que corresponden probablemente a sucesivas posiciones de una persona en el momento de la toma de datos. Si el mapa hubiera sido obtenido con la opción de borrado activada, como resultaría conveniente, el robot podría llegar hasta el final del recorrido planificado:
-
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{reactivo3}\\
-  \caption{Deformación de trayectorias en un mapa obtenido con borrado de puntos dinámicos}\label{fg:react3}
-\end{figure}
+\clearpage
+Aquí puede verse la utilidad del borrado de puntos dinámicos del mapa. En los casos anteriores, hay obstáculos que impiden el avance del robot en una cierta zona (situación de bloqueo). Dichos obstáculos, sin embargo, no son puntos reales del mapa sino que corresponden probablemente a sucesivas posiciones de una persona en el momento de la toma de datos. Si el mapa hubiera sido obtenido con la opción de borrado activada, como resultaría conveniente, el robot podría llegar hasta el final del recorrido planificado (figura \ref{fg:react3c}).
 
 El número de obstáculos considerados en este tipo de situaciones es significativamente alto, por lo que la trayectoria deformada difiere de la original. En caso de que se desee que el robot regrese al punto de origen de su movimiento se empleará como trayectoria nominal sobre la que realizar los cambios oportunos la trayectoria seguida en el camino de ida, siendo ésta una trayectoria deformada en base a la trayectoria nominal inicial. En la figura \ref{fg:vuelta_map} se muestra en color azul la trayectoria seguida durante la ida (trayectoria nominal del camino de vuelta) y en color rosa la trayectoria modificada durante el camino de regreso.
+
+\begin{figure}[hb]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{reactivo3}
+  \caption{Deformación de trayectorias en un mapa obtenido con borrado de puntos dinámicos}\label{fg:react3c}
+\end{figure}
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -242,23 +249,32 @@ El número de obstáculos considerados en este tipo de situaciones es significat
   \caption{Trayectoria deformada en el camino de ida y nuevas deformaciones en el camino de vuelta}\label{fg:vuelta_map}
 \end{figure} 
 
+\clearpage
+
 \subsubsection{Construcción de un mapa mediante movimiento controlado del robot y deformación de la trayectoria ante los puntos del mismo con el robot Pioneer}
 
-Con este robot, el simulador proporcionado por el fabricante permite disponer de las medidas ficticias del láser en un entorno hipotético representado en el mismo por medio de un mapa geométrico de líneas. Así, puede verse el comportamiento del sistema desarrollado a la hora de construir el mapa de puntos de un entorno como el dado por aquél mapa. En la  figura \ref{fg:pioneerSim1} se muestran los resultados de un primer experimento. En ella pueden apreciarse algunos detalles interesantes. 
+Con este robot, el simulador proporcionado por el fabricante permite disponer de las medidas ficticias del láser en un entorno hipotético representado en el mismo por medio de un mapa geométrico de líneas. Así, puede verse el comportamiento del sistema desarrollado a la hora de construir el mapa de puntos de un entorno como el dado por aquél mapa. En la figura \ref{fg:pioneerSim1a} se muestran los resultados de un primer experimento. En ella pueden apreciarse algunos detalles interesantes. 
+
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{pioneer3}\\
-  \hspace{0.5cm}\includegraphics[scale=0.7]{pioneer3_sim}
-  \caption{Primer experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1}
+  \centering\includegraphics[scale=0.4]{pioneer3}
+  
+  \vspace{0.5cm}
+  
+  \centering\includegraphics[scale=0.7]{pioneer3_sim}
+  \caption{Primer experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1a}
 \end{figure}
  
  Como primera conclusión podría destacarse la insuficiencia de un valor de 0.1 en la estimación del ruido de la odometría, lo que afecta a la construcción del mapa y hace que se creen paredes dobles en algunos casos. La posición corregida por el filtro aparece en color rojo, mientras que la de la odometría es la que se dibuja en color verde. Al final del recorrido empieza a apreciarse la desviación en la posición odométrica. La trayectoria azul es la nominal, definida por el usuario mediante el ratón, y la trayectoria deformada no se muestra, pero es bastante similar a la trayectoria real seguida(trayectoria roja). Puede verse que se deforma adecuadamente en los puntos cercanos a las paredes o muebles.
  
- En un segundo experimento se mejoró la estimación del ruido de la odometría (estableciéndose en un valor de 0.5), con lo que aumenta la calidad del mapa construido. Posiblemente se obtendrían mejores resultados incrementando algo más dicho valor. Los colores empleados son los mismos que en el caso anterior, pero sólo se representa el último tramo de la trayectoria nominal definida. De nuevo se puede observar la deformación de la trayectoria en las cercanías de los obstáculos y el efecto de la localización, más fácilmente apreciable en observación simultánea en tiempo real de ambos simuladores.
+ En un segundo experimento (figura \ref{fg:pioneerSim1b}) se mejoró la estimación del ruido de la odometría (estableciéndose en un valor de 0.5), con lo que aumenta la calidad del mapa construido. Posiblemente se obtendrían mejores resultados incrementando algo más dicho valor. Los colores empleados son los mismos que en el caso anterior, pero sólo se representa el último tramo de la trayectoria nominal definida. De nuevo se puede observar la deformación de la trayectoria en las cercanías de los obstáculos y el efecto de la localización, más fácilmente apreciable en observación simultánea en tiempo real de ambos simuladores.
  
  \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{pioneer2}\\
-  \hspace{0.5cm}\includegraphics[scale=0.7]{pioneer2_sim}
-  \caption{Segundo experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1}
+  \centering\includegraphics[scale=0.4]{pioneer2}
+  
+  \vspace{0.5cm}
+  
+  \centering\includegraphics[scale=0.62]{pioneer2_sim}
+  \caption{Segundo experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1b}
 \end{figure}
