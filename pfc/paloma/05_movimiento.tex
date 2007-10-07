@@ -232,40 +232,38 @@ Una trayectoria planificada y modificada de acuerdo con los apartados anteriores
   \caption{Definición del punto $p$ y otras magnitudes para el punto de la trayectoria $i = 0$}\label{fg:elastic}
 \end{figure}
 
-%%%%%%%%%% pg 82 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \pagebreak[4]
 Se define un vector $v_{2}$ con origen en el punto de la trayectoria considerado y extremo los sucesivos puntos tomados como obstáculos. La proyección ortogonal de este vector sobre $v_{1}$ define un punto que llamaremos $p_{2}$. La distancia entre éste y el punto de la trayectoria se denota como $d$, que puede adoptar un signo u otro dependiendo de a qué lado de la trayectoria se encuentre el objeto. La distancia entre $p_{2}$ y el obstáculo correspondiente se mide mediante $d_{1}$.
 
 En la deformación de la trayectoria sólo se utilizan los obstáculos que proporcionan un valor de $d_{1}$ suficientemente pequeño, puesto que la influencia de los objetos cercanos a tramos más avanzados de aquella podría llevar a malos resultados.
 
-\begin{figure}[h]
+\begin{figure}[hbt]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.5]{d1}\\
   \caption{Los obstáculos del tramo 1 no deben afectar al 2 ni los del tramo 4 a los tramos 3 y 5.}\label{fg:d1}
 \end{figure}
 
-A través de un valor de $d$ corregido al tenerse en cuenta el radio del robot, se guardan para cada punto de la trayectoria las dos distancias mínimas a algún obstáculo a cada uno de los dos lados de la misma. Estas distancias se llamarán min\_int[i] y max\_int[i] respectivamente. Sus valores están inicializados con la máxima desviación que se le permite al robot, para el caso en que no haya ningún obstáculo en alguno de los lados y otras situaciones similares. Si después de recalcular dichos valores se cumple que min\_int $>$ max\_int, el robot no puede evitar los obstáculos sin superar la máxima desviación establecida y se dice que se encuentra en estado de bloqueo.
+A través de un valor de $d$ corregido al tenerse en cuenta el radio del robot, se guardan para cada punto de la trayectoria las dos distancias mínimas a algún obstáculo a cada uno de los dos lados de la misma. Estas distancias se llamarán \prog{min\_int[i]} y \prog{max\_int[i]}, respectivamente. Sus valores están inicializados con la máxima desviación que se le permite al robot, para el caso en que no haya ningún obstáculo en alguno de los lados y otras situaciones similares. Si después de recalcular dichos valores se cumple que \prog{min\_int > max\_int}, el robot no puede evitar los obstáculos sin superar la máxima desviación establecida y se dice que se encuentra en estado de bloqueo.
 
-Haciendo la media entre esos dos valores se obtiene el desplazamiento, error [i], que debe aplicarse sobre el punto para que quede a la misma distancia de cada uno de los límites hallados para ambos lados (figura \ref{fg:elasticTray}).
+Haciendo la media entre esos dos valores se obtiene el desplazamiento, \prog{error [i]}, que debe aplicarse sobre el punto para que quede a la misma distancia de cada uno de los límites hallados para ambos lados (figura \ref{fg:elasticTray}).
 
-\begin{figure}[h]
+\begin{figure}[htb]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.6]{elasticTray}\\
   \caption{Desplazamiento que sufre cada punto de la trayectoria}\label{fg:elasticTray}
 \end{figure}
 
+\pagebreak
 Con los puntos intermedios de la trayectoria lo que se hace es promediar el valor del error en el punto considerado con los valores del mismo en los puntos anterior y siguiente:
 
-\begin{center}
-$error2[i] = \frac{error[i-1] + error[i] + error[i+1]}{3}$
-\end{center}
+\[  \mbox{error2}[i] = \frac{\mbox{error}[i-1] + \mbox{error}[i] + \mbox{error}[i+1]}{3} \]
 
 \noindent
 De este modo se busca deformar la trayectoria más suavemente.
 
 \section{La clase \prog{CMoveControl}}
-En esta clase se llevan a cabo las tareas de control de movimiento, planificacón de trayectorias y control reactivo que se han descrito. Las principales funciones que se utilizan para ello son las siguientes:
+
+En esta clase se llevan a cabo las tareas de control de movimiento, planificación de trayectorias y control reactivo que se han descrito. Las principales funciones que se utilizan para ello son las siguientes:
 
 \subsection{\prog{DefineDest}}
 
@@ -282,7 +280,7 @@ Esta función sirve para definir el punto hacia el que tiene que dirigirse el ro
 \end{itemize}
 
 \noindent
-Se guardan los argumentos en variables miembro, para que sus valores sean utilizados por el control de movimiento, y se establece el estado como \prog{NO_LLEGADO} mediante una macro con este nombre.
+Se guardan los argumentos en variables miembro, para que sus valores sean utilizados por el control de movimiento, y se establece el estado como \prog{NO_} \prog{LLEGADO} mediante una macro con este nombre.
 
 \subsection{\prog{Dist2Tray}}
 
@@ -290,7 +288,7 @@ Se guardan los argumentos en variables miembro, para que sus valores sean utiliz
 \prog{float Dist2Tray()}
 
 \noindent
-Esta función se utiliza para hallar la distancia del robot al segmento que une los puntos de la trayectoria entre los que se encuentra e indicar a qué lado del mismo está, de modo que pueda realizarse el control de acercamiento a la trayectoria descrito en \ref{control}.
+Esta función se utiliza para hallar la distancia del robot al segmento que une los puntos de la trayectoria entre los que se encuentra e indicar a qué lado del mismo está, de modo que pueda realizarse el control de acercamiento a la trayectoria descrito en el apartado \ref{control}.
 
 \noindent
 El cálculo de la distancia se lleva a cabo mediante los ángulos mostrados en la figura \ref{fg:dist2tray}, con la fórmula que aparece en ella. El valor que se devuelve es el de $d$.
@@ -301,7 +299,7 @@ El cálculo de la distancia se lleva a cabo mediante los ángulos mostrados en l
 \prog{int FindPoint()}
 
 \noindent
-Esta función se utiliza para ver cuál es el próximo punto de la trayectoria hacia el que debe ir el robot. Es útil en el caso de que haya pasado demasiado rápidamente por algún punto, para evitar que tenga que retroceder (ver última parte de \ref{control}).
+Esta función se utiliza para ver cuál es el próximo punto de la trayectoria hacia el que debe ir el robot. Es útil en el caso de que haya pasado demasiado rápidamente por algún punto, para evitar que tenga que retroceder (ver última parte del apartado \ref{control}).
 
 \noindent
 Se busca entre los cinco puntos de la trayectoria siguientes al de índice \prog{current_point} dentro del vector \prog{trajectory} aquel que esté más cerca del robot. Se devuelve el valor de su índice.
@@ -322,16 +320,18 @@ La función de este método consiste en calcular las velocidades de avance y gir
 \noindent
 En primer lugar se mira si es necesario corregir el punto de destino con una llamada a la función \prog{FindPoint()} y si es así se hacen los correspondientes cambios. A continuación se determina el estado, viendo si la distancia entre la posición del robot y el punto de destino es menor que la tolerancia.
 
-En la figura se muestra el diagrama de flujo simplificado de los pasos que se realizan a partir de este punto.
+En la figura \ref{fg:flujo1} se muestra el diagrama de flujo simplificado de los pasos que se realizan a partir de este punto.
 
-\begin{figure}[h]
+\begin{figure}[htb]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.6]{flujo1}\\
   \caption{Diagrama de flujo simplificado de parte del proceso efectuado en \prog{GetCommand}}\label{fg:flujo1}
 \end{figure}
+
 Si el estado es \prog{NO_LLEGADO}, se determinan las velocidades mediante el procedimiento indicado en \ref{control} a partir de la posición del robot (disponible en toda la clase mediante las variables miembro \prog{x} e \prog{y}) y del punto guardado como destino.
-Si el estado es \prog{LLEGADO} se da valor nulo a ambas velocidades y se incrementa una variable llamada \prog{current_point} que mide de este modo el índice del último punto de la trayectoria al que se ha llegado. Si efectivamente hay una trayectoria definida, se llama a la función \prog{DefineDest} para guardar como destino el siguiente punto de la misma (\prog{current_point + 1}). Los puntos de la trayectoria han de estar almacenados en un vector de la STL, vector \prog{trajectory}, miembro de la clase y definido para contener objetos CPoint2D.
-\noindent
+
+Si el estado es \prog{LLEGADO} se da valor nulo a ambas velocidades y se incrementa una variable llamada \prog{current_point} que mide de este modo el índice del último punto de la trayectoria al que se ha llegado. Si efectivamente hay una trayectoria definida, se llama a la función \prog{DefineDest} para guardar como destino el siguiente punto de la misma (\prog{current_point + 1}). Los puntos de la trayectoria han de estar almacenados en un vector de la STL, vector \prog{trajectory}, miembro de la clase y definido para contener objetos \prog{CPoint2D}.
+
 El valor de retorno es el estado.
 
 \subsection{\prog{DefineTrajectory}}
@@ -355,7 +355,7 @@ Esta función se utiliza para suavizar la trayectoria.
 
 \noindent
 Los puntos de la trayectoria a suavizar se hallan guardados en un vector dinámico de nombre \prog{tray_prev} e inicialmente se copian en otro vector dínámico variable local de la función (vector \prog{smooth_tray}) para realizar en éste las modificaciones oportunas y no perder los puntos de la trayectoria original (de cara a la representación gráfica, principalmente).
-Esta función es la implementación del algoritmo descrito en \ref{tray}. Se devuelve el vector \prog{smooth_tray}, que contiene los puntos de la trayectoria suave obtenida.
+Esta función es la implementación del algoritmo descrito en el apartado \ref{tray}. Se devuelve el vector \prog{smooth_tray}, que contiene los puntos de la trayectoria suave obtenida.
 
 \subsection{\prog{ComputeElasticTray}}
 
@@ -366,7 +366,7 @@ Esta función es la implementación del algoritmo descrito en \ref{tray}. Se dev
 Esta función sirve para deformar la trayectoria de forma que se aleje de los obstáculos (puntos 2D guardados en el vector de la STL \prog{v_puntos}, variable miembro de la clase).
 
 \noindent
-Los puntos de la trayectoria que se deforma son los almacenados en el vector \prog{nom_tray} de la STL, que se copian en una variable local de nombre \prog{ret_tray}. Con estos puntos se siguen los pasos indicados en el algoritmo de \ref{reactivo}. En caso de que al calcularse alguno de los nuevos puntos se produzca bloqueo (\prog{min_int[i] > max_int[i]}), se devuelve la trayectoria \prog{ret_tray} con los puntos hallados hasta ese momento. Si no se da situación de bloqueo, el vector \prog{ret_tray} se devuelve al final de la función y tendrá tantos puntos como la trayectoria inicial. El resultado de esta llamada será asignado al vector \prog{trajectory} para que pueda aplicarse el control de movimiento.
+Los puntos de la trayectoria que se deforma son los almacenados en el vector \prog{nom_tray} de la STL, que se copian en una variable local de nombre \prog{ret_tray}. Con estos puntos se siguen los pasos indicados en el algoritmo del aparatado \ref{reactivo}. En caso de que al calcularse alguno de los nuevos puntos se produzca bloqueo (\prog{min_int[i] > max_int[i]}), se devuelve la trayectoria \prog{ret_tray} con los puntos hallados hasta ese momento. Si no se da situación de bloqueo, el vector \prog{ret_tray} se devuelve al final de la función y tendrá tantos puntos como la trayectoria inicial. El resultado de esta llamada será asignado al vector \prog{trajectory} para que pueda aplicarse el control de movimiento.
 
 %\subsection{\prog{FindPoint}}
 %
@@ -387,9 +387,8 @@ Los puntos de la trayectoria que se deforma son los almacenados en el vector \pr
 \noindent
 Esta función permite obtener una trayectoria igual a la inicial (\prog{nom_tray}) pero con el requisito de que cada uno de sus puntos no diste más de 0.1m del siguiente.
 
-
-\noindent
-Se utiliza un vector de la STL, variable local de la función, en el que se guarda cada punto de la trayectoria seguido de tantos otros puntos como sea necesario para que el segmento que va de aquél al próximo punto de \prog{nom_tray} cumpla la condición dada. El número de puntos intermedios que se añaden será $n = \frac{dist}{0.1} - 1$, siendo $dist$ la longitud del segmento inicial. Finalmente se iguala el vector \prog{nom_tray} al vector con los nuevos puntos.
+Se utiliza un vector de la STL, variable local de la función, en el que se guarda cada punto de la trayectoria seguido de tantos otros puntos como sea necesario para que el segmento que va de aquél al próximo punto de \prog{nom_tray} cumpla la condición dada. El número de puntos intermedios que se añaden será $n = \frac{\mbox{dist}}{0.1} - 1$,
+siendo $dist$ la longitud del segmento inicial. Finalmente se iguala el vector \prog{nom_tray} al vector con los nuevos puntos (figura \ref{fg:divide}).
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -397,9 +396,9 @@ Se utiliza un vector de la STL, variable local de la función, en el que se guar
   \caption{Puntos de un segmento de la trayectoria original y del resultado de la llamada a \prog{DivideTrajectory()}}\label{fg:divide}
 \end{figure}
 
-\vspace{0.2cm}
+%\vspace{0.2cm}
 
-\noindent
+%\noindent
 La utilidad de esta función reside en la necesidad de tener los puntos de la trayectoria suficientemente juntos para que el control reactivo que se implementa a través de \prog{ComputeElasticTray()} sea efectivo. Si no fuera así, el filtro que se realiza mediante $d_{1}$ no permitiría esquivar muchos de los obstáculos.
 
 %\subsection{\prog{Dist2Tray}}
@@ -415,100 +414,116 @@ La utilidad de esta función reside en la necesidad de tener los puntos de la tr
 
 
 \section{Pruebas y resultados}
-Todas las funcionalidades de control de movimiento, planificación de trayectorias y control reactivo del proyecto han sido probadas inicialmente mediante simulación gráfica. Esto permite la depuración y mejora del comportamiento del programa de una forma más cómoda. Las pruebas con robots reales requieren más espacio y pueden conllevar mayores riesgos si no se han llevado a cabo previamente en simulación. Además, es preciso cargar baterías, llevar el ejecutable al ordenador portátil que se utiliza, realizar la conexión \emph{telnet} e introducir las contraseñas correspondientes\ldots por lo que resultan bastante más lentas. El control de movimiento, sin embargo, sí que fue probado en modo real en fases anteriores del proyecto ya que la respuesta del robot ante las velocidades aplicadas puede ser algo diferente en uno y otro caso y resultaba conveniente ajustar bien los parámetros para no seguir trabajando con un regulador inadecuado.
+
+Todas las funcionalidades de control de movimiento, planificación de trayectorias y control reactivo del proyecto han sido probadas inicialmente mediante simulación gráfica. Esto permite la depuración y mejora del comportamiento del programa de una forma más cómoda. Las pruebas con robots reales requieren más espacio y pueden conllevar mayores riesgos si no se han llevado a cabo previamente en simulación. Además, es preciso cargar baterías, llevar el ejecutable al ordenador portátil que se utiliza, realizar la conexión \emph{telnet} e introducir las contraseñas correspondientes\ldots, por lo que resultan bastante más lentas. El control de movimiento, sin embargo, sí que fue probado en modo real en fases anteriores del proyecto, ya que la respuesta del robot ante las velocidades aplicadas puede ser algo diferente en uno y otro caso y resultaba conveniente ajustar bien los parámetros para no seguir trabajando con un regulador inadecuado.
 
 \subsection{Pruebas en modo \emph{simulación}}
 
 \subsubsection{Control de movimiento y planificación de trayectorias}
 
+\paragraph{Prueba 1. Seguimiento de una trayectoria planificada a priori.}\  %
+
 \noindent
-\textbf{\textbf{1.} Seguimiento de una trayectoria planificada a priori}
+En este caso, lo que se ha hecho es definir los puntos de la trayectoria inicial mediante doble click con el botón derecho del ratón sobre la interfaz gráfica. Según se van añadiendo puntos se va suavizando la trayectoria. Cuando se ha completado la definición de la trayectoria deseada se indica que el robot debe seguirla y éste comienza a moverse sobre la misma. En la figura \ref{fg:mov1} puede verse en color azul la trayectoria resultante tras la planificación, en verde la trayectoria seguida de acuerdo con las medidas de la odometría, y en rojo la trayectoria seguida según la localización. Como las medidas del láser en modo simulación se hallan a 8000m del robot (ver método \prog{Simulate}, apartado \ref{CPosData}), no se realiza asociación de datos ni se corrige la posición, de modo que las trayectorias dibujadas en verde y rojo serán necesariamente iguales. La única diferencia reside en el hecho de que se han representado a diferentes alturas.
 
-En este caso, lo que se ha hecho es definir los puntos de la trayectoria inicial mediante doble click con el botón derecho del ratón sobre la interfaz gráfica. Según se van añadiendo puntos se va suavizando la trayectoria. Cuando se ha completado la definición de la trayectoria deseada se indica que el robot debe seguirla y éste comienza a moverse sobre la misma. En la figura puede verse en color azul la trayectoria resultante tras la planificación, en verde la trayectoria seguida de acuerdo con las medidas de la odometría y en rojo la trayectoria seguida según la localización. Como las medidas del láser en modo simulación se hallan a 8000m del robot (ver método \prog{Simulate}, de \ref{CPosData}), no se realiza asociación de datos ni se corrige la posición, de modo que las trayectorias dibujadas en verde y rojo serán necesariamente iguales. La única diferencia reside en el hecho de que se han representado a diferentes alturas.
-
-
-\textbf{Resultados:}
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{mov1}\\
   \caption{Primer experimento de planificación de trayectorias y control de movimiento}\label{fg:mov1}
 \end{figure}
 
-Como puede verse, la trayectoria seguida por el robot es prácticamente idéntica a la planificada, lo que muestra el buen diseño del controlador.
+\paragraph{Resultados:}
+Como puede verse en la figura \ref{fg:mov1}, la trayectoria seguida por el robot es prácticamente idéntica a la planificada, lo que muestra el buen diseño del controlador.
+
+\paragraph{Prueba 2. Seguimiento de una trayectoria planificada a priori con el robot Pioneer P3AT.}\ %
 
 \noindent
-\textbf{\textbf{2.} Seguimiento de una trayectoria planificada a priori con el robot Pioneer P3AT}
-
 Esta es una de las pruebas que se realizó con el control elaborado para el robot Pioneer P3AT de MobileRobots/Activmedia. En ella se utiliza MobileSim, un software de simulación proporcionado por los fabricantes para la experimentación con Aria. MobileSim está construido sobre el simulador Stage (creado por Richard Vaughan, Andrew Howard y otros como parte del proyecto Player/Stage), con algunas modificaciones por parte de MobileRobots. Utilizando la clase \prog{SimpleConnector} de la biblioteca Aria, la conexión se inicia por defecto con el simulador.
 
-
-\textbf{Resultados:}
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{mov2}\\
   \caption{Segundo experimento de planificación de trayectorias y control de movimiento}\label{fg:mov2}
 \end{figure}
 
-La trayectoria inicial definida en este caso es la formada por los puntos marcados en negro. Puede observarse que el control proporciona de nuevo un buen resultado.
+\paragraph{Resultados:}
+La trayectoria inicial definida en este caso es la formada por los puntos marcados en negro (figura \ref{fg:mov2}). Puede observarse que el control proporciona de nuevo un buen resultado.
+
+\paragraph{Prueba 3. Seguimiento de una trayectoria planificada dinámicamente.}\ %
 
 \noindent
-\textbf{\textbf{3.} Seguimiento de una trayectoria planificada dinámicamente}
+En esta prueba se generan nuevos puntos de la trayectoria a medida que el robot se acerca a su próximo destino. En algunos casos, al llegar el robot a un punto y posteriormente añadir otro punto después de aquél, el algoritmo que suaviza la trayectoria hace que ésta deje de pasar por el punto en el que se encontraba el robot. Si se produce esta circunstancia, entra en acción el controlador para evitar desvíos sobre la trayectoria planificada. El buen funcionamiento del mismo puede verse con claridad en las figuras \ref{fg:mov3a} y \ref{fg:mov3b}.
 
-En esta prueba se generan nuevos puntos de la trayectoria a medida que el robot se acerca a su próximo destino. En algunos casos, al llegar el robot a un punto y posteriormente añadir otro punto después de aquél, el algoritmo que suaviza la trayectoria hace que ésta deje de pasar por el punto en el que se encontraba el robot. Si se produce esta circunstancia, entra en acción el controlador para evitar desvíos sobre la trayectoria planificada. El buen funcionamiento del mismo puede verse con claridad en las figuras \ref{fg:mov3} y \ref{fg:mov4}:
-
-
-
-\textbf{Resultados:}
-\begin{figure}[h]
+\begin{figure}[hbt]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{mov3}\\
-  \vspace{2cm}\includegraphics[scale=0.4]{mov_3}
-  \caption{Tercer experimento de planificación de trayectorias y control de movimiento}\label{fg:mov3}
+    \caption{Tercer experimento de planificación de trayectorias y control de movimiento (a)}\label{fg:mov3a}
+\end{figure}
+ 
+ \begin{figure}[hbt]
+\centering\includegraphics[scale=0.4]{mov_3}
+\caption{Tercer experimento de planificación de trayectorias y control de movimiento (b)}\label{fg:mov3b}
 \end{figure}
 
+\paragraph{Resultados:}
 
-En la segunda figura, por ejemplo, el robot llega al punto B procedente del A y, seguidamente, se añade a la trayectoria el punto C. El algoritmo para suavizar trayectorias redondea entonces la trayectoria que habría de estar formada por A, B y C, pero el robot ya se encuentra en B. El regulador inicial conduciría al robot directamente hacia C pero las mejoras introducidas hacen que el robot se aproxime primero a la trayectoria planificada.
+En la segunda figura (\ref{fg:mov3b}), por ejemplo, el robot llega al punto B procedente del A y, seguidamente, se añade a la trayectoria el punto C. El algoritmo para suavizar trayectorias redondea entonces la trayectoria que habría de estar formada por A, B y C, pero el robot ya se encuentra en B. El regulador inicial conduciría al robot directamente hacia C pero las mejoras introducidas hacen que el robot se aproxime primero a la trayectoria planificada.
+
+\clearpage
+\paragraph{Prueba 4. Seguimiento del camino de vuelta después de que el robot ejecute una trayectoria.}\ %
 
 \noindent
-\textbf{\textbf{4.} Seguimiento del camino de vuelta después de que el robot ejecute una trayectoria.}
+En este caso, se define una trayectoria mediante el ratón o moviendo al robot por teleoperación con el teclado (sección \ref{opciones}). Cuando finaliza el seguimiento de la misma, el robot es capaz de regresar de forma autónoma al punto de partida si así se le indica. En la primera figura que se muestra (figura \ref{fg:mov4a}), la trayectoria inicial está definida mediante el ratón mientras que en la segunda (\ref{fg:mov4b}) se utiliza el modo teleoperado. La trayectoria dibujada en color verde es la correspondiente a la odometría durante la ida y la que aparece en rosa es la odometría del camino de vuelta.
 
-En este caso, se define una trayectoria mediante el ratón o moviendo al robot por teleoperación con el teclado (sección \ref{opciones}). Cuando finaliza el seguimiento de la misma, el robot es capaz de regresar de forma autónoma al punto de partida si así se le indica. En la primera figura que se muestra, la trayectoria inicial está definida mediante el ratón mientras que en la segunda se utiliza el modo teleoperado. La trayectoria dibujada en color verde es la correspondiente a la odometría durante la ida y la que aparece en rosa es la odometría del camino de vuelta.
+\paragraph{Resultados:} Ver figuras \ref{fg:mov4a} y \ref{fg:mov4b}.
 
-\textbf{Resultados:}
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{vuelta}\\
-  \hspace{0.5cm}\includegraphics[scale=0.4]{vuelta2}
-  \caption{Cuarto experimento de planificación de trayectorias y control de movimiento}\label{fg:mov4}
+ \caption{Cuarto experimento de planificación de trayectorias y control de movimiento (a)}\label{fg:mov4a}
 \end{figure}
 
+\begin{figure}[h]
+\centering\includegraphics[scale=0.4]{vuelta2}
+  \caption{Cuarto experimento de planificación de trayectorias y control de movimiento (b)}\label{fg:mov4b}
+\end{figure}
+
+\clearpage
 
 \subsubsection{Control reactivo}
 
-\noindent
-\textbf{\textbf{1.} Obtención de trayectorias deformadas ante la presencia de obstáculos cercanos a una trayectoria definida}
-En esta prueba se define primeramente una trayectoria y a continuación se crean obstáculos más o menos cercanos a la misma mediante doble click con el botón izquierdo del ratón sobre el punto en el que debe situarse cada uno de ellos. En el momento en que se añade un obstáculo, la trayectoria se deforma mediante el algoritmo previamente explicado. En este caso no se han incorporado obstáculos nuevos durante el movimiento del robot sobre la trayectoria, por lo que no se trata de una aplicación de control reactivo sino sólo de una prueba del algoritmo de deformación.
+\paragraph{Prueba 1. Obtención de trayectorias deformadas ante la presencia de obstáculos cercanos a una trayectoria definida.}\ %
 
-\textbf{Resultados:}
+\noindent
+En esta prueba se define primeramente una trayectoria, y a continuación se crean obstáculos más o menos cercanos a la misma mediante doble click con el botón izquierdo del ratón sobre el punto en el que debe situarse cada uno de ellos. En el momento en que se añade un obstáculo, la trayectoria se deforma mediante el algoritmo previamente explicado. En este caso no se han incorporado obstáculos nuevos durante el movimiento del robot sobre la trayectoria, por lo que no se trata de una aplicación de control reactivo sino sólo de una prueba del algoritmo de deformación.
+
+
+\paragraph{Resultados:} 
+Como puede verse(figuras \ref{fg:react1a} y \ref{fg:react1b}), los obstáculos se han representado en color cyan. La trayectoria se deforma de un modo suave en los puntos cercanos a ellos sin superar la máxima desviación permitida, establecida en 0.15m. Los obstáculos suficientemente alejados de la trayectoria no suponen ninguna modificación en la misma. En la segunda figura (\ref{fg:react1b}) hay un obstáculo que afecta a dos tramos diferentes de la trayectoria y ambas deformaciones se realizan correctamente. Con este valor de la máxima desviación permitida no pueden esquivarse obstáculos que se encuentren sobre la trayectoria a seguir. En este caso, para el robot Urbano, entrarían en acción los mecanismos de control reactivo de bajo nivel (comandos de parada y giro). Si se utiliza en su lugar un valor de 0.6m, las deformaciones son mayores y pueden evitarse los obstáculos que supondrían un choque directo (figura \ref{fg:react2}). El problema que conlleva esta opción es que en el caso de entornos densos (como son la mayoría de los entornos de interiores), las deformaciones son excesivas hacia uno y otro lado y se pierde suavidad en la trayectoria.
+
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{obs2}\\
-  \hspace{0.5cm}\includegraphics[scale=0.4]{obs3}
-  \caption{Experimento previo para el control reactivo}\label{fg:react1}
+    \caption{Experimento previo para el control reactivo (a)}\label{fg:react1a}
+  \end{figure}
+  
+\begin{figure}[h]
+  \centering\includegraphics[scale=0.4]{obs3}
+  \caption{Experimento previo para el control reactivo (b)}\label{fg:react1b}
 \end{figure}
 
 
-Como puede verse, los obstáculos se han representado en color cyan. La trayectoria se deforma de un modo suave en los puntos cercanos a ellos sin superar la máxima desviación permitida, establecida en 0.15m. Los obstáculos suficientemente alejados de la trayectoria no suponen ninguna modificación en la misma. En la segunda figura hay un obstáculo que afecta a dos tramos diferentes de la trayectoria y ambas deformaciones se realizan correctamente. Con este valor de la máxima desviación permitida no pueden esquivarse obstáculos que se encuentren sobre la trayectoria a seguir. En este caso, para el robot Urbano, entrarían en acción los mecanismos de control reactivo de bajo nivel (comandos de parada y giro). Si se utiliza en su lugar un valor de 0.6m, las deformaciones son mayores y pueden evitarse los obstáculos que supondrían un choque directo (figura \ref{react2}). El problema que conlleva esta opción es que en el caso de entornos densos (como son la mayoría de los entornos de interiores), las deformaciones son excesivas hacia uno y otro lado y se pierde suavidad en la trayectoria.
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{obs4}\\
   \caption{Aumento de la máxima desviación permitida}\label{fg:react2}
 \end{figure}
 
+\clearpage
+
+\paragraph{Prueba 2. Trayectoria seguida por el robot ante la aparición de un obstáculo durante su movimiento sobre una trayectoria.}\ %
 
 \noindent
-\textbf{\textbf{2.} Trayectoria seguida por el robot ante la aparición de un obstáculo durante su movimiento sobre una trayectoria}
-
 En este caso se ha llevado el robot a un punto por medio de una trayectoria definida sobre la interfaz gráfica y se le ha indicado que regrese a su posición inicial. Durante el camino de vuelta, se ha creado un obstáculo en la trayectoria teórica que debería seguir el robot para ver su respuesta simulada en tiempo real.
 
 \textbf{Resultados:}
@@ -519,36 +534,45 @@ En la figura \ref{fg:react3} se ha plasmado en color verde la trayectoria seguid
   \caption{Primer experimento de control reactivo}\label{fg:react3}
 \end{figure}
 
+\clearpage
 
 \subsection{Pruebas en modo \emph{real}}
 Cuando se utiliza el sistema con el robot real las llamadas a \prog{GetCommand} se realizan cada 300ms aproximadamente. Como se verá en los siguientes resultados, el seguimiento de la trayectoria es algo menos preciso que en las pruebas realizadas en simulación.
 
 \subsubsection{Control de movimiento y planificación de trayectorias}
 
+\paragraph{Prueba 1. Seguimiento de una trayectoria planificada a priori.}\ %
+
 \noindent
-\textbf{\textbf{1.} Seguimiento de una trayectoria planificada a priori}
 En estas pruebas lo que se ha hecho es definir una trayectoria con el ratón, al igual que en el modo simulación, y ver cómo el robot se va dirigiendo hacia los correspondientes puntos de la misma. La longitud de las trayectorias efectuadas está limitada por el entorno de experimentación, una zona del laboratorio no muy amplia y con objetos cercanos que disminuyen el área explorable.
 
 \textbf{Resultados:}
-En la figura \ref{fg:real1} se muestra en color azul la trayectoria nominal seleccionada y en colores verde y rojo la seguida por el robot.
-\begin{figure}[h]
-  % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{real}\\
-  \hspace{0.5cm}\includegraphics[scale=0.4]{real1}
-  \caption{Primer experimento de movimiento con robot real}\label{fg:real}
-\end{figure}
-
+En las figuras \ref{fg:real1a} y \ref{fg:real1b} se muestra en color azul la trayectoria nominal seleccionada y en colores verde y rojo la seguida por el robot.
 En el segundo caso se aprecia que el mantenimiento de la dirección de la trayectoria prevalece frente a la acción de acercar el robot a la misma, pero esto evita que la trayectoria resultante sea más ondulada.
 
+\begin{figure}[h]
+  \centering\includegraphics[scale=0.4]{real}
+  \caption{Primer experimento de movimiento con robot real (a)}\label{fg:real1a}
+\end{figure}
+
+\begin{figure}[h]
+  \centering\includegraphics[scale=0.4]{real1}
+  \caption{Primer experimento de movimiento con robot real (b)}\label{fg:real1b}
+\end{figure}
+
+\clearpage
+\paragraph{Prueba 2. Seguimiento del camino de vuelta después de que el robot ejecute una trayectoria.}\ %
+
 \noindent
-\textbf{\textbf{2.} Seguimiento del camino de vuelta después de que el robot ejecute una trayectoria.}
 La forma de proceder en este caso es la misma que en el modo de simulación.
-\textbf{Resultados:}
+
+\paragraph{Resultados:}
 En la figura \ref{fg:real2} se muestra en color verde la trayectoria durante la ida y en color rosa la correspondiente al camino de vuelta.
+
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{real2}\\
   \caption{Segundo experimento de movimiento con robot real}\label{fg:real2}
 \end{figure}
 
-Como puede observarse, en este caso aparecen mayores desviaciones respecto a la trayectoria definida. La desviación producida al dar la vuelta el robot hace que éste tarde un poco en coger la dirección correcta, pero las acciones de control sobre err\_ang2 y err\_ang3 permiten que los cambios no sean demasiado bruscos. Si la trayectoria fuera más larga podría verse que la estabilización es bastante rápida.
+Como puede observarse, en este caso aparecen mayores desviaciones respecto a la trayectoria definida. La desviación producida al dar la vuelta el robot hace que éste tarde un poco en coger la dirección correcta, pero las acciones de control sobre \prog{err\_ang2} y \prog{err\_ang3} permiten que los cambios no sean demasiado bruscos. Si la trayectoria fuera más larga podría verse que la estabilización es bastante rápida.
