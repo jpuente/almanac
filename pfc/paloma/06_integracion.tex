@@ -91,7 +91,7 @@ Esta función va a ejecutarse a modo de bucle, dentro de un \emph{timer} que se 
 Esta clase hereda de la clase pública \prog{CDialog}, perteneciente a las MFC. En ella comienza el hilo principal de ejecución del programa. Desde esta clase se crea el cuadro de diálogo, al que han de añadirse los diferentes botones para realizar el paso de información del usuario a los distintos componentes del sistema. En ella se tiene la variable \prog{gl_wnd} para crear la ventana gráfica y asociarla a él. Como se ha mencionado, proporciona el modo de controlar el ciclo de tareas que ha de realizar el robot mediante un temporizador o \emph{timer} que permite la repetición de una serie de acciones periódicamente. La variable \prog{robot}, de acuerdo con lo visto, es necesaria para obtener la posición corregida y el mapa y hacer posible su utilización desde el control de movimiento en cada momento. La variable \prog{control} se emplea para facilitar el acceso a aquél. %Las principales funciones editadas en esta clase son:
 
 \section{Interfaz de usuario}
-Aunque ya se ha mostrado en otras figuras, a continuación se presenta el aspecto de la interfaz de usuario desarrollada (figura \ref{fg:interfaz}. En esta imagen se ve tal y como aparece al iniciarse la ejecución del programa (salvo los colores de fondo y cuadrícula, que por defecto son negro y magenta pero pueden cambiarse pulsando en el teclado la letra 'F'). Seguidamente se describirán sus propiedades y la utilidad de sus botones.
+Aunque ya se ha mostrado en otras figuras, a continuación se presenta el aspecto final de la interfaz de usuario desarrollada (figura \ref{fg:interfaz}). En esta imagen se ve tal y como aparece al iniciarse la ejecución del programa (salvo los colores de fondo y cuadrícula, que por defecto son negro y magenta pero pueden cambiarse pulsando en el teclado la letra 'F'). Seguidamente se describirán sus propiedades y la utilidad de sus botones.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -159,7 +159,7 @@ Se utiliza para cerrar el fichero anterior y de este modo dejar de registrar los
 
 %\vspace{0.2cm}
 %\noindent
-\paragraph{Nota:} 
+\paragraph{Nota:}
 Lógicamente, los dos botones anteriores no se encuentran activados si el modo de funcionamiento es tipo fichero.
 
 \subsubsection{Desviación típica de odometría}
@@ -226,7 +226,7 @@ A continuación se utilizan mapas obtenidos por los métodos descritos en el cap
   \centering\includegraphics[scale=0.4]{reactivo1}
    \caption{Deformación de trayectorias definidas en el laboratorio de DISAM-UPM (a)}\label{fg:react3a}
 \end{figure}
-  
+
 \begin{figure}[htb]
   \centering\includegraphics[scale=0.4]{reactivo2}
   \caption{Deformación de trayectorias definidas en el laboratorio de DISAM-UPM (b)}\label{fg:react3b}
@@ -247,34 +247,34 @@ El número de obstáculos considerados en este tipo de situaciones es significat
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.8]{vuelta_map}\\
   \caption{Trayectoria deformada en el camino de ida y nuevas deformaciones en el camino de vuelta}\label{fg:vuelta_map}
-\end{figure} 
+\end{figure}
 
 \clearpage
 
 \subsubsection{Construcción de un mapa mediante movimiento controlado del robot y deformación de la trayectoria ante los puntos del mismo con el robot Pioneer}
 
-Con este robot, el simulador proporcionado por el fabricante permite disponer de las medidas ficticias del láser en un entorno hipotético representado en el mismo por medio de un mapa geométrico de líneas. Así, puede verse el comportamiento del sistema desarrollado a la hora de construir el mapa de puntos de un entorno como el dado por aquél mapa. En la figura \ref{fg:pioneerSim1a} se muestran los resultados de un primer experimento. En ella pueden apreciarse algunos detalles interesantes. 
+Con este robot, el simulador proporcionado por el fabricante permite disponer de las medidas ficticias del láser en un entorno hipotético representado en el mismo por medio de un mapa geométrico de líneas. Así, puede verse el comportamiento del sistema desarrollado a la hora de construir el mapa de puntos de un entorno como el dado por aquél mapa. En la figura \ref{fg:pioneerSim1a} se muestran los resultados de un primer experimento. En ella pueden apreciarse algunos detalles interesantes.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{pioneer3}
-  
+
   \vspace{0.5cm}
-  
+
   \centering\includegraphics[scale=0.7]{pioneer3_sim}
   \caption{Primer experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1a}
 \end{figure}
- 
+
  Como primera conclusión podría destacarse la insuficiencia de un valor de 0.1 en la estimación del ruido de la odometría, lo que afecta a la construcción del mapa y hace que se creen paredes dobles en algunos casos. La posición corregida por el filtro aparece en color rojo, mientras que la de la odometría es la que se dibuja en color verde. Al final del recorrido empieza a apreciarse la desviación en la posición odométrica. La trayectoria azul es la nominal, definida por el usuario mediante el ratón, y la trayectoria deformada no se muestra, pero es bastante similar a la trayectoria real seguida(trayectoria roja). Puede verse que se deforma adecuadamente en los puntos cercanos a las paredes o muebles.
- 
+
  En un segundo experimento (figura \ref{fg:pioneerSim1b}) se mejoró la estimación del ruido de la odometría (estableciéndose en un valor de 0.5), con lo que aumenta la calidad del mapa construido. Posiblemente se obtendrían mejores resultados incrementando algo más dicho valor. Los colores empleados son los mismos que en el caso anterior, pero sólo se representa el último tramo de la trayectoria nominal definida. De nuevo se puede observar la deformación de la trayectoria en las cercanías de los obstáculos y el efecto de la localización, más fácilmente apreciable en observación simultánea en tiempo real de ambos simuladores.
- 
+
  \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{pioneer2}
-  
+
   \vspace{0.5cm}
-  
+
   \centering\includegraphics[scale=0.62]{pioneer2_sim}
   \caption{Segundo experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1b}
-\end{figure}
+\end{figure} 
