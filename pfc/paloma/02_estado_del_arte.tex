@@ -157,7 +157,7 @@ Aceptando que el único estado que existe es el definido por $s_{t}$ y $m_{t}$ (
 El segundo factor puede expresarse en base al teorema de la probabilidad total como:
 \begin{eqnarray}\label{eq:prob_total}
   \lefteqn{p(s_{t},m_{t}\mid z^{t-1},u^{t}) =} \\
-	&&  \int\int p(s_{t},m_{t}\mid z^{t-1},u^{t},s_{t-1},m_{t-1}) 
+	&&  \int\int p(s_{t},m_{t}\mid z^{t-1},u^{t},s_{t-1},m_{t-1})
  	\cdot p(s_{t-1},m_{t-1}\mid z^{t-1},u^{t}) ds_{t-1}dm_{t-1}  \nonumber
 \end{eqnarray}
 
@@ -373,8 +373,14 @@ En las expresiones \ref{eq:P_estimation}, \ref{eq:K}, \ref{eq:S} ha de efectuars
     S_{k} = (\frac{\delta h}{\delta z} \mid _{\tilde{x}_{k},z_{k}}) R_{k} (\frac{\delta h}{\delta z} \mid _{\tilde{x}_{k},z_{k}})^{T}+(\frac{\delta h}{\delta x}\mid_{\tilde{x}_{k},z_{k}})\tilde{P}_{k} (\frac{\delta h}{\delta x}\mid_{\tilde{x}_{k},z_{k}})^{T}
 \end{equation}
 
-Una forma de comprobar que una innovación es consistente con el modelo consiste en calcular la llamada distancia de Mahalanobis de la misma y determinar si este valor de la adecuación de la medida al estado se encuentra dentro del intervalo de confianza escogido. El cuadrado de la distancia de Mahalanobis se calcula mediante $v_{k}^{T}S_{k}^{-1}v_{k}$ y también recibe el nombre de \emph{Normalised Innovation Squared}, $NIS_{k}$. Este parámetro tiene distribución $\chi^{2}$ con tantos grados de libertad como medidas independientes haya en el vector de medidas $z_{k}$, con lo que la decisión de aceptar o rechazar la medida se hará en base a:
+Ya se ha comentado la complejidad que puede entrañar la asociación de datos. Además, el hecho de que ésta se haga correctamente es de una gran importancia para el buen funcionamiento del algoritmo.De hecho, es sabido que una asociación de datos errónea conduce fácilmente a la rápida divergencia del mapa tras ser aplicada en la etapa de corrección, sin posibilidad de que el error pueda ser subsanado posteriormente.
+
+La estrategia más ampliamente utilizada consiste en calcular la llamada distancia de Mahalanobis de la observación a todos los objetos del mapa y tomar aquella que sea menor. Es lo que se conoce como la técnica del \emph{Neirest Neighbour }(ND), pues se empareja cada observación con el punto del mapa estadísticamente más cercano. Para comprobar que una innovación es consistente con el modelo lo que se hace es calcular la distancia de Mahalanobis de la misma y determinar si este valor de la adecuación de la medida al estado se encuentra dentro de un intervalo de confianza escogido. El cuadrado de la distancia de Mahalanobis se calcula mediante $v_{k}^{T}S_{k}^{-1}v_{k}$ y también recibe el nombre de \emph{Normalised Innovation Squared}, $NIS_{k}$. Este parámetro tiene distribución $\chi^{2}$ con tantos grados de libertad como medidas independientes haya en el vector de medidas $z_{k}$, con lo que la decisión de aceptar o rechazar la medida se hará en base a:
 \begin{equation}\label{eq:mahalanobis}
     v_{k}^{T}S_{k}^{-1}v_{k}<\chi^{2}_{dim(v_{k}),\alpha = confianza}
 \end{equation}
+
+Otras forma más robusta de realizar la asociación de datos es el test de Compatibilidad Conjunta o "Joint Compatibility" (JC), pero resulta más difícil de implementar y tiene un coste computacional mayor. Esta estrategia ya no considera cada una de las asociaciones independientemente, siendo aplicable en el caso de que puedan realizarse varias observaciones a la vez o bien si cada una de ellas pueda asociarse a varios puntos del mapa previo. En general se suele aplicar la ecuación \ref{eq:mahalanobis} para establecer los emparejamientos iniciales y posteriormente se calcula una distancia de Mahalanobis conjunta mediante el vector acumulado de innovaciones y la matriz conjunta de varianzas y covarianzas de las mismas, de modo que pueda determinarse si las asociaciones anteriores pueden realizarse de forma simultánea. Para cada emparejamiento individual, cabe la posibilidad de que sea compatible con el resto o no, por lo que el coste computacional se incrementa exponencialmente y será O=($2^{q}$), con $q$ igual al número de dichos emparejamientos individuales (aquellos que satisfacen \ref{eq:mahalanobis}).
+
+En el proyecto se ha utilizado la primera alternativa, ya que, aunque se realizan observaciones simultáneamente, al emplearse mapas de puntos no es muy probable la asociación múltiple a varios objetos del mismo mientras el error en la posición sea inferior a la distancia entre puntos del mapa. Como no se tienen muchos errores, esta opción es mejor para no incurrir en un aumento extra del tiempo de procesamiento. Deberá tenerse en cuenta, en todo caso, que la asociación de datos resulta menos fiable a medida que aumenta la incertidumbre en la posición de las características observadas, como ocurre cuando el robot revisita zonas mapeadas con anterioridad, tras cerrar algún bucle.
 

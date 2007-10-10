@@ -235,7 +235,7 @@ A continuación se utilizan mapas obtenidos por los métodos descritos en el cap
 \clearpage
 Aquí puede verse la utilidad del borrado de puntos dinámicos del mapa. En los casos anteriores, hay obstáculos que impiden el avance del robot en una cierta zona (situación de bloqueo). Dichos obstáculos, sin embargo, no son puntos reales del mapa sino que corresponden probablemente a sucesivas posiciones de una persona en el momento de la toma de datos. Si el mapa hubiera sido obtenido con la opción de borrado activada, como resultaría conveniente, el robot podría llegar hasta el final del recorrido planificado (figura \ref{fg:react3c}).
 
-El número de obstáculos considerados en este tipo de situaciones es significativamente alto, por lo que la trayectoria deformada difiere de la original. En caso de que se desee que el robot regrese al punto de origen de su movimiento se empleará como trayectoria nominal sobre la que realizar los cambios oportunos la trayectoria seguida en el camino de ida, siendo ésta una trayectoria deformada en base a la trayectoria nominal inicial. En la figura \ref{fg:vuelta_map} se muestra en color azul la trayectoria seguida durante la ida (trayectoria nominal del camino de vuelta) y en color rosa la trayectoria modificada durante el camino de regreso.
+El número de obstáculos considerados en este tipo de situaciones es significativamente alto, por lo que la trayectoria deformada difiere de la original. En caso de que se desee que el robot regrese al punto de origen de su movimiento se empleará como trayectoria nominal sobre la que realizar los cambios oportunos la trayectoria seguida en el camino de ida, siendo ésta una trayectoria deformada en base a la trayectoria nominal inicial. En la figura \ref{fg:reactVuelta} se muestra en color azul la trayectoria seguida durante la ida (trayectoria nominal del camino de vuelta) y en color rosa la trayectoria modificada durante el camino de regreso, tras la aparición de un nuevo obstáculo.
 
 \begin{figure}[hb]
   % Requires \usepackage{graphicx}
@@ -245,8 +245,8 @@ El número de obstáculos considerados en este tipo de situaciones es significat
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.8]{vuelta_map}\\
-  \caption{Trayectoria deformada en el camino de ida y nuevas deformaciones en el camino de vuelta}\label{fg:vuelta_map}
+  \centering\includegraphics[scale=0.8]{reactVuelta}\\
+  \caption{Trayectoria deformada en el camino de ida y nuevas deformaciones en el camino de vuelta}\label{fg:reactVuelta}
 \end{figure}
 
 \clearpage
@@ -277,4 +277,23 @@ Con este robot, el simulador proporcionado por el fabricante permite disponer de
 
   \centering\includegraphics[scale=0.62]{pioneer2_sim}
   \caption{Segundo experimento para ver el comportamiento del sistema con el robot Pioneer}\label{fg:pioneerSim1b}
+\end{figure}
+
+\clearpage
+\subsection{Pruebas en modo \emph{real}}
+
+En la figura \ref{fg:RealMapa1} se puede ver la trayectoria deformada seguida por el robot al acercarse a un perchero situado en una esquina del laboratorio. A medida que iba siguiendo dicha trayectoria planificada se iba actualizando el mapa. El valor de ruido considerado para la odometría (0.1 por defecto)puede resultar escaso, pero la longitud del recorrido no es suficiente para apreciarlo.
+
+\begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{RealMapa}\\
+  \caption{ Primer experimento del sistema conjunto en modo real}\label{fg:RealMapa1}
+\end{figure}
+
+En un segundo experimento, figura \ref{fg:RealMapa2}, pasaron varias personas por la zona de detección del láser. La mayor parte de los puntos correspondientes fueron borrados, como puede observarse. La trayectoria seguida resultó ser algo más suave en este caso. El valor del ruido estimado en las medidas de odometría parece ser más correcto; aunque los errores de este tipo son menores de lo esperado y la trayectoria odométrica resulta ser bastante aproximada a la real.
+
+\begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{RealMapa2}\\
+  \caption{ Segundo experimento del sistema conjunto en modo real}\label{fg:RealMapa2}
 \end{figure} 

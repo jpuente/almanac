@@ -1,6 +1,6 @@
 % -*- coding: utf-8 -*-
 
-\chapter{Arquitectura del sistema}
+\chapter{Arquitectura del sistema}\label{ch:arquitectura}
 
 La arquitectura del sistema describe la estructura global del mismo. Incluye su división en componentes, el reparto de responsabilidades entre dichos componentes, la colaboración entre ellos y el flujo de control.
 \section{Plataformas de desarrollo y ejecución}
@@ -399,7 +399,7 @@ Si el tipo de conexión es \prog{REAL_CONN} se efectúa una llamada a la funció
 Se devuelve el tipo de datos obtenido (\prog{DATA_CONN_ERROR}, \prog{DATA_ODOM}, \prog{DATA_} \prog{LASER}, \prog{DATA_ODOM_LASER} o \prog{DATA_NONE}).
 
 \subsection{La clase \prog{CPioneer}} \label{CPioneer}
-En esta clase se realiza una encapsulación de los métodos de Aria que permiten la conexión con el robot, el envío de comandos de bajo nivel así como la recepción y el procesamiento de datos de los encoders y del láser. 
+En esta clase se realiza una encapsulación de los métodos de Aria que permiten la conexión con el robot, el envío de comandos de bajo nivel así como la recepción y el procesamiento de datos de los encoders y del láser.
 
 La función \prog{CPioneer::init()} es la encargada de establecer la conexión con el robot o, si no hay esa posibilidad, con el simulador MobileSim, incluido en el software proporcionado por el fabricante. El puerto seleccionado para la conexión serie es el COM3, aunque esto puede cambiarse modificando el código.
 

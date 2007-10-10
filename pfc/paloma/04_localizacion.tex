@@ -2,7 +2,7 @@
 
 \chapter{Localización y mapas}\label{ch:localizacion}
 
-El sistema de localización realizado no incorpora la construcción simultánea de mapas de los tipos descritos en el capítulo de Estado del Arte sino que elabora y luego va actualizando un mapa de puntos a partir de las observaciones correspondientes a las medidas del láser. Son los puntos que ya forman parte del mapa los que se utilizan para la localización en cada instante. Se trata de un método de \emph{máxima probabilidad incremental} basado en el filtro extendido de Kalman.
+El sistema de localización realizado no incorpora la construcción simultánea de mapas de los tipos descritos en el capítulo de Estado del Arte sino que elabora y luego va actualizando un mapa de puntos a partir de las observaciones correspondientes a las medidas del láser. Son los puntos que forman parte del mapa los que se utilizan para la localización en cada instante. Se trata de un método de \emph{máxima probabilidad incremental} basado en el filtro extendido de Kalman.
 
 \section{Aplicación del EKF a la localización del robot: descripción del algoritmo}
 
@@ -357,7 +357,7 @@ En la figura \ref{fg:labo3} puede verse que cuando se tomaron estos datos había
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 3.63min. El cálculo de los puntos del polígono, el de los ángulos necesarios para aplicar el algoritmo de borrado y el análisis de los puntos del mapa no asociados a cada observación en las sucesivas iteraciones( llamadas al método \prog{KalmanUpdate}) provocan un cierto retardo en la ejecución del programa. Este tiempo, no obstante, es considerablemente inferior al correspondiente a otros algoritmos para examinar si un punto pertenece o no a un polígono (algoritmo de Jordan, algoritmo radial\ldots). Además, cada observación nueva ha de compararse con un número menor de puntos del mapa, con lo que en algunos casos el retardo puede quedar prácticamente compensado.
 
-\paragraph{Prueba 4.} 
+\paragraph{Prueba 4.}
 En esta prueba se han utilizado los siguientes parámetros:
 
 \begin{itemize}
@@ -439,7 +439,7 @@ En esta prueba se han utilizado los siguientes parámetros:\nopagebreak[4]
   \item incorporación de nuevos puntos al mapa: $actualiza = true$
 \end{itemize}
 
-\paragraph{Resultados:} 
+\paragraph{Resultados:}
 
 \begin{figure}[hbtp]
   \centering\includegraphics[scale=0.4]{intel3}\\
@@ -464,7 +464,7 @@ En esta prueba se han utilizado los siguientes parámetros:
 \end{itemize}
 
 
-\paragraph{Resultados:} 
+\paragraph{Resultados:}
 \begin{figure}[h]
   \centering\includegraphics[scale=0.5]{val3}\\
   \caption{Primer experimento con datos del Museo de las Ciencias Príncipe Felipe de Valencia}\label{fg:val3}
