@@ -2,7 +2,7 @@
 
 \chapter{Integración}\label{ch:integracion}
 
-El funcionamiento del sistema requiere la integración de sus distintos componentes. El robot debe combinar su capacidad para localizarse correctamente en el entorno con el seguimiento de una trayectoria adecuada, resultante de la planificación y el control reactivo. La localización resulta imprescindible para el buen funcionamiento del control y, particularmente, para situaciones en que el robot quede alejado de la trayectoria definida (como en la figura \ref{fg:reg}%
+El funcionamiento del sistema requiere la integración de sus distintos componentes. El robot debe combinar su capacidad para localizarse correctamente en el entorno con el seguimiento de una trayectoria adecuada, resultante de la planificación y el control reactivo. La localización resulta imprescindible para el buen funcionamiento del control y, particularmente, para detectar situaciones en que el robot quede alejado de la trayectoria definida (como en la figura \ref{fg:reg}%
 %\footnote{Página \pageref{fg:reg}}%
 ).
 
@@ -233,7 +233,7 @@ A continuación se utilizan mapas obtenidos por los métodos descritos en el cap
 \end{figure}
 
 \clearpage
-Aquí puede verse la utilidad del borrado de puntos dinámicos del mapa. En los casos anteriores, hay obstáculos que impiden el avance del robot en una cierta zona (situación de bloqueo). Dichos obstáculos, sin embargo, no son puntos reales del mapa sino que corresponden probablemente a sucesivas posiciones de una persona en el momento de la toma de datos. Si el mapa hubiera sido obtenido con la opción de borrado activada, como resultaría conveniente, el robot podría llegar hasta el final del recorrido planificado (figura \ref{fg:react3c}).
+Aquí puede verse la utilidad del borrado de puntos dinámicos del mapa. En \ref{fg:react3a}, hay obstáculos que impiden el avance del robot en una cierta zona (situación de bloqueo). Dichos obstáculos, sin embargo, no son puntos reales del mapa sino que corresponden probablemente a sucesivas posiciones de una persona en el momento de la toma de datos. Si el mapa hubiera sido obtenido con la opción de borrado activada, como resultaría conveniente, el robot podría llegar hasta el final del recorrido planificado (figura \ref{fg:react3c}).
 
 El número de obstáculos considerados en este tipo de situaciones es significativamente alto, por lo que la trayectoria deformada difiere de la original. En caso de que se desee que el robot regrese al punto de origen de su movimiento se empleará como trayectoria nominal sobre la que realizar los cambios oportunos la trayectoria seguida en el camino de ida, siendo ésta una trayectoria deformada en base a la trayectoria nominal inicial. En la figura \ref{fg:reactVuelta} se muestra en color azul la trayectoria seguida durante la ida (trayectoria nominal del camino de vuelta) y en color rosa la trayectoria modificada durante el camino de regreso, tras la aparición de un nuevo obstáculo.
 
@@ -282,7 +282,7 @@ Con este robot, el simulador proporcionado por el fabricante permite disponer de
 \clearpage
 \subsection{Pruebas en modo \emph{real}}
 
-En la figura \ref{fg:RealMapa1} se puede ver la trayectoria deformada seguida por el robot al acercarse a un perchero situado en una esquina del laboratorio. A medida que iba siguiendo dicha trayectoria planificada se iba actualizando el mapa. El valor de ruido considerado para la odometría (0.1 por defecto)puede resultar escaso, pero la longitud del recorrido no es suficiente para apreciarlo.
+En la figura \ref{fg:RealMapa1} se puede ver la trayectoria deformada seguida por el robot al acercarse a un perchero situado en una esquina del laboratorio. A medida que iba siguiendo dicha trayectoria planificada se iba actualizando el mapa. El valor de la desviación típica del ruido considerado para la odometría (0.1 por defecto)probablemente es escaso, pero la longitud del recorrido no es suficiente para apreciarlo. La orientación de partida del robot no era paralela a las paredes, lo que hace menos intuitiva la interpretación de resultados.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
@@ -290,10 +290,19 @@ En la figura \ref{fg:RealMapa1} se puede ver la trayectoria deformada seguida po
   \caption{ Primer experimento del sistema conjunto en modo real}\label{fg:RealMapa1}
 \end{figure}
 
-En un segundo experimento, figura \ref{fg:RealMapa2}, pasaron varias personas por la zona de detección del láser. La mayor parte de los puntos correspondientes fueron borrados, como puede observarse. La trayectoria seguida resultó ser algo más suave en este caso. El valor del ruido estimado en las medidas de odometría parece ser más correcto; aunque los errores de este tipo son menores de lo esperado y la trayectoria odométrica resulta ser bastante aproximada a la real.
+En un segundo experimento, figura \ref{fg:RealMapa2}, pasaron varias personas por la zona de detección del láser. La mayor parte de los puntos correspondientes fueron borrados, como puede observarse. La trayectoria seguida resultó ser algo más suave en este caso. La estimación de la desviación típica del ruido en las medidas de odometría parece ser más correcta; aunque los errores de este tipo son menores de lo esperado y la trayectoria odométrica resulta ser bastante aproximada a la real.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.4]{RealMapa2}\\
   \caption{ Segundo experimento del sistema conjunto en modo real}\label{fg:RealMapa2}
-\end{figure} 
+\end{figure}
+
+\clearpage
+Una tercera prueba consistió en llevar al robot en modo teleoperado hasta el final del laboratorio y hacer que regresara al punto inicial de manera autónoma. Los resultados se muestran en la figura \ref{fg:LaboRealVuelta}. La trayectoria dibujada en color azul es la trayectoria real seguida por el robot durante la ida y la dibujada en rojo (superpuesta con la anterior, apenas distinguible dado que no hubo cambios en el entorno que afectaran a puntos lo suficientemente cercanos al robot como para ser considerados como obstáculos) es la real correspondiente al camino de vuelta. En color verde se representa la trayectoria odométrica de la ida y en color magenta, la odometría de la vuelta.
+
+\begin{figure}[h]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{LaboRealVuelta}\\
+  \caption{ Tercer experimento del sistema conjunto en modo real}\label{fg:LaboRealVuelta}
+\end{figure}

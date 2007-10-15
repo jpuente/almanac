@@ -13,7 +13,7 @@ En el problema que se trata, el estado queda definido por la posición del robot
  \end{equation}
 
 \noindent
-siendo $\oplus$ el operador composición de transformaciones relativas.
+siendo $\oplus$ el operador composición de transformaciones relativas. Como ya se señaló tras la ecuación \ref{eq:model}, $\rho_{\rho}$ representa el ruido presente en el sistema.
 
 \paragraph{Etapa de predicción.}
 De acuerdo con esto, la predicción del estado dada por \ref{eq:x_predictionEKF} será:
@@ -281,7 +281,7 @@ Se aplica un coeficiente de acercamiento de los vértices del polígono al robot
 Las pruebas relativas a la localización y a la construcción de mapas de puntos se han efectuado en los modos fichero y real. En simulación las medidas del láser se consideran con alcance constante, por lo que no aportan información que permita la localización.
 
 \subsection{Pruebas en modo \emph{fichero}}
-En estas pruebas, se han empleado datos de odometría y del láser obtenidos con diferentes robots y en diferentes entornos por Diego Rodríguez-Losada y otros investigadores que han trabajado con él. Se ha estudiado el funcionamiento del algoritmo implementado por medio de ficheros que contienen esa información sensorial sin procesar. En ellos se alternan líneas del tipo representado en la figura \ref{fg:ficheropos} (datos de la odometría) y líneas del tipo representado en la figura \ref{fg:ficherolaser} (datos de medidas del láser). Estas pruebas resultan de mucha utilidad ya que utilizan gran variedad de datos y permiten evaluar el funcionamiento del sistema en entornos muy distintos y con medidas de diferentes características.
+En estas pruebas, se han empleado datos de odometría y del láser obtenidos con diferentes robots en diferentes entornos y almacenados en un fichero \cite{Rodriguez-Losada04},\cite{CARMEN} (Data Sets), \cite{Radish}. Se ha estudiado el funcionamiento del algoritmo implementado por medio de ficheros que contienen esa información sensorial sin procesar. En ellos se alternan líneas del tipo representado en la figura \ref{fg:ficheropos} (datos de la odometría) y líneas del tipo representado en la figura \ref{fg:ficherolaser} (datos de medidas del láser). Estas pruebas resultan de mucha utilidad ya que utilizan gran variedad de datos y permiten evaluar el funcionamiento del sistema en entornos muy distintos y con medidas de diferentes características. No se trata de simulaciones, el comportamiento es completamente equivalente al que presentaría una conexión real con el robot. Únicamente se reemplazan los datos sensoriales que podría enviar éste por otros datos reales obtenidos con anterioridad en unas determinadas circunstancias.
 
 \subsubsection{Utilización de datos tomados en el laboratorio de DISAM-UPM}
 En este caso, los datos empleados contienen 181 medidas del láser cada vez. Debe recordarse que, por motivos de coste computacional, el algoritmo de localización emplea una de cada dos de ellas. Como estos datos fueron obtenidos con el robot Urbano, no es necesario modificar el \emph{offset} del láser utilizado en el programa.
@@ -495,3 +495,25 @@ Como puede observarse, la presencia de personas en el museo afecta a la construc
 
 \subsection{Pruebas en modo \emph{real}}
 Como ya se ha mencionado, en estas pruebas se ha trabajado con el robot móvil Urbano. A continuación se muestran algunos de los mapas obtenidos en el laboratorio del departamento llevando al robot en modo teleoperado. Los mapas realizados mediante movimiento planificado, empleando el control diseñado, se incluyen en el capítulo \ref{ch:integracion}.
+
+\begin{figure}[hbt]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{LaboReal1}\\
+  \caption{Primer experimento en el laboratorio con robot real}\label{fg:LaboReal1}
+\end{figure}
+
+En la figura \ref{fg:LaboReal1} puede observarse el primer mapa realizado. Durante la elaboración del mismo dos personas adelantaron al robot en su trayecto, lo que se refleja en los puntos color cyan (borrados del mapa con el algoritmo correspondiente). La trayectoria corregida por la localización y el mapa realizado a partir de las correspondientes posiciones corregidas ofrecen un buen resultado con un ruido estimado de 0.3 de desviación típica. A pesar de ello, al final del recorrido se aprecia una pequeña desviación, por lo que se considera conveniente incrementar la estimación de la desviación típica de la odometría. Para construir el mapa de la figura \ref{fg:LaboReal2} se emplea un valor más apropiado ($\sigma_{odom}=0.5$), como queda a la vista de los resultados. En \ref{fg:LaboRealMalo} se hace más patente el efecto de subestimar la covarianza del ruido de las medidas odométricas.
+
+\begin{figure}[hbt]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{LaboReal2}\\
+  \caption{Segundo experimento en el laboratorio con robot real}\label{fg:LaboReal2}
+\end{figure}
+
+\begin{figure}[hbt]
+  % Requires \usepackage{graphicx}
+  \centering\includegraphics[scale=0.4]{LaboRealMalo}\\
+  \caption{Tercer experimento en el laboratorio con robot real}\label{fg:LaboRealMalo}
+\end{figure}
+
+
