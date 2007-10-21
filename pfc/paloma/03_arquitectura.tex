@@ -24,12 +24,30 @@ El modo de operación puede ser de tipo \emph{simulación}, \emph{fichero} o \em
 
 Respecto a la plataforma de ejecución para el modo real, en diferentes fases del ciclo de vida del proyecto se han utilizado los robots Pioneer y Urbano. A este último corresponde la implementación del sistema completo y con él se ha llevado a cabo la mayor parte de las pruebas.
 
-En el caso del Pioneer P3AT la puesta en funcionamiento se ha basado en comunicación con cable serie entre un computador portátil y el robot.
+En el caso del Pioneer 3AT la puesta en funcionamiento se ha basado en comunicación con cable serie entre un computador portátil y el robot. El software proporcionado por los fabricantes de este robot permite una conexión similar a la anterior con un simulador accesible a través del puerto TCP 8101.
 
 Como se ha visto en la introducción, el computador base de Urbano es un PC Pentium con sistema operativo GNU/Linux. También cuenta con un computador secundario que es un PC Pentium con Windows XP. La conexión entre la plataforma de desarrollo y el robot se realiza con un ordenador portátil mediante conexión con el protocolo \emph{telnet} a través de cable Ethernet.
 
-Para más información acerca de estos robots y del resto de hardware utilizado puede consultarse el Anexo \ref{ap:hardware}.
+En las figuras \ref{fg:arq1}, \ref{fg:arq2} y \ref{fg:arq3} se muestran los esquemas de distribución de estas posibles configuraciones.
 
+Para más información acerca de los robots y del resto de hardware utilizado puede consultarse el Anexo \ref{ap:hardware}.
+
+\begin{figure}[h]
+  \centering\includegraphics[scale=0.85]{arq1}
+  \caption{Diagrama de distribución en la utilización del robot Urbano}\label{fg:arq1}
+\end{figure}
+
+\begin{figure}[h]
+  \centering\includegraphics[scale=0.85]{arq2}
+  \caption{Diagrama de distribución en la utilización del robot P3AT}\label{fg:arq2}
+\end{figure}
+
+\begin{figure}[h]
+  \centering\includegraphics[scale=0.85]{arq3}
+  \caption{Diagrama de distribución en la utilización del simulador del P3AT}\label{fg:arq3}
+\end{figure}
+
+\clearpage
 \section{Bibliotecas empleadas}
 Para el desarrollo del software del proyecto se ha hecho uso de varias bibliotecas existentes.
 

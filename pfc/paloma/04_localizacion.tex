@@ -287,7 +287,7 @@ En estas pruebas, se han empleado datos de odometría y del láser obtenidos con
 En este caso, los datos empleados contienen 181 medidas del láser cada vez. Debe recordarse que, por motivos de coste computacional, el algoritmo de localización emplea una de cada dos de ellas. Como estos datos fueron obtenidos con el robot Urbano, no es necesario modificar el \emph{offset} del láser utilizado en el programa.
 
 \paragraph{Prueba 1.}
-En esta prueba se han utilizado los siguientes parámetros:
+En esta prueba se han utilizado los siguientes parámetros (definidos por medio del diálogo, ver \ref{botones}):
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 0.1$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -300,10 +300,11 @@ En esta prueba se han utilizado los siguientes parámetros:
 \paragraph{Resultados:}
 
 En la figura \ref{fg:labo1} se puede ver el resultado de la ejecución del programa con las condiciones indicadas. Las sucesivas posiciones del robot según los datos de odometría disponibles serían las representadas en color verde, mientras que la trayectoria corregida mediante el filtro de Kalman es la mostrada en color rojo. Los puntos del mapa creado aparecen en color negro.
+\vspace{0.2cm}
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{labo1}\\
+  \centering\includegraphics[scale=0.7]{labo1}\\
   \caption{Primer experimento con datos del laboratorio}\label{fg:labo1}
 \end{figure}
 
@@ -326,7 +327,7 @@ En esta prueba se han utilizado los siguientes parámetros:
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{labo2}\\
+  \centering\includegraphics[scale=0.7]{labo2}\\
   \caption{Segundo experimento con datos del laboratorio}\label{fg:labo2}
 \end{figure}
 
@@ -349,7 +350,7 @@ En esta prueba se han utilizado los siguientes parámetros:
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{labo3}\\
+  \centering\includegraphics[scale=0.7]{labo3Nuevo}\\
   \caption{Tercer experimento con datos del laboratorio}\label{fg:labo3}
 \end{figure}
 
@@ -371,7 +372,7 @@ En esta prueba se han utilizado los siguientes parámetros:
 \paragraph{Resultados:}
 
 \begin{figure}[h]
-  \centering\includegraphics[scale=0.4]{labo4}\\
+  \centering\includegraphics[scale=0.7]{labo4}\\
   \caption{Cuarto experimento con datos del laboratorio}\label{fg:labo4}
 \end{figure}
 
@@ -382,7 +383,7 @@ El tiempo total empleado en la obtención del mapa y en el cálculo de la trayec
 \clearpage
 \subsubsection{Utilización de datos de Intel}
 
-Con estos datos, el número de medidas del láser disponibles en cada momento es 361. Esto repercute en el tiempo de procesamiento.
+Con estos datos, el número de medidas del láser disponibles en cada momento es 361. Esto repercute en el tiempo de procesamiento. El conjunto de datos ha sido obtenido del Robotics Data Set Repository~(Radish) \cite{Radish}. Agradecimientos a Dieter Fox por suministrar los datos. El formato del fichero descargado de este sitio directamente alterna líneas de los tipos mostrados en las figuras \ref{fg:ficherolaser} y \ref{fg:ficheropos} .
 
 \paragraph{Prueba 1.}
 En esta prueba se han utilizado los siguientes parámetros:
@@ -420,7 +421,7 @@ En esta prueba se han utilizado los siguientes parámetros:
 \paragraph{Resultados:}
 
 \begin{figure}[h]
-  \centering\includegraphics[scale=0.4]{intel2}\\
+  \centering\includegraphics[scale=0.6]{intel2}\\
   \caption{Segundo experimento con datos de Intel}\label{fg:intel2}
 \end{figure}
 
@@ -428,9 +429,9 @@ En este caso, la varianza del ruido de las medidas de odometría estimada para l
 
 El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 5.71~min.
 
-\pagebreak[4]
+%\pagebreak[4]
 \paragraph{Prueba 3.}
-En esta prueba se han utilizado los siguientes parámetros:\nopagebreak[4]
+En esta prueba se han utilizado los siguientes parámetros:%\nopagebreak[4]
 \begin{itemize}
   \item desviación típica del ruido de la odometría introducida en el filtro de Kalman: $\sigma_{odom} = 1$
   \item desviación típica del ruido de las medidas del láser: $\sigma_{med} = 0.3$
@@ -442,11 +443,29 @@ En esta prueba se han utilizado los siguientes parámetros:\nopagebreak[4]
 \paragraph{Resultados:}
 
 \begin{figure}[hbtp]
-  \centering\includegraphics[scale=0.4]{intel3}\\
+  \centering\includegraphics[scale=0.6]{intel3}\\
   \caption{Tercer experimento con datos de Intel}\label{fg:intel3}
 \end{figure}
 
 Ver figura \ref{fg:intel3}. El tiempo total empleado en la obtención del mapa y en el cálculo de la trayectoria corregida es: 6.61min.
+
+%\clearpage
+\vspace{0.2cm}
+Con el objetivo de resaltar la calidad de los mapas obtenidos, en la figura \ref{fg:intelOdom} se muestra el mapa que resultaría de emplear únicamente los datos de la odometría, sin realizar la etapa de corrección del filtro de Kalman.
+
+\begin{figure}[hbtp]
+  \centering\includegraphics[scale=0.45]{intelOdom}\\
+  \caption{Mapa de Intel basado únicamente en datos de odometría}\label{fg:intelOdom}
+\end{figure}
+
+\vspace{0.8cm}
+Puede observarse que el mapa así construido es una nube de puntos que no sirve en absoluto para representar el entorno.
+Para completar la evaluación de los resultados se incluye el mapa de estas instalaciones que aparece en \cite{Radish} (figura \ref{fg:intelRadish}).
+
+\begin{figure}[hbtp]
+  \centering\includegraphics[scale=0.3]{intelRadish}\\
+  \caption{Mapa de Intel \cite{Radish}}\label{fg:intelRadish}
+\end{figure}
 
 \clearpage
 \subsubsection{Utilización de datos del Museo de las Ciencias Príncipe Felipe de Valencia}
@@ -466,7 +485,7 @@ En esta prueba se han utilizado los siguientes parámetros:
 
 \paragraph{Resultados:}
 \begin{figure}[h]
-  \centering\includegraphics[scale=0.5]{val3}\\
+  \centering\includegraphics[scale=0.4]{val3}\\
   \caption{Primer experimento con datos del Museo de las Ciencias Príncipe Felipe de Valencia}\label{fg:val3}
 \end{figure}
 
@@ -498,7 +517,7 @@ Como ya se ha mencionado, en estas pruebas se ha trabajado con el robot móvil U
 
 \begin{figure}[hbt]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{LaboReal1}\\
+  \centering\includegraphics[scale=0.9]{LaboReal1}\\
   \caption{Primer experimento en el laboratorio con robot real}\label{fg:LaboReal1}
 \end{figure}
 
@@ -506,13 +525,13 @@ En la figura \ref{fg:LaboReal1} puede observarse el primer mapa realizado. Duran
 
 \begin{figure}[hbt]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{LaboReal2}\\
+  \centering\includegraphics[scale=0.8]{LaboReal2}\\
   \caption{Segundo experimento en el laboratorio con robot real}\label{fg:LaboReal2}
 \end{figure}
 
 \begin{figure}[hbt]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{LaboRealMalo}\\
+  \centering\includegraphics[scale=1.2]{LaboRealMalo}\\
   \caption{Tercer experimento en el laboratorio con robot real}\label{fg:LaboRealMalo}
 \end{figure}
 

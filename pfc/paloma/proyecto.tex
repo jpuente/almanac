@@ -13,6 +13,7 @@
 \usepackage[usenames]{color}         % texto de colores
 \usepackage{fancyhdr}                % encabezados y pies
 \usepackage{pfc}                     % formato de proyecto fin de carrera
+\usepackage{pdfpages}
 %\usepackage[pdftex, pdfpagemode=UseOutlines,bookmarks,bookmarksopen ]{hyperref}
 
 %\listfiles
@@ -33,6 +34,7 @@
 \fecha{noviembre de 2007}
 \copyrightnote{Copyright \copyright 2007 by Paloma de la Puente Yusty}
 %== documento =========================================================
+%\includeonly{03_arquitectura}
 \begin{document}
 \selectlanguage{spanish}
 %== páginas iniciales  ====================================================
@@ -41,7 +43,7 @@
 \frontmatter\pagestyle{plain}
 %\include{resumen}
 
-\include {firmas}
+\includepdf{firmas}
 \tableofcontents
 \listoffigures
 \listoftables

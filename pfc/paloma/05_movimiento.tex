@@ -31,7 +31,7 @@ Para que el robot se traslade mirando de frente la mayor parte del tiempo, se bu
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.5]{err_ang23}\\
   \caption{Nuevos errores incorporados al regulador}\label{fg:err_ang23}
-\end{figure} 
+\end{figure}
 
 Como puede verse en la figura \ref{fg:err_ang}, el ángulo resultante de esa diferencia de orientaciones se llamará \prog{err\_ang}. En función de su valor se distinguen cuatro casos principales en los cuales se utilizaron en una primera aproximación las ganancias indicadas en el cuadro \ref{vel1}, donde todas las magnitudes están expresadas en el Sistema Internacional salvo cuando se especifica lo contrario.
 
@@ -68,7 +68,7 @@ Urbano:  & Pioneer: \\
 \end{table}
 
 Al aumentar la duración del ciclo de tareas cuando se utiliza el robot real Urbano, los comandos de velocidad enviados de acuerdo con el cuadro a \ref{vel1} llegaban con retraso y el robot daba algunos bandazos. Para solucionar este problema se modificó el regulador de forma que se contemplara también la orientación de la trayectoria en el tramo en que se encuentra el robot en cada instante y la orientación en el tramos siguiente, a modo de control predictivo. Los nuevos ángulos sobre los que también se actúa se denominarán \prog{err\_ang2} y \prog{err\_ang3}, respectivamente, y se muestran en la figura \ref{fg:err_ang23}.
- 
+
 La acción de control resultante es una combinación lineal de las acciones sobre estos tres ángulos. Se ha utilizado un peso de 0.3 para regular \prog{err\_ang}, un peso de 0.2 para regular \prog{err\_ang2} y un peso de 0.5 para regular \prog{err\_ang3}. El regulador final obtenido utiliza los valores y ganancias que aparecen en el cuadro \ref{vel2}, donde de nuevo las magnitudes se expresan en el S.I. a no ser que se especifique lo contrario. $p1$, $p2$ y $p3$ son los pesos indicados (0.3, 0.2 y 0.5).
 Con el robot Pioneer los pesos son los mismos y se mantienen las ganancias del cuadro \ref{vel1}.
 
@@ -89,7 +89,7 @@ $v_{s}=30err\_ang$\\
   45º$<err\_ang(º)<$160º \\ \hline
 Urbano:\\
    $v_{d}=3$ \\
-  $v_{s}=p1\times3oerr\_ang + p2\times3oerr\_ang2 + p3\times3oerr\_ang3$ \\
+  $v_{s}=p1\times30err\_ang + p2\times30err\_ang2 + p3\times30err\_ang3$ \\
 \hline
 15º$<err\_ang(º)<$45º \\ \hline
 Urbano:\\
@@ -150,16 +150,16 @@ Mientras sea posible, para cada punto de la trayectoria se toma el siguiente a �
 \begin{figure}[bt]
   % Requires \usepackage{graphicx}
   \centering\includegraphics[scale=0.6]{smooth}\\
-  \caption{Cálculo de coordenadas de los puntos del arco con 
+  \caption{Cálculo de coordenadas de los puntos del arco con
   $\mbox{erro\_ang} > 0$}\label{fg:smooth}
 \end{figure}
 
 En la figura \ref{fg:smooth} se muestra un caso en el que \prog{erro\_ang} es mayor que cero. Para la obtención de los sucesivos puntos el valor de $ang_{inc}$ se va incrementando en 0.1 rad mientras que al sumarse a $\alpha_{1}$ no se sobrepase el valor de $\alpha_{2}$. Estos dos ángulos vienen dados por:
 
 \begin{eqnarray*}
-\alpha_{1}  & = & \mbox{AngRango} \left ( alpha\_ref - 
+\alpha_{1}  & = & \mbox{AngRango} \left ( alpha\_ref -
    \left (\frac{\pi}{2} - \frac{\mbox{erro\_ang}}{2} \right ) \right )\\
- \alpha_{2}  & = & \mbox{AngRango} \left ( alpha\_ref + 
+ \alpha_{2}  & = & \mbox{AngRango} \left ( alpha\_ref +
    \left (\frac{\pi}{2} - \frac{\mbox{erro\_ang}}{2} \right ) \right )\\
 \end{eqnarray*}
 
@@ -169,12 +169,12 @@ Así, para la trayectoria de la figura \ref{fg:smooth} los valores son:
 \mbox{alfa\_ref}     &=  & \mbox{AngRango} (\pi - (-130º))\\
                                   & = &\mbox{AngRango} (310º) \\
                                   & = & -50º\\
-alpha_{1}                &= & \mbox{AngRango} (-50º - 90º + 50º)\\ 
+alpha_{1}                &= & \mbox{AngRango} (-50º - 90º + 50º)\\
                                  & = & \mbox{AngRango} (-90º)\\
-                                 & = & -90º\\ 
-alpha_{2}                &= & \mbox{AngRango} (-50º + 90º - 50º)\\ 
+                                 & = & -90º\\
+alpha_{2}                &= & \mbox{AngRango} (-50º + 90º - 50º)\\
                                  & = & \mbox{AngRango} (-10º)\\
-                                 & = & -10º\\                             
+                                 & = & -10º\\
 \end{eqnarray*}
 
 
@@ -182,9 +182,9 @@ alpha_{2}                &= & \mbox{AngRango} (-50º + 90º - 50º)\\
 Si \prog{erro\_ang} es menor que cero, los ángulos extremos mediante los cuales se calculan las coordenadas de los puntos del arco son:
 
 \begin{eqnarray*}
-\alpha_{1}  & = & \mbox{AngRango} \left ( alpha\_ref + 
+\alpha_{1}  & = & \mbox{AngRango} \left ( alpha\_ref +
    \left (\frac{\pi}{2} + \frac{\mbox{erro\_ang}}{2} \right ) \right )\\
- \alpha_{2}  & = & \mbox{AngRango} \left ( alpha\_ref - 
+ \alpha_{2}  & = & \mbox{AngRango} \left ( alpha\_ref -
    \left (\frac{\pi}{2} + \frac{\mbox{erro\_ang}}{2} \right ) \right )\\
 \end{eqnarray*}
 
@@ -202,12 +202,12 @@ En el caso concreto representado en la figura \ref{fg:smooth2} los ángulos que 
 \mbox{alfa\_ref}     &=  & \mbox{AngRango} (\pi - 130º)\\
                                   & = &\mbox{AngRango} (50º) \\
                                   & = & 50º\\
-alpha_{1}                &= & \mbox{AngRango} (50º + 90º - 50º)\\ 
+alpha_{1}                &= & \mbox{AngRango} (50º + 90º - 50º)\\
                                  & = & \mbox{AngRango} (-90º)\\
-                                 & = & -90º\\ 
-alpha_{2}                &= & \mbox{AngRango} (50º - 90º + 50º)\\ 
+                                 & = & -90º\\
+alpha_{2}                &= & \mbox{AngRango} (50º - 90º + 50º)\\
                                  & = & \mbox{AngRango} (-10º)\\
-                                 & = & 10º\\                             
+                                 & = & 10º\\
 \end{eqnarray*}
 
 \clearpage
@@ -428,7 +428,7 @@ En este caso, lo que se ha hecho es definir los puntos de la trayectoria inicial
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{mov1}\\
+  \centering\includegraphics[scale=0.6]{mov1}\\
   \caption{Primer experimento de planificación de trayectorias y control de movimiento}\label{fg:mov1}
 \end{figure}
 
@@ -438,17 +438,18 @@ Como puede verse en la figura \ref{fg:mov1}, la trayectoria seguida por el robot
 \paragraph{Prueba 2. Seguimiento de una trayectoria planificada a priori con el robot Pioneer P3AT.}\ %
 
 \noindent
-Esta es una de las pruebas que se realizó con el control elaborado para el robot Pioneer P3AT de MobileRobots/Activmedia. En ella se utiliza MobileSim, un software de simulación proporcionado por los fabricantes para la experimentación con Aria. MobileSim está construido sobre el simulador Stage (creado por Richard Vaughan, Andrew Howard y otros como parte del proyecto Player/Stage), con algunas modificaciones por parte de MobileRobots. Utilizando la clase \prog{SimpleConnector} de la biblioteca Aria, la conexión se inicia por defecto con el simulador.
+Esta es una de las pruebas que se realizó con el control elaborado para el robot Pioneer P3AT de MobileRobots/Activmedia. En ella se utiliza MobileSim, un software de simulación proporcionado por los fabricantes para la experimentación con Aria. MobileSim está construido sobre el simulador Stage (creado por Richard Vaughan, Andrew Howard y otros como parte del proyecto Player/Stage), con algunas modificaciones por parte de MobileRobots. Utilizando la clase \prog{SimpleConnector} de la biblioteca Aria, la conexión se inicia por defecto con este simulador.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{mov2}\\
+  \centering\includegraphics[scale=1]{mov2Peq}\\
   \caption{Segundo experimento de planificación de trayectorias y control de movimiento}\label{fg:mov2}
 \end{figure}
 
 \paragraph{Resultados:}
 La trayectoria inicial definida en este caso es la formada por los puntos marcados en negro (figura \ref{fg:mov2}). Puede observarse que el control proporciona de nuevo un buen resultado.
 
+\clearpage
 \paragraph{Prueba 3. Seguimiento de una trayectoria planificada dinámicamente.}\ %
 
 \noindent
@@ -456,12 +457,12 @@ En esta prueba se generan nuevos puntos de la trayectoria a medida que el robot 
 
 \begin{figure}[hbt]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{mov3}\\
+  \centering\includegraphics[scale=0.8]{mov3}\\
     \caption{Tercer experimento de planificación de trayectorias y control de movimiento (a)}\label{fg:mov3a}
 \end{figure}
- 
+
  \begin{figure}[hbt]
-\centering\includegraphics[scale=0.4]{mov_3}
+\centering\includegraphics[scale=0.8]{mov_3}
 \caption{Tercer experimento de planificación de trayectorias y control de movimiento (b)}\label{fg:mov3b}
 \end{figure}
 
@@ -479,12 +480,12 @@ En este caso, se define una trayectoria mediante el ratón o moviendo al robot p
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{vuelta}\\
+  \centering\includegraphics[scale=0.5]{vuelta}\\
  \caption{Cuarto experimento de planificación de trayectorias y control de movimiento (a)}\label{fg:mov4a}
 \end{figure}
 
 \begin{figure}[h]
-\centering\includegraphics[scale=0.4]{vuelta2}
+\centering\includegraphics[scale=0.5]{vuelta2}
   \caption{Cuarto experimento de planificación de trayectorias y control de movimiento (b)}\label{fg:mov4b}
 \end{figure}
 
@@ -498,24 +499,24 @@ En este caso, se define una trayectoria mediante el ratón o moviendo al robot p
 En esta prueba se define primeramente una trayectoria, y a continuación se crean obstáculos más o menos cercanos a la misma mediante doble click con el botón izquierdo del ratón sobre el punto en el que debe situarse cada uno de ellos. En el momento en que se añade un obstáculo, la trayectoria se deforma mediante el algoritmo previamente explicado. En este caso no se han incorporado obstáculos nuevos durante el movimiento del robot sobre la trayectoria, por lo que no se trata de una aplicación de control reactivo sino sólo de una prueba del algoritmo de deformación.
 
 
-\paragraph{Resultados:} 
+\paragraph{Resultados:}
 Como puede verse(figuras \ref{fg:react1a} y \ref{fg:react1b}), los obstáculos se han representado en color cyan. La trayectoria se deforma de un modo suave en los puntos cercanos a ellos sin superar la máxima desviación permitida, establecida en 0.15m. Los obstáculos suficientemente alejados de la trayectoria no suponen ninguna modificación en la misma. En la segunda figura (\ref{fg:react1b}) hay un obstáculo que afecta a dos tramos diferentes de la trayectoria y ambas deformaciones se realizan correctamente. Con este valor de la máxima desviación permitida no pueden esquivarse obstáculos que se encuentren sobre la trayectoria a seguir. En este caso, para el robot Urbano, entrarían en acción los mecanismos de control reactivo de bajo nivel (comandos de parada y giro). Si se utiliza en su lugar un valor de 0.6m, las deformaciones son mayores y pueden evitarse los obstáculos que supondrían un choque directo (figura \ref{fg:react2}). El problema que conlleva esta opción es que en el caso de entornos densos (como son la mayoría de los entornos de interiores), las deformaciones son excesivas hacia uno y otro lado y se pierde suavidad en la trayectoria.
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{obs2}\\
+  \centering\includegraphics[scale=0.5]{obs2}\\
     \caption{Experimento previo para el control reactivo (a)}\label{fg:react1a}
   \end{figure}
-  
+
 \begin{figure}[h]
-  \centering\includegraphics[scale=0.4]{obs3}
+  \centering\includegraphics[scale=0.5]{obs3}
   \caption{Experimento previo para el control reactivo (b)}\label{fg:react1b}
 \end{figure}
 
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{obs4}\\
+  \centering\includegraphics[scale=0.6]{obs4}\\
   \caption{Aumento de la máxima desviación permitida}\label{fg:react2}
 \end{figure}
 
@@ -530,7 +531,7 @@ En este caso se ha llevado el robot a un punto por medio de una trayectoria defi
 En la figura \ref{fg:react3} se ha plasmado en color verde la trayectoria seguida por el robot durante la ida (trayectoria teórica de vuelta) y en colores azul y magenta la trayectoria real efectuada ante la presencia del obstáculo.
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{react2}\\
+  \centering\includegraphics[scale=0.8]{react2}\\
   \caption{Primer experimento de control reactivo}\label{fg:react3}
 \end{figure}
 
@@ -551,16 +552,16 @@ En las figuras \ref{fg:real1a} y \ref{fg:real1b} se muestra en color azul la tra
 En el segundo caso se aprecia que el mantenimiento de la dirección de la trayectoria prevalece frente a la acción de acercar el robot a la misma, pero esto evita que la trayectoria resultante sea más ondulada.
 
 \begin{figure}[h]
-  \centering\includegraphics[scale=0.4]{real}
+  \centering\includegraphics[scale=0.5]{real}
   \caption{Primer experimento de movimiento con robot real (a)}\label{fg:real1a}
 \end{figure}
 
 \begin{figure}[h]
-  \centering\includegraphics[scale=0.4]{real1}
+  \centering\includegraphics[scale=1.1]{real1}
   \caption{Primer experimento de movimiento con robot real (b)}\label{fg:real1b}
 \end{figure}
 
-\clearpage
+%\clearpage
 \paragraph{Prueba 2. Seguimiento del camino de vuelta después de que el robot ejecute una trayectoria.}\ %
 
 \noindent
@@ -571,8 +572,9 @@ En la figura \ref{fg:real2} se muestra en color verde la trayectoria durante la 
 
 \begin{figure}[h]
   % Requires \usepackage{graphicx}
-  \centering\includegraphics[scale=0.4]{real2}\\
+  \centering\includegraphics[scale=1]{real2}\\
   \caption{Segundo experimento de movimiento con robot real}\label{fg:real2}
 \end{figure}
 
+\noindent
 Como puede observarse, en este caso aparecen mayores desviaciones respecto a la trayectoria definida. La desviación producida al dar la vuelta el robot hace que éste tarde un poco en coger la dirección correcta, pero las acciones de control sobre \prog{err\_ang2} y \prog{err\_ang3} permiten que los cambios no sean demasiado bruscos. Si la trayectoria fuera más larga podría verse que la estabilización es bastante rápida.
