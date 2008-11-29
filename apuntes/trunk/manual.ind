@@ -1,0 +1,196 @@
+\begin{theindex}
+
+  \item avisos a los navegantes, 15
+
+  \indexspace
+
+  \item cable, \textbf{5}
+  \item calendario, 13
+  \item carta, \textbf{15}
+    \subitem electr\IeC {\'o}nica, 15
+    \subitem escala, \textbf{17}
+    \subitem mercatoriana, \textbf{16}
+      \subsubitem latitudes aumentadas, 17
+    \subitem n\IeC {\'a}utica, 15
+  \item CET, 12
+  \item coordenadas, \textbf{3}
+    \subitem geogr\IeC {\'a}ficas, 3
+    \subitem latitud, \textbf{3}
+    \subitem longitud, \textbf{3}
+
+  \indexspace
+
+  \item d\IeC {\'\i }a
+    \subitem solar, 9
+    \subitem solar medio, 9
+  \item datum, 6
+    \subitem europeo (Potsdam), 6
+    \subitem horizontal, \textbf{6}
+  \item declinaci\IeC {\'o}n, \textbf{7}
+    \subitem decremento anuo, 7
+    \subitem incremento anuo, 7
+    \subitem magn\IeC {\'e}tica, 7
+  \item derrota, \textbf{1}
+    \subitem ortodr\IeC {\'o}mica, 19
+  \item direcci\IeC {\'o}n, 5
+  \item distancia, 5
+    \subitem loxodr\IeC {\'o}mica
+      \subsubitem textbf, 5
+    \subitem ortodr\IeC {\'o}mica, \textbf{5}
+
+  \indexspace
+
+  \item ecuador, \textbf{3}
+  \item elipsoide, \textbf{6}
+    \subitem de referencia, 6
+  \item escala, \textbf{17}
+    \subitem \textemdash, \seealso{carta}{17}
+  \item Este, 3
+
+  \indexspace
+
+  \item fecha, 13
+
+  \indexspace
+
+  \item geoide, \textbf{6}
+
+  \indexspace
+
+  \item hora
+    \subitem civil, 9
+      \subsubitem de Greenwich, \seealso{tiempo universal}{9}
+    \subitem de Europa central (CET), 12
+    \subitem del reloj de bit\IeC {\'a}cora (HRB), 13
+    \subitem legal, 11
+    \subitem oficial\textbf, 12
+    \subitem solar media, 9
+    \subitem universal, 9, \seealso{tiempo universal}{9}, 10
+    \subitem UTC, 10
+  \item horario
+    \subitem de invierno, 12
+    \subitem de verano, 12
+  \item HRB, 13
+  \item huso horario, \textbf{11}
+
+  \indexspace
+
+  \item Instituto Hidrogr\IeC {\'a}fico de la Marina, 15
+
+  \indexspace
+
+  \item l\IeC {\'\i }nea
+    \subitem de cambio de fecha, 12
+    \subitem loxodr\IeC {\'o}mica, \textbf{5}, 16
+    \subitem ortodr\IeC {\'o}mica, 16
+  \item latitud, \textbf{3}
+    \subitem aumentada, \textbf{17}
+    \subitem diferencia, 4
+  \item longitud, \textbf{3}
+    \subitem diferencia, 4
+
+  \indexspace
+
+  \item meridiano, \textbf{3}, \textbf{7}
+    \subitem de Greenwich, 3
+    \subitem de referencia, \textbf{3}
+    \subitem inferior, 3, 7
+    \subitem origen, \see{meridiano de referencia}{3}
+    \subitem primer \textemdash, \see{meridiano de referencia}{3}
+  \item milla n\IeC {\'a}utica, \textbf{5}
+
+  \indexspace
+
+  \item navegaci\IeC {\'o}n, \textbf{1}
+    \subitem astron\IeC {\'o}mica, 2
+    \subitem con radar, 2
+    \subitem costera, 1, 2
+    \subitem de altura, 1
+    \subitem de estima, 2
+    \subitem por sat\IeC {\'e}lite, 2
+  \item Norte, 3, 7
+    \subitem geogr\IeC {\'a}fico, 7
+    \subitem magn\IeC {\'e}tico, \textbf{7}
+    \subitem verdadero, \textbf{7}
+
+  \indexspace
+
+  \item Oeste, 3
+
+  \indexspace
+
+  \item paralelo, \textbf{3}
+  \item pilotaje, \textbf{1}
+  \item plotter, \textbf{15}
+  \item polos, \textbf{3}
+    \subitem magn\IeC {\'e}ticos, 7
+    \subitem polo Norte, 3
+      \subsubitem magn\IeC {\'e}tico, 7
+    \subitem polo Sur, 3
+      \subsubitem magn\IeC {\'e}tico, 7
+  \item proyecci\IeC {\'o}n, \textbf{16}
+    \subitem conforme, 16
+    \subitem de Lambert, 19
+    \subitem de Mercator, \textbf{16}
+    \subitem equivalente, 16
+    \subitem gnom\IeC {\'o}nica, 19
+    \subitem gnom\IeC {\'o}nica polar, 19
+    \subitem isog\IeC {\'o}nica, 16
+    \subitem polar estereogr\IeC {\'a}fica, 19
+
+  \indexspace
+
+  \item reloj de bit\IeC {\'a}cora, 13
+  \item rumbo, \textbf{5}
+
+  \indexspace
+
+  \item segundo, \textbf{8}
+  \item SI, \see{sistema internacional de unidades}{8}
+  \item sistema de referencia de tiempo, 8
+    \subitem \textemdash, 
+		\seealso{tiempo solar, tiempo solar medio, tiempo universal}{8}
+  \item sistema geod\IeC {\'e}sico mundial, \see{WGS84}{6}
+  \item sistema internacional de unidades, 8
+  \item situaci\IeC {\'o}n, \textbf{1}
+  \item Sur, 3
+
+  \indexspace
+
+  \item tiempo, \textbf{8}
+    \subitem solar, 9
+    \subitem solar medio, 9
+    \subitem universal, 9
+    \subitem universal coordinado, \textbf{10}
+  \item Tierra, \textbf{3}
+    \subitem campo magn\IeC {\'e}tico, \textbf{7}
+    \subitem ecuador, \see{ecuador}{3}
+    \subitem forma, \see{geoide, elipsoide}{3}
+    \subitem meridianos, \see{meridiano}{3}
+    \subitem paralelos, \see{paralelo}{3}
+    \subitem polos, \see{polos}{3}
+  \item TU, \see{tiempo universal}{9}
+  \item TUC, \see{tiempo universal coordinado}{10}
+
+  \indexspace
+
+  \item UT, \see{tiempo universal}{9}
+  \item UTC, \see{tiempo universal coordinado}{10}
+
+  \indexspace
+
+  \item variaci\IeC {\'o}n magn\IeC {\'e}tica, 
+		\see{declinaci\IeC {\'o}n}{7}
+  \item visor, 15
+
+  \indexspace
+
+  \item WGS,WGS84, \textbf{6}
+  \item World Geodetic System, \see{WGS84}{6}
+
+  \indexspace
+
+  \item zona horaria, 11
+    \subitem \textemdash, \seealso{huso horario}{11}
+
+\end{theindex}

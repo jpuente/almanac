@@ -1,0 +1,43 @@
+\select@language {spanish}
+\contentsline {chapter}{\'Indice general}{I}
+\contentsline {chapter}{\chapternumberline {1}Fundamentos de la navegaci\IeC {\'o}n mar\IeC {\'\i }tima}{1}
+\contentsline {section}{La navegaci\IeC {\'o}n}{1}
+\contentsline {subsection}{Tipos de navegaci\IeC {\'o}n}{1}
+\contentsline {subsection}{T\IeC {\'e}cnicas de navegaci\IeC {\'o}n}{2}
+\contentsline {section}{La Tierra}{3}
+\contentsline {subsection}{Coordenadas geogr\IeC {\'a}ficas}{3}
+\contentsline {subsubsection}{Latitud y longitud}{3}
+\contentsline {subsubsection}{Diferencias de latitud y longitud}{4}
+\contentsline {subsection}{Direcci\IeC {\'o}n y distancia }{5}
+\contentsline {subsubsection}{Medida de direcciones}{5}
+\contentsline {subsubsection}{Medida de distancias}{5}
+\contentsline {subsection}{Elipsoide de referencia y datum}{6}
+\contentsline {subsection}{El campo magn\IeC {\'e}tico terrestre}{7}
+\contentsline {section}{El tiempo}{8}
+\contentsline {subsection}{Tiempo solar}{9}
+\contentsline {subsection}{Tiempo solar medio}{9}
+\contentsline {subsection}{Tiempo universal}{9}
+\contentsline {subsubsection}{Hora civil y hora universal}{9}
+\contentsline {subsection}{Tiempo universal coordinado}{10}
+\contentsline {subsection}{Hora legal}{11}
+\contentsline {subsubsection}{L\IeC {\'\i }nea de cambio de fecha}{12}
+\contentsline {subsection}{Hora oficial}{12}
+\contentsline {subsection}{El reloj de bit\IeC {\'a}cora}{13}
+\contentsline {subsection}{La fecha y el calendario}{13}
+\contentsline {chapter}{\chapternumberline {2}Cartas n\IeC {\'a}uticas}{15}
+\contentsline {section}{Cartas n\IeC {\'a}uticas }{15}
+\contentsline {subsection}{La proyecci\IeC {\'o}n de Mercator}{16}
+\contentsline {subsection}{Escala de las cartas }{16}
+\contentsline {subsection}{Otras proyecciones}{19}
+\contentsline {section}{Caracter\IeC {\'\i }sticas de las cartas}{19}
+\contentsline {subsection}{Identificaci\IeC {\'o}n }{20}
+\contentsline {subsection}{Tarjeta}{20}
+\contentsline {subsection}{Escala}{20}
+\contentsline {subsubsection}{Escalas de latitudes y longitudes }{21}
+\contentsline {subsection}{Tipos de cartas}{22}
+\contentsline {subsection}{Datum de la carta}{22}
+\contentsline {subsubsection}{Datum vertical }{23}
+\contentsline {section}{Trabajo sobre la carta}{25}
+\contentsline {section}{Cartas electr\IeC {\'o}nicas}{25}
+\contentsline {appendix}{\chapternumberline {A}Rumbos cuadrantales y por cuartas}{27}
+\contentsline {chapter}{\'Indice alfab\'etico}{29}
