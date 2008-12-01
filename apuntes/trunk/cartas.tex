@@ -171,7 +171,6 @@ yección gnomónica oblicua (es decir, con el punto de tangencia en un lugar cua
 la superficie terrestre) para trazar derrotas ortodrómicas, es decir las que siguen un arco 
 de círculo máximo. 
 
-
 %===================================
 \section{Características de las cartas}
 
@@ -180,8 +179,7 @@ de círculo máximo.
 Las cartas náuticas contienen numerosos detalles interesantes para la navegación, por lo 
 que a veces su lectura puede resultar complicada a primera vista. Es necesario, por tanto, 
 conocer los convenios de signos, rotulación, escalas, etc. que se utilizan en su confección, 
-así como los procedimientos adecuados para mantenerlas al día. A continuación se resu- 
-men las características más importantes de las cartas oficiales españolas publicadas por el 
+así como los procedimientos adecuados para mantenerlas al día. A continuación se resumen las características más importantes de las cartas oficiales españolas publicadas por el 
 IHM (Instituto Hidrográfico de la Marina), que son similares a las de otros organismos. 
 Características generales  
 
@@ -249,7 +247,7 @@ medir longitudes sobre la carta.
 
 \begin{figure}[hbtp]
 \begin{center}
-%\includegraphics[width=\textwidth]{escala-grafica}\\
+\includegraphics[width=\textwidth]{escala-grafica}\\
 \caption{Escalas de latitud y longitud.}
 \label{fg:escala-grafica}
 \end{center}
@@ -303,14 +301,15 @@ punto menor las cartas generales y las de arrumbamiento, y cartas de punto mayor
 \index{datum!horizontal}
 
 \index{datum!europeo (Potsdam)}
-\index{sistema geodésico mundial|see{WGS84}}
-\index{World Geodetic System|see{WGS84}}
+%\index{sistema geodésico mundial|see{WGS84}}
+%\index{World Geodetic System|see{WGS84}}
 \index{coordenadas!geográficas}
  
 La tarjeta también contiene información sobre el \emph{datum horizontal} de la carta. Como 
 vimos en el capítulo \ref{ch:introduccion}, este término se refiere al sistema de referencia que 
-que se utiliza para determinar las coordenadas geográficas sobre la superficie de la Tierra. Actualmente las cartas españolas se 
-refieren al \emph{sistema geodésico mundial} (WGS\,84), que es el que se utiliza en la mayoría de los países y 
+que se utiliza para determinar las coordenadas geográficas sobre la superficie de la Tierra. 
+Actualmente las cartas españolas se refieren al \emph{sistema geodésico mundial} (WGS\,84), 
+que es el que se utiliza en la mayoría de los países y 
 en los sistemas de navegación por satélite  (ver capítulo \ref{ch:satelite}). Sin embargo, todavía se encuentran cartas referidas al  \emph{datum europeo de 1950}. Con el fin de permitir el uso de estas cartas en la navegación por satélite, la tarjeta proporciona instrucciones para convertir las coordenadas geográficas medidas en la carta al sistema WGS84 y 
 viceversa. 
 
@@ -325,14 +324,14 @@ viceversa.
 \begin{ejemplo}
 En la tarjeta de de una carta referida al datum europeo %(figura\ref{fg:datum-europeo})
 figura el siguiente párrafo: 
-\begin{quotation}\noindent
+\begin{quotation}\noindent\itshape
 SITUACIONES OBTENIDAS POR SATÉLITE: Las situaciones obtenidas mediante sistemas 
 de navegación por satélite referidas al Sistema Geodésico Mundial (WGS-84) deberán ser 
 desplazadas 0,07 minutos al Norte y 0,07 minutos al Este para estar correctamente representadas en esta carta. 
 \end{quotation}
 Si se ha obtenido una situación por satélite referida al sistema WGS84 igual a 37º44,02’\,N
 0º42,35’\,W, la trazaremos en la carta como 37º44,09’\,N 0º42,28’\,W. En una carta de punto mayor
-la diferencia es imperceptible (0,4 mm, aproximadamente, para una escala de 1:300\,000), pero si usamos cartas de 
+la diferencia es imperceptible (0,4\,mm, aproximadamente, para una escala de 1:300\,000), pero si usamos cartas de 
 punto mayor es muy importante hacer la correción del datum. Así, por ejemplo, la corrección de 0,07’ 
 de latitud (129,6\,m) equivale a 2,6\,mm en una carta de escala 1:50\,000, y a 8,6\,mm en un portulano de escala
  1:15\,000.
@@ -348,34 +347,62 @@ hacer las correcciones necesarias.
 \index{bajamar escorada}
 
 El \emph{datum vertical} es la referencia que se usa para medir las elevaciones (en tierra) y las 
-sondas (en la mar). En las cartas españolas, las elevaciones se miden siempre en metros 
-sobre el nivel medio del mar, y las sondas también en metros, referidas a la bajamar escorada (ver capítulo \ref{ch:mareas}). 
+sondas (en la mar). En las cartas españolas las elevaciones se miden siempre en metros 
+sobre el nivel medio del mar, y las sondas también en metros, referidas a la bajamar 
+escorada (ver capítulo \ref{ch:mareas}). 
 
-En las cartas inglesas y norteamericanas antiguas se miden las elevaciones en pies (ft), 
-y las sondas en brazas (fm) y pies, aunque en las cartas modernas estas magnitudes se 
+En las cartas inglesas y norteamericanas antiguas se miden las elevaciones en pies (ft),%
+%\footnote{\emph{Feet}.} 
+ y las sondas en brazas (fm)%
+%\footnote{\emph{Fathoms}.}
+ y pies, aunque en las cartas modernas estas magnitudes se 
 miden en metros. En estas cartas las sondas se refieren al nivel medio de la bajamar de 
 mareas vivas. 
 
-Rosas y declinación magnética 
+%--------------------------------------------------------------
+\subsection{Rosa náutica y declinación magnética}
 
-Una rosa es una figura consistente en dos círculos graduados concéntricos que indican 
-rumbos verdaderos y magnéticos (figura 2.7). En la dirección que señala el Norte magné- 
-tico se indica el valor de la declinación magnética para un año determinado, y el valor de 
-la variación anual de la misma. 
+\index{rosa}
+\index{rosa!náutica}
+\index{rosa!de los vientos|see rosa náutica}
+\index{declinación!magnética}
+\index{declinación!variación anual}
+
+Una rosa náutica es una figura consistente en dos círculos graduados concéntricos que indican 
+rumbos verdaderos y magnéticos, respectivamente (figura \ref{fg:rosa}). 
+En la dirección que señala el Norte magnético se indica el valor de la declinación magnética 
+para un año determinado, y el valor de la variación anual de la misma. 
 Cuando la declinación magnética varía significativamente de una parte a otra de la 
 carta, su valor se indica mediante distintas rosas o con rótulos adicionales. En estos casos 
 hay que emplear el valor de la declinación indicado en la rosa o rótulo más próximo a la 
 zona de la carta con la que se esté trabajando. 
 
-%Ejemplo 2.4. El valor de la declinación magnética en la zona de la carta donde se encuentra la rosa 
-%de la figura 2.7 es de 4º 15’ W en 1985. La variación anual es de 8’ E. Por tanto, en 2003 la declina- 
-%ción será igual a 
-%dm (1985) = -4º 15’ (W) 
-%variación = +2º 42’ (E) =  +162’  =  18 años × 9’ E 
-%dm (2003) = -1º 33’ (W) ≈  -1,5º 
-El valor de la declinación en 2003, por tanto, es aproximadamente igual a -1,5º. 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[scale=0.5]{rosa}\\
+\caption{Rosa náutica.}
+\label{fg:rosa}
+\end{center}
+\end{figure}
 
-Detalles de las cartas 
+\begin{ejemplo}
+El valor de la declinación magnética en la zona de la carta donde se encuentra la rosa 
+de la figura \ref{fg:rosa} es de 1º10’\,W en 2002. La variación anual es de 7’\,E. 
+Por tanto, en 2009 la declinación será:
+\[
+\begin{array}{lcll}
+  \mbox{Valor en 2002} & =  & -1º \, 10' \: \mathrm{(W)} \\
+  \mbox{Variación}     & =  & +0º \, 42' \: \mathrm{(E)} & (\mbox{7 años} \times 10' )\\
+%  \cline{3-5}\\
+\mbox{Valor en 2009}  &  = &   -0º \, 25’ \: \mathrm{(W)} & \approx -0,5º 
+\end{array}
+\]
+El valor de la declinación en 2003, por tanto, es aproximadamente $-0,5º$. 
+\end{ejemplo}
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Detalles de las cartas}
 
 Las figuras 2.9 y 2.10 muestran sendos fragmentos de dos cartas náuticas: el aproche a la 
 ría de Cedeira incluido en la carta nº930, y la carta de navegación costera nº471A del 
