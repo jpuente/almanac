@@ -324,7 +324,7 @@ viceversa.
 \begin{ejemplo}
 En la tarjeta de de una carta referida al datum europeo %(figura\ref{fg:datum-europeo})
 figura el siguiente párrafo: 
-\begin{quotation}\noindent\itshape
+\begin{quotation}\noindent\itshape\color{darkblue}
 SITUACIONES OBTENIDAS POR SATÉLITE: Las situaciones obtenidas mediante sistemas 
 de navegación por satélite referidas al Sistema Geodésico Mundial (WGS-84) deberán ser 
 desplazadas 0,07 minutos al Norte y 0,07 minutos al Este para estar correctamente representadas en esta carta. 
@@ -392,109 +392,353 @@ Por tanto, en 2009 la declinación será:
 \[
 \begin{array}{lcll}
   \mbox{Valor en 2002} & =  & -1º \, 10' \: \mathrm{(W)} \\
-  \mbox{Variación}     & =  & +0º \, 42' \: \mathrm{(E)} & (\mbox{7 años} \times 10' )\\
+  \mbox{Variación}     & =  & +1º \, 10' \: \mathrm{(E)} & (\mbox{7 años} \times 10' = 70' )\\
 %  \cline{3-5}\\
-\mbox{Valor en 2009}  &  = &   -0º \, 25’ \: \mathrm{(W)} & \approx -0,5º 
+\mbox{Valor en 2009}  &  = & \hspace{1\plus}0º \, 00’ \: \mathrm{(W)} &  
 \end{array}
 \]
-El valor de la declinación en 2003, por tanto, es aproximadamente $-0,5º$. 
 \end{ejemplo}
 
-%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------------------------------------------------
+\subsection{Detalles de las cartas}
 
-\subsubsection{Detalles de las cartas}
-
-Las figuras 2.9 y 2.10 muestran sendos fragmentos de dos cartas náuticas: el aproche a la 
-ría de Cedeira incluido en la carta nº930, y la carta de navegación costera nº471A del 
-IHM. En ambas se pueden apreciar la mayoría de los detalles que suelen aparecer en las 
+Las figuras \ref{fg:cedeira} y \ref{fg:471a} muestran sendos fragmentos de dos cartas náuticas: 
+el aproche de la ría de Cedeira incluido en la carta nº~930, y la carta de navegación costera 
+nº~471A del IHM. En ambas se pueden apreciar la mayoría de los detalles que suelen aparecer en las 
 cartas náuticas. 
 
-Signos y abreviaturas 
+\begin{figure}[htbpp]
+\begin{center}
+\includegraphics[width=\textwidth]{cedeira}\\
+\caption{Aproche de la ría de Cedeira (cartucho de la carta nº930 del IHM).}
+\label{fg:cedeira}
+\end{center}
+\end{figure}
 
-La publicación especial nº 14 (INT 1) del Instituto Hidrográfico de la Marina contiene 
+\begin{figure}[htbpp]
+\begin{center}
+\includegraphics[width=\textwidth]{cabopalos}\\
+\caption{Fragmento de la carta 471A del IHM.}
+\label{fg:471a}
+\end{center}
+\end{figure}
+
+
+\subsubsection{Signos y abreviaturas }
+
+La publicación especial nº~14 (INT1) del Instituto Hidrográfico de la Marina contiene 
 todos los símbolos, abreviaturas y términos usados en las cartas oficiales españolas. Los 
 símbolos son los recomendados por la Organización Hidrográfica Internacional (OHI), 
 aunque en algunos casos las cartas españolas de una cierta antigüedad utilizan símbolos 
 nacionales distintos de aquéllos. Estos símbolos nacionales se explican también en la 
 publicación nº 14. 
 
+\subsubsection{Profundidad y naturaleza del fondo}
 
-Profundidad y naturaleza del fondo 
-La profundidad medida en distintos puntos 
-de la carta se indica mediante sondas. Las 
-sondas se refieren al datum vertical de la 
-carta (la bajamar escorada en las cartas espa- 
-ñolas), y se representan mediante números 
-que indican la profundidad en metros y, en su 
-caso, en decímetros, en el punto donde se 
-encuentran. La cifra que indica los decíme- 
-tros se escribe como un subíndice de las que 
-indican los metros enteros. Las sondas que se 
-encuentran fuera de posición, es decir las que 
-se refieren a un punto cercano a aquél donde 
-se encuentran, se escriben entre paréntesis. 
-La sondas medidas con precisión se escriben 
-en cursiva, mientras que las dudosas o las 
-obtenidas de otros documentos menos fiables 
-se escriben con cifras rectas (figura 2.8). 
-Las sondas negativas corresponden a 
-puntos que velan en la bajamar escorada, aunque pueden quedar sumergidos al subir la 
-marea (capítulo 8). Se escriben subrayadas. 
+La profundidad medida en distintos puntos de la carta se indica mediante \emph{sondas}. 
+Las sondas se refieren al datum vertical de la carta (la bajamar escorada en las cartas 
+españolas), y se representan mediante números que indican la profundidad en metros y, en su 
+caso, en decímetros, en el punto donde se encuentran. La cifra que indica 
+los decímetros se escribe como un subíndice. Las sondas que se encuentran 
+fuera de posición, es decir las que se refieren a un punto cercano a aquél 
+donde se encuentran, se escriben entre paréntesis. La sondas medidas con 
+precisión se escriben en cursiva, mientras que las dudosas o las 
+obtenidas de otros documentos menos fiables se escriben con números rectos 
+(figura \ref{fg:sondas}). Las sondas negativas corresponden a 
+puntos que velan en la bajamar escorada, aunque pueden quedar sumergidos 
+al subir la marea (capítulo \ref{ch:mareas}), se escriben subrayadas. 
 
-Ejemplo 2.5. En un punto en donde la carta marca 18 la profundidad del agua es igual a 0,7m cuando 
-la altura de la marea es de 2,5m. Cuando la altura de la marea es menor de 1,8m el punto vela (es 
-decir, está fuera del agua). 
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{>{\itshape\color{blue}}m{1cm} >{\upshape}m{6cm}}\toprule
+{35 \newline S} & Sonda de 35 m con fondo de arena.     \\ \addlinespace[1ex]
+{12\textsubscript{7} \newline St} & Sonda de 12,7\,m con fondo de piedra.\\ \addlinespace[1ex]
+{(8\textsubscript{2}) } &  Sonda de 8,2\,m en un punto cercano. \\ \addlinespace[1ex]
+{\upshape 15} & Sonda de 15\,m aproximada.\\ \addlinespace[1ex]
+{\underline{1\textsubscript8} } & sonda negativa de 1,8\,m.\\ \addlinespace[1ex]
+\bottomrule
+\end{tabular}
+\caption{Ejemplos de sondas.}
+\label{fg:sondas}
+\end{center}
+\end{figure}
+
+\begin{ejemplo}
+En un punto en donde la carta marca \underline{\itshape1\textsubscript{8}} 
+la profundidad del agua es igual a 0,7\,m cuando la altura de la marea es de 2,5\,m. 
+Cuando la altura de la marea es menor que 1,8\,m el punto vela
+ (es decir, está fuera del agua). 
+\end{ejemplo}
+
+Las sondas suelen ir acompañadas de una abreviatura, situada debajo de ellas, que
+indica la naturaleza del fondo. La figura \ref{fg:fondo} muestra algunas de las 
+abreviaturas más comunes en español y en inglés. 
+En las cartas españolas modernas figura siempre la abreviatura 
+en inglés, de acuerdo con las normas internacionales.
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{>{\itshape\color{blue}}c 
+                >{\itshape\color{blue}}c
+                >{\upshape}l}\toprule
+A & S & Arena (\emph{sand}) \\
+F & M & Fango (\emph{mud}) \\
+P & St & Piedra (\emph{stone}) \\
+C\textsuperscript{o} & G & Cascajo (\emph{gravel}) \\
+G\textsuperscript{o} & P & Guijarros (\emph{pebbles}) \\
+R & R & Roca (\emph{rock}) \\
+Alg & Wd & Algas (\emph{weed}) \\
+\bottomrule
+\end{tabular}
+\caption{Tipos de fondos.}
+\label{fg:fondo}
+\end{center}
+\end{figure}
 
 
-Las sondas suelen ir acompañadas de una
-abreviatura, situada debajo de ellas, que
-indica la naturaleza del fondo. La figura 2.11
-muestra algunas de las abreviaturas más
-comunes definidas por las normas nacionales
-e internacionales. 
-Los veriles o líneas isobáticas son líneas
-que unen todos los puntos que tienen una
-misma profundidad (por ejemplo, 10m, 20m
-o 100m). Las zonas delimitadas por los veri-
-les de menor profundidad, dependiendo de la
-escala y del tipo de carta, se colorean con dis-
-tintos tonos de azul. La zona cercana a la
-costa que queda al descubierto en la bajamar
-se colorea de verde claro. 
- Peligros 
-Los distintos peligros que se encuentran en la
-mar, como piedras, bajos, restos de naufra-
-gios, etc. se indican en las cartas mediante
-diversos signos, los más importantes de los
-cuales se muestran en la figura 2.12. 
-Marcas y luces 
-Las cartas muestran de forma detallada la
-situación de las marcas terrestres útiles para la
-navegación, y de las boyas, balizas, luces y
-otras ayudas. Las luces se indican con una
-marca púrpura, junto con sus características
-luminosas (figura 2.13). Los sectores visibles
-o de distintos colores, en su caso, se indican
-también gráficamente en la carta. También se
-indica la altura de la luz sobre el nivel medio
-del mar y su alcance en millas. Todos estos
-datos se encuentran igualmente en el Libro de 
-Faros, donde debe acudirse siempre para una 
-referencia más completa y exacta. 
-V, G Verde (green). 
-Figura 2.13. Símbolos y abreviaturas 
-de luces y faros.
+Los \emph{veriles} o \emph{líneas isobáticas} son líneas que unen todos los puntos 
+que tienen una misma profundidad (por ejemplo, 10\,m, 20\,m o 100\,m). Las zonas 
+delimitadas por los veriles de menor profundidad, dependiendo de la escala y del 
+tipo de carta, se colorean con distintos tonos de azul. La zona cercana a la
+costa que queda al descubierto en la bajamar se colorea de verde claro. 
 
-Puesta al día de las cartas 
-La información que contienen las cartas sólo es exacta en la fecha de su última actualiza- 
-ción, que en el momento de su adquisición está escrita en el margen inferior (figura 2.4). 
+\subsubsection{Peligros}
+ 
+Los distintos peligros que se encuentran en la mar, como piedras, bajos, 
+restos de naufragios, etc. se indican en las cartas mediante
+diversos signos, los más importantes de los cuales se muestran en la figura \ref{fg:peligros}. 
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{m{8mm}
+                >{\itshape\color{blue}}m{6mm}
+                >{\upshape}m{5cm}}
+                \toprule
+\
+\centering\includegraphics[scale=0.75]{piedra}  && Roca a flor de agua.  \\
+\centering\includegraphics[scale=0.75]{piedra-sumergida} && Roca cubierta peligrosa. \\
+\centering\includegraphics{pecio} &Wk & Naufragio \\
+\bottomrule
+\end{tabular}
+\caption{Símbolos de peligros.}
+\label{fg:peligros}
+\end{center}
+\end{figure}
+
+\subsubsection{Marcas y luces }
+
+Las cartas muestran de forma detallada la situación de las marcas terrestres útiles para la
+navegación, y de las boyas, balizas, luces y otras ayudas. Las luces se indican con una
+marca púrpura, junto con sus características luminosas (figura \ref{fg:luces}).
+ Los sectores visibles o de distintos colores, en su caso, se indican
+también gráficamente en la carta. También se indica la altura de la luz sobre el nivel medio
+del mar y su alcance en millas. Todos estos datos se encuentran igualmente en el
+ \emph{Libro de Faros}, donde debe acudirse siempre para una referencia más completa y exacta. 
+
+
+\begin{figure}[htbp]
+\begin{center}
+\begin{tabular}{>{\color{blue}}m{12mm}
+                >{\bfseries\color{blue}}m{10mm}
+                >{\upshape}l}\toprule
+ \includegraphics{faro} &
+ & Luz, faro \\
+ F.  & F & Fija (\emph{fixed}). \\
+ Oc. & Oc & Ocultaciones (\emph{occulting}) \\
+ D   & Fl & Destellos (\emph{flaring}) \\
+ Gp. D. & Fl(3) & Grupos de destellos \\
+ Ct.    & Q     & Centelleos (\emph{quick}) \\
+ B      & W     & Blanca (\emph{white}) \\
+ R      & R     & Roja (\emph{red}) \\
+ V      & G     & Verde (\emph{green}) \\
+\bottomrule
+\end{tabular}
+\caption{Símbolos y abreviaturas de luces y faros.}
+\label{fg:luces}
+\end{center}
+\end{figure}
+
+\subsection{Puesta al día de las cartas }
+
+La información que contienen las cartas sólo es exacta en la fecha de su última actualización, 
+que en el momento de su adquisición está escrita en el margen inferior (figura \ref{fg:id-carta}). 
 Para mantenerlas al día es preciso actualizarlas con las correcciones que se publican cada 
-semana en los Avisos a los navegantes, editados por el Instituto Hidrográfico de la 
+semana en los \emph{Avisos a los navegantes}, editados por el Instituto Hidrográfico de la 
 Marina. 
 
 %===================================
 \section{Trabajo sobre la carta}
 
+\subsection{Instrumentos}
+ 
+Los trabajos gráficos sobre la carta se efectúan con lápiz, compás de puntas o compás 
+ordinario (con mina de lápiz), transportador y regla. También hay 
+instrumentos que combinan un transportador y una regla, de forma rectangular o triangular.
+Estos instrumentos son más fáciles de utilizar que los transportadores tradicionales 
+en el reducido espacio de la mesa de cartas. 
+
+\subsection{Situaciones}
+ 
+ \begin{figure}[htbp]
+\begin{center}
+\includegraphics{carta-coordenadas}
+\caption{Forma de hallar las coordenadas de un punto.}
+\label{fg:carta-coordenadas}
+\end{center}
+\end{figure}
+
+\subsubsection{Obtener las coordenadas de un punto de la carta}
+
+Para obtener las coordenadas de un punto se utiliza normalmente un compás, una de 
+cuyas puntas se coloca en el punto (figura \ref{fg:carta-coordenadas}, 1). 
+Con la otra punta se tangentea el paralelo más próximo, y manteniendo la abertura 
+del compás se mide la latitud en la escala de latitudes de la carta (2). 
+Para la longitud se opera de forma semejante (3 y 4). 
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{carta-situacion}
+\caption{Forma de situar un punto dadas sus coordenadas.}
+\label{fg:carta-situacion}
+\end{center}
+\end{figure}
+
+\subsubsection{Situar un punto dadas sus coordenadas}
+
+Para situar un punto en la carta, se coloca una punta del compás en la marca 
+correspondiente a la latitud en la escala de latitudes, y la otra punta en el paralelo 
+más cercano en la misma escala (figura \ref{fg:carta-situacion}, 1). La abertura del compás se traslada 
+al meridiano más cercano al punto, a partir del mismo paralelo (2), y se marca el 
+punto correspondiente. Se coloca el transportador de forma que su borde superior 
+pase por el punto marcado y esté perpendicular al meridiano, y sobre este borde 
+se lleva la abertura de compás que previamente se ha tomado sobre la escala de longitudes,
+entre el meridiano anterior y la longitud buscada (4 y 5).
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{carta-distancia}
+\caption{Medida de la distancia entre dos puntos.}
+\label{fg:carta-distancia}
+\end{center}
+\end{figure}
+
+
+\subsubsection{Distancia entre dos puntos}
+
+Para medir la distancia entre dos puntos se coloca cada una de las puntas del compás 
+sobre uno de los puntos (figura \ref{fg:carta-distancia}, 1), y se lleva 
+la abertura correspondiente a la escala 
+de latitudes más cercana (2). La distancia en millas entre los dos puntos es igual al 
+intervalo de latitud en minutos que corresponde a la apertura del compás. 
+Hay que tener cuidado de que la parte de la escala que se utilice esté aproximadamente 
+a la misma latitud que los puntos cuya distancia se desea medir, sobre todo si la 
+carta abarca una gran diferencia de latitudes. En este caso, al variar de forma apreciable la 
+escala con la latitud podríamos obtener un valor de la distancia falseado. 
+Para situar un punto a una distancia dada de otro se procede de forma inversa, 
+midiendo primero la distancia sobre la escala de longitudes y llevándola después sobre la 
+línea donde se desea situar el punto. 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics{carta-rumbo}
+\caption{Trazado de rumbos y demoras.}
+\label{fg:carta-rumbo}
+\end{center}
+\end{figure}
+
+\subsubsection{Rumbos y demoras}
+
+Las líneas que forman un ángulo constante con la dirección Norte (loxodrómicas), como 
+son los rumbos y demoras, se representan en la carta mediante rectas, como ya hemos 
+visto. Para trazar la línea correspondiente a un rumbo o una demora dada pasando por un 
+punto determinado se utiliza la regla-transportador, situando el centro de la escala de 
+ángulos en un meridiano o paralelo, orientando el instrumento de forma que se lea la gra- 
+duación correspondiente al rumbo sobre dicho meridiano o paralelo, y situando uno de los 
+bordes sobre el punto (figura \ref{fg:carta-rumbo}). 
+En cualquier caso, es necesario familiarizarse con el 
+instrumento que se utilice, y practicar en la mesa de cartas del barco para efectuar el tra- 
+zado con soltura. 
+
+Para medir el rumbo entre dos puntos se procede de forma inversa: se coloca la regla- 
+transportador de manera que su centro se sitúe sobre un meridiano o paralelo y su borde 
+pase por ambos puntos. El rumbo se lee directamente sobre la escala del transportador. 
+Como antes, es necesario practicar para efectuar esta operación con soltura. 
 
 %===================================
 \section{Cartas electrónicas}
+
+Las cartas electrónicas contienen una información similar a las cartas tradicionales 
+impresas en papel, pero están almacenadas en forma digital en un soporte electrónico o 
+magnético adecuado para su lectura e interpretación por un computador. Este computador puede 
+ser de tipo general (por ejemplo, un computador personal) o estar empotrado en un 
+instrumento de navegación, como una pantalla de radar o un navegador por satélite. En todos 
+los casos se usan diferentes formatos para la representación de los datos de las cartas, 
+algunos de los cuales son cerrados, es decir sólo se pueden leer con los programas o ins- 
+trumentos fabricados por una compañía determinada. Siempre que sea posible se deben 
+preferir las cartas almacenadas en formatos abiertos, que se pueden leer con programas e 
+instrumentos de distintos fabricantes. 
+
+Hay dos tipos de cartas digitales: las \emph{cartas escaneadas} y las 
+\emph{cartas vectoriales}. Cada uno de estos tipos tiene sus ventajas e inconvenientes, 
+aunque en general las cartas vectoriales son más precisas y fáciles de usar. 
+
+\subsection{Tipos de cartas electrónicas}
+
+\subsubsection{Cartas escaneadas}
+
+Las cartas escaneadas son reproducciones directas de las cartas de papel realizadas 
+mediante un escáner o un aparato similar, que produce una imagen formada por una cua- 
+drícula de puntos (\emph{raster}). Su principal ventaja es que reproducen exactamente las cartas 
+oficiales, por lo que en general se puede confiar en ellas, siempre que se mantengan al 
+día. Otra ventaja es que son relativamente fáciles de construir, y que si se almacenan en 
+un formato abierto se pueden ver en un computador mediante programas corrientes. 
+El principal inconveniente de las cartas escaneadas es que cuando se amplían no se 
+consigue mayor detalle, e incluso se hacen visibles los puntos de la cuadrícula, perdién- 
+dose calidad de imagen. 
+
+\subsubsection{Cartas vectoriales}
+
+Las cartas vectoriales, de construcción más elaborada, representan cada elemento de la 
+carta (línea de costa, peligros, balizas, faros, etc.) mediante una estructura de datos 
+(vector) que contiene información sobre su situación, nombre, representación gráfica, etc. Los 
+puntos que forman la imagen se forman sobre la marcha al ver la carta en un visor ade- 
+cuado. De esta manera, al ampliar la carta no se pierde resolución, ya que los detalles que 
+aparecen se vuelven a dibujar cada vez. Además, casi todos los visores permiten seleccio- 
+nar los detalles que se ven, que se agrupan en distintas capas, por ejemplo 
+(figura \ref{fg:ENC}): 
+\begin{itemize}
+\item  Información básica: línea de costa, veril de seguridad (por ejemplo, 10\,m), 
+peligros aislados, balizas más importantes, etc. 
+\item Información estándar: además de la anterior, línea de bajamar, canales, ayudas a la 
+navegación (faros, balizas, etc.). 
+\item Información completa: sondas en cada punto, nombres, y en general todos los 
+detalles. 
+\end{itemize}
+
+La principal ventaja de las cartas vectoriales es su precisión y versatilidad. Sin 
+embargo, son más difíciles de obtener y, en general, más caras que las escaneadas.
+
+\subsection{Cartas electrónicas oficiales}
+ 
+Algunas organizaciones y empresas privadas comercializan cartas electrónicas de distintos 
+tipos. Estas cartas no tienen carácter oficial y su uso no excluye la obligación de llevar a 
+bordo cartas oficiales de la zona de navegación en papel. Por otra parte, la OHI ha defi- 
+nido unas normas (S-57) para realizar cartas electrónicas oficiales. Los servicios 
+hidrográficos de cada país (en España el IHM) producen cartas digitales oficiales con arreglo a esta 
+normativa, denominadas ENC. Estas cartas son la base de los sistemas de información y 
+visualización de cartas electrónicas (ECDIS). La OHI ha definido unas características 
+mínimas que deben cumplir los ECDIS para que su uso, junto con el de las cartas electrónicas oficiales, dispense de la obligación de llevar a bordo cartas y otros documentos en 
+papel (ver también el capítulo \ref{ch:satelite}). 
+
+La figura \ref{fg:ENC} contiene un ejemplo de carta ENC mostrada en un visor electrónico con 
+distintos niveles de detalle. 
+
+\begin{figure}[htbp]
+\begin{center}
+%\includegraphics{ENC}
+\caption{ Carta electrónica con distintos tipos de presentación.}
+\label{fg:ENC}
+\end{center}
+\end{figure}
+
