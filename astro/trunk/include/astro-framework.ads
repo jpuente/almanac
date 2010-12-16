@@ -24,6 +24,7 @@
 -----------------------------------------------------------------------
 with Astro.Generic_Julian_Time;
 with Astro.Generic_Frame_Transformations;
+with Ada.Numerics.Generic_Elementary_Functions;
 with Ada.Numerics.Generic_Real_Arrays;
 
 -- This unit provides a framework for the instantiation of the Astro
@@ -44,7 +45,7 @@ package Astro.Framework is
    package Frame_Transformations is
      new Astro.Generic_Frame_Transformations
        (Real,
-        Real_Functins,
+        Real_Functions,
         Real_Arrays,
         Julian_Time);
 
