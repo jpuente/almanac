@@ -1,5 +1,5 @@
 \input texinfo   @c -*-texinfo-*-
-@comment $Id:$
+@comment $Id$
 @comment %**start of header
 @setfilename ephemeris.info
 
@@ -40,7 +40,7 @@ Documentation License.''
 
 @title Ada Ephemeris Library
 @subtitle Version @value{VERSION}
-@subtitle Document revision level $Id:$
+@subtitle Document revision level $Id$
 @subtitle Date: @today{}
 @author Juan A. de la Puente
 
