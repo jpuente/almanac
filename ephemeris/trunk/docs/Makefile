@@ -12,7 +12,7 @@ ephemeris_docs: version ephemeris.pdf ephemeris.html
 version:
 	sed 's/^/@set /g;s/=/ /g' ../version_information  > version.texi
 
-%.pdf: %.texi
+%.pdf: %.tex
 ifneq (${PDFTEX},)
 	echo Building $@
 	${PDFTEX} $<
@@ -34,5 +34,8 @@ else
 endif
 
 clean:
-	-$(RM) -f ephemeris.dvi ephemeris.html ephemeris.info* ephemeris.log 
-	-$(RM) -f ephemeris.ps ephemeris.pdf ephemeris.txt *~ version.texi
+	-$(RM) *.aux *.log *.vr *.tp *.toc *.pg *.ky *.fn *.cp  *~ 
+
+veryclean: clean
+	-$(RM) ephemeris.pdf ephemeris.html version.texi
+
