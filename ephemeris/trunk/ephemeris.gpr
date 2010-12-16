@@ -7,25 +7,30 @@ project Ephemeris is
    for Library_Name use "ephemeris";
    for Library_Kind use "static";
 
-   package Pretty_Printer is
-      for Default_Switches ("ada") use ("-A1", "-A2", "-A3");
-   end Pretty_Printer;
-
-   package Builder is
-      for Default_Switches ("ada") use ("-g", "-gnatQ");
-   end Builder;
-
-   package Linker is
-      for Default_Switches ("ada") use ("-g");
-   end Linker;
+   package Binder is
+      for Default_Switches ("ada") use ("-E", "static");
+   end Binder;
 
    package Compiler is
       for Default_Switches ("ada") use ("-gnat05", "-gnatf", "-g");
    end Compiler;
 
-   package Binder is
-      for Default_Switches ("ada") use ("-E", "static");
-   end Binder;
+   package Linker is
+      for Default_Switches ("ada") use ("-g");
+   end Linker;
+
+   package Builder is
+      for Default_Switches ("ada") use ("-g", "-gnatQ");
+   end Builder;
+
+   package Pretty_Printer is
+      for Default_Switches ("ada") use ("-A1", "-A2", "-A3");
+   end Pretty_Printer;
+
+   package Ide is
+      for Vcs_Kind use "Subversion";
+      for Vcs_Repository_Root use "https://polaris.dit.upm.es/repos-str/jp/ephemeris/trunk";
+   end Ide;
 
 end Ephemeris;
 
