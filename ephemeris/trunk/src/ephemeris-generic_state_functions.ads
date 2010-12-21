@@ -24,15 +24,14 @@
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
 with Ada.Numerics.Generic_Elementary_Functions;
---with Ada.Numerics.Generic_Real_Arrays;
-with Generic_Real_Arrays;
+with Ada.Numerics.Generic_Real_Arrays;
 
 generic
    type Real is digits <>;
    with package Real_Functions is
      new Ada.Numerics.Generic_Elementary_Functions (Real);
    with package Real_Arrays is
-     new Generic_Real_Arrays (Real);
+     new Ada.Numerics.Generic_Real_Arrays(Real);
    Ephemeris_Number : in JPL_Ephemeris := DE200;
 package Ephemeris.Generic_State_Functions is
    use Real_Arrays;

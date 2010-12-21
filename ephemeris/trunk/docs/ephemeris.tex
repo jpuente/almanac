@@ -59,7 +59,7 @@ Documentation License.''
 
 @insertcopying
 
-The Ada Ephemeris Library is a collection of Ada 2005 packages that
+The Ada Ephemeris Library is a collection of Ada packages that
 provide access to the Solar System Ephemeris developed by the
 Jet Propulsion Laboratory (JPL).
 @end ifnottex
@@ -90,7 +90,7 @@ Jet Propulsion Laboratory (JPL).
 @section Purpose
 
 This manual contains instructions for installing and using the Ada
-Ephemeris Library (@acronym{AEL}), a collection of Ada 2005 packages
+Ephemeris Library (@acronym{AEL}), a collection of Ada packages
 that provide access to the Solar System Ephemerides developed by the
 Jet Propulsion Laboratory (@acronym{JPL})@footnote{The @acronym{JPL}
 has developed several kinds of ephemerides (e.g.  @acronym{DE200},
@@ -104,13 +104,13 @@ to read ephemeris data, and some utility programs which are needed to
 install and test the ephemeris data files. The data files themselves
 are not part of the @acronym{AEL} distribution, and should be
 downloaded by the user directly from the @acronym{JPL} site@footnote{
-@uref{ftp://ssd.jpl.nasa.gov/pub/eph/export/}}.
+@uref{http://ssd.jpl.nasa.gov}}.
 
-Previous knowledge of the Ada 2005 programming language is
+Previous knowledge of the Ada programming language is
 assumed. The reader should also be familiar with
 @acronym{GNAT}@footnote{ @acronym{GNAT,@acronym{GNU}-@acronym{NYU} Ada
-Translator} is a free programming environment for Ada.  See
-@uref{http://www.gnat.com} for more details.} or some other
+Translator} is a free programming environment for Ada.  See the AdaCore web site
+@uref{http://libre.adacore.com} for more details.} or some other
 programming environment for Ada 2005.
 
 @c ----------------------------------------------------------------------
@@ -119,12 +119,11 @@ programming environment for Ada 2005.
 
 The @acronym{AEL} software is highly portable and can be used on any
 platform for which an Ada 2005 compilation system is available. The
-distributed version has been compiled with @acronym{GNAT} Pro 5.04 and
-@acronym{GNAT GPL} 2005 on PC workstations running @acronym{GNU}/Linux
-and Windows@registeredsymbol{} @acronym{XP} operating
-systems. Compiling the software with other Ada 2005 compilers should
-no give any problems as only Ada 2005 standard language features have
-been used.
+distributed version has been compiled with @acronym{GNAT GPL} 2010 on 
+PC workstations running @acronym{GNU}/Linux and on Mac computers 
+running MacOS X Snow Leopard. Compiling the software with other Ada 2005 
+compilers should no give any problems as only Ada 2005 standard language 
+features have been used.
 
 @c ----------------------------------------------------------------------
 @node Acknowledgments,  , Installation requisites, Introduction
@@ -135,11 +134,11 @@ develop the Ada Ephemeris Library comes from the following sources:
 
 @itemize @bullet
 @item The @acronym{JPL} ephemerides package user's guide@footnote{
-@uref{ftp://ssd.jpl.nasa.gov/pub/eph/export/usrguide}}.
+@uref{ftp://ssd.jpl.nasa.gov/pub/eph/planets/usrguide}}.
 
 @item David Hoffman's user's guide for the C utility programs for
 processing @acronym{JPL} Ephemeris Data@footnote{
-@uref{ftp://ssd.jpl.nasa.gov/pub/eph/export/C-versions/hoffman}}.
+@uref{ftp://ssd.jpl.nasa.gov/pub/eph/planets/C-versions/hoffman}}.
 
 @item The @emph{Explanatory Supplement to the Astronomical Almanac},
 edited by P. Kenneth Seidelmann, University Science Books, 1992,
@@ -179,7 +178,7 @@ interpolation in such a way that the state of a body at any time
 within the ephemeris range can be efficiently computed from a small
 number of coefficients. The number of coefficients and the precision
 of the data are adjusted so that the interpolation error is less than
-0.5 mm. @xref{Interpolation coefficients}, for the details.
+0.5mm. @xref{Interpolation coefficients}, for the details.
 
 The position and velocity components are computed in barycentric
 rectangular equatorial coordinates, referred to the mean equator and
@@ -398,8 +397,11 @@ main solar system bodies.
 system bodies.}
 @multitable {11} {Mercury and others} {Granule (days)} {No. of polynomials}
 @headitem No. @tab Name    @tab Granule (days) @tab No. of polynomials
-@item     1   @tab Mercury @tab 8       @tab 13
+@item     1   @tab Mercury @tab  8      @tab 13
+@item     2   @tab Venus   @tab 16      @tab  9
+
 @end multitable
+
 @end float
 
 

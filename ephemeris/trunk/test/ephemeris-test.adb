@@ -26,7 +26,7 @@ with Ephemeris.Generic_State_Functions;
 
 with Ada.Numerics,
      Ada.Numerics.Generic_Elementary_Functions,
-     Generic_Real_Arrays;
+     Ada.Numerics.Generic_Real_Arrays;
 
 with Ada.Text_IO;
 with Ada.Command_Line;          use Ada.Command_Line;
@@ -39,7 +39,7 @@ procedure Ephemeris.Test is
   package Real_Functions is
      new Ada.Numerics.Generic_Elementary_Functions (Real);
    package Real_Arrays is
-     new Generic_Real_Arrays (Real);
+     new Ada.Numerics.Generic_Real_Arrays (Real);
    package Solar_System is
      new Ephemeris.Generic_State_Functions (Real,
                                             Real_Functions,
