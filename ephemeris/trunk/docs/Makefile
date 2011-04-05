@@ -12,17 +12,17 @@ ephemeris_docs: version ephemeris.pdf ephemeris.html
 version:
 	sed 's/^/@set /g;s/=/ /g' ../version_information  > version.texi
 
-%.pdf: %.tex
+%.pdf: %.texi
 ifneq (${PDFTEX},)
 	echo Building $@
-	${PDFTEX} $<
+	${PDFTEX} $<; 	${PDFTEX} $<
 else
 	@echo "-----------------------------------------------"
 	@echo "pdftex not found, cannot build PDF documentation"
 	@echo "-----------------------------------------------"
 endif
 
-%.html: %.tex
+%.html: %.texi
 ifneq (${MAKEINFO},)
 	echo Building $@
 	-${MAKEINFO} --html --no-split --css-include=ephemeris.css --ifinfo $<
