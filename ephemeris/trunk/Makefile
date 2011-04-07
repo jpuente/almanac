@@ -24,7 +24,7 @@ util: library
 
 clean:
 	-gnatclean -Pephemeris
-	-gnatclean -Pephemeris_tests
+	-gnatclean -Pephemeris_test
 	-gnatclean -Pephemeris_utilities
 	-$(RMDIR) obj
 	-$(RMDIR) lib
