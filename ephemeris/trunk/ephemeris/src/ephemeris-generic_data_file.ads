@@ -31,6 +31,7 @@ package Ephemeris.Generic_Data_File is
      := (DE200 =>  826,
          DE405 => 1018,
          DE406 =>  728);
+
    Data_Record_Size : constant Positive := Record_Size (Ephemeris_Number);
 
    -----------------------

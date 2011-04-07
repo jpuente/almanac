@@ -33,6 +33,7 @@ generic
    with package Real_Arrays is
      new Ada.Numerics.Generic_Real_Arrays(Real);
    Ephemeris_Number : in JPL_Ephemeris := DE200;
+
 package Ephemeris.Generic_State_Functions is
    use Real_Arrays;
 
