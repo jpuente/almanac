@@ -23,49 +23,48 @@
 -- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
 -- Boston, MA 02111-1307, USA.                                       --
 -----------------------------------------------------------------------
-with Ada.Numerics.Generic_Elementary_Functions;
 with Ada.Numerics.Generic_Real_Arrays;
 
 generic
    type Real is digits <>;
-   with package Real_Functions is
-     new Ada.Numerics.Generic_Elementary_Functions (Real);
+--   with package Real_Functions is
+--     new Ada.Numerics.Generic_Elementary_Functions (Real);
    with package Real_Arrays is
-     new Ada.Numerics.Generic_Real_Arrays(Real);
+     new Ada.Numerics.Generic_Real_Arrays (Real);
    Ephemeris_Number : in JPL_Ephemeris := DE200;
 
 package Ephemeris.Generic_State_Functions is
    use Real_Arrays;
 
    type State is record
-      Position : Real_Vector(1..3);
-      Velocity : Real_Vector(1..3);
+      Position : Real_Vector (1 .. 3);
+      Velocity : Real_Vector (1 .. 3);
    end record;
-   -- Position and velocity are given in rectangular equatorial
-   -- coordinates, in AU and AU/day
+   --  Position and velocity are given in rectangular equatorial
+   --  coordinates, in AU and AU/day
 
    function Barycentric_State (Target   : Object;
                                Date     : Real)   -- Julian TDB Date
                                return State;
-   -- Barycentric position and velocity of the target at given date,
-   -- referred to the mean equator and equinox of J2000.0.
+   --  Barycentric position and velocity of the target at given date,
+   --  referred to the mean equator and equinox of J2000.0.
 
    function AU return Real;
-   -- Length of an astronomical unit (in meters)
+   --  Length of an astronomical unit (in meters)
 
    function EM_Ratio return Real;
-   -- Earth_Moon Mass ratio
+   --  Earth_Moon Mass ratio
 
    function Start_Date return Real;
-   -- Initial date for ephemeris data
+   --  Initial date for ephemeris data
 
    function End_Date return Real;
-   -- Final date for ephemeris data
+   --  Final date for ephemeris data
 
    procedure Open_Data (Data_File_Name : in String);
-   -- Open data file
+   --  Open data file
 
    procedure Close_Data;
-   -- Close data file
+   --  Close data file
 
-end Ephemeris.Generic_State_Functions ;
+end Ephemeris.Generic_State_Functions;

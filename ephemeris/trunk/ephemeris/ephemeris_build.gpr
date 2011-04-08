@@ -1,5 +1,8 @@
 project Ephemeris_Build is
 
+   type Targets is ("debug", "release");
+   Target: Targets := external("target", "debug");
+
    for Languages use ("Ada");
    for Object_Dir use "obj";
    for Library_Dir use "lib";
@@ -8,23 +11,18 @@ project Ephemeris_Build is
    for Source_Dirs use ("src");
 
    package Compiler is
-      for Default_Switches ("ada") use ("-gnat05", "-gnatf", "-g");
+      case Target is
+        when "debug" =>
+          for Default_Switches ("Ada") use
+            ("-gnat05", "-g", "-gnatQ", "-O1", "-gnatf", "-gnato", "-gnatwa.Xe", "-gnaty");
+        when "release" =>
+          for Default_Switches ("Ada") use
+            ("-gnat05", "-O2");
+      end case;
    end Compiler;
 
-   package Linker is
-      for Default_Switches ("ada") use ("-g");
-   end Linker;
-
-   package Binder is
-      for Default_Switches ("ada") use ("-E", "static");
-   end Binder;
-
-   package Builder is
-      for Default_Switches ("ada") use ("-g", "-gnatQ");
-   end Builder;
-
    package Pretty_Printer is
-      for Default_Switches ("ada") use ("-A1", "-A2", "-A3");
+      for Default_Switches ("Ada") use ("-A1", "-A2", "-A3");
    end Pretty_Printer;
 
    package IDE is

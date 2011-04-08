@@ -45,11 +45,11 @@ package body Ephemeris.Generic_Data_File is
 
    type Padding is array (Natural range <>) of Byte;
    Slack : constant Natural := (Data_Record'Size - Parameter_Record'Size)/8;
-   pragma Pack(Padding);
+   pragma Pack (Padding);
 
    type Header_Record is record
       Parameters : Parameter_Record;
-      Trailer    : Padding(1..Slack);
+      Trailer    : Padding (1 .. Slack);
    end record;
    pragma Pack (Header_Record);
 
@@ -68,7 +68,7 @@ package body Ephemeris.Generic_Data_File is
    exception
       when E : others => raise Data_Error
            with "Cannot open data file " &
-                File_Name & Exception_Message(E);
+                File_Name & Exception_Message (E);
    end Open;
 
    ------------
@@ -81,7 +81,7 @@ package body Ephemeris.Generic_Data_File is
    exception
       when E : others => raise Data_Error
            with "Cannot create data file " &
-                File_Name & Exception_Message(E);
+                File_Name & Exception_Message (E);
    end Create;
 
    -----------
@@ -95,7 +95,7 @@ package body Ephemeris.Generic_Data_File is
       end if;
    exception
       when E : others => raise Data_Error
-           with "Cannot close data file " & Exception_Message(E);
+           with "Cannot close data file " & Exception_Message (E);
    end Close;
 
    --------------------
@@ -123,7 +123,7 @@ package body Ephemeris.Generic_Data_File is
    begin
       Header.Parameters := Parameters;
       Buffer := Parsed_Data (Header);
-      Write(Data_File, Buffer, 1);
+      Write (Data_File, Buffer, 1);
    end Put_Parameters;
 
    --------------
@@ -133,10 +133,10 @@ package body Ephemeris.Generic_Data_File is
    procedure Get_Data (Record_Number   : in  Positive;
                        Data            : out Data_Record)
    is
-      -- Skip header record
-      N : Positive_Count := Positive_Count(Record_Number + 1);
+      --  Skip header record
+      N : constant Positive_Count := Positive_Count (Record_Number + 1);
    begin
-      Read(Data_File, Data, N);
+      Read (Data_File, Data, N);
    end Get_Data;
 
    --------------
@@ -146,8 +146,8 @@ package body Ephemeris.Generic_Data_File is
    procedure Put_Data (Record_Number   : in  Positive;
                        Data            : in  Data_Record)
    is
-      -- Skip header record
-      N : Positive_Count := Positive_Count(Record_Number + 1);
+      --  Skip header record
+      N : constant Positive_Count := Positive_Count (Record_Number + 1);
    begin
       Write (Data_File, Data, N);
    end Put_Data;
@@ -159,6 +159,6 @@ package body Ephemeris.Generic_Data_File is
    function  End_Of_Data return Boolean is
    begin
       return End_Of_File (Data_File);
-   end End_of_Data;
+   end End_Of_Data;
 
 end Ephemeris.Generic_Data_File;

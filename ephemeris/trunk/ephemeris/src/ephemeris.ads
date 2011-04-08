@@ -1,4 +1,4 @@
--- $Id$:
+--  $Id$:
 -----------------------------------------------------------------------
 -- Ephemeris - Ada 2005 library for the JPL ephemerides              --
 --                                                                   --
@@ -31,13 +31,13 @@ package Ephemeris is
 
    pragma Pure (Ephemeris);
 
-   Ephemeris_Error : exception;
-   Date_Error      : exception;
-
-   type JPL_Ephemeris is (DE200,DE405,DE406);
+   type JPL_Ephemeris is (DE200, DE405, DE406);
 
    type Object is
      (Mercury, Venus,  Earth,   Mars,  Jupiter,
       Saturn,  Uranus, Neptune, Pluto, Moon, Sun);
+
+   Ephemeris_Error : exception;
+   Date_Error      : exception;
 
 end Ephemeris;
