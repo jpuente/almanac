@@ -1,4 +1,4 @@
-with "ephemeris.gpr";
+with "../ephemeris/ephemeris_build.gpr";
 
 project Ephemeris_Utilities is
 
