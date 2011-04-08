@@ -32,22 +32,22 @@ package Ephemeris.Generic_Source_File is
 
    Error : exception;
 
-  -------------------------------
+   -------------------------------
    -- Open and close procedures --
    -------------------------------
 
    procedure Open (File_Name : String);
-   -- Open source file. Error is raised if the file cannot be opened.
+   --  Open source file. Error is raised if the file cannot be opened.
 
    procedure Close;
-   -- Close source file.
+   --  Close source file.
 
    ----------------------------
    -- Data access procedures --
    ----------------------------
 
-   -- The following subprograms are to be called in sequence.
-   -- Error is raised if a data format error is found.
+   --  The following subprograms are to be called in sequence.
+   --  Error is raised if a data format error is found.
 
    procedure Get_Parameters (Parameters : out Parameter_Record);
 

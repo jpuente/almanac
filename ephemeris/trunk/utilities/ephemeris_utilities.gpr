@@ -2,27 +2,37 @@ with "../ephemeris/ephemeris_build.gpr";
 
 project Ephemeris_Utilities is
 
+   type Targets is ("debug", "release");
+   Target: Targets := external("target", "debug");
+
    for Languages use ("Ada");
-   for Source_Dirs use ("utilities");
-   for Object_Dir use "utilities";
-   for Exec_Dir use ".";
    for Main use ("create_ephemeris.ads");
+   for Source_Dirs use ("create");
+   for Object_Dir use "obj";
+   for Exec_Dir use "bin";
+
+   package Compiler is
+      case Target is
+        when "debug" =>
+          for Default_Switches ("ada") use
+            ("-gnat05", "-g", "-gnatQ", "-O1", "-gnatf", "-gnato", "-gnatwa.Xe", "-gnaty");
+        when "release" =>
+          for Default_Switches ("ada") use
+            ("-gnat05", "-O2");
+      end case;
+   end Compiler;
 
    package Binder is
       for Default_Switches ("ada") use ("-E", "-static");
    end Binder;
 
-   package Compiler is
-      for Default_Switches ("ada") use ("-gnat05", "-gnatf", "-g");
-   end Compiler;
-
    package Linker is
-      for Default_Switches ("ada") use ("-g");
+      case Target is
+        when "debug" =>
+          for Default_Switches ("ada") use
+            ("-g");
+      end case;
    end Linker;
-
-   package Builder is
-      for Default_Switches ("ada") use ("-g", "-gnatQ");
-   end Builder;
 
 end Ephemeris_Utilities;
 

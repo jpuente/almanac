@@ -15,7 +15,7 @@
 -- 3) Otherwise, the ephemeris number (e.g. 'DE200')is used as the   --
 --    binary file  name .                                            --
 --                                                                   --
--- This is a generic version of the procedure.
+--  This is a generic version of the procedure.
 -----------------------------------------------------------------------
 --  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
 --  This unit was originally developed by Juan A. de la Puente.      --
