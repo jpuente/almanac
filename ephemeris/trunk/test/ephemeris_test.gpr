@@ -1,20 +1,21 @@
-with "ephemeris.gpr";
+with "../library/ephemeris_library.gpr";
 
 project Ephemeris_Test is
 
    for Languages use ("Ada");
-   for Source_Dirs use ("test");
-   for Object_Dir use "test";
-   for Exec_Dir use ".";
    for Main use ("test_ephemeris.ads");
+   for Source_Dirs use ("src");
+   for Object_Dir use "obj";
+   for Exec_Dir use "bin";
+
+   package Compiler is
+      for Default_Switches ("ada") use
+        ("-gnat05", "-g", "-gnatQ", "-O1", "-gnatf", "-gnato", "-gnatwa.Xe", "-gnaty");
+   end Compiler;
 
    package Binder is
       for Default_Switches ("ada") use ("-E", "-static");
    end Binder;
-
-   package Compiler is
-      for Default_Switches ("ada") use ("-gnat05", "-gnatf", "-g");
-   end Compiler;
 
    package Linker is
       for Default_Switches ("ada") use ("-g");

@@ -1,4 +1,4 @@
-# $Id: Makefile 100 2011-04-08 15:30:11Z jpuente $
+# $Id$
 
 GPRBUILD  = gprbuild
 GPRCLEAN = gprclean
