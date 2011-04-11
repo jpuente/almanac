@@ -1,4 +1,4 @@
-project Ephemeris_Build is
+project Ephemeris_Library is
 
    type Targets is ("debug", "release");
    Target: Targets := external("target", "debug");
@@ -30,4 +30,4 @@ project Ephemeris_Build is
       for VCS_Repository_Root use "https://polaris.dit.upm.es/repos-str/jp/ephemeris/trunk";
    end IDE;
 
-end Ephemeris_Build;
+end Ephemeris_Library;

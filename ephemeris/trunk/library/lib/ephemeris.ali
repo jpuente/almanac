@@ -1,0 +1,52 @@
+V "GNAT Lib v2010"
+A -O1
+A -mmacosx-version-min=10.6.7
+A -gnatA
+A -gnat05
+A -g
+A -gnatQ
+A -gnatf
+A -gnato
+A -gnatwa
+A -gnatw.X
+A -gnatwe
+A -gnaty
+A -mtune=generic
+A -fPIC
+A -fno-common
+A -feliminate-unused-debug-symbols
+P ZX
+R nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnnnnnvnvnnnnnnnnnnnnnnnn
+
+U ephemeris%s		ephemeris.ads		8fa6c9bd EE OO PU PK
+W system%s		system.ads		system.ali
+W system.exception_table%s  s-exctab.adb	s-exctab.ali
+W system.standard_library%s  s-stalib.adb	s-stalib.ali
+
+D ada.ads		20100603062030 9c7dd3ea
+D a-unccon.ads		20100603062010 51e09df2
+D ephemeris.ads		20110408104833 8fa6c9bd
+D system.ads		20100603062759 b0a7514b
+D s-exctab.ads		20100603062408 4b7fd51d
+D s-stalib.ads		20100603062604 9cbc334a
+X 3 ephemeris.ads
+30K9*Ephemeris 32r17 43l5 43e14
+34E9*JPL_Ephemeris 34e47
+34n27*DE200{34E9}
+34n34*DE405{34E9}
+34n41*DE406{34E9}
+36E9*Object 38e50
+37n7*Mercury{36E9}
+37n16*Venus{36E9}
+37n24*Earth{36E9}
+37n33*Mars{36E9}
+37n40*Jupiter{36E9}
+38n7*Saturn{36E9}
+38n16*Uranus{36E9}
+38n24*Neptune{36E9}
+38n33*Pluto{36E9}
+38n40*Moon{36E9}
+38n46*Sun{36E9}
+40X4*Ephemeris_Error
+41X4*Date_Error
+

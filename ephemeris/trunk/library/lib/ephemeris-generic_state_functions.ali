@@ -1,0 +1,192 @@
+V "GNAT Lib v2010"
+A -O1
+A -mmacosx-version-min=10.6.7
+A -gnatA
+A -gnat05
+A -g
+A -gnatQ
+A -gnatf
+A -gnato
+A -gnatwa
+A -gnatw.X
+A -gnatwe
+A -gnaty
+A -mtune=generic
+A -fPIC
+A -fno-common
+A -feliminate-unused-debug-symbols
+P SS ZX
+R nnnnnnnvnnnnnnnvvnvnnvnnnnnnnnnnnnnnnnnnnvnnnnnnnnvnnnnvnvvnnvnnnnnnnnnnnnnnn
+
+U ephemeris.generic_state_functions%b  ephemeris-generic_state_functions.adb  545e6e25 NE OO PK GE
+W ada%s			ada.ads			ada.ali
+W ada.direct_io%s
+W ada.exceptions%s	a-except.adb		a-except.ali
+W ada.io_exceptions%s	a-ioexce.ads		a-ioexce.ali
+W ada.unchecked_conversion%s
+W ephemeris%s		ephemeris.ads		ephemeris.ali
+W ephemeris.generic_data_file%s  ephemeris-generic_data_file.adb  ephemeris-generic_data_file.ali
+W interfaces%s		interfac.ads		interfac.ali
+W interfaces.c_streams%s  i-cstrea.adb		i-cstrea.ali
+W system%s		system.ads		system.ali
+W system.crtl%s		s-crtl.ads		s-crtl.ali
+W system.direct_io%s	s-direio.adb		s-direio.ali
+W system.file_control_block%s  s-ficobl.ads	s-ficobl.ali
+W system.file_io%s	s-fileio.adb		s-fileio.ali
+W system.storage_elements%s  s-stoele.adb	s-stoele.ali
+
+U ephemeris.generic_state_functions%s  ephemeris-generic_state_functions.ads  bf23804a BN EE NE OO PK GE
+W ada%s			ada.ads			ada.ali
+W ada.numerics%s	a-numeri.ads		a-numeri.ali
+W ada.numerics.generic_real_arrays%s
+W ephemeris%s		ephemeris.ads		ephemeris.ali
+
+D ada.ads		20100603062030 9c7dd3ea
+D a-direio.ads		20100603061922 998ca0b9
+D a-direio.adb		20100603061922 fcea2962
+D a-except.ads		20100603061925 34786013
+D a-finali.ads		20100603061929 bfd2ca79
+D a-filico.ads		20100603061928 4ff02a40
+D a-ioexce.ads		20100603061931 2504b9d2
+D a-numeri.ads		20100603061938 1cf3e608
+D a-ngrear.ads		20100603061935 6c227f19
+D a-stream.ads		20100603061946 34aca5be
+D a-tags.ads		20100603062003 bfa07446
+D a-unccon.ads		20100603062010 51e09df2
+D ephemeris.ads		20110408104833 8fa6c9bd
+D ephemeris-generic_data_file.ads  20110408102919 21f589c1
+D ephemeris-generic_data_file.adb  20110408102753 f1226616
+D ephemeris-generic_state_functions.ads  20110408103108 5ca736ee
+D ephemeris-generic_state_functions.adb  20110408102407 290cd10a
+D interfac.ads		20100603062247 a69cad5c
+D i-cstrea.ads		20100603062238 e1e064a9
+D system.ads		20100603062759 b0a7514b
+D s-crtl.ads		20100603062405 1dba5d50
+D s-direio.ads		20100603062405 716929ad
+D s-exctab.ads		20100603062408 4b7fd51d
+D s-ficobl.ads		20100603062415 c05c3205
+D s-fileio.ads		20100603062416 42b99b37
+D s-finimp.ads		20100603062417 90fd9896
+D s-finroo.ads		20100603062418 1408f9d1
+D s-parame.ads		20100603062544 6cdeed25
+D s-secsta.ads		20100603062555 d2c357fb
+D s-soflin.ads		20100603062559 61e5c9e8
+D s-stache.ads		20100603062602 481f9e9d
+D s-stalib.ads		20100603062604 9cbc334a
+D s-stoele.ads		20100603062606 a4d57c26
+D s-stoele.adb		20100603062606 d9d7e80e
+D s-stratt.ads		20100603062608 fef7c1da
+D s-traent.ads		20100603062648 a66ef260
+D s-unstyp.ads		20100603062650 c0f9fae5
+X 1 ada.ads
+16K9*Ada 19e8 16|26r6 33r10
+X 8 a-numeri.ads
+16K13*Numerics 32e17 16|26r10 33r14
+X 9 a-ngrear.ads
+41k22*Generic_Real_Arrays 142e37 16|26w19 33r23
+46A9 Real_Vector<integer> 16|40r18[32] 41r18[32]
+57V13 "+"{46A9[16|32]} 17|91r40[16|32] 92r40[16|32]
+58V13 "-"{46A9[16|32]} 17|86r40[16|32] 87r40[16|32]
+67V13 "*"{46A9[16|32]} 17|86r53[16|32] 87r53[16|32] 91r53[16|32] 92r53[16|32]
+68V13 "/"{46A9[16|32]} 17|96r34[16|32] 97r34[16|32]
+X 13 ephemeris.ads
+30K9*Ephemeris 43e14 16|36r9 70r5 17|22r6 23r14 240r5
+34E9*JPL_Ephemeris 34e47 16|34r26
+34n27*DE200{34E9} 16|34r43
+36E9*Object 38e50 16|46r43 17|40r37 49r18 144r37 149r35
+37n7*Mercury{36E9} 17|81r15
+37n16*Venus{36E9} 17|81r26
+37n24*Earth{36E9} 17|83r15 84r33 89r33
+37n33*Mars{36E9} 17|81r34
+38n33*Pluto{36E9} 17|81r42
+38n40*Moon{36E9} 17|85r33 88r15 90r33
+38n46*Sun{36E9} 17|81r50
+41X4*Date_Error 17|65r16
+X 14 ephemeris-generic_data_file.ads
+28k19*Generic_Data_File 114e32 17|22w16 26r10
+44A9 Data_Record(16|29F9)<integer> 17|41r37[25] 54r19[25] 145r37[25]
+56A9 Polynomial_Pointers(natural)<integer><integer> 17|30r23[25]
+71R9 Parameter_Record 17|219r20[25]
+72*7 Start_Date{16|29F9} 17|223r38[25]
+73*7 End_Date{16|29F9} 17|224r38[25]
+74*7 Interval{16|29F9} 17|225r38[25]
+75a7 Pointers{56A9[17|25]} 17|228r32[25]
+76*7 AU{16|29F9} 17|226r38[25]
+77*7 EM_Ratio{16|29F9} 17|227r38[25]
+89U14 Open 17|221r17[25]
+97U14 Close 17|237r17[25]
+104U14 Get_Parameters 17|222r7[25]
+107U14 Get_Data 17|74r7[25]
+X 16 ephemeris-generic_state_functions.ads
+29F9 Real 33r44 47r43 52r23 55r29 58r31 61r29 17|26r29 31r23 32r23 33r23
+. 34r23 35r23 38r38 39r37 50r18 55r19 56r19 57r19 58r19 61r28 70r31 72r31
+. 106r23 115r29 124r31 133r29 142r38 143r37 161r47 165r14 173r18 173r36 173r52
+. 175r15 175r31 175r48 176r16 208r51
+32K17 Real_Arrays[9|41] 37r8
+34e4 Ephemeris_Number{13|34E9} 17|26r35
+36k19*Generic_State_Functions 13|30k9 16|29z9 32z17 34z4 70l15 70e38 17|23b24
+. 240l15 240t38
+39R9*State 42e14 48r39 17|42r41 51r14 59r19 60r19 146r41
+40a7 Position{9|46A9[32]} 17|86m16 86r31 86r45 91m16 91r31 91r45 96m10 96r25
+. 200m12 202m15 202r33
+41a7 Velocity{9|46A9[32]} 17|87m16 87r31 87r45 92m16 92r31 92r45 97m10 97r25
+. 204m12 206m15 206r33 208m12 208r30
+46V13*Barycentric_State{39R9} 46>32 47>32 17|48b13 100l8 100t25
+46e32 Target{13|36E9} 17|49b7 80r12 82r33
+47*32 Date{29F9} 17|50b7 64r10 64r31 69r10 70r44 72r44 77r13
+52V13*AU{29F9} 17|96r36 97r36 106b13 109l8 109t10
+55V13*EM_Ratio{29F9} 17|61r49 115b13 118l8 118t16
+58V13*Start_Date{29F9} 17|64r17 70r51 72r51 124b13 127l8 127t18
+61V13*End_Date{29F9} 17|64r38 69r17 133b13 136l8 136t16
+64U14*Open_Data 64>25 17|217b14 229l8 229t17
+64s25 Data_File_Name{string} 17|217b25 221r23
+67U14*Close_Data 17|235b14 238l8 238t18
+X 17 ephemeris-generic_state_functions.adb
+25K12 Data_File[14|28] 27r8 221r7 237r7
+30a4 Pointers{14|56A9[25]} 153r35 155r35 157r35 228m7
+31*4 Interval{16|29F9} 58r32 70r63 72r63 225m7
+32*4 AU_Value{16|29F9} 108r14 226m7
+33*4 EM_Ratio_Value{16|29F9} 117r14 227m7
+34*4 Start_Date_Value{16|29F9} 126r14 223m7
+35*4 End_Date_Value{16|29F9} 135r14 224m7
+38U14 Interpolate 38>27 39>26 40>26 41>26 42<26 82r13 84r13 85r13 89r13 90r13
+. 142b14 211l8 211t19
+38*27 T{16|29F9} 142b27 173r48 173r69 175r27 175r60 176r33
+39*26 TS{16|29F9} 143b26 208r63
+40e26 Target{13|36E9} 144b26 149r47
+41a26 Data{14|44A9[25]} 145b26 193r25
+42r26 X{16|39R9} 146b26 200m10 202m13 202r31 204m10 206m13 206r31 208m10
+. 208r28
+53i7 N_Record{natural} 70m10 72m10 74r17
+54a7 Data{14|44A9[25]} 55r32 56r32 74m27 82r41 84r40 85r39 89r40 90r39
+55*7 T0=55:32{16|29F9} 77r20 77r30
+56*7 T1=56:32{16|29F9} 77r25
+57*7 T{16|29F9} 77m7 82r26 84r26 85r26 89r26 90r26
+58*7 TS=58:32{16|29F9} 82r29 84r29 85r29 89r29 90r29
+59r7 XT{16|39R9} 82m47 84m46 86m13 86r28 87m13 87r28 89m46 91m13 91r28 92m13
+. 92r28 96m7 96r22 97m7 97r22 98r14
+60r7 XM{16|39R9} 85m45 86r42 87r42 90m45 91r42 92r42
+61*7 EM_Factor{16|29F9} 86r54 87r54 91r61 92r61
+149i7 I{natural} 153r48 155r48 157r48
+151i7 Index{natural} 190m7 193r31 194m13 194r22
+153i7 I0{natural} 190r16
+155i7 NC{natural} 161r40 180r21 185r21 190r32 192r24 201r24 205r24
+157i7 NG{natural} 173r42 175r21 175r54 208r57
+159i7 NM{natural} 162r40 190r29 191r21 199r21
+161A12 Polynomial(16|29F9)<integer> 162r47 167r14 168r14
+162A12 Coefficients(161A12)<integer> 169r14
+164i7 G{natural} 172m7 190r22
+165*7 TC{16|29F9} 174m7 179r18 181r23 184r28 186r24
+167a7 P{161A12} 179m7 181m10 181r26 181r38 186r44 202r57
+168a7 PP{161A12} 184m7 186m10 186r27 186r56 206r57
+169a7 C{162A12} 193m13 202r48 206r48
+180i11 K{integer} 181r13 181r29 181r41
+185i11 k{integer} 186r14 186r31 186r47 186r60
+191i11 j{integer} 193r16
+192i14 k{integer} 193r19
+199i11 J{integer} 200r22 202r25 202r43 202r51 204r22 206r25 206r43 206r51
+. 208r22 208r40
+201i14 K{integer} 202r54 202r60
+205i14 K{integer} 206r54 206r61
+219r7 Parameters{14|71R9[25]} 222m23 223r27 224r27 225r27 226r27 227r27 228r21
+

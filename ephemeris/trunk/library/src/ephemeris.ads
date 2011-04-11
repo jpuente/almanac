@@ -1,4 +1,4 @@
---  $Id$:
+--  $Id: ephemeris.ads 98 2011-04-08 10:48:32Z jpuente $:
 -----------------------------------------------------------------------
 -- Ephemeris - Ada 2005 library for the JPL ephemerides              --
 --                                                                   --
