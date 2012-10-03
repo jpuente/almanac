@@ -1,4 +1,4 @@
---  $Id$:
+--  $Id$
 -----------------------------------------------------------------------
 -- Ephemeris - Ada 2005 library for the JPL ephemerides.             --
 --                                                                   --
@@ -25,15 +25,14 @@
 -----------------------------------------------------------------------
 generic
    type Real is digits <>;
-   Ephemeris_Number : in JPL_Ephemeris := DE200;
+   Ephemeris_Code : in JPL_Ephemeris := DE200;
 package Ephemeris.Generic_Data_File is
 
-   Record_Size : constant array (JPL_Ephemeris) of Positive
-     := (DE200 =>  826,
-         DE405 => 1018,
-         DE406 =>  728);
+   Record_Size : constant array (JPL_Ephemeris) of Natural
+     := (DE200 =>  826,  -- only this ephemeris is supported
+         others => 0);   -- other ephemerides are not supported
 
-   Data_Record_Size : constant Positive := Record_Size (Ephemeris_Number);
+   Data_Record_Size : constant Natural := Record_Size (Ephemeris_Code);
 
    -----------------------
    -- Record definition --
@@ -103,13 +102,20 @@ package Ephemeris.Generic_Data_File is
    ----------------------------
 
    procedure Get_Parameters (Parameters : out Parameter_Record);
+   --  Get parameters from ephemeris file
+
    procedure Put_Parameters (Parameters : in  Parameter_Record);
+   --  Put parameters into the ephemeris file
 
    procedure Get_Data (Record_Number   : in  Positive;
                        Data            : out Data_Record);
+   --  Get a data record from ephemeris file
+
    procedure Put_Data (Record_Number   : in  Positive;
-                       Data            : in Data_Record);
+                       Data            : in  Data_Record);
+   --  Put a data record into ephemeris file
 
    function  End_Of_Data return Boolean;
+   --  True when end of ephemeris file has been reached
 
 end Ephemeris.Generic_Data_File;

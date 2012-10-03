@@ -33,11 +33,11 @@ with Ada.Text_IO;
 procedure Ephemeris.Create is
 
    package Data_File is
-     new Ephemeris.Generic_Data_File (Real, Ephemeris_Number);
+     new Ephemeris.Generic_Data_File (Real, Ephemeris_Code);
    use Data_File;
 
    package Source_File is
-     new Ephemeris.Generic_Source_File (Real, Ephemeris_Number, Data_File);
+     new Ephemeris.Generic_Source_File (Real, Ephemeris_Code, Data_File);
 
    package Real_IO    is new Ada.Text_IO.Float_IO (Real);
    package Integer_IO is new Ada.Text_IO.Integer_IO (Integer);
@@ -81,7 +81,7 @@ begin
    else
       Output_File :=
         To_Unbounded_String
-          (Compose ("data", JPL_Ephemeris'Image (Ephemeris_Number)));
+          (Compose ("data", JPL_Ephemeris'Image (Ephemeris_Code)));
    end if;
 
    Source_File.Open (To_String (Input_File));

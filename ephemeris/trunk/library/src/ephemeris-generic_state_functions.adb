@@ -1,4 +1,4 @@
---  $Id$:
+--  $Id$s
 -----------------------------------------------------------------------
 -- Ephemeris - Ada 2005 library for the JPL ephemerides.             --
 -----------------------------------------------------------------------
@@ -24,7 +24,7 @@ with Ephemeris.Generic_Data_File;
 package body Ephemeris.Generic_State_Functions is
 
    package Data_File is
-     new Generic_Data_File (Real, Ephemeris_Number);
+     new Generic_Data_File (Real, Ephemeris_Code);
    use Data_File;
 
    --  Internal data
@@ -37,17 +37,17 @@ package body Ephemeris.Generic_State_Functions is
 
    --  Internal procedures
    procedure Interpolate (T        : Real; -- relative time (0.0..1.0)
-                         TS       : Real; -- time span for the full interval
-                         Target   : Object;
-                         Data     : Data_Record;
-                         X        : out State);
+                          TS       : Real; -- time span for the full interval
+                          Target   : Celestial_Body;
+                          Data     : Data_Record;
+                          X        : out State);
 
    -----------------------
    -- Barycentric_State --
    -----------------------
 
    function Barycentric_State
-     (Target   : Object;
+     (Target   : Celestial_Body;
       Date     : Real)
       return State
    is
@@ -141,13 +141,13 @@ package body Ephemeris.Generic_State_Functions is
    -----------------
 
    procedure Interpolate (T        : Real; -- relative time (0.0..1.0)
-                         TS       : Real; -- time span for the full interval
-                         Target   : Object;
-                         Data     : Data_Record;
-                         X        : out State)
+                          TS       : Real; -- time span for the full interval
+                          Target   : Celestial_Body;
+                          Data     : Data_Record;
+                          X        : out State)
    is
       --  target object index (1..11)
-      I     : constant Natural := Object'Pos (Target) + 1;
+      I     : constant Natural := Celestial_Body'Pos (Target) + 1;
       --  index to coefficients
       Index : Natural;
       --  beginning of coefficients

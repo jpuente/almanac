@@ -37,5 +37,5 @@
 -----------------------------------------------------------------------
 generic
    type Real is digits <>;
-   Ephemeris_Number : JPL_Ephemeris := DE200;
+   Ephemeris_Code : JPL_Ephemeris := DE200;
 procedure Ephemeris.Test;

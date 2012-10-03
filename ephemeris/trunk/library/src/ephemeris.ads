@@ -1,6 +1,6 @@
 --  $Id$:
 -----------------------------------------------------------------------
--- Ephemeris - Ada 2005 library for the JPL ephemerides              --
+-- Ephemeris - Ada library for the JPL ephemerides                   --
 --                                                                   --
 -- This package is the root of the hierarchy for the ephemeris       --
 -- library. It provides basic definitions used in other packages.    --
@@ -31,9 +31,24 @@ package Ephemeris is
 
    pragma Pure (Ephemeris);
 
-   type JPL_Ephemeris is (DE200, DE405, DE406);
+   --  List of available ephemeris files. See http://ssd.jpl.nasa.gov/
+   --  for a description of the different sets of ephemerides.
 
-   type Object is
+   type JPL_Ephemeris is (DE102,
+                          DE200, -- only this ephemris is supported
+                          DE202,
+                          DE403,
+                          DE405,
+                          DE406,
+                          DE410,
+                          DE413,
+                          DE414,
+                          DE418,
+                          DE421,
+                          DE422,
+                          DE423);
+
+   type Celestial_Body is
      (Mercury, Venus,  Earth,   Mars,  Jupiter,
       Saturn,  Uranus, Neptune, Pluto, Moon, Sun);
 

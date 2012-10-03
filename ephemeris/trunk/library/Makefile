@@ -1,6 +1,6 @@
 # $Id$
 
-GPRBUILD  = gprbuild
+GPRBUILD = gprbuild
 GPRCLEAN = gprclean
 
 all: library

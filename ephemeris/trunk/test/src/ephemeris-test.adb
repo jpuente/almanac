@@ -45,7 +45,7 @@ procedure Ephemeris.Test is
      new Ephemeris.Generic_State_Functions (Real,
                                             --  Real_Functions,
                                             Real_Arrays,
-                                            Ephemeris_Number);
+                                            Ephemeris_Code);
    use Solar_System;
 
    package Real_IO    is new Ada.Text_IO.Float_IO (Real);
@@ -56,7 +56,7 @@ procedure Ephemeris.Test is
    Data_File_Name : Unbounded_String := Null_Unbounded_String;
    Test_File      : File_Type;
 
-   Ephemeris_Name : constant String := JPL_Ephemeris'Image (Ephemeris_Number);
+   Ephemeris_Name : constant String := JPL_Ephemeris'Image (Ephemeris_Code);
 
    Tag    : String (1 .. 3);  -- test file tags
    Eph_No : String (1 .. 3);  -- ephemeris number in test file records
@@ -127,8 +127,8 @@ begin
       --  check data
       if JED >= Start_Date and JED <= End_Date
         and Target in 1 .. 11 and Center in 1 .. 11 then
-         XT := Barycentric_State (Object'Val (Target - 1), JED);
-         XC := Barycentric_State (Object'Val (Center - 1), JED);
+         XT := Barycentric_State (Celestial_Body'Val (Target - 1), JED);
+         XC := Barycentric_State (Celestial_Body'Val (Center - 1), JED);
          if Coordinate in 1 .. 3 then    -- position component
             XE := XT.Position (Coordinate) - XC.Position (Coordinate);
          elsif Coordinate in 4 .. 6 then -- velocity component

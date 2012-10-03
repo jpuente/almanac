@@ -10,7 +10,7 @@ project Ephemeris_Test is
 
    package Compiler is
       for Default_Switches ("ada") use
-        ("-gnat05", "-g", "-gnatQ", "-O1", "-gnatf", "-gnato", "-gnatwa.Xe", "-gnaty");
+        ("-gnat12", "-g", "-gnatQ", "-O1", "-gnatf", "-gnato", "-gnatwa.Xe", "-gnaty");
    end Compiler;
 
    package Binder is

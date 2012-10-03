@@ -15,10 +15,10 @@ project Ephemeris_Utilities is
       case Target is
         when "debug" =>
           for Default_Switches ("ada") use
-            ("-gnat05", "-g", "-gnatQ", "-O1", "-gnatf", "-gnato", "-gnatwa.Xe", "-gnaty");
+            ("-gnat12", "-g", "-gnatQ", "-O1", "-gnatf", "-gnato", "-gnatwa.Xe", "-gnaty");
         when "release" =>
           for Default_Switches ("ada") use
-            ("-gnat05", "-O2");
+            ("-gnat12", "-O2");
       end case;
    end Compiler;
 

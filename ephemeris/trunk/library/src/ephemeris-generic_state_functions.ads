@@ -1,4 +1,4 @@
---  $Id$:
+--  $Id$
 -----------------------------------------------------------------------
 -- Ephemeris - Ada 2005 library for the JPL ephemerides              --
 --                                                                   --
@@ -32,7 +32,7 @@ generic
 --     new Ada.Numerics.Generic_Elementary_Functions (Real);
    with package Real_Arrays is
      new Ada.Numerics.Generic_Real_Arrays (Real);
-   Ephemeris_Number : in JPL_Ephemeris := DE200;
+   Ephemeris_Code : in JPL_Ephemeris := DE200;
 
 package Ephemeris.Generic_State_Functions is
    use Real_Arrays;
@@ -44,7 +44,7 @@ package Ephemeris.Generic_State_Functions is
    --  Position and velocity are given in rectangular equatorial
    --  coordinates, in AU and AU/day
 
-   function Barycentric_State (Target   : Object;
+   function Barycentric_State (Target   : Celestial_Body;
                                Date     : Real)   -- Julian TDB Date
                                return State;
    --  Barycentric position and velocity of the target at given date,

@@ -24,9 +24,10 @@
 with Ephemeris.Generic_Data_File;
 generic
    type Real is digits <>;
-   Ephemeris_Number : in JPL_Ephemeris := DE200;
+   Ephemeris_Code : in JPL_Ephemeris := DE200;
    with package Data_File is
-     new Ephemeris.Generic_Data_File (Real, Ephemeris_Number);
+     new Ephemeris.Generic_Data_File (Real, Ephemeris_Code);
+
 package Ephemeris.Generic_Source_File is
    use Data_File;
 
