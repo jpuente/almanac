@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/repos-str/jp/!svn/ver/106/ephemeris/trunk/library
+END
+ephemeris_library.gpr
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/repos-str/jp/!svn/ver/107/ephemeris/trunk/library/ephemeris_library.gpr
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/repos-str/jp/!svn/ver/107/ephemeris/trunk/library/Makefile
+END
