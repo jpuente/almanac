@@ -12,7 +12,6 @@ project Ephemeris_Library is
    for Object_Dir      use Ephemeris_Shared'Object_Dir & "/library/";
    for Library_Dir     use Ephemeris_Shared'Library_Dir;
    for Library_Name    use Ephemeris_Shared.Name;
-   for Library_Version use "lib" & Project'Library_Name & ".so." & Ephemeris_Shared.Version;
 
    package Compiler renames Ephemeris_Shared.Compiler;
    package Linker   renames Ephemeris_Shared.Linker;
