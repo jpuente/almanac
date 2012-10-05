@@ -1,5 +1,5 @@
-with "astro.gpr";
-with "/usr/gnat/lib/gnat/aunit.gpr";
+with "../astro.gpr";
+with "/usr/local/gnat/lib/gnat/aunit.gpr";
 
 project Test is
 
