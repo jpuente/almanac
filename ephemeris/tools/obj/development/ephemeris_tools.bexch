@@ -1,0 +1,19 @@
+[GENERATED OBJECT FILE]
+b__ephemeris_tools.o
+[PROJECT FILES]
+/Users/jpuente/Proyectos/ephemeris/ephemeris/tools/ephemeris_tools.gpr
+20230328161607 c14b24b4d929b1e8bee105d4d28da49f
+/Users/jpuente/Proyectos/ephemeris/ephemeris/tools/config/ephemeris_tools_config.gpr
+20230328161619 6edda3d0ba2dd4f321b00d89586b8d3e
+[BOUND OBJECT FILES]
+/Users/jpuente/Proyectos/ephemeris/ephemeris/tools/obj/development/ephemeris_tools.o
+[GENERATED SOURCE FILES]
+b__ephemeris_tools.ads
+b__ephemeris_tools.adb
+b__ephemeris_tools.ali
+[RESULTING OPTIONS]
+-L/Users/jpuente/Proyectos/ephemeris/ephemeris/tools/obj/development/
+-L/Users/jpuente/Proyectos/ephemeris/ephemeris/tools/obj/development/
+-L/users/jpuente/.config/alire/cache/dependencies/gnat_native_11.2.4_9800548d/lib/gcc/x86_64-apple-darwin19.6.0/11.2.0/adalib/
+-static
+/users/jpuente/.config/alire/cache/dependencies/gnat_native_11.2.4_9800548d/lib/gcc/x86_64-apple-darwin19.6.0/11.2.0/adalib/libgnat.a

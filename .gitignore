@@ -1,0 +1,12 @@
+# Object file
+*.o
+
+# Ada Library Information
+*.ali
+
+# MacOS
+*.DS_Store
+
+# miscellaneous
+*backup*
+
