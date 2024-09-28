@@ -1,0 +1,10 @@
+name = "ephemeris"
+description = "Library for reading astronomical ephemerides from JPL DE200 files"
+version = "0.1.0-dev"
+
+authors = ["Juan A. de la Puente"]
+maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
+maintainers-logins = ["jpuente"]
+licenses = "GPL-3.0-or-later"
+website = ""
+tags = ["astronomy", "sun", "moon", "planets"]
