@@ -1,8 +1,6 @@
-# ephemeris
+# almanac
 
 Ada ephemeris library providing access to JPL Solar System ephemeris
+and basic functions for building almanac data
 
-No longer useful -- see the JPL Horizons system
-
-https://ssd.jpl.nasa.gov
 
