@@ -10,6 +10,7 @@ project Ephemeris_Library is
    for Library_Kind use  Ephemeris_Shared.Library_Type;
 
    for Object_Dir      use Ephemeris_Shared'Object_Dir & "/library/";
+   for Create_Missing_Dirs use "True";
    for Library_Dir     use Ephemeris_Shared'Library_Dir;
    for Library_Name    use Ephemeris_Shared.Name;
 

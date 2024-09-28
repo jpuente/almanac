@@ -11,6 +11,7 @@ project Ephemeris_Tools is
    for Main            use ("create_ephemeris.ads");
 
    for Object_Dir      use Ephemeris_Shared'Object_Dir & "/tools/";
+   for Create_Missing_Dirs use "True";
    for Exec_Dir        use Ephemeris_Shared'Exec_Dir;
 
    package Compiler renames Ephemeris_Shared.Compiler;
