@@ -24,9 +24,6 @@ The format of such files is described in
 [https://ssd.jpl.nasa.gov/pub/eph/planets/ascii/ascii_format.txt](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/ascii_format.txt).
 The [`create` folder](create/) contains a tool that can be used for this purpose. 
 
-The [`docs` folder](docs/) contains more detailed documentation on the design and
-use of the Ephemeris library.
-
 ---
 
 ## Installation
@@ -55,6 +52,12 @@ Documentation for the tests is provided [here](test/README.md).
 
 The library is intended to be used in the [astro](URL) library, 
 available from [Alire](https://alire.ada.dev).
+
+### References
+
+1. Jet Propulsion Laboratory — [Planetary and Lunar Ephemerides](https://ssd.jpl.nasa.gov/planets/eph_export.html)
+2. P.K. Seidelmann (ed.). *Explanatory Supplement to the Astronomical Almanac*. 
+   University Science Books, 2nd. ed. 1992.
 
 
 
