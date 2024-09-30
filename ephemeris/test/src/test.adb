@@ -33,7 +33,7 @@ with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 procedure Test is
 
    type Real is new Long_Long_Float;
-   Ephemeris_Code : JPL_Ephemeris := DE200;
+   Ephemeris_Code : constant JPL_Ephemeris := DE200;
 
    package Real_Arrays is
      new Ada.Numerics.Generic_Real_Arrays (Real);
@@ -98,7 +98,7 @@ begin
    Put (" --- End date = "); Put (End_Date,   8, 1, 0);
    New_Line (2);
 
-   Put_Line (" line -- jed --   t#   c#   x#   --- jpl value ---"&
+   Put_Line (" line -- jed --   t#   c#   x#   --- jpl value ---" &
             "  --- user value ---    -- difference --");
    loop
       Get (Test_File, Tag); Skip_Line (Test_File);
@@ -110,7 +110,7 @@ begin
    while not End_Of_File (Test_File) loop
       --  get test data
       Get (Test_File, Eph_No);
-      if "DE"&Eph_No /= Ephemeris_Name then
+      if "DE" & Eph_No /= Ephemeris_Name then
          raise Ephemeris_Error
            with "Wrong ephemeris number";
       end if;
@@ -124,8 +124,9 @@ begin
       Skip_Line (Test_File);
 
       --  check data
-      if JED >= Start_Date and JED <= End_Date
-        and Target in 1 .. 11 and Center in 1 .. 11 then
+      if JED >= Start_Date and then JED <= End_Date
+        and then Target in 1 .. 11 and then Center in 1 .. 11
+      then
          XT := Barycentric_State (Celestial_Body'Val (Target - 1), JED);
          XC := Barycentric_State (Celestial_Body'Val (Center - 1), JED);
          if Coordinate in 1 .. 3 then    -- position component
@@ -134,7 +135,7 @@ begin
             XE := XT.Velocity (Coordinate - 3) - XC.Velocity (Coordinate - 3);
          else
             raise Ephemeris_Error
-              with "Bad coordinate number";
+                 with "Bad coordinate number";
          end if;
          Diff := abs (XI - XE);
          --  write data
@@ -160,11 +161,10 @@ begin
    Close_Data;
    Close (Test_File);
 
-   if (OK) then
+   if OK then
       Put_Line ("TEST SUCEEDED");
    else
       Put_Line ("TEST FAILED -- see details above");
    end if;
    Put_Line ("*** End of test *** ");
 end Test;
-

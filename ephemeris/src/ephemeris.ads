@@ -15,7 +15,7 @@ package Ephemeris is
 
    pragma Pure (Ephemeris);
 
-   --  List of available ephemeris files. 
+   --  List of available ephemeris files.
    --  See https://ssd.jpl.nasa.gov/planets/eph_export.html for more
    --  information on JPL ephemeris files.
 

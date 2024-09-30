@@ -6,7 +6,7 @@
 -- WARNING:                                                          --
 --     This version has only been tested with the DE200 ephemeris    --
 -----------------------------------------------------------------------
-with EPhemeris; use Ephemeris;
+with Ephemeris; use Ephemeris;
 with Ephemeris.Generic_Data_File;
 with Ephemeris.Generic_Source_File;
 
@@ -19,8 +19,8 @@ with Ada.Text_IO;
 
 procedure Create is
 
-   type Real is new LONG_LONG_FLOAT;
-   Ephemeris_Code : JPL_Ephemeris := DE200;
+   type Real is new Long_Long_Float;
+   Ephemeris_Code : constant JPL_Ephemeris := DE200;
 
    package Data_File is
      new Ephemeris.Generic_Data_File (Real, Ephemeris_Code);
@@ -113,9 +113,9 @@ begin
       --  Skip this data record if the end of the interval is less than
       --  the specified start time or if it does not begin where the
       --  previous block ended.
-      if    Data (1) >= Last_Date
-        and Data (2) <= T2
-        and Data (2) >= T1
+      if Data (1) >= Last_Date
+        and then Data (2) <= T2
+        and then Data (2) >= T1
       then
          if Data (1) /= Last_Date then
             --  Beginning of current interval is past the end

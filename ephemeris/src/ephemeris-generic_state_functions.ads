@@ -20,7 +20,7 @@ generic
    with package Real_Arrays is
      new Ada.Numerics.Generic_Real_Arrays (Real);
 
-   Ephemeris_Code : in JPL_Ephemeris := DE200;
+   Ephemeris_Code : JPL_Ephemeris := DE200;
 
 package Ephemeris.Generic_State_Functions is
    use Real_Arrays;
@@ -50,7 +50,7 @@ package Ephemeris.Generic_State_Functions is
    function End_Date return Real;
    --  Final date for ephemeris data
 
-   procedure Open_Data (Data_File_Name : in String);
+   procedure Open_Data (Data_File_Name : String);
    --  Open data file
 
    procedure Close_Data;

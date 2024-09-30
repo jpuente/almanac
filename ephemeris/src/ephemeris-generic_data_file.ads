@@ -13,7 +13,7 @@
 generic
 
    type Real is digits <>;
-   Ephemeris_Code : in JPL_Ephemeris := DE200;
+   Ephemeris_Code : JPL_Ephemeris := DE200;
 
 package Ephemeris.Generic_Data_File is
 
@@ -93,15 +93,15 @@ package Ephemeris.Generic_Data_File is
    procedure Get_Parameters (Parameters : out Parameter_Record);
    --  Get parameters from ephemeris file
 
-   procedure Put_Parameters (Parameters : in  Parameter_Record);
+   procedure Put_Parameters (Parameters : Parameter_Record);
    --  Put parameters into the ephemeris file
 
-   procedure Get_Data (Record_Number   : in  Positive;
+   procedure Get_Data (Record_Number   : Positive;
                        Data            : out Data_Record);
    --  Get a data record from ephemeris file
 
-   procedure Put_Data (Record_Number   : in  Positive;
-                       Data            : in  Data_Record);
+   procedure Put_Data (Record_Number   : Positive;
+                       Data            : Data_Record);
    --  Put a data record into ephemeris file
 
    function  End_Of_Data return Boolean;

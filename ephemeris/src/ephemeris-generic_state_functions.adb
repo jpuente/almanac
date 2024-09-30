@@ -51,23 +51,23 @@ package body Ephemeris.Generic_State_Functions is
       TS        : Real renames Interval;   -- time span of data record
       XT        : State;                   -- target state
       XM        : State;                   -- Moon state
-      EM_Factor : constant Real   := 1.0/(1.0 + EM_Ratio);
+      EM_Factor : constant Real   := 1.0 / (1.0 + EM_Ratio);
    begin
       --  Check that there are ephemeris data for the given date.
-      if Date < Start_Date or Date > End_Date then
+      if Date < Start_Date or else Date > End_Date then
          raise Date_Error;
       end if;
 
       --  Get ephemeris data record.
       if Date < End_Date then
-         N_Record := Natural (Real'Floor ((Date - Start_Date)/Interval)) + 1;
+         N_Record := Natural (Real'Floor ((Date - Start_Date) / Interval)) + 1;
       else
-         N_Record := Natural (Real'Floor ((Date - Start_Date)/Interval));
+         N_Record := Natural (Real'Floor ((Date - Start_Date) / Interval));
       end if;
       Get_Data (N_Record, Data);
 
       --  Compute relative time within data record interval.
-      T := (Date - T0)/(T1 - T0);
+      T := (Date - T0) / (T1 - T0);
 
       --  Interpolate barycentric state of object
       case Target is
@@ -76,13 +76,13 @@ package body Ephemeris.Generic_State_Functions is
          when Earth =>
             Interpolate (T, TS, Earth, Data, XT);
             Interpolate (T, TS, Moon, Data, XM);
-            XT.Position := XT.Position - XM.Position*EM_Factor;
-            XT.Velocity := XT.Velocity - XM.Velocity*EM_Factor;
+            XT.Position := XT.Position - XM.Position * EM_Factor;
+            XT.Velocity := XT.Velocity - XM.Velocity * EM_Factor;
          when Moon =>
             Interpolate (T, TS, Earth, Data, XT);
             Interpolate (T, TS, Moon, Data, XM);
-            XT.Position := XT.Position + XM.Position*(1.0 - EM_Factor);
-            XT.Velocity := XT.Velocity + XM.Velocity*(1.0 - EM_Factor);
+            XT.Position := XT.Position + XM.Position * (1.0 - EM_Factor);
+            XT.Velocity := XT.Velocity + XM.Velocity * (1.0 - EM_Factor);
       end case;
 
       --  Return normalized position and velocity values
@@ -165,22 +165,22 @@ package body Ephemeris.Generic_State_Functions is
       G  :=
         Natural (Real'Truncation ((Real (NG) * T - Real'Truncation (T)))) + 1;
       TC :=
-        2.0*((Real (NG) * T - Real'Truncation (Real (NG) * T))
+        2.0 * ((Real (NG) * T - Real'Truncation (Real (NG) * T))
              + Real'Truncation (T)) - 1.0;
 
       --  evaluate Chebyshev polynomials and derivatives
       P := (1.0, TC, others => 0.0);
       for K in 3 .. NC loop
-         P (K) := 2.0*TC*P (K - 1) - P (K - 2);
+         P (K) := 2.0 * TC * P (K - 1) - P (K - 2);
       end loop;
 
-      PP := (0.0, 1.0, 4.0*TC, others => 0.0);
+      PP := (0.0, 1.0, 4.0 * TC, others => 0.0);
       for k in 4 .. NC loop
-         PP (k) := 2.0*TC*PP (k - 1) + 2.0*P (k - 1) - PP (k - 2);
+         PP (k) := 2.0 * TC * PP (k - 1) + 2.0 * P (k - 1) - PP (k - 2);
       end loop;
 
       --  copy Chebyshev coefficients from data record
-      Index := I0 + (G - 1)*NM*NC;
+      Index := I0 + (G - 1) * NM * NC;
       for j in 1 .. NM loop
          for k in 1 .. NC loop
             C (j)(k) := Data (Index);
@@ -192,11 +192,11 @@ package body Ephemeris.Generic_State_Functions is
       for J in 1 .. NM loop
          X.Position (J) := 0.0;
          for K in 1 .. NC loop
-            X.Position (J) := X.Position (J) + C (J)(K)*P (K);
+            X.Position (J) := X.Position (J) + C (J)(K) * P (K);
          end loop;
          X.Velocity (J) := 0.0;
          for K in 1 .. NC loop
-            X.Velocity (J) := X.Velocity (J) + C (J)(K)*PP (K);
+            X.Velocity (J) := X.Velocity (J) + C (J)(K) * PP (K);
          end loop;
          X.Velocity (J) := X.Velocity (J) * 2.0 * Real (NG) / TS;
       end loop;
@@ -207,7 +207,7 @@ package body Ephemeris.Generic_State_Functions is
    -- Initialize --
    ----------------
 
-   procedure Open_Data (Data_File_Name : in String)
+   procedure Open_Data (Data_File_Name : String)
    is
       Parameters : Parameter_Record;
    begin

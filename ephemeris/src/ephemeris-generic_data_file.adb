@@ -33,7 +33,7 @@ package body Ephemeris.Generic_Data_File is
    for Byte'Size use 8;
 
    type Padding is array (Natural range <>) of Byte;
-   Slack : constant Natural := (Data_Record'Size - Parameter_Record'Size)/8;
+   Slack : constant Natural := (Data_Record'Size - Parameter_Record'Size) / 8;
    pragma Pack (Padding);
 
    type Header_Record is record
@@ -105,7 +105,7 @@ package body Ephemeris.Generic_Data_File is
    -- Put_Parameters --
    --------------------
 
-   procedure Put_Parameters (Parameters : in Parameter_Record)
+   procedure Put_Parameters (Parameters : Parameter_Record)
    is
       Header : Header_Record;
       Buffer : Data_Record;
@@ -119,7 +119,7 @@ package body Ephemeris.Generic_Data_File is
    -- Get_Data --
    --------------
 
-   procedure Get_Data (Record_Number   : in  Positive;
+   procedure Get_Data (Record_Number   : Positive;
                        Data            : out Data_Record)
    is
       --  Skip header record
@@ -132,8 +132,8 @@ package body Ephemeris.Generic_Data_File is
    -- Put_Data --
    --------------
 
-   procedure Put_Data (Record_Number   : in  Positive;
-                       Data            : in  Data_Record)
+   procedure Put_Data (Record_Number   : Positive;
+                       Data            : Data_Record)
    is
       --  Skip header record
       N : constant Positive_Count := Positive_Count (Record_Number + 1);

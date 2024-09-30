@@ -186,7 +186,7 @@ package body Ephemeris.Generic_Source_File is
       Get (Input, Text);
       if Text /= Tag then
          raise Error
-           with "Expected tag "&Tag& "not found";
+           with "Expected tag " & Tag & "not found";
       end if;
    end Get_Tag;
 
@@ -198,7 +198,7 @@ package body Ephemeris.Generic_Source_File is
       loop
          Look_Ahead (Input, C, EOL);
          exit when not EOL
-           and then (Is_Graphic (C) and C /= ' ');
+           and then (Is_Graphic (C) and then C /= ' ');
          if EOL then
             Skip_Line (Input);
          else
