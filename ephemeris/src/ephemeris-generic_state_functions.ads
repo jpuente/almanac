@@ -1,37 +1,25 @@
---  $Id: ephemeris-generic_state_functions.ads 107 2012-10-03 18:33:09s $
 -----------------------------------------------------------------------
--- Ephemeris - Ada 2005 library for the JPL ephemerides              --
+-- Ephemeris - Ada library for the JPL ephemerides.                  --
 --                                                                   --
 -- This package provides basic functions for computing the state     --
--- of solar system bodies.                                           --
--- This is a generic version of the package                          --
------------------------------------------------------------------------
---  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
---  This unit was originally developed by Juan A. de la Puente.      --
------------------------------------------------------------------------
--- This library is free software; you can redistribute it and/or     --
--- modify it under the terms of the GNU General ~Public               --
--- License as published by the Free Software Foundation; either      --
--- version 2 of the License, or (at your option) any later version.  --
+-- of solar system bodies from data in a binary ephemerides fil      --
 --                                                                   --
--- This library is distributed in the hope that it will be useful,   --
--- but WITHOUT ANY WARRANTY; without even the implied warranty of    --
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU --
--- General Public License for more details.                          --
---                                                                   --
--- You should have received a copy of the GNU General Public         --
--- License along with this library; if not, write to the             --
--- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
--- Boston, MA 02111-1307, USA.                                       --
+-- WARNING:                                                          --
+--     This version only works with the DE200 ephemeris              --
 -----------------------------------------------------------------------
+--  Copyright (C) 2024 Juan A. de la Puente                          --
+--  Distributed under GPL 3.0                                        --
+-----------------------------------------------------------------------
+
 with Ada.Numerics.Generic_Real_Arrays;
 
 generic
+
    type Real is digits <>;
---   with package Real_Functions is
---     new Ada.Numerics.Generic_Elementary_Functions (Real);
+
    with package Real_Arrays is
      new Ada.Numerics.Generic_Real_Arrays (Real);
+
    Ephemeris_Code : in JPL_Ephemeris := DE200;
 
 package Ephemeris.Generic_State_Functions is

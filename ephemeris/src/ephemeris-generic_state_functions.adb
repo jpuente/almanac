@@ -1,26 +1,18 @@
---  $Id: ephemeris-generic_state_functions.adb 107 2012-10-03 18:33:09Z s $s
 -----------------------------------------------------------------------
--- Ephemeris - Ada 2005 library for the JPL ephemerides.             --
------------------------------------------------------------------------
---  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
---  This unit was originally developed by Juan A. de la Puente.      --
------------------------------------------------------------------------
--- This library is free software; you can redistribute it and/or     --
--- modify it under the terms of the GNU General Public               --
--- License as published by the Free Software Foundation; either      --
--- version 2 of the License, or (at your option) any later version.  --
+-- Ephemeris - Ada library for the JPL ephemerides.                  --
 --                                                                   --
--- This library is distributed in the hope that it will be useful,   --
--- but WITHOUT ANY WARRANTY; without even the implied warranty of    --
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU --
--- General Public License for more details.                          --
+-- This package provides basic functions for computing the state     --
+-- of solar system bodies from data in a binary ephemerides fil      --
 --                                                                   --
--- You should have received a copy of the GNU General Public         --
--- License along with this library; if not, write to the             --
--- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
--- Boston, MA 02111-1307, USA.                                       --
+-- WARNING:                                                          --
+--     This version only works with the DE200 ephemeris              --
 -----------------------------------------------------------------------
+--  Copyright (C) 2024 Juan A. de la Puente                          --
+--  Distributed under GPL 3.0                                        --
+-----------------------------------------------------------------------
+
 with Ephemeris.Generic_Data_File;
+
 package body Ephemeris.Generic_State_Functions is
 
    package Data_File is
