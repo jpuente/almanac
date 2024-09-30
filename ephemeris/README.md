@@ -22,7 +22,7 @@ can be generated as convenient from ASCII files downloaded
 from the JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/)).
 The format of such files is described in 
 [https://ssd.jpl.nasa.gov/pub/eph/planets/ascii/ascii_format.txt](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/ascii_format.txt).
-The [`tools` folder](tools/) contains a [`create` tool](tools/create/) that can be used for this purpose. 
+The [`create` folder](create/) contains a tool that can be used for this purpose. 
 
 The [`docs` folder](docs/) contains more detailed documentation on the design and
 use of the Ephemeris library.
