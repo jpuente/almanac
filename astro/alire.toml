@@ -1,0 +1,16 @@
+name = "astro"
+description = "Library for astronomical calculations"
+version = "0.1.0-dev"
+
+authors = ["Juan A. de la Puente"]
+maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
+maintainers-logins = ["jpuente"]
+licenses = "GPL-3.0-or-later"
+website = ""
+tags = []
+
+[[ depends-on ]]
+ephemeris = "*"
+
+[[ pins ]]
+ephemeris = { path = "../ephemeris"}
