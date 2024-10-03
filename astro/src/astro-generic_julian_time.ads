@@ -12,6 +12,7 @@ with Ada.Calendar;
 generic
    type Real is digits <>;
 package Astro.Generic_Julian_Time is
+
    --  Julian time is counted in days from noon on January 1, 4713 BC.
    --  This way of counting time was proposed by J. J. Scaliger
    --  in 1583 and is commonly used in astronomical calculations.
@@ -24,8 +25,13 @@ package Astro.Generic_Julian_Time is
    --          or 1st January 2000, noon TT
    --          (equivalent to 1st January 2000 11:58:55.816 UTC)
 
+   --  Calendar time date is assumed to be Gregorian.
+   --  Time value is assumed ot be based on any
+   --  UT-like scale (UTC, UT1, TT, etc.). The corresponding
+   --  Julian date is based on the same scale.
+
    function Date_Of (T : Ada.Calendar.Time) return Date;
+
    function Time_Of (D : Date) return Ada.Calendar.Time;
-   --  Ada.Calendar.Time is assumed to be UTC
 
 end Astro.Generic_Julian_Time;

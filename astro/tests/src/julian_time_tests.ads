@@ -15,7 +15,7 @@ package Julian_Time_Tests is
    overriding function Name
       (T : Julian_Time_Test_Case) return Message_String;
 
-   overriding procedure Set_Up 
+   overriding procedure Set_Up
       (T : in out Julian_Time_Test_Case);
 
    overriding procedure Register_Tests
