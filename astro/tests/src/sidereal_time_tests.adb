@@ -8,8 +8,6 @@
 with Ada.Numerics.Generic_Elementary_Functions;
 with Ada.Numerics.Generic_Real_Arrays;
 
-with Ada.Text_IO;
-
 with AUnit.Assertions; use AUnit.Assertions;
 
 with Astro.Generic_Julian_Time;
@@ -18,7 +16,7 @@ with Astro.Generic_Frame_Transformations;
 
 package body Sidereal_Time_Tests is
 
-   type Real is new Long_Float;
+   type Real is new Long_Long_Float;
 
    package Real_Functions is
       new Ada.Numerics.Generic_Elementary_Functions (Real);
@@ -55,16 +53,26 @@ package body Sidereal_Time_Tests is
    -- Set_Up --
    ------------
 
-   D0 : Date;
-   T0, T1, T2 : Time;
+   Max_Error : constant Real := 0.1;
+
+   JD1, JD2, JD3         : Date;
+   GMST1, GMST2, GMST3   : Time;
+   GAST1, GAST2, GAST3   : Time;
 
    overriding procedure Set_Up
       (T : in out Sidereal_Time_Test_Case) is
    begin
-      D0 := 2_451_545.0;  -- J2000.0 = 2000.01.01 12:00:00
-      T0 := 67311.0;      -- GST 18:41:51   
-      T1 := 67309.6974;   -- GAST 18:41:49.6974
-      T2 := 67310.5494;   -- GMST 18:41:50.5494
+      JD1   := 2_460_587.0;   -- 2024.10.03 12:00:00
+      GMST1 := 46_244.1871;   -- 12:50:44.1871
+      GAST1 := 46_244.0267;   -- 12:50:44.0267
+
+      JD2   := 2_458_849.5;   -- 2020.01.01 00:00:00
+      GMST2 := 24_029.2343;   -- 06:40:29.2343
+      GAST2 := 24_028.2256;   -- 06:40:28.2256
+
+      JD3   := 2_462_683.25;  -- 2030.06.30 18:00:00
+      GMST3 := 45_323.379;    -- 12:35:23.3790
+      GAST3 := 45_324.431;    -- 12:35:24.4310
    end Set_Up;
 
    --------------------
@@ -75,31 +83,38 @@ package body Sidereal_Time_Tests is
       use Test_Cases.Registration;
    begin
       Register_Routine
-        (T, Test_GMST'Access, "GMST calculation");
+        (T, Test_GMST'Access, "GMST");
       Register_Routine
-        (T, Test_GST'Access, "GAST calculation");
+        (T, Test_GAST'Access, "GAST");
    end Register_Tests;
 
    --------------------
    --  Test routines --
    --------------------
 
-   function Absolute_Error (X, Y : Time) return Real is
-      Z : Real;
+   --  Compare time values  --
+
+   function Equals (X, Y : Time) return Boolean is
    begin
-      Z := Abs (X - Y);
-      Ada.Text_IO.Put_Line (">>> " & X'Image & "---" & Y'Image & "---" & Z'Image);
-      return Abs (X - Y);
-   end Absolute_Error;
+      return abs (X - Y) <= Max_Error;
+   end Equals;
+
+   --  Test_GMST  --
 
    procedure Test_GMST (T : in out Test_Case'Class) is
    begin
-      Assert (Absolute_Error(GMST(D0), T2) <= 1.0E-3, "GMST calculation is incorrect");
+      Assert (Equals (GMST (JD1), GMST1), "Incorrect GMST calculation");
+      Assert (Equals (GMST (JD2), GMST2), "Incorrect GMST calculation");
+      Assert (Equals (GMST (JD3), GMST3), "Incorrect GMST calculation");
    end Test_GMST;
 
-   procedure Test_GST  (T : in out Test_Case'Class) is
+   --  Test GAST  --
+
+   procedure Test_GAST  (T : in out Test_Case'Class) is
    begin
-      Assert (Absolute_Error(GST (D0), T1) <= 1.0E-3, "GAST calculation is incorrect");
-   end Test_GST;
+      Assert (Equals (GAST (JD1), GAST1), "Incorrect GAST calculation");
+      Assert (Equals (GAST (JD2), GAST2), "Incorrect GAST calculation");
+      Assert (Equals (GAST (JD3), GAST3), "Incorrect GAST calculation");
+   end Test_GAST;
 
 end Sidereal_Time_Tests;

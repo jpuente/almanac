@@ -21,23 +21,22 @@ generic
    with package Real_Arrays is
      new Ada.Numerics.Generic_Real_Arrays (Real);
    with package Julian_Time is
-     new Astro.Generic_Julian_Time(Real);
+     new Astro.Generic_Julian_Time (Real);
    with package Frame_Transformations is
      new Astro.Generic_Frame_Transformations
        (Real, Real_Functions, Real_Arrays, Julian_Time);
 
 package Astro.Generic_Sidereal_Time is
-   -- For maximum precision Julian dates should be based on UT1 or TT.
-   -- UTC-based Julian dates are acceptable for precision <= 1s.
+   --  Julian dates are assumed to be UTC
 
-   subtype Time is Real range 0.0..86_400.0;
-   -- Sidereal time in seconds. Equals the number of seconds elapsed since
-   -- the transit of the vernal point (Aries).
+   subtype Time is Real range 0.0 .. 86_400.0;
+   --  Sidereal time in seconds. Equals the number of seconds elapsed since
+   --  the transit of the vernal point (Aries).
 
-   function GMST (D: Julian_Time.Date) return Time;
-   -- Greenwich Mean Sidereal Time in seconds.
+   function GMST (JD : Julian_Time.Date) return Time;
+   --  Greenwich Mean Sidereal Time in seconds.
 
-   function GST  (D: Julian_Time.Date) return Time;
-   -- Greenwich Apparent Sidereal Time in seconds.
+   function GAST  (JD : Julian_Time.Date) return Time;
+   --  Greenwich Apparent Sidereal Time in seconds.
 
 end Astro.Generic_Sidereal_Time;

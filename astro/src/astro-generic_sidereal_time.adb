@@ -3,38 +3,74 @@
 --                                                                   --
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
+--                                                                   --
+--  References :                                                     --
+--  Kaplan, G. (2005), US Naval Observatory Circular 179.            --
 -----------------------------------------------------------------------
 
 package body Astro.Generic_Sidereal_Time is
-   -- Reference: Explanatory Supplemment to the Astronomical Almanac (ESAA),
-   -- pp. 50-53 & 109-120
 
-   -- use Numerics;
+   --  References :  
+   --  Kaplan, G. (2005), US Naval Observatory Circular 179.
+
    package Julian renames Julian_Time;
-   use type Julian.Date;
 
-   function Floor(X : Real) return Real
-                  renames Real'Base'Floor;
+   function Floor (X : Real) return Real
+      renames Real'Base'Floor;
 
-   T0    : constant Julian.Date := Julian.Epoch;
+   JD0     : constant Julian.Date := Julian.Epoch;
+
+   ------------------
+   --  Time scales --
+   ------------------
+
+   --  difference TT - UT in seconds;
+   Delta_T : constant Real := 32.184 + 37.000 + 0.1;
+
+   --  source: IERS bulletin A 2024.10.03
+   --  TT := TAI + 32.184 s
+   --  DUT1= (UT1-UTC) transmitted with time signals                         
+   --          = +0.1 seconds beginning 5 September 2024 at 0000 UTC             
+   --      Beginning 1 January 2017:                                             
+   --         TAI-UTC = 37.000 000 seconds 
+   --  TDB is approximated by TT  
 
    ----------
    -- GMST --
    ----------
 
-   function GMST (D : Julian.Date) return Time
+   function GMST (JD : Julian.Date) return Time
    is
-      T    : Real;
-      S    : Real;
+      JD_TT, JD_TDB : Julian.Date;
+      DT, T         : Julian.Date;
+      Theta, S      : Real;
    begin
-      T := (D - T0) / 36525.0;         -- Julian centuries (UT) since epoch
-      S := 67_310.54841
-        + 8_640_184.812866 * T
-          + 3_155_760_000.0 * T
-            + 0.093_104 * T**2
-              - 6.2E-6 * T**3;         -- Sidereal time in seconds
-      if S < 0.0 or S >= 86400.0 then
-         S := S - Floor(S/86400.0)*86400.0;
+      --  Time scales
+      JD_TT  := JD + (Delta_T / 86_400.0); -- days
+      JD_TDB := JD_TT;  
+
+      --  Julian days (UT) since epoch
+      DT := JD - JD0;
+
+      --  Julian centuries (TT) since epoch
+      T := (JD_TDB - JD0) / 36525.0;
+
+      --  Earth rotation angle
+      Theta := 0.7790572732640 + 1.00273781191135448 * DT; -- rotations
+      Theta := ( Theta - Floor (Theta) ) * 360.0;          -- degrees 
+
+      --  Precession in RA of the equinox in arcseconds
+      S := 0.014506 + 4612.156534 * T + 1.3915817 * T**2
+         - 0.00000044 * T**3 - 0.000029956 * T**4 - 0.0000000368 * T**5; 
+
+      --  GMST 
+      S := S / 3600.0 + Theta;                    -- degrees
+      S := (S - Floor (S/360.0) * 360.0) / 15.0;  -- hours
+      S := S*3600.0;                              -- seconds
+
+      -- Normalize
+      if S < 0.0 or else S >= 86400.0 then
+         S := S - Floor (S / 86400.0) * 86400.0;
       end if;
 
       return S;
@@ -45,41 +81,47 @@ package body Astro.Generic_Sidereal_Time is
    -- Equation of the equinoxes --
    -------------------------------
 
-   function Equinoxes(D: Julian.Date) return Real
+   function Equinoxes (JD : Julian.Date) return Real
    is
+
       use Frame_Transformations;
       use Real_Functions;
 
-      deg : constant := 360.0;
+      T  : Julian.Date;
 
       Epsilon, Epsilon_0       : Real;
       Delta_Psi, Delta_Epsilon : Real;
-      T  : Real;
-      EE : Real;
-   begin
-      -- Mean obliquity of ecliptic
-      T := (D - Julian_Time.Epoch)/36525.0; -- Julian centuries
-      Epsilon_0 := 23.439291 - 0.0130042*T
-        - 0.163889E-6*T**2 + 0.503611E-6*T**3;
+      EE                       : Real;
 
-      -- Nutation angles and true obliquity
-      Get_Nutation_Angles(D, Delta_Psi, Delta_Epsilon);
+   begin
+
+      T := (JD - Julian.Epoch) / 36525.0; -- Julian centuries
+
+      --  Mean obliquity of ecliptic
+      Epsilon_0 := 23.439291 - 0.0130042 * T
+        - 0.163889E-6 * T**2 + 0.503611E-6 * T**3;
+
+      --  Nutation angles and true obliquity
+      Get_Nutation_Angles (JD, Delta_Psi, Delta_Epsilon);
+
       Epsilon   := Epsilon_0 + Delta_Epsilon;
 
-      -- Equation of the equinoxes in seconds
-      EE := Delta_Psi*cos(Epsilon,360.0)*86_400.0/360.0;
+      --  Equation of the equinoxes in seconds
+      EE := Delta_Psi * Cos (Epsilon, 360.0) * 86_400.0 / 360.0;
+
       return EE;
+
    end Equinoxes;
 
    ----------
-   -- GST --
+   -- GAST --
    ----------
 
-   function GST (D: Julian.Date)  return Time is
+   function GAST (JD : Julian.Date) return Time is
       Theta : Time;
    begin
-      Theta     := GMST(D) + Equinoxes(D);
+      Theta := GMST (JD) + Equinoxes (JD);
       return Theta;
-   end GST;
+   end GAST;
 
 end Astro.Generic_Sidereal_Time;

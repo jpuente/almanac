@@ -24,6 +24,6 @@ package Sidereal_Time_Tests is
    --  Test routines
 
    procedure Test_GMST (T : in out Test_Case'Class);
-   procedure Test_GST  (T : in out Test_Case'Class);
+   procedure Test_GAST (T : in out Test_Case'Class);
 
 end Sidereal_Time_Tests;
