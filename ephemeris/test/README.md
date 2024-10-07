@@ -1,6 +1,6 @@
 # Ephemeris test
 
-![Alire](https://img.shields.io/endpoint?url=https://alire.ada.dev/badges/ephemeris.json)](https://alire.ada.dev/crates/ephemeris.html)
+[![Alire](https://img.shields.io/endpoint?url=https://alire.ada.dev/badges/ephemeris.json)](https://alire.ada.dev/crates/ephemeris.html)
 [![GitHub release](https://img.shields.io/github/release/jpuente/ephemeris.svg)](https://github.com/jpuente/ephemeris/releases/latest)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
