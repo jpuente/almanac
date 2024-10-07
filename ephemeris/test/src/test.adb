@@ -51,6 +51,7 @@ procedure Test is
    Data_File_Name : Unbounded_String := Null_Unbounded_String;
    Test_File      : File_Type;
 
+   Test_Data_Name : constant String := "testpo.200";
    Ephemeris_Name : constant String := JPL_Ephemeris'Image (Ephemeris_Code);
 
    Tag    : String (1 .. 3);  -- test file tags
@@ -74,9 +75,7 @@ begin
    if Argument_Count > 0 then
       Test_File_Name := To_Unbounded_String (Full_Name (Argument (1)));
    else
-      Put_Line ("-- Usage: test_ephemeris test_file [data_file]");
-      Set_Exit_Status (Failure);
-      return;
+      Test_File_Name := To_Unbounded_String (Compose ("data", Test_Data_Name));
    end if;
 
    if Argument_Count > 1 then
