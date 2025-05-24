@@ -6,8 +6,8 @@ authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
 maintainers-logins = ["jpuente"]
 licenses = "GPL-3.0-or-later"
-website = ""
-tags = []
+website = "https://github.com/jpuente/almanac/"
+tags = ["astronomy", "sun", "moon", "planets"]
 
 executables = ["create"]
 

@@ -1,18 +1,13 @@
-<!---
-![Alire](https://img.shields.io/endpoint?url=https://alire.ada.dev/badges/euler_tools.json)](https://alire.ada.dev/crates/ephemeris.html)
-[![Alire CI/CD](https://img.shields.io/endpoint?url=https://alire-crate-ci.ada.dev/badges/euler_tools.json)](https://alire-crate-ci.ada.dev/crates/euler_tools.html)
-![unit-test](https://github.com/rocher/euler_tools/actions/workflows/unit-test.yml/badge.svg)
-[![GitHub release](https://img.shields.io/github/release/rocher/euler_tools.svg)](https://github.com/rocher/euler_tools/releases/latest)
-[![License](https://img.shields.io/github/license/rocher/euler_tools.svg?color=blue)](https://github.com/rocher/euler_tools/blob/master/LICENSE)
--->
-
 # Ephemeris create
 
- *Create a binary ephemeris file*
+[![Alire](https://img.shields.io/endpoint?url=https://alire.ada.dev/badges/ephemeris.json)](https://alire.ada.dev/crates/ephemeris.html)
+[![GitHub release](https://img.shields.io/github/release/jpuente/ephemeris.svg)](https://github.com/jpuente/ephemeris/releases/latest)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-The `create` utility creates a binary ephemeris file to be used
-with the Ephemeris library from an asci file downloaded from
-the [JPL ephemeris server](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/).
+>*Create a binary ephemeris file*
+
+The `create` utility creates a binary ephemeris file
+from an ascii file downloaded from the [JPL ephemeris server](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/).
 
 ---
 
