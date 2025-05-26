@@ -140,6 +140,9 @@ package body Ephemeris.Generic_Source_File is
       end loop;
       --  advance to start of data
       Get_Tag ("GROUP"); Get_Tag ("1070"); Skip_Blanks;
+
+   exception
+      when others => raise Error with "Error in parameters";
    end Get_Parameters;
 
    --------------
@@ -164,6 +167,8 @@ package body Ephemeris.Generic_Source_File is
       end loop;
       Skip_Numbers;
       Skip_Blanks;
+   exception
+      when others => raise Error with "Error in data record " & Record_Number'Image & " " & Record_Size'Image;
    end Get_Data;
 
    -----------------

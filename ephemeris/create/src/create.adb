@@ -105,7 +105,11 @@ begin
    N_Record  := 0;
 
    while not Source_File.End_Of_File loop
+
+      -- Put ("Get data record " & N'Image); New_Line;
       Source_File.Get_Data (N, Size, Data);
+      -- Put ("Read data record " & N'Image); New_Line; ------------------------
+
       --  Set last date for first record.
       if N_Record = 0 then
          Last_Date := Data (1);

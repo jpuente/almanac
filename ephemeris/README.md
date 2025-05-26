@@ -11,7 +11,7 @@ out of a binary file compiled from [JPL ephemerides](https://ssd.jpl.nasa.gov/pl
 currently supports the DE200 ephemeris, which provides enough precision
 por celestial navigation computations. 
 
-The library is intended to be used in the [astro](URL) library, 
+The library is intended to be used in the [astro](https://alire.ada.dev/crates/astro) library, 
 also available from [Alire](https://alire.ada.dev).
 
 ---
@@ -35,7 +35,7 @@ alr build
 ./bin/test
 ```
 
-Documentation for the tests is provided [here](test/README.md).
+Documentation for the tests can be found in the [README file](test/README.md) of the test directory.
 
 ---
 ## Design

@@ -39,7 +39,6 @@ procedure Test is
      new Ada.Numerics.Generic_Real_Arrays (Real);
    package Solar_System is
      new Ephemeris.Generic_State_Functions (Real,
-   --  Real_Functions,
        Real_Arrays,
        Ephemeris_Code);
    use Solar_System;
@@ -75,7 +74,7 @@ begin
    if Argument_Count > 0 then
       Test_File_Name := To_Unbounded_String (Full_Name (Argument (1)));
    else
-      Test_File_Name := To_Unbounded_String (Compose ("data", Test_Data_Name));
+      Test_File_Name := To_Unbounded_String (Compose ("data/", Test_Data_Name));
    end if;
 
    if Argument_Count > 1 then
@@ -83,15 +82,17 @@ begin
    elsif Ada.Environment_Variables.Exists ("EPHEMERIS") then
       Data_File_Name := To_Unbounded_String (Value ("EPHEMERIS"));
    else
-      Data_File_Name := To_Unbounded_String (Compose ("data", Ephemeris_Name));
+      Data_File_Name := To_Unbounded_String (Compose ("data/", Ephemeris_Name));
    end if;
 
    Open (Test_File, In_File, To_String (Test_File_Name));
    Open_Data (To_String (Data_File_Name));
 
    --  Write header and start test
-   Put ("*** Test JPL Ephemeris " & Ephemeris_Name & " ***");
-   New_Line;
+   Put ("*** Test JPL Ephemeris " & Ephemeris_Name & " ***"); New_Line;
+ --  Put ("*** Test file          " & To_String (Test_File_Name) & " ***"); New_Line;
+ --  Put ("*** Data file          " & To_String (Data_File_Name) & " ***"); New_Line;
+ 
    --  Start and end dates
    Put ("Start date = ");    Put (Start_Date, 8, 1, 0);
    Put (" --- End date = "); Put (End_Date,   8, 1, 0);
