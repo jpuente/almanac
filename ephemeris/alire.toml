@@ -6,5 +6,5 @@ authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
 maintainers-logins = ["jpuente"]
 licenses = "GPL-3.0-or-later"
-website = "https://github.com/jpuente/almanac/"
+website = "https://github.com/jpuente/almanac/ephemeris"
 tags = ["ephemeris", "astronomy", "sun", "moon", "planets"]
