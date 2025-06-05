@@ -48,7 +48,6 @@ package body Julian_Time_Tests is
       UT : Time;
       JD : Date;
    begin
-
       UT := Time_Of (2000, 1, 1, Noon);
       JD := 2_451_545.0;
       Assert (Date_Of (UT) = JD, "invalid Julian date");

@@ -76,19 +76,6 @@ package body Sidereal_Time_Tests is
    end Set_Up;
 
    --------------------
-   -- Register_Tests --
-   --------------------
-
-   overriding procedure Register_Tests (T : in out Sidereal_Time_Test_Case) is
-      use Test_Cases.Registration;
-   begin
-      Register_Routine
-        (T, Test_GMST'Access, "GMST");
-      Register_Routine
-        (T, Test_GAST'Access, "GAST");
-   end Register_Tests;
-
-   --------------------
    --  Test routines --
    --------------------
 
@@ -101,7 +88,7 @@ package body Sidereal_Time_Tests is
 
    --  Test_GMST  --
 
-   procedure Test_GMST (T : in out Test_Case'Class) is
+   procedure Test_GMST (T : in out AUnit.Test_Cases.Test_Case'Class) is
    begin
       Assert (Equals (GMST (JD1), GMST1), "Incorrect GMST calculation");
       Assert (Equals (GMST (JD2), GMST2), "Incorrect GMST calculation");
@@ -110,11 +97,24 @@ package body Sidereal_Time_Tests is
 
    --  Test GAST  --
 
-   procedure Test_GAST  (T : in out Test_Case'Class) is
+   procedure Test_GAST  (T : in out AUnit.Test_Cases.Test_Case'Class) is
    begin
       Assert (Equals (GAST (JD1), GAST1), "Incorrect GAST calculation");
       Assert (Equals (GAST (JD2), GAST2), "Incorrect GAST calculation");
       Assert (Equals (GAST (JD3), GAST3), "Incorrect GAST calculation");
    end Test_GAST;
+
+   --------------------
+   -- Register_Tests --
+   --------------------
+
+   overriding procedure Register_Tests (T : in out Sidereal_Time_Test_Case) is
+      use Test_Cases.Registration;
+   begin
+      Register_Routine
+        (T, Test_GMST'Access, "GMST");
+      Register_Routine
+        (T, Test_GAST'Access, "GAST");
+   end Register_Tests;
 
 end Sidereal_Time_Tests;

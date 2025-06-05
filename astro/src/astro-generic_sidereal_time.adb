@@ -10,9 +10,6 @@
 
 package body Astro.Generic_Sidereal_Time is
 
-   --  References :  
-   --  Kaplan, G. (2005), US Naval Observatory Circular 179.
-
    package Julian renames Julian_Time;
 
    function Floor (X : Real) return Real
@@ -29,11 +26,11 @@ package body Astro.Generic_Sidereal_Time is
 
    --  source: IERS bulletin A 2024.10.03
    --  TT := TAI + 32.184 s
-   --  DUT1= (UT1-UTC) transmitted with time signals                         
-   --          = +0.1 seconds beginning 5 September 2024 at 0000 UTC             
-   --      Beginning 1 January 2017:                                             
-   --         TAI-UTC = 37.000 000 seconds 
-   --  TDB is approximated by TT  
+   --  DUT1= (UT1-UTC) transmitted with time signals
+   --          = +0.1 seconds beginning 5 September 2024 at 0000 UTC
+   --      Beginning 1 January 2017:
+   --         TAI-UTC = 37.000 000 seconds
+   --  TDB is approximated by TT
 
    ----------
    -- GMST --
@@ -47,7 +44,7 @@ package body Astro.Generic_Sidereal_Time is
    begin
       --  Time scales
       JD_TT  := JD + (Delta_T / 86_400.0); -- days
-      JD_TDB := JD_TT;  
+      JD_TDB := JD_TT;
 
       --  Julian days (UT) since epoch
       DT := JD - JD0;
@@ -57,18 +54,18 @@ package body Astro.Generic_Sidereal_Time is
 
       --  Earth rotation angle
       Theta := 0.7790572732640 + 1.00273781191135448 * DT; -- rotations
-      Theta := ( Theta - Floor (Theta) ) * 360.0;          -- degrees 
+      Theta := (Theta - Floor (Theta)) * 360.0;          -- degrees
 
       --  Precession in RA of the equinox in arcseconds
       S := 0.014506 + 4612.156534 * T + 1.3915817 * T**2
-         - 0.00000044 * T**3 - 0.000029956 * T**4 - 0.0000000368 * T**5; 
+         - 0.00000044 * T**3 - 0.000029956 * T**4 - 0.0000000368 * T**5;
 
-      --  GMST 
+      --  GMST
       S := S / 3600.0 + Theta;                    -- degrees
-      S := (S - Floor (S/360.0) * 360.0) / 15.0;  -- hours
-      S := S*3600.0;                              -- seconds
+      S := (S - Floor (S / 360.0) * 360.0) / 15.0;  -- hours
+      S := S * 3600.0;                              -- seconds
 
-      -- Normalize
+      --  Normalize
       if S < 0.0 or else S >= 86400.0 then
          S := S - Floor (S / 86400.0) * 86400.0;
       end if;

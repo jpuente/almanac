@@ -1,34 +1,20 @@
 -----------------------------------------------------------------------
---  Astro - Ada 2005 library for astrometry.                          --
------------------------------------------------------------------------
---  Copyright (C) 2006 Juan A. de la Puente  <jpuente@dit.upm.es>    --
---  This unit was originally developed by Juan A. de la Puente.      --
------------------------------------------------------------------------
--- This library is free software; you can redistribute it and/or     --
--- modify it under the terms of the GNU General Public               --
--- License as published by the Free Software Foundation; either      --
--- version 2 of the License, or (at your option) any later version.  --
+-- Astro - Ada library for astronomical calculations.                --
 --                                                                   --
--- This library is distributed in the hope that it will be useful,   --
--- but WITHOUT ANY WARRANTY; without even the implied warranty of    --
--- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU --
--- General Public License for more details.                          --
+-- This package provides frame transformations for position          --
+-- and velocity vectors.                                             --
 --                                                                   --
--- You should have received a copy of the GNU General Public         --
--- License along with this library; if not, write to the             --
--- Free Software Foundation, Inc., 59 Temple Place - Suite 330,      --
--- Boston, MA 02111-1307, USA.                                       --
+-- Reference: P.K. Seildemann (ed.), Explanatory Supplement to the   --
+-- Astronomical Almanac, ch. 3 (1992)                                --
 -----------------------------------------------------------------------
+--  Copyright (C) 2025 Juan A. de la Puente                          --
+--  Distributed under GPL 3.0                                        --
+-----------------------------------------------------------------------
+
 with Ada.Numerics.Generic_Elementary_Functions;
 with Ada.Numerics.Generic_Real_Arrays;
 
 with Astro.Generic_Julian_Time;
-
--- This package provides frame transformations for position
--- and velocity vectors.
-
--- Reference: P.K. Seildemann (ed.), Explanatory Supplement to the
--- Astronomical Almanac, ch. 3.
 
 generic
    type Real is digits <>;
@@ -37,10 +23,11 @@ generic
    with package Real_Arrays is
      new Ada.Numerics.Generic_Real_Arrays (Real);
    with package Julian_Time is
-     new Astro.Generic_Julian_Time(Real);
+     new Astro.Generic_Julian_Time (Real);
+
 package Astro.Generic_Frame_Transformations is
 
-   subtype Vector is Real_Arrays.Real_Vector(1..3);
+   subtype Vector is Real_Arrays.Real_Vector (1 .. 3);
 
    package Julian renames Julian_Time;
 
