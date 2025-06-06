@@ -41,7 +41,7 @@ package body Astro.Generic_Frame_Transformations is
       U1, Q1, E1 : Vector; -- unit vectors
       Em, G1, G2 : Real;
       UQ, EU     : Real;
-      
+
    begin
       U1 := U / abs (U);             -- geocentric direction of the body
       Q1 := Q / abs (Q);             -- heliocentric direction of the body
