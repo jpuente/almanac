@@ -10,7 +10,6 @@
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-
 with Ada.Numerics.Generic_Real_Arrays;
 
 generic
@@ -34,8 +33,14 @@ package Ephemeris.Generic_State_Functions is
 
    function Barycentric_State (Target   : Celestial_Body;
                                Date     : Real)   -- Julian TDB Date
-                               return State;
+      return State;
    --  Barycentric position and velocity of the target at given date,
+   --  referred to the mean equator and equinox of J2000.0.
+
+   function Heliocentric_State (Target  : Celestial_Body;
+                                Date    : Real)    -- Julian TBD date
+      return State;
+   --  Heliocentric position and velocity of the target at given date,
    --  referred to the mean equator and equinox of J2000.0.
 
    function AU return Real;
