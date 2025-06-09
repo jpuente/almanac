@@ -68,7 +68,12 @@ ephemeris (default is `DE200`).
    to a Solar System barycentric reference frame.
 
    The function `Barycentric_State` gives the value of the state vector
-   of a celestial body at a given Julian date. 
+   of a celestial body at a given Julian date with respect to the
+   barycenter of the solar system.
+
+   The function `Heliocentric_State`  gives the value of the state vector
+   of a celestial body at a given Julian date with respect to the
+   barycenter of the Sun.
 
 ### Data
 
