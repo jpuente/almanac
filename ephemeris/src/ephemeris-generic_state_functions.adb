@@ -10,7 +10,6 @@
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-
 with Ephemeris.Generic_Data_File;
 
 package body Ephemeris.Generic_State_Functions is

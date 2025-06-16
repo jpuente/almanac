@@ -76,7 +76,7 @@ package Ephemeris.Generic_Data_File is
    -------------------------------
 
    procedure Open (File_Name : String);
-   --  Open the binary ephemeris file.
+   --  Open a custom binary ephemeris file.
    --  Ephemeris_Error is raised if the file cannot be opened.
 
    procedure Create (File_Name : String);

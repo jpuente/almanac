@@ -4,42 +4,43 @@
 [![GitHub release](https://img.shields.io/github/release/jpuente/ephemeris.svg)](https://github.com/jpuente/ephemeris/releases/latest)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
->*Test of the `Ephemeris` library packages*
+>*Test the `Ephemeris` library packages*
 
 The test compares the output of the `Barycentric_State` function 
 (position and velocity of a celestial body in a solar system
 barycentric reference frame) with the values stored in a 
-reference file (`testpo.xxx`). If the difference is larger than
+reference file (by default `testpo.200`). If the difference is larger than
 10<sup>-13</sup> in units of AU or AU/day, an error message is
 printed out. A progress message is printed every 100 comparisons.
 
 ---
 ## Build
 
-To compile and build the unit tests:
+Use Alire to compile and build the tests:
+
 ```sh
 cd test
 alr build
 ```
 
---
+---
 ## Run the test
 
-```sh
-./bin/test [test_file] [data_file]
-```
+To run the test enter the following shell command from the test root directory:
 
-where `test_file` is the reference file (default is `data/testpo200`),
-and `data file` is the binary ephemeris file to be tested
-(defaults to `data/DE200`).
+```sh
+./bin/test
+```
 
 ---
 ## Data
 
-The test data file `data/testpo200` has been downloaded from the
+The test program uses two data files:
+
+- The text file `share/test/testpo.200` has been downloaded from the
 JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/)).
 
-The `data/DE200` file is a copy of `ephemeris/etc/DE200/ephemeris200`,
+- The binary data file `share/test/de200.dat` is a copy of `ephemeris/share/ephemeris/de200.dat`,
 which in turn has been generated from ascii files downloaded from
 the JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/)).
 

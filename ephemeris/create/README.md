@@ -13,7 +13,7 @@ from an ascii file downloaded from the [JPL ephemeris server](https://ssd.jpl.na
 
 ### Build
 
-To compile and build the program:
+Use Alire to compile and build the program:
 ```sh
 cd create
 alr build

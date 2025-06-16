@@ -13,15 +13,11 @@
 with Ada.Numerics.Generic_Real_Arrays;
 
 generic
-
    type Real is digits <>;
-
-   with package Real_Arrays is
-     new Ada.Numerics.Generic_Real_Arrays (Real);
-
    Ephemeris_Code : JPL_Ephemeris := DE200;
-
 package Ephemeris.Generic_State_Functions is
+
+   package Real_Arrays is new Ada.Numerics.Generic_Real_Arrays (Real);
    use Real_Arrays;
 
    type State is record
