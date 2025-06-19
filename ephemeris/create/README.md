@@ -22,7 +22,7 @@ alr build
 ### Create a binary file
 
 ```sh
-./bin/create source_file [binary_file]
+alr run --args="source_file [binary_file]"
 ```
 
 where `test_file` is the ascii file file to be converted.
@@ -31,7 +31,7 @@ to the original ascii file, e.g.
 
 ```sh
 cat header.200 ascp2020.200 > DE2020.200
-bin/create DE2020.200 DE2020
+alr run --args "DE2020.200 DE2020"
 ```
 
 and `data file` is the binary ephemeris file to be tested.

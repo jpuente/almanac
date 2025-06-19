@@ -32,7 +32,7 @@ To compile and build the unit tests:
 ```sh
 cd test
 alr build
-./bin/test
+alr run
 ```
 
 Documentation for the tests can be found in the [README file](test/README.md) of the test directory.
@@ -77,7 +77,7 @@ ephemeris (default is `DE200`).
 
 ### Data
 
-The distributed version includes a binary ephemeris file (`share/ephemeris/de200-dat`) 
+The distributed version includes a binary ephemeris file (`share/ephemeris/de200.dat`) 
 that can be used for the time interval going from 2019-12-15 to 2040-01-07
 (Julian dates 2458832.5 to 2466160.5).
 
