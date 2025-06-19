@@ -17,3 +17,5 @@ ephemeris = "*"
 [[ pins ]]
 ephemeris = { path = ".."}
 
+[[depends-on]]
+resources = "~0.1.0"

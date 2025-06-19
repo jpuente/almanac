@@ -32,11 +32,12 @@ procedure Test is
    type Real is new Long_Long_Float;
    Ephemeris_Code : constant JPL_Ephemeris := DE200;
 
+   package Test_Resources is
+      new Resources (Test_Config.Crate_Name);
+
    package State_Functions is
      new Ephemeris.Generic_State_Functions (Real, Ephemeris_Code);
    use State_Functions;
-
-   package Test_Resources is new Resources (Test_Config.Crate_Name);
 
    package Real_IO    is new Ada.Text_IO.Float_IO (Real);
    package Integer_IO is new Ada.Text_IO.Integer_IO (Integer);
@@ -46,6 +47,7 @@ procedure Test is
       := Test_Resources.Resource_Path & "testpo.200";
    Data_File_Name : constant String
       := Test_Resources.Resource_Path & "de200.dat";
+
    Test_File      : File_Type;
 
    Test_Data_Name : constant String := "testpo.200";

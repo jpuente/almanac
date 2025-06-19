@@ -12,11 +12,17 @@
 -----------------------------------------------------------------------
 with Ephemeris.Generic_Data_File;
 
+with Resources;
+with Ephemeris_Config;
+
 package body Ephemeris.Generic_State_Functions is
 
    package Data_File is
      new Generic_Data_File (Real, Ephemeris_Code);
    use Data_File;
+
+   package Ephemeris_Resources is
+      new Resources (Ephemeris_Config.Crate_Name);
 
    --  Internal data
    Pointers         : Polynomial_Pointers;
@@ -231,6 +237,14 @@ package body Ephemeris.Generic_State_Functions is
    ----------------
    -- Initialize --
    ----------------
+
+   procedure Open_Data
+   is
+      Default_Data_File : constant String 
+         := Ephemeris_Resources.Resource_Path & "de200.dat";
+   begin
+      Open_Data (Default_Data_File);
+   end Open_Data;
 
    procedure Open_Data (Data_File_Name : String)
    is

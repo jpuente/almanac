@@ -26,10 +26,10 @@ alr build
 ---
 ## Run the test
 
-To run the test enter the following shell command from the test root directory:
+Run the test using Alire:
 
 ```sh
-./bin/test
+alr run
 ```
 
 ---
@@ -46,7 +46,7 @@ the JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jp
 
 ---
 ## License
-This library is distributed under a [GPL version 3.0 license](https://www.gnu.org/licenses/gpl-3.0.html).
+This software is distributed under a [GPL version 3.0 license](https://www.gnu.org/licenses/gpl-3.0.html).
 See LICENSE for more information.
 
 ---

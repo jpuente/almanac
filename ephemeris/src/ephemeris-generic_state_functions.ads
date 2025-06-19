@@ -51,8 +51,11 @@ package Ephemeris.Generic_State_Functions is
    function End_Date return Real;
    --  Final date for ephemeris data
 
+   procedure Open_Data;
+   --  Open default data file
+
    procedure Open_Data (Data_File_Name : String);
-   --  Open data file
+   --  Open custom data file
 
    procedure Close_Data;
    --  Close data file
