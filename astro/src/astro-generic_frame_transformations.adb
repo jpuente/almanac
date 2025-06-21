@@ -10,16 +10,43 @@
 --  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-
 with Astro.Constants;
 
 package body Astro.Generic_Frame_Transformations is
 
    use Astro.Constants;
-   use Real_Functions;
 
-   --  subtype Vector is Real_Arrays.Real_Vector(1 .. 3);
-   subtype Matrix is Real_Arrays.Real_Matrix (1 .. 3, 1 .. 3);
+   subtype Degrees is Real;
+   subtype Matrix  is Real_Matrix (1 .. 3, 1 .. 3);
+
+   ------------------------
+   -- Correct aberration --
+   ------------------------
+
+   --  Reference: Explanatory Supplement to the Astronomical Almanac, 3.317.
+
+   procedure Correct_Aberration
+     (U   : in out Vector;          -- geocentric position vector
+      VEB :        Vector)          -- barycentric Earth velocity vector
+   is
+
+      AU : constant := Constants.AU;               -- Astronomical Unit in km
+      C  : constant := Constants.C / AU * 86400.0; -- Light speed in AU/day
+
+      P, V   : Vector;
+      Beta   : Real;
+      F1, F2 : Real;
+
+   begin
+
+      P     := U / abs (U);        -- Unit vector on the direction of U.
+      V     := VEB / C;            -- Earth velocity in units of C.
+      Beta  := Sqrt (1.0 - V * V);
+      F1    := P * V;
+      F2    := 1.0 + F1 / (1.0 + Beta);
+      U     := (Beta * U + F2 * abs (U) * V) / (1.0 + F1);
+
+   end Correct_Aberration;
 
    ------------------------------
    -- Correct light deflection --
@@ -32,8 +59,6 @@ package body Astro.Generic_Frame_Transformations is
       Q  :        Vector;  -- heliocentric position of the body
       EH :        Vector)  -- heliocentric position of the Earth
    is
-      use type Real_Arrays.Real_Vector;
-
       C  : constant := Constants.C * 1000.0;   -- Light speed in m/s
       Mu : constant := Constants.Mu;           -- Gravitational constant m3/s2
       AU : constant := Constants.AU;           -- Astronomical Unit in km
@@ -41,7 +66,7 @@ package body Astro.Generic_Frame_Transformations is
       U1, Q1, E1 : Vector; -- unit vectors
       Em, G1, G2 : Real;
       UQ, EU     : Real;
-      
+
    begin
       U1 := U / abs (U);             -- geocentric direction of the body
       Q1 := Q / abs (Q);             -- heliocentric direction of the body
@@ -54,33 +79,6 @@ package body Astro.Generic_Frame_Transformations is
       U  := abs (U) * (U1 + G1 / G2 * UQ * E1 - EU * Q1);
    end Correct_Light_Deflection;
 
-   ------------------------
-   -- Correct aberration --
-   ------------------------
-
-   --  Reference: Explanatory Supplement to the Astronomical Almanac, 3.317.
-
-   procedure Correct_Aberration (U       : in out Vector; -- geo. position
-                                 VEB     :        Vector) -- bary. Earth vel.
-   is
-      use type Real_Arrays.Real_Vector;
-
-      AU : constant := Constants.AU;           -- Astronomical Unit in km
-      C  : constant := Constants.C / AU * 86400.0; -- Light speed in AU/day
-
-      P, V   : Vector;
-      Beta   : Real;
-      F1, F2 : Real;
-
-   begin
-      P     := U / abs (U);         -- Unit vector on the direction of U.
-      V     := VEB / C;            -- Earth velocity in units of C.
-      Beta  := Sqrt (1.0 - V * V);
-      F1    := P * V;
-      F2    := 1.0 + F1 / (1.0 + Beta);
-      U     := (Beta * U + F2 * abs (U) * V) / (1.0 + F1);
-   end Correct_Aberration;
-
    ----------------------
    -- Apply precession --
    ----------------------
@@ -90,23 +88,18 @@ package body Astro.Generic_Frame_Transformations is
 
    procedure Precess
      (U    : in out Vector;      -- geocentric position vector
-      TDB0 : Julian_Time.Date;
-      TDB1 : Julian_Time.Date)
+      TDB0 : Date;
+      TDB1 : Date)
    is
-      use type Real_Arrays.Real_Matrix;
-
-      E0      : constant Real := Julian_Time.Epoch;
+      E0      : constant Real := Epoch;
       SEC2RAD : constant := 2.0 * Pi / (360.0 * 60.0 * 60.0);
 
       T0, T   : Real; -- Julian centuries
       Zeta_A  : Real; -- Fundamental angles in radians
       Z_A     : Real;
       Theta_A : Real;
-
       P       : Matrix;
-
    begin
-
       T0 := (TDB0 - E0) / 36525.0;
       T  := (TDB1 - TDB0) / 36525.0;
 
@@ -137,7 +130,6 @@ package body Astro.Generic_Frame_Transformations is
 
       --  Apply precession matrix to position vector
       U := P * U;
-
    end Precess;
 
    --------------------
@@ -149,21 +141,18 @@ package body Astro.Generic_Frame_Transformations is
 
    procedure Nutate
      (U   : in out Vector;
-      JD  :        Julian_Time.Date)
+      JD  :        Date)
    is
-      use type Real_Arrays.Real_Matrix;
       deg : constant := 360.0;
 
-      Epsilon_0, Epsilon       : Real; -- Mean and true obliquity, degrees.
-      Delta_Psi, Delta_Epsilon : Real; -- Nutation angles, degrees.
+      Epsilon_0, Epsilon       : Degrees; -- Mean and true obliquity, degrees.
+      Delta_Psi, Delta_Epsilon : Degrees; -- Nutation angles, degrees.
 
       T : Real;
       N : Matrix;
-
    begin
-
       --  Mean obliquity of ecliptic
-      T := (JD - Julian_Time.Epoch) / 36525.0; -- Julian centuries
+      T := (JD - Epoch) / 36525.0; -- Julian centuries
       Epsilon_0 := 23.439291 - 0.0130042 * T
         - 0.163889E-6 * T**2 + 0.503611E-6 * T**3;
 
@@ -187,14 +176,12 @@ package body Astro.Generic_Frame_Transformations is
                - Cos (Epsilon, deg) * Sin (Epsilon_0, deg),
              Cos (Delta_Psi, deg) * Sin (Epsilon, deg) * Sin (Epsilon_0, deg)
                + Cos (Epsilon, deg) * Cos (Epsilon_0, deg)));
-
       U := N * U;
-
    end Nutate;
 
-   -----------------------------
-   -- Compute nutation angles --
-   -----------------------------
+   -------------------------
+   -- Get nutation angles --
+   -------------------------
    --  Approximate method, see ESAA 3.225
 
    procedure Get_Nutation_Angles
@@ -203,9 +190,9 @@ package body Astro.Generic_Frame_Transformations is
       Delta_Eps : out Real)
    is
       deg : constant := 360.0;
-      T : Real;
+      T : Date;
    begin
-      T := JD - Julian_Time.Epoch;     -- days Since epoch
+      T := JD - Epoch;     -- days Since epoch
       Delta_Psi := -0.0048 * Sin (125.0 - 0.05295 * T, deg)
         - 0.0004 * Sin (200.9 + 1.97129 * T, deg);
       Delta_Eps := 0.0026 * Cos (125.0 - 0.05295 * T, deg)

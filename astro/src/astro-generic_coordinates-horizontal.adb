@@ -1,70 +1,25 @@
 -----------------------------------------------------------------------
 -- Astro - Ada library for astronomical calculations.                --
 --                                                                   --
--- This package provides definitions for various types of            --
--- coordinates.                                                      --
+-- Horizontal coordinates.                                           --
+--                                                                   --
+-- Reference: P.K. Seildemann (ed.), Explanatory Supplement to the   --
+-- Astronomical Almanac, ch. 1 and 4 (1992)                          --
 -----------------------------------------------------------------------
 --  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-package body Astro.Generic_Coordinates is
 
-   -----------
-   --  GHA  --
-   -----------
+package body Astro.Generic_Coordinates.Horizontal is
+   use Real_Functions;
 
-   function GHA (RA : Real; TU : Julian.Date)
-      return Degrees
-   is
-      use Sidereal_Time;
-      HA : Degrees;
-   begin
-      HA := (GMST (TU) / 86400.0 - RA / 24.0) * 360.0;
-      if HA < 0.0 then
-         HA := HA + 360.0;
-      end if;
-      return HA;
-   end GHA;
-
-   -----------
-   --  LHA  --
-   -----------
-
-   function LHA (GHA : Degrees; Longitude : Degrees)
-      return Degrees
-   is
-      HA : Degrees;
-   begin
-      HA := GHA + Longitude;
-      --  normalize
-      if HA > 180.0 then
-         HA := HA - 360.0;
-      elsif HA < -180.0 then
-         HA := HA + 360.0;
-      end if;
-
-      return HA;
-   end LHA;
-
-   -----------------
-   --  Spherical  --
-   -----------------
-
-   function Spherical (U : Vector)
-      return Spherical_Coordinates
-   is
-   begin
-      return Spherical_Coordinates'(0.0, 0.0, 0.0);
-   end Spherical;
-
-   ------------------
-   --  Horizontal  --
-   -------------------
+   --------------------------
+   -- Conversion functions --
+   --------------------------
 
    function Horizontal (E : Equatorial_Coordinates; P : Geographic_Coordinates)
       return Horizontal_Coordinates
    is
-      use Real_Functions;
 
       d   : Degrees renames E.Declination;
       ha  : Degrees renames E.Hour_Angle;
@@ -92,4 +47,4 @@ package body Astro.Generic_Coordinates is
 
    end Horizontal;
 
-end Astro.Generic_Coordinates;
+end Astro.Generic_Coordinates.Horizontal;

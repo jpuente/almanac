@@ -10,10 +10,12 @@
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
+with Ephemeris_Config;
+with Resources;
 
 package Ephemeris is
 
-   pragma Pure (Ephemeris);
+-- pragma Pure (Ephemeris);
 
    --  List of available ephemeris files.
    --  See https://ssd.jpl.nasa.gov/planets/eph_export.html for more
@@ -38,8 +40,12 @@ package Ephemeris is
                           DE440,
                           DE441);
 
+   --  Ephemeris data file resources
+   package Ephemeris_Resources is
+      new Resources (Ephemeris_Config.Crate_Name);
+
    type Celestial_Body is
-     (Mercury, Venus,  Earth,   Mars,  Jupiter,
+   (Mercury, Venus,  Earth,   Mars,  Jupiter,
       Saturn,  Uranus, Neptune, Pluto, Moon, Sun);
 
    Ephemeris_Error : exception;

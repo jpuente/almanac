@@ -7,22 +7,21 @@
 with AUnit;            use AUnit;
 with AUnit.Test_Cases; use AUnit.Test_Cases;
 
-package Coordinates_Tests is
+package Horizontal_Coordinates_Tests is
 
-   type Coordinates_Test_Case is new Test_Case with null record;
+   type Horizontal_Coordinates_Test_Case is new Test_Case with null record;
 
    overriding function Name
-      (T : Coordinates_Test_Case) return Message_String;
+      (T : Horizontal_Coordinates_Test_Case) return Message_String;
 
    overriding procedure Set_Up
-      (T : in out Coordinates_Test_Case);
+      (T : in out Horizontal_Coordinates_Test_Case);
 
    overriding procedure Register_Tests
-      (T : in out Coordinates_Test_Case);
+      (T : in out Horizontal_Coordinates_Test_Case);
 
    --  Test routines
 
-   procedure Test_LHA (T : in out Test_Case'Class);
    procedure Test_Horizontal (T : in out Test_Case'Class);
 
-end Coordinates_Tests;
+end Horizontal_Coordinates_Tests;

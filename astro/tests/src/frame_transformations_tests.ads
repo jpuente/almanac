@@ -15,9 +15,6 @@ package Frame_Transformations_Tests is
    overriding function Name
       (T : Frame_Transformations_Test_Case) return Message_String;
 
-   overriding procedure Set_Up
-      (T : in out Frame_Transformations_Test_Case);
-
    overriding procedure Register_Tests
       (T : in out Frame_Transformations_Test_Case);
 

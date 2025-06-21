@@ -10,19 +10,14 @@
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-
 with Ada.Numerics.Generic_Real_Arrays;
 
 generic
-
    type Real is digits <>;
-
-   with package Real_Arrays is
-     new Ada.Numerics.Generic_Real_Arrays (Real);
-
    Ephemeris_Code : JPL_Ephemeris := DE200;
-
 package Ephemeris.Generic_State_Functions is
+
+   package Real_Arrays is new Ada.Numerics.Generic_Real_Arrays (Real);
    use Real_Arrays;
 
    type State is record
@@ -34,8 +29,14 @@ package Ephemeris.Generic_State_Functions is
 
    function Barycentric_State (Target   : Celestial_Body;
                                Date     : Real)   -- Julian TDB Date
-                               return State;
+      return State;
    --  Barycentric position and velocity of the target at given date,
+   --  referred to the mean equator and equinox of J2000.0.
+
+   function Heliocentric_State (Target  : Celestial_Body;
+                                Date    : Real)    -- Julian TBD date
+      return State;
+   --  Heliocentric position and velocity of the target at given date,
    --  referred to the mean equator and equinox of J2000.0.
 
    function AU return Real;
@@ -50,8 +51,11 @@ package Ephemeris.Generic_State_Functions is
    function End_Date return Real;
    --  Final date for ephemeris data
 
+   procedure Open_Data;
+   --  Open default data file
+
    procedure Open_Data (Data_File_Name : String);
-   --  Open data file
+   --  Open custom data file
 
    procedure Close_Data;
    --  Close data file

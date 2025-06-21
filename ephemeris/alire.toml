@@ -8,3 +8,6 @@ maintainers-logins = ["jpuente"]
 licenses = "GPL-3.0-or-later"
 website = "https://github.com/jpuente/almanac/ephemeris"
 tags = ["ephemeris", "astronomy", "sun", "moon", "planets"]
+
+[[depends-on]]
+resources = "~0.1.0"

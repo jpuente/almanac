@@ -10,14 +10,19 @@
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-
 with Ephemeris.Generic_Data_File;
+
+with Resources;
+with Ephemeris_Config;
 
 package body Ephemeris.Generic_State_Functions is
 
    package Data_File is
      new Generic_Data_File (Real, Ephemeris_Code);
    use Data_File;
+
+   package Ephemeris_Resources is
+      new Resources (Ephemeris_Config.Crate_Name);
 
    --  Internal data
    Pointers         : Polynomial_Pointers;
@@ -91,6 +96,32 @@ package body Ephemeris.Generic_State_Functions is
       return XT;
 
    end Barycentric_State;
+
+   ------------------------
+   -- Heliocentric State --
+   ------------------------
+
+   function Heliocentric_State
+         (Target  : Celestial_Body;
+          Date    : Real)    -- Julian TBD date
+      return State
+   is
+      TBS : State;  --  target barycentric state
+      SBS : State;  --  Sun barycentric state
+      THS : State;  --  target heliocentric state
+   begin
+      if Target = Sun then
+         THS.Position := Real_Vector'(0.0, 0.0, 0.0);
+         THS.Velocity := Real_Vector'(0.0, 0.0, 0.0);
+      else
+         TBS := Barycentric_State (Target, Date);
+         SBS := Barycentric_State (Sun, Date);
+         THS.Position := TBS.Position - SBS.Position;
+         THS.Velocity := TBS.Velocity - SBS.Velocity;
+      end if;
+
+      return THS;
+   end Heliocentric_State;
 
    --------
    -- AU --
@@ -206,6 +237,14 @@ package body Ephemeris.Generic_State_Functions is
    ----------------
    -- Initialize --
    ----------------
+
+   procedure Open_Data
+   is
+      Default_Data_File : constant String 
+         := Ephemeris_Resources.Resource_Path & "de200.dat";
+   begin
+      Open_Data (Default_Data_File);
+   end Open_Data;
 
    procedure Open_Data (Data_File_Name : String)
    is

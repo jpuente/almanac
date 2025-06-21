@@ -21,33 +21,33 @@
 
 with Ephemeris; use Ephemeris;
 with Ephemeris.Generic_State_Functions;
-with Ada.Numerics,
-     Ada.Numerics.Generic_Real_Arrays;
+
+with Resources;
+with Test_Config;
 
 with Ada.Text_IO;
-with Ada.Command_Line;          use Ada.Command_Line;
-with Ada.Environment_Variables; use Ada.Environment_Variables;
-with Ada.Directories;           use Ada.Directories;
-with Ada.Strings.Unbounded;     use Ada.Strings.Unbounded;
 
 procedure Test is
 
    type Real is new Long_Long_Float;
    Ephemeris_Code : constant JPL_Ephemeris := DE200;
 
-   package Real_Arrays is
-     new Ada.Numerics.Generic_Real_Arrays (Real);
-   package Solar_System is
-     new Ephemeris.Generic_State_Functions (Real,
-       Real_Arrays,
-       Ephemeris_Code);
-   use Solar_System;
+   package Test_Resources is
+      new Resources (Test_Config.Crate_Name);
+
+   package State_Functions is
+     new Ephemeris.Generic_State_Functions (Real, Ephemeris_Code);
+   use State_Functions;
+
    package Real_IO    is new Ada.Text_IO.Float_IO (Real);
    package Integer_IO is new Ada.Text_IO.Integer_IO (Integer);
    use Ada.Text_IO, Real_IO, Integer_IO;
 
-   Test_File_Name : Unbounded_String := Null_Unbounded_String;
-   Data_File_Name : Unbounded_String := Null_Unbounded_String;
+   Test_File_Name : constant String
+      := Test_Resources.Resource_Path & "testpo.200";
+   Data_File_Name : constant String
+      := Test_Resources.Resource_Path & "de200.dat";
+
    Test_File      : File_Type;
 
    Test_Data_Name : constant String := "testpo.200";
@@ -70,29 +70,16 @@ procedure Test is
    OK     : Boolean  := True; -- global result of the test
 
 begin
-   --  Open data files
-   if Argument_Count > 0 then
-      Test_File_Name := To_Unbounded_String (Full_Name (Argument (1)));
-   else
-      Test_File_Name := To_Unbounded_String (Compose ("data/", Test_Data_Name));
-   end if;
-
-   if Argument_Count > 1 then
-      Data_File_Name := To_Unbounded_String (Full_Name (Argument (2)));
-   elsif Ada.Environment_Variables.Exists ("EPHEMERIS") then
-      Data_File_Name := To_Unbounded_String (Value ("EPHEMERIS"));
-   else
-      Data_File_Name := To_Unbounded_String (Compose ("data/", Ephemeris_Name));
-   end if;
-
-   Open (Test_File, In_File, To_String (Test_File_Name));
-   Open_Data (To_String (Data_File_Name));
 
    --  Write header and start test
-   Put ("*** Test JPL Ephemeris " & Ephemeris_Name & " ***"); New_Line;
- --  Put ("*** Test file          " & To_String (Test_File_Name) & " ***"); New_Line;
- --  Put ("*** Data file          " & To_String (Data_File_Name) & " ***"); New_Line;
- 
+   Put ("*** Test JPL Ephemeris " & Ephemeris_Name &
+    " *** with " & Test_Data_Name & " test data"); New_Line;
+   --  Put ("*** Test file          " & Test_File_Name & " ***"); New_Line;
+   --  Put ("*** Data file          " & Data_File_Name & " ***"); New_Line;
+
+   Open (Test_File, In_File, Test_File_Name);
+   Open_Data (Data_File_Name);
+
    --  Start and end dates
    Put ("Start date = ");    Put (Start_Date, 8, 1, 0);
    Put (" --- End date = "); Put (End_Date,   8, 1, 0);

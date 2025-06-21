@@ -7,10 +7,18 @@
 --  References :                                                     --
 --  Kaplan, G. (2005), US Naval Observatory Circular 179.            --
 -----------------------------------------------------------------------
+with Ada.Numerics.Generic_Elementary_Functions;
+with Astro.Generic_Frame_Transformations;
 
 package body Astro.Generic_Sidereal_Time is
 
    package Julian renames Julian_Time;
+
+   package Real_Functions is
+      new Ada.Numerics.Generic_Elementary_Functions (Real);
+
+   package Frame_Transformations is
+      new Generic_Frame_Transformations (Real);
 
    function Floor (X : Real) return Real
       renames Real'Base'Floor;
@@ -80,7 +88,6 @@ package body Astro.Generic_Sidereal_Time is
 
    function Equinoxes (JD : Julian.Date) return Real
    is
-
       use Frame_Transformations;
       use Real_Functions;
 
