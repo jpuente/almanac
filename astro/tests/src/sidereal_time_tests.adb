@@ -5,36 +5,24 @@
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
 
-with Ada.Numerics.Generic_Elementary_Functions;
-with Ada.Numerics.Generic_Real_Arrays;
-
 with AUnit.Assertions; use AUnit.Assertions;
 
 with Astro.Generic_Julian_Time;
 with Astro.Generic_Sidereal_Time;
-with Astro.Generic_Frame_Transformations;
 
 package body Sidereal_Time_Tests is
 
+   ---------------
+   -- Framework --
+   ---------------
+
    type Real is new Long_Long_Float;
-
-   package Real_Functions is
-      new Ada.Numerics.Generic_Elementary_Functions (Real);
-
-   package Real_Arrays is
-     new Ada.Numerics.Generic_Real_Arrays (Real);
 
    package Julian_Time is
      new Astro.Generic_Julian_Time (Real);
 
-   package Frame_Transformations is
-      new Astro.Generic_Frame_Transformations
-       (Real, Real_Functions, Real_Arrays, Julian_Time);
-
    package Sidereal_Time is
-      new Astro.Generic_Sidereal_Time
-         (Real, Real_Functions, Real_Arrays, Julian_Time,
-          Frame_Transformations);
+      new Astro.Generic_Sidereal_Time (Real);
 
    use Julian_Time;
    use Sidereal_Time;

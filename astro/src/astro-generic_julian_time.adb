@@ -78,6 +78,7 @@ package body Astro.Generic_Julian_Time is
       Year  := 100 * (N - 49) + M + K;
 
       return Time_Of (Year, Month, Day, Seconds);
+
    end Time_Of;
 
 end Astro.Generic_Julian_Time;

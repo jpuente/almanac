@@ -9,18 +9,13 @@
 --  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-with Astro.Generic_Frame_Transformations;
+--  with Astro.Generic_Frame_Transformations;
 with Astro.Generic_Sidereal_Time;
 
 package body Astro.Generic_Coordinates.Spherical is
 
-   package Frames is new Astro.Generic_Frame_Transformations
-      (Real, Real_Functions, Real_Arrays, Julian);
-
-   package Sidereal is new Astro.Generic_Sidereal_Time
-      (Real, Real_Functions, Real_Arrays, Julian, Frames);
-
-   use Real_Functions, Real_Arrays;
+   package Sidereal is
+      new Astro.Generic_Sidereal_Time (Real);
 
    ---------------------------
    -- Auxiliary definitions --
@@ -48,8 +43,8 @@ package body Astro.Generic_Coordinates.Spherical is
    function Spherical (U : Vector)
       return Spherical_Coordinates
     is
-      XY        : Vector2 := U (1 .. 2);
-      XY_Module : Real := Sqrt (XY * XY);
+      XY        : constant Vector2 := U (1 .. 2);
+      XY_Module : constant Real := Sqrt (XY * XY);
       P         : Spherical_Coordinates;
    begin
       if XY_Module = 0.0  then

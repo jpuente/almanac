@@ -6,8 +6,6 @@
 -----------------------------------------------------------------------
 with AUnit.Assertions; use AUnit.Assertions;
 
-with Ada.Numerics.Generic_Elementary_Functions;
-with Ada.Numerics.Generic_Real_Arrays;
 with Astro.Generic_Coordinates.Spherical;
 
 package body Spherical_Coordinates_Tests is
@@ -18,19 +16,12 @@ package body Spherical_Coordinates_Tests is
 
    type Real is new Long_Long_Float;
 
-   package Real_Functions is
-     new Ada.Numerics.Generic_Elementary_Functions (Real);
-
-   package Real_Arrays is
-      new Ada.Numerics.Generic_Real_Arrays (Real);
-
    package Coordinates is
-     new Astro.Generic_Coordinates (Real, Real_Functions, Real_Arrays);
+     new Astro.Generic_Coordinates (Real);
 
-   package S_Coordinates is
+   package Spheric_Coordinates is
       new Coordinates.Spherical;
-
-   use S_Coordinates;
+   use Spheric_Coordinates;
 
    ----------
    -- Name --
@@ -95,7 +86,6 @@ package body Spherical_Coordinates_Tests is
    end Test_GHA;
 
    procedure Test_Spherical (T : in out Test_Case'Class) is
-      use Coordinates;
 
       U  : Vector;                 --  Cartesian coordinates
       P1 : Spherical_Coordinates;  --  expected

@@ -16,9 +16,13 @@ package Astro.Generic_Coordinates.Spherical is
 
    package Julian is new Astro.Generic_Julian_Time (Real);
 
+   use Real_Functions, Real_Arrays;
+
    ------------------
    --  Data types  --
    ------------------
+
+   subtype Vector  is Real_Arrays.Real_Vector  (1 .. 3);
 
    type Spherical_Coordinates is
       record

@@ -2,11 +2,13 @@
 -- Astro - Ada library for astronomical calculations.                --
 --                                                                   --
 --  This package provides abstractions for Julian time.              --
+--                                                                   --
+-- Reference: P.K. Seildemann (ed.), Explanatory Supplement to the   --
+-- Astronomical Almanac (1992), 1.252, 2.26                          --
 -----------------------------------------------------------------------
---  Copyright (C) 2024 Juan A. de la Puente                          --
+--  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-
 with Ada.Calendar;
 
 generic

@@ -6,9 +6,6 @@
 -----------------------------------------------------------------------
 with AUnit.Assertions; use AUnit.Assertions;
 
-with Ada.Numerics.Generic_Elementary_Functions;
-with Ada.Numerics.Generic_Real_Arrays;
-
 with Astro.Generic_Coordinates.Equatorial;
 
 package body Equatorial_Coordinates_Tests is
@@ -19,19 +16,11 @@ package body Equatorial_Coordinates_Tests is
 
    type Real is new Long_Long_Float;
 
-   package Real_Functions is
-     new Ada.Numerics.Generic_Elementary_Functions (Real);
-
-   package Real_Arrays is
-      new Ada.Numerics.Generic_Real_Arrays (Real);
-
    package Coordinates is
-     new Astro.Generic_Coordinates
-      (Real, Real_Functions, Real_Arrays);
+     new Astro.Generic_Coordinates (Real);
 
    package Equatorial_Coordinates is
       new Coordinates.Equatorial;
-
    use Equatorial_Coordinates;
 
    ----------

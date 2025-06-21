@@ -10,7 +10,6 @@
 
 with Ephemeris;
 package Astro is
-   pragma Pure (Astro);
 
    subtype Celestial_Body is Ephemeris.Celestial_Body;
    --     (Mercury, Venus,  Earth,   Mars,  Jupiter,

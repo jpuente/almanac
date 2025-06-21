@@ -11,6 +11,7 @@
 -----------------------------------------------------------------------
 with Astro.Generic_Coordinates.Equatorial;
 with Astro.Generic_Coordinates.Geographic;
+
 generic
 package Astro.Generic_Coordinates.Horizontal is
 
@@ -31,7 +32,7 @@ package Astro.Generic_Coordinates.Horizontal is
          Azimuth         : Degrees;
          --  0..360 Eastwards from North
    end record;
-   --  topocentric apparent position of a celestial body
+   --  apparent position of a celestial body
 
    --------------------------
    -- Conversion functions --

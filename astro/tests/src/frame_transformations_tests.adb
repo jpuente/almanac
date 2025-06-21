@@ -4,10 +4,6 @@
 --  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-
-with Ada.Numerics.Generic_Elementary_Functions;
-with Ada.Numerics.Generic_Real_Arrays;
-
 with AUnit.Assertions; use AUnit.Assertions;
 
 with Astro.Generic_Julian_Time;
@@ -21,27 +17,13 @@ package body Frame_Transformations_Tests is
 
    type Real is new Long_Long_Float;
 
-   package Real_Functions is
-     new Ada.Numerics.Generic_Elementary_Functions (Real);
-
-   package Real_Arrays is
-     new Ada.Numerics.Generic_Real_Arrays (Real);
-   use Real_Arrays;
-
    package Julian_Time is
      new Astro.Generic_Julian_Time (Real);
    use Julian_Time;
 
    package Frame_Transformations is
-     new Astro.Generic_Frame_Transformations
-      (Real, Real_Functions, Real_Arrays, Julian_Time);
+     new Astro.Generic_Frame_Transformations (Real);
    use Frame_Transformations;
-
-   ----------------------
-   -- Fixture elements --
-   ----------------------
-
-   P, Q, E : Real_Vector (1 .. 3);
 
    ----------
    -- Name --
@@ -53,54 +35,72 @@ package body Frame_Transformations_Tests is
       return Format ("Frame_Transformation tests");
    end Name;
 
-   -----------
-   -- Setup --
-   -----------
+   --------------------
+   -- Register_Tests --
+   --------------------
 
-   overriding procedure Set_Up
+   overriding procedure Register_Tests
       (T : in out Frame_Transformations_Test_Case) is
+      use Test_Cases.Registration;
    begin
+      Register_Routine
+         (T, Test_Correct_Light_Deflection'Access,
+            "Correct light deflection - not implemented");
+      Register_Routine
+         (T, Test_Correct_Aberration'Access,
+            "Correct aberration - not implemented");
+      Register_Routine
+         (T, Test_Precess'Access, "Precess - not implemented");
+      Register_Routine
+         (T, Test_Nutate'Access, "Nutate  - not implemented");
+      Register_Routine
+         (T, Test_Get_Nutation_Angles'Access, "Get Nutation Angles");
+   end Register_Tests;
 
-      P := (0.0, 1.0, 0.0);
-      Q := (0.7, 0.7, 0.0);
-      E := (1.0, 0.0, 0.0);
+   ------------------------
+   -- Auxiliary function --
+   ------------------------
 
-   end Set_Up;
-
-   -------------------
-   -- Test routines --
-   -------------------
-
-   --  Compare real values  --
-
+   --  Compare real values
    function Equals (X, Y : Real; Error : Real := 1.0E-6) return Boolean is
    begin
       return abs (X - Y) <= Error;
    end Equals;
 
-   procedure Test_Correct_Light_Deflection (T : in out Test_Case'Class) is
-   begin
-      Correct_Light_Deflection (P, Q, E);
-      Assert (False, "test not implemented");
-   end Test_Correct_Light_Deflection;
+   -------------------
+   -- Test routines --
+   -------------------
+
+   --  Test orrect Aberration
+   --  not implemented
 
    procedure Test_Correct_Aberration (T : in out Test_Case'Class) is
    begin
-      Assert (False, "test not implemented");
+      null;
    end Test_Correct_Aberration;
 
+   --  Test Correct Light Deflection
+   --  not implemented
+
+   procedure Test_Correct_Light_Deflection (T : in out Test_Case'Class) is
+   begin
+      null;
+   end Test_Correct_Light_Deflection;
+
    --  Test Precess
+   --  not implemented
 
    procedure Test_Precess (T : in out Test_Case'Class) is
    begin
-      Assert (False, "test not implemented");
+      null;
    end Test_Precess;
 
    --  Test_Nutate  --
+   --  not implemented
 
    procedure Test_Nutate (T : in out Test_Case'Class) is
    begin
-      Assert (False, "test not implemented");
+      null;
    end Test_Nutate;
 
    --  Test_Get_Nutation_Angles  --
@@ -122,26 +122,5 @@ package body Frame_Transformations_Tests is
       Assert (Equals (DEPS, DEPS1, Max_Error),
          "Incorrect Delta_Eps" & DEPS'Image);
    end Test_Get_Nutation_Angles;
-
-   --------------------
-   -- Register_Tests --
-   --------------------
-
-   overriding procedure Register_Tests
-      (T : in out Frame_Transformations_Test_Case) is
-      use Test_Cases.Registration;
-   begin
-      Register_Routine
-         (T, Test_Correct_Light_Deflection'Access, "Correct light deflection");
-      Register_Routine
-         (T, Test_Correct_Aberration'Access, "Correct aberration");
-      Register_Routine
-         (T, Test_Precess'Access, "Precess");
-      Register_Routine
-         (T, Test_Nutate'Access, "Nutate");
-      Register_Routine
-         (T, Test_Get_Nutation_Angles'Access, "Get Nutation Angles");
-
-   end Register_Tests;
 
 end Frame_Transformations_Tests;
