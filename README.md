@@ -9,6 +9,6 @@ This repository contains two Ada crates that are available from  [Alire](https:/
 
 -   [Ephemeris](ephemeris) is an Ada library for getting ephemerides of celestial bodies. 
 
-  [Astro](astro) is an Ada library of functions for carrying out astronomical calculations 
+-   [Astro](astro) is an Ada library of functions for carrying out astronomical calculations 
 	such as those required to build 	the [astronomical almanac](https://aa.usno.navy.mil/publications/asa). 
 
