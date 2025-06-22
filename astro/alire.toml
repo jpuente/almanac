@@ -10,7 +10,7 @@ website = ""
 tags = []
 
 [[ depends-on ]]
-ephemeris = "*"
+ephemeris = "1.1.0"
 
 [[ pins ]]
 ephemeris = { path = "../ephemeris"}
