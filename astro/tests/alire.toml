@@ -1,6 +1,6 @@
 name = "astro_tests"
 description = "Astro library unit tests"
-version = "0.1.0-dev"
+version = "1.1.0"
 
 authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
@@ -13,11 +13,9 @@ executables = ["astro_tests"]
 
 [[depends-on]]
 aunit = "^24.0.0"
-[[depends-on]]
+
 astro ="*"
+ephemeris = "^1.1.0"
 
 [[pins]]
 astro = { path = '..' }
-
-[[depends-on]]
-ephemeris = "^1.0.0"
