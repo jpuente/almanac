@@ -1,9 +1,10 @@
 -----------------------------------------------------------------------
 -- Astro - Ada library for astronomical calculations.                --
 --                                                                   --
---  This package provides abstractions for dynamical time.           --
+--  This package provides conversion functions between               --
+--  barycentric dynamical time (TDB and terrestrial time (TT)        --
 --                                                                   --
---  Copyright (C) 2024 Juan A. de la Puente                          --
+--  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
 with Astro.Generic_Julian_Time;
@@ -20,13 +21,10 @@ package Astro.Generic_Dynamical_Time is
    --  Conversion functions  --
    ----------------------------
 
-   function TT (TU : Date) return Date;
-   --  Terrestrial time from UT1
-
-   function TU (TT : Date) return Date;
-   --  Universal time (UT1) from terrestrial dynamical time.
+   function TT (TDB : Date) return Date;
+   --  Terrestrial time from barycenctric dynamical time
 
    function TDB (TT : Date) return Date;
-   --  Barycentric dynamical time from terrestrial dynamical time.
+   --  Barycentric dynamical time from terrestrial time.
 
 end Astro.Generic_Dynamical_Time;
