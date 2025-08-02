@@ -1,0 +1,19 @@
+name = "examples"
+description = "Examples for the astro library"
+version = "0.1.0-dev"
+
+authors = ["Juan A. de la Puente"]
+maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
+maintainers-logins = ["jpuente"]
+licenses = "GPL-3.0-or-later"
+website = ""
+tags = []
+
+executables = ["sun_tracker"]
+
+[[depends-on]]
+astro ="*"
+ephemeris = "^1.1.0"
+
+[[pins]]
+astro = { path = '..' } 
