@@ -7,6 +7,7 @@ with Ada.Long_Long_Float_Text_IO; use Ada.Long_Long_Float_Text_IO;
 
 with Astro.Generic_Solar_System;
 with Astro.Generic_Dynamical_Time;
+with Astro.Generic_Coordinates.Horizontal;
 
 with Ephemeris;
 
@@ -16,6 +17,11 @@ procedure Sun_Tracker is
       new Astro.Generic_Solar_System (Long_Long_Float);
    package Dynamical_Time is
       new Astro.Generic_Dynamical_Time (Long_Long_Float);
+
+   package Horizontal is
+      new Solar_system.Coordinates.Horizontal;
+   package Equatorial renames Horizontal.Equatorial;
+   --  REVIEW THIS, IT IS NOT ELEGANT
 
    --  Compute apparent place of Sun at a given time. The apparent place
    --  is given in spherical coordinates (declination, right ascension or
@@ -49,8 +55,10 @@ procedure Sun_Tracker is
 
    --  Place of Sun
 
-   P    : Solar_System.Spheric.Spherical_Coordinates;
+   P    :  Solar_System.Spheric.Spherical_Coordinates;
+
    GHA  :  Solar_System.Coordinates.Degrees;
+   LHA  :  Solar_System.Coordinates.Degrees;
 
    --  Observer's location
    --  Edit for other locations
@@ -60,10 +68,12 @@ procedure Sun_Tracker is
       Longitude => 35.0);
    Height   : constant := 20.0; -- meters over geoid
 
-   --  E : Equatorial.Equatorial_Coordinates;
-   --    H : Horizontal.Horizontal_Coordinates;
+   --  Equatorial and horizontal coordinates of observation
+   E : Equatorial.Equatorial_Coordinates;
+   H : Horizontal.Horizontal_Coordinates;
 
 begin
+
    --  Apparent place (geocentric coordinates of Sun)
 
    New_Line;
@@ -128,24 +138,34 @@ begin
    Put (P.Distance, Exp => 0, Fore => 3, Aft => 9);
    Put (" AU");
    New_Line (2);
+   Put_Line ("You can check these values on the USNO calculator");
+   Put_Line ("(https://aa.usno.navy.mil/data/topocentric)");
+   New_Line;
 
+   --  Horizontal coordinates for observation
 
-   --  https://aa.usno.navy.mil/data/topocentric
+   LHA := Equatorial.LHA (GHA, Location.Longitude);
+   Put ("Local hour angle     : ");
+   Put (LHA, Exp => 0, Fore => 3, Aft => 4);
+   Put ("°");
+   New_Line (2);
 
---    declare
---       GHA  : constant Solar_System.Coordinates.Degrees :=
---         Solar_System.Spheric.GHA (C.Right_Ascension, Date);
+   E := (Declination => P.Declination, Hour_Angle => LHA);
 
---    begin
---       E :=
---         (Declination => C.Declination,
---          Hour_Angle  => Equatorial.LHA (GHA, Place.Longitude));
+   H := Horizontal.Horizontal (E, (Location.Latitude, Location.Longitude));  -- REVIEW
 
---       H := Horizontal.Horizontal (E, (Place.Latitude, Place.Longitude));
+   Put ("Horizontal coordinates of Sun at given time and location");
+   New_Line (2);
+   Put ("Altitude             : ");
+   Put (H.Altitude, Exp => 0, Fore => 3, Aft => 1);
+   Put ("°");
+   New_Line;
+   Put ("Azimuth              : ");
+   Put (H.Azimuth, Exp => 0, Fore => 3, Aft => 1);
+   Put ("°");
+   New_Line (2);
+   Put_Line ("You can check these values on the USNO calculator");
+   Put_Line ("(https://aa.usno.navy.mil/data/AltAz)");
+   New_Line;
 
---       Ada.Text_IO.Put ("Azimuth ");
---       Ada.Long_Long_Float_Text_IO.Put (H.Azimuth, Exp => 0);
---       Ada.Text_IO.New_Line;
---    end;
-   null;
 end Sun_Tracker;
