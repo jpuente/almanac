@@ -1,3 +1,20 @@
+-----------------------------------------------------------------------
+-- Astro - Ada library for astronomical calculations.                --
+--                                                                   --
+-- Sun tracker example.                                              --
+--                                                                   --
+-- This example was proposed by Maxim Reznik as a means to show      --
+-- how the astro library can be used to get obeservational           --
+-- coordinates of the Sun at a given location and time.              --
+--                                                                   --
+-- Further edited by Juan A. de la Puente to simplfy the code and    --
+-- fix a minor error.                                                -- 
+--                                                                   --
+-----------------------------------------------------------------------
+--  Copyright (C) 2025 Juan A. de la Puente                          --
+--  Copyright (C) 2025 Maxim Reznik                                  --
+--  Distributed under GPL 3.0                                        --
+-----------------------------------------------------------------------
 with Ada.Calendar;
 with Ada.Calendar.Time_Zones;
 with Ada.Calendar.Formatting;
@@ -20,8 +37,7 @@ procedure Sun_Tracker is
 
    package Horizontal is
       new Solar_system.Coordinates.Horizontal;
-   package Equatorial renames Horizontal.Equatorial;
-   --  REVIEW THIS, IT IS NOT ELEGANT
+   package Equatorial renames Horizontal.Equatorial; --  REVIEW
 
    --  Compute apparent place of Sun at a given time. The apparent place
    --  is given in spherical coordinates (declination, right ascension or
