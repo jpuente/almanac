@@ -1,6 +1,6 @@
 name = "astro"
 description = "Library for astronomical calculations"
-version = "1.1.1"
+version = "1.2.1"
 
 authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
