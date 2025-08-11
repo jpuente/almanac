@@ -7,7 +7,7 @@
 -- how the astro library can be used to get obeservational           --
 -- coordinates of the Sun at a given location and time.              --
 --                                                                   --
--- Further edited by Juan A. de la Puente to simplfy the code and    --
+-- Further edited by Juan A. de la Puente to simplify the code and   --
 -- fix a minor error.                                                -- 
 --                                                                   --
 -----------------------------------------------------------------------
