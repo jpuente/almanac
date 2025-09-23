@@ -13,6 +13,7 @@ with Astro.Constants;
 
 package body Astro.Generic_Coordinates.Geographic is
       use Real_Functions;
+      --  instantiated in Astro.Generic_Coordinates.ads
 
    ---------------------------
    --  Geocentric_Position  --

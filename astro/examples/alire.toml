@@ -1,13 +1,13 @@
 name = "examples"
 description = "Examples for the astro library"
-version = "0.1.0-dev"
+version = "1.3.0"
 
 authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
 maintainers-logins = ["jpuente"]
 licenses = "GPL-3.0-or-later"
-website = ""
-tags = []
+website = "https://github.com/jpuente/almanac/tree/master/astro"
+tags = ["astronomy", "sun", "moon", "planets"]
 
 executables = ["sun_tracker"]
 

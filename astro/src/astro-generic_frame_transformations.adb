@@ -26,8 +26,8 @@ package body Astro.Generic_Frame_Transformations is
    --  Reference: Explanatory Supplement to the Astronomical Almanac, 3.317.
 
    procedure Correct_Aberration
-     (U   : in out Vector;          -- geocentric position vector
-      VEB :        Vector)          -- barycentric Earth velocity vector
+     (U   : in out Vector;      -- geocentric position vector (AU)
+      VEB :        Vector)      -- barycentric Earth velocity vector (AU/day)
    is
 
       AU : constant := Constants.AU;               -- Astronomical Unit in km

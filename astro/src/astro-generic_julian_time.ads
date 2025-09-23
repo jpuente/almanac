@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------
 -- Astro - Ada library for astronomical calculations.                --
 --                                                                   --
---  This package provides abstractions for Julian time.              --
+--  This package provides abstractions for Julian date notation.     --
 --                                                                   --
 -- Reference: P.K. Seildemann (ed.), Explanatory Supplement to the   --
 -- Astronomical Almanac (1992), 1.252, 2.26                          --
@@ -15,7 +15,7 @@ generic
    type Real is digits <>;
 package Astro.Generic_Julian_Time is
 
-   --  Julian time is counted in days from noon on January 1, 4713 BC.
+   --  Julian dates are counted in days from noon on January 1, 4713 BC.
    --  This way of counting time was proposed by J. J. Scaliger
    --  in 1583 and is commonly used in astronomical calculations.
 

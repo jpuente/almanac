@@ -7,7 +7,7 @@
 --  Reference:                                                       --
 --  Explanatory Supplement to the Astronomical Almanac,  2.222       --                                                            --
 -----------------------------------------------------------------------
---  Copyright (C) 2024 Juan A. de la Puente                          --
+--  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
 with Ada.Numerics.Generic_Elementary_Functions;

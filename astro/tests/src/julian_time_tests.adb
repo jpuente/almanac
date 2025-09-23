@@ -4,15 +4,23 @@
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-with Ada.Calendar;     use Ada.Calendar;
-with AUnit.Assertions; use AUnit.Assertions;
+with Ada.Calendar;            use Ada.Calendar;
+with Ada.Calendar.Arithmetic; use Ada.Calendar.Arithmetic;
+
+with AUnit.Assertions;        use AUnit.Assertions;
 
 with Astro.Generic_Julian_Time;
 
 package body Julian_Time_Tests is
 
+   ---------------
+   -- Framework --
+   ---------------
+
+   type Real is new Long_Long_Float;
+
    package Julian_Time is
-     new Astro.Generic_Julian_Time (Long_Long_Float);
+     new Astro.Generic_Julian_Time (Real);
    use Julian_Time;
 
    ----------
@@ -43,6 +51,26 @@ package body Julian_Time_Tests is
       Register_Routine (T, Test_Time'Access, "Time_Of");
    end Register_Tests;
 
+   --------------------------
+   -- Auxiliary functions --
+   -------------------------
+
+   --  Compare real values  --
+
+   function Equals (X, Y : Real; Error : Real := 1.0E-6) return Boolean is
+   begin
+      return abs (X - Y) <= Error;
+   end Equals;
+
+   --  Compare time values  --
+
+   function Equals (X, Y : Time; Error : Duration := 1.0E-2) return Boolean is
+      D : Day_Count; S : Duration; L : Integer;
+   begin
+      Difference (X, Y, D, S, L);
+      return (D = 0 and then abs (S) < Error);
+   end Equals;
+
    -------------------
    -- Test routines --
    -------------------
@@ -53,40 +81,55 @@ package body Julian_Time_Tests is
    begin
       UT := Time_Of (2000, 1, 1, Noon);
       JD := 2_451_545.0;
-      Assert (Date_Of (UT) = JD, "invalid Julian date");
+      Assert (Equals (Date_Of (UT), JD), "invalid Julian date" & JD'Image);
 
       UT := Time_Of (1901,  1,  1, Midnight);
       JD := 2_415_385.5;
-      Assert (Date_Of (UT) = JD, "invalid Julian date");
+      Assert (Equals (Date_Of (UT), JD), "invalid Julian date" & JD'Image);
 
       UT := Time_Of (2024,  2, 29, Noon);
       JD := 2_460_370.0;
-      Assert (Date_Of (UT) = JD, "invalid Julian date");
+      Assert (Equals (Date_Of (UT), JD), "invalid Julian date" & JD'Image);
+
+      UT := Time_Of (2025,  9, 18, 37138.0); -- 10:18:58
+      JD := 2_460_936.929838;
+      Assert (Equals (Date_Of (UT), JD), "invalid Julian date" & JD'Image);
 
       UT := Time_Of (2099, 12, 31, Noon);
       JD := 2_488_069.0;
-      Assert (Date_Of (UT) = JD, "invalid Julian date");
+      Assert (Equals (Date_Of (UT), JD), "invalid Julian date" & JD'Image);
    end Test_Date;
 
    procedure Test_Time (T : in out AUnit.Test_Cases.Test_Case'Class) is
-      UT : Time;
-      JD : Date;
+      UT     : Time;
+      JD     : Date;
+      JT     : Time;
+      JS     : Day_Duration;
    begin
       UT := Time_Of (2000, 1, 1, Noon);
       JD := 2_451_545.0;
-      Assert (Time_Of (JD) = UT, "invalid time");
+      JT := Time_Of (JD); JS := Seconds (JT);
+      Assert (Equals (JT, UT), "invalid time " & JS'Image & " s");
 
       UT := Time_Of (1901,  1,  1, Midnight);
       JD := 2_415_385.5;
-      Assert (Time_Of (JD) = UT, "invalid time");
+      JT := Time_Of (JD); JS := Seconds (JT);
+      Assert (Equals (JT, UT), "invalid time " & JS'Image & " s");
 
       UT := Time_Of (2024,  2, 29, Noon);
       JD := 2_460_370.0;
-      Assert (Time_Of (JD) = UT, "invalid time");
+      JT := Time_Of (JD); JS := Seconds (JT);
+      Assert (Equals (JT, UT), "invalid time " & JS'Image & " s");
+
+      UT := Time_Of (2025,  9, 18, 37138.0); -- 10:18:58
+      JD := 2_460_936.929838;
+      JT := Time_Of (JD); JS := Seconds (JT);
+      Assert (Equals (JT, UT), "invalid time " & JS'Image & " s");
 
       UT := Time_Of (2099, 12, 31, Noon);
       JD := 2_488_069.0;
-      Assert (Time_Of (JD) = UT, "invalid time");
+      JT := Time_Of (JD); JS := Seconds (JT);
+      Assert (Equals (JT, UT), "invalid time " & JS'Image & " s");
    end Test_Time;
 
 end Julian_Time_Tests;

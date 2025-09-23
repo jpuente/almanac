@@ -6,7 +6,6 @@
 -----------------------------------------------------------------------
 with AUnit.Assertions; use AUnit.Assertions;
 
-with Astro.Generic_Julian_Time;
 with Astro.Generic_Dynamical_Time;
 
 package body Dynamical_Time_Tests is
@@ -17,14 +16,11 @@ package body Dynamical_Time_Tests is
 
    type Real is new Long_Long_Float;
 
-   package Julian_Time is
-     new Astro.Generic_Julian_Time (Real);
-
    package Dynamical_Time is
       new Astro.Generic_Dynamical_Time (Real);
 
-   use Julian_Time;
    use Dynamical_Time;
+   use Julian_Time;     -- instantiated in Dynamical_Time
 
    ----------
    -- Name --

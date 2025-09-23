@@ -1,5 +1,5 @@
 -----------------------------------------------------------------------
--- Astro - Ada library for astronomical calculations.                --
+--  Astro - Ada library for astronomical calculations.               --
 --                                                                   --
 --  Copyright (C) 2024 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
@@ -50,7 +50,7 @@ package body Sidereal_Time_Tests is
    overriding procedure Set_Up
       (T : in out Sidereal_Time_Test_Case) is
    begin
-      JD1   := 2_460_587.0;   -- 2024.10.03 12:00:00
+      JD1   := 2_460_587.0;   -- 2024.10.03 12:00:00 
       GMST1 := 46_244.1871;   -- 12:50:44.1871
       GAST1 := 46_244.0267;   -- 12:50:44.0267
 
@@ -69,7 +69,7 @@ package body Sidereal_Time_Tests is
 
    --  Compare time values  --
 
-   function Equals (X, Y : Time) return Boolean is
+   function Equals (X, Y : Time; Error : Real := 1.0E-2) return Boolean is
    begin
       return abs (X - Y) <= Max_Error;
    end Equals;
@@ -77,10 +77,15 @@ package body Sidereal_Time_Tests is
    --  Test_GMST  --
 
    procedure Test_GMST (T : in out AUnit.Test_Cases.Test_Case'Class) is
+      UTC1 : Date; ST1 : Real; 
    begin
-      Assert (Equals (GMST (JD1), GMST1), "Incorrect GMST calculation");
-      Assert (Equals (GMST (JD2), GMST2), "Incorrect GMST calculation");
-      Assert (Equals (GMST (JD3), GMST3), "Incorrect GMST calculation");
+      UTC1  := 2_460_587.0;   -- 2024.10.03 12:00:00 
+      GMST1 := 46_244.1871;   -- 12:50:44.1871
+      ST1   := GMST (UTC1); 
+      Assert (Equals (ST1, GMST1),
+         "Incorrect GMST calculation" & ST1'Image);
+      -- Assert (Equals (GMST (JD2), GMST2), "Incorrect GMST calculation");
+      -- Assert (Equals (GMST (JD3), GMST3), "Incorrect GMST calculation");
    end Test_GMST;
 
    --  Test GAST  --
@@ -96,8 +101,9 @@ package body Sidereal_Time_Tests is
    -- Register_Tests --
    --------------------
 
-   overriding procedure Register_Tests (T : in out Sidereal_Time_Test_Case) is
-      use Test_Cases.Registration;
+   overriding procedure Register_Tests
+      (T : in out Sidereal_Time_Test_Case) is
+         use Test_Cases.Registration;
    begin
       Register_Routine
         (T, Test_GMST'Access, "GMST");

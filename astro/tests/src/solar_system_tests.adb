@@ -13,13 +13,18 @@ with Ephemeris; use Ephemeris;
 
 package body Solar_System_Tests is
 
+   ---------------
+   -- Framework --
+   ---------------
+
    type Real is new Long_Long_Float;
 
    package Solar_System is
       new Astro.Generic_Solar_System (Real);
 
    package Julian renames Solar_System.Julian;
-   package Dynamical_Time is new Astro.Generic_Dynamical_Time (Real);
+   package Dynamical_Time is
+      new Astro.Generic_Dynamical_Time (Real);
 
    use Solar_System;
    use Coordinates, Spheric, Geographic;
