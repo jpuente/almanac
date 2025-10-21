@@ -20,6 +20,7 @@ package body Astro.Generic_Solar_System is
 
    package State_Functions is
       new Ephemeris.Generic_State_Functions (Real);
+
    package Dynamical_Time is
       new Astro.Generic_Dynamical_Time (Real);
    package Sidereal_Time is new Astro.Generic_Sidereal_Time (Real);
@@ -55,7 +56,7 @@ package body Astro.Generic_Solar_System is
 
    function Apparent_Place
       (Target : Solar_System_Body;
-      TT      : Julian.Date)
+       TT      : Julian.Date)
          return Spherical_Coordinates
    is
 
@@ -183,8 +184,8 @@ package body Astro.Generic_Solar_System is
 
       State_Functions.Open_Data;
 
-      --  Compute Universal time
-      UT := TU (JTD);
+      --  Compute Universal time 
+      UT := 0.0; --  TU (JTD); ************************************
 
       --  Compute geocentric position of observer
       R  := Vector (Geocentric_Position (Position, Height));

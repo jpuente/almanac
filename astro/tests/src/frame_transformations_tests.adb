@@ -6,7 +6,6 @@
 -----------------------------------------------------------------------
 with AUnit.Assertions; use AUnit.Assertions;
 
-with Astro.Generic_Julian_Time;
 with Astro.Generic_Frame_Transformations;
 
 package body Frame_Transformations_Tests is
@@ -17,13 +16,11 @@ package body Frame_Transformations_Tests is
 
    type Real is new Long_Long_Float;
 
-   package Julian_Time is
-     new Astro.Generic_Julian_Time (Real);
-   use Julian_Time;
-
    package Frame_Transformations is
      new Astro.Generic_Frame_Transformations (Real);
+
    use Frame_Transformations;
+   use Julian_Time; -- instantiated in Frame_Transformations
 
    ----------
    -- Name --
@@ -71,7 +68,7 @@ package body Frame_Transformations_Tests is
    -- Test routines --
    -------------------
 
-   --  Test orrect Aberration
+   --  Test correct Aberration
    --  not implemented
 
    procedure Test_Correct_Aberration (T : in out Test_Case'Class) is

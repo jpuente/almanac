@@ -23,7 +23,6 @@ package Dynamical_Time_Tests is
    --  Test routines
 
    procedure Test_TT (T : in out Test_Case'Class);
-   procedure Test_TU (T : in out Test_Case'Class);
    procedure Test_TDB (T : in out Test_Case'Class);
 
 end Dynamical_Time_Tests;

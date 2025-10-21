@@ -1,29 +1,32 @@
 -----------------------------------------------------------------------
 -- Astro - Ada library for astronomical calculations.                --
 --                                                                   --
---  This package provides abstractions for sidereal time.            --
+--  This package provides conversion functioins for terrestrial time.--
 --                                                                   --
---  Copyright (C) 2024 Juan A. de la Puente                          --
+--  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
 with Astro.Generic_Julian_Time;
 
 generic
    type Real is digits <>;
-package Astro.Generic_Sidereal_Time is
+package Astro.Generic_Terrestrial_Time is
 
    --  Julian time notation is used for all time scales
    package Julian_Time is new Astro.Generic_Julian_Time (Real);
    use Julian_Time;
 
-   subtype Time is Real range 0.0 .. 86_400.0;
-   --  Sidereal time in seconds. Equals the number of seconds elapsed since
-   --  the transit of the vernal point (Aries).
+   ---------------------------
+   --  Conversion functions --
+   ---------------------------
 
-   function GMST (UTC : Date) return Time;
-   --  Greenwich Mean Sidereal Time in seconds.
+   function UT1 (UTC : Date) return Date;
+   --  UT1 from UTC
 
-   function GAST  (UTC : Date) return Time;
-   --  Greenwich Apparent Sidereal Time in seconds.
+   function TT (UTC : Date) return Date;
+   --  Terrestrial time from UTC
 
-end Astro.Generic_Sidereal_Time;
+   function UTC (TT : Date) return Date;
+   --  UTC from terrestrial time
+
+end Astro.Generic_Terrestrial_Time;

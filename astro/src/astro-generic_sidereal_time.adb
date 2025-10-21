@@ -8,7 +8,10 @@
 --  Kaplan, G. (2005), US Naval Observatory Circular 179.            --
 -----------------------------------------------------------------------
 with Ada.Numerics.Generic_Elementary_Functions;
+
 with Astro.Generic_Frame_Transformations;
+with Astro.Generic_Terrestrial_Time;
+with Astro.Generic_Dynamical_Time;
 
 package body Astro.Generic_Sidereal_Time is
 
@@ -20,56 +23,54 @@ package body Astro.Generic_Sidereal_Time is
    package Frame_Transformations is
       new Generic_Frame_Transformations (Real);
 
+   package Terrestrial_Time is
+      new Generic_Terrestrial_Time (Real);
+
+   package Dynamical_Time is
+      new Generic_Dynamical_Time (Real);
+
    function Floor (X : Real) return Real
       renames Real'Base'Floor;
 
    JD0     : constant Julian.Date := Julian.Epoch;
 
-   ------------------
-   --  Time scales --
-   ------------------
-
    --  difference TT - UT in seconds;
-   Delta_T : constant Real := 32.184 + 37.000 + 0.1;
-
-   --  source: IERS bulletin A 2024.10.03
-   --  TT := TAI + 32.184 s
-   --  DUT1= (UT1-UTC) transmitted with time signals
-   --          = +0.1 seconds beginning 5 September 2024 at 0000 UTC
-   --      Beginning 1 January 2017:
-   --         TAI-UTC = 37.000 000 seconds
-   --  TDB is approximated by TT
+   Delta_T : constant Real := 32.184 + 37.000;
 
    ----------
    -- GMST --
    ----------
 
-   function GMST (JD : Julian.Date) return Time
+   function GMST (UTC : Date) return Time
    is
-      JD_TT, JD_TDB : Julian.Date;
-      DT, T         : Julian.Date;
+      UT      : Date;
+      DT      : Date;
+      TT, TDB : Date;
+      T       : Date;
+
       Theta, S      : Real;
    begin
       --  Time scales
-      JD_TT  := JD + (Delta_T / 86_400.0); -- days
-      JD_TDB := JD_TT;
+      UT  := Terrestrial_Time.UT1 (UTC);
+      TT  := Terrestrial_Time.TT (UTC);
+      TDB := Dynamical_Time.TDB (TT);
 
       --  Julian days (UT) since epoch
-      DT := JD - JD0;
+      DT := UTC - JD0;
 
       --  Julian centuries (TT) since epoch
-      T := (JD_TDB - JD0) / 36525.0;
+      T := (TT - JD0) / 36525.0;
 
       --  Earth rotation angle
       Theta := 0.7790572732640 + 1.00273781191135448 * DT; -- rotations
-      Theta := (Theta - Floor (Theta)) * 360.0;          -- degrees
+      Theta := (Theta - Floor (Theta)) * 360.0;            -- degrees
 
       --  Precession in RA of the equinox in arcseconds
       S := 0.014506 + 4612.156534 * T + 1.3915817 * T**2
          - 0.00000044 * T**3 - 0.000029956 * T**4 - 0.0000000368 * T**5;
 
       --  GMST
-      S := S / 3600.0 + Theta;                    -- degrees
+      S := S / 3600.0 + Theta;                      -- degrees
       S := (S - Floor (S / 360.0) * 360.0) / 15.0;  -- hours
       S := S * 3600.0;                              -- seconds
 
@@ -86,12 +87,12 @@ package body Astro.Generic_Sidereal_Time is
    -- Equation of the equinoxes --
    -------------------------------
 
-   function Equinoxes (JD : Julian.Date) return Real
+   function Equinoxes (JD : Date) return Real
    is
       use Frame_Transformations;
       use Real_Functions;
 
-      T  : Julian.Date;
+      T  : Date;
 
       Epsilon, Epsilon_0       : Real;
       Delta_Psi, Delta_Epsilon : Real;
@@ -121,10 +122,10 @@ package body Astro.Generic_Sidereal_Time is
    -- GAST --
    ----------
 
-   function GAST (JD : Julian.Date) return Time is
+   function GAST (UTC : Date) return Time is
       Theta : Time;
    begin
-      Theta := GMST (JD) + Equinoxes (JD);
+      Theta := GMST (UTC) + Equinoxes (UTC);
       return Theta;
    end GAST;
 
