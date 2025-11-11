@@ -99,9 +99,6 @@ The format of such files is described in the `ascii_format.txt` file, also inclu
 
 Other ephemeris data files can be generated as convenient from these text files.
 The [`create` ](create/) folder contains a tool that can be used for this purpose.  
- which can be generated at any time using the
-`create` application (see the [README file](create/README.md) of the application directory
-for the details.)
 
 ---
 ## License

@@ -37,12 +37,14 @@ alr run
 
 The test program uses two data files:
 
-- The text file `share/test/testpo.200` has been downloaded from the
+  - The text file `share/test/testpo.200` has been downloaded from the
 JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/)).
 
-- The binary data file `share/test/de200.dat` is a copy of `ephemeris/share/ephemeris/de200.dat`,
-which in turn has been generated from ascii files downloaded from
-the JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/)).
+  - A binary data file, either `share/test/de200-aarch64.dat` or `share/test/de200-x86_64.dat`, depending
+    on the underlying architecture. Both files have been generated from ascii files downloaded from
+    the JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/)).
+
+    The data file is selected at run time using a variable set by alire in the ephemeis/config/ephemeris_config.ads file. 
 
 ---
 ## License
