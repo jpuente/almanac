@@ -240,8 +240,8 @@ package body Ephemeris.Generic_State_Functions is
 
    procedure Open_Data
    is
-      Default_Data_File : constant String 
-         := Ephemeris_Resources.Resource_Path 
+      Default_Data_File : constant String
+         := Ephemeris_Resources.Resource_Path
             & "de200-" & Ephemeris_Config.Alire_Host_Arch & ".dat";
    begin
       Open_Data (Default_Data_File);

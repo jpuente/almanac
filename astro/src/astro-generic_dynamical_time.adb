@@ -5,7 +5,7 @@
 --  barycentric dynamical time (TDB and terrestrial time (TT)        --
 --                                                                   --
 --  Reference:                                                       --
---  Explanatory Supplement to the Astronomical Almanac,  2.222       --                                                            --
+--  Explanatory Supplement to the Astronomical Almanac,  2.222       --
 -----------------------------------------------------------------------
 --  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
@@ -19,7 +19,7 @@ package body Astro.Generic_Dynamical_Time is
       new Ada.Numerics.Generic_Elementary_Functions (Real);
    use Real_Functions;
 
-   Pi  : constant := Astro.Constants.Pi;
+   --  Pi  : constant := Astro.Constants.Pi;
    deg : constant := 360.0;
 
    ----------

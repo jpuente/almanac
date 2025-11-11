@@ -9,11 +9,11 @@
 --  Copyright (C) 2025 Juan A. de la Puente                          --
 --  Distributed under GPL 3.0                                        --
 -----------------------------------------------------------------------
-with Astro.Generic_Julian_Time;
+--  with Astro.Generic_Julian_Time;
 
 package body Astro.Generic_Terrestrial_Time is
 
-   package Julian renames Julian_Time;
+   --  package Julian renames Julian_Time;
 
    Day_Duration : constant Real := 86_400.0;
 
@@ -27,13 +27,12 @@ package body Astro.Generic_Terrestrial_Time is
    LS  : constant Real := 37.000;  -- s
 
    --  Difference UT1 - UTC
-   --  Beginning 10 July 2025 at 0000 UTC  
+   --  Beginning 10 July 2025 at 0000 UTC
    --  Check with IERS Bulletin A for possible changes
    DUT1 : constant Real := +0.1;   -- s
 
    --  Difference TT - TAI
    DTT  : constant Real := 32.184; -- s
-
 
    -----------
    --  UT1  --

@@ -32,7 +32,7 @@ procedure Test is
 
    type Real is new Long_Long_Float;
    Ephemeris_Code : constant JPL_Ephemeris := DE200;
-   Architecture   : constant String := Ephemeris_Config.Alire_Host_Arch ;
+   Architecture   : constant String := Ephemeris_Config.Alire_Host_Arch;
 
    package Test_Resources is
       new Resources (Test_Config.Crate_Name);

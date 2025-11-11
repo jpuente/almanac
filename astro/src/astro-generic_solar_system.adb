@@ -184,7 +184,7 @@ package body Astro.Generic_Solar_System is
 
       State_Functions.Open_Data;
 
-      --  Compute Universal time 
+      --  Compute Universal time
       UT := 0.0; --  TU (JTD); ************************************
 
       --  Compute geocentric position of observer
