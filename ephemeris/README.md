@@ -22,7 +22,7 @@ also available from [Alire](https://alire.ada.dev).
 Use [Alire](https://alire.ada.dev) to get and compile the library:
 ```sh
 alr get ephemeris
-cd ephemeris*
+cd almanac*/ephemeris
 alr build
 ```
 
@@ -77,10 +77,21 @@ ephemeris (default is `DE200`).
 
 ### Data
 
-The distributed version includes a binary ephemeris file (`share/ephemeris/de200.dat`) 
-that can be used for the time interval going from 2019-12-15 to 2040-01-07
-(Julian dates 2458832.5 to 2466160.5).
+Ephemeris data are read from a binary file, which has an 
+architecture-dependent format. 
+The distributed crate includes two binary data files in the 
+`share/ephemeris/` folder:
 
+  * `de200-aarch64.dat` for the ARM 64-bit architecture, as in the MacBook M series.
+  * `de200-x86_64.dat` for the Intel 86-64 architecture, as in MacBook Intel series
+     and PCs running Windows or Linux.
+
+The file for the current architecture is automatically selected when opening 
+the file (see the `Ephemeris.Generic_State_Functions.Open_Data` source
+code for the details).
+
+Both files cover the time interval going from 2019-12-15 to 2040-01-07
+(Julian dates 2458832.5 to 2466160.5).
 
 The `share/ephemeris/DE200` folder contains additional text files downloaded
 from the JPL server ([https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/](https://ssd.jpl.nasa.gov/ftp/eph/planets/ascii/)).
@@ -88,6 +99,9 @@ The format of such files is described in the `ascii_format.txt` file, also inclu
 
 Other ephemeris data files can be generated as convenient from these text files.
 The [`create` ](create/) folder contains a tool that can be used for this purpose.  
+ which can be generated at any time using the
+`create` application (see the [README file](create/README.md) of the application directory
+for the details.)
 
 ---
 ## License
