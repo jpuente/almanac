@@ -49,6 +49,8 @@ procedure Test is
       := Test_Resources.Resource_Path & "testpo.200";
    Data_File_Name : constant String
       := Test_Resources.Resource_Path & "de200-" & Architecture & ".dat";
+   --  Data_File_Name : constant String
+   --     := Test_Resources.Resource_Path & "de200.dat";
 
    Test_File      : File_Type;
 
@@ -80,6 +82,7 @@ begin
    --  Put ("*** Data file          " & Data_File_Name & " ***"); New_Line;
 
    Open (Test_File, In_File, Test_File_Name);
+   --  Put_Line (">>> " & Data_File_Name);
    Open_Data (Data_File_Name);
 
    --  Start and end dates

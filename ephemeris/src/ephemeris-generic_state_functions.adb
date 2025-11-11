@@ -14,7 +14,7 @@ with Ephemeris.Generic_Data_File;
 
 with Resources;
 with Ephemeris_Config;
-with Ada.Text_IO;
+--  with Ada.Text_IO;
 package body Ephemeris.Generic_State_Functions is
 
    package Data_File is
@@ -251,7 +251,7 @@ package body Ephemeris.Generic_State_Functions is
    is
       Parameters : Parameter_Record;
    begin
-      Ada.Text_IO.Put_Line ("+++ Open file " & Data_File_Name & " +++");
+      --  Ada.Text_IO.Put_Line ("+++ Open file " & Data_File_Name & " +++");
       Data_File.Open (Data_File_Name);
       Get_Parameters (Parameters);
       Start_Date_Value := Parameters.Start_Date;
