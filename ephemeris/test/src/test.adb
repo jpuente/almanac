@@ -21,6 +21,7 @@
 
 with Ephemeris; use Ephemeris;
 with Ephemeris.Generic_State_Functions;
+with Ephemeris_Config;
 
 with Resources;
 with Test_Config;
@@ -31,6 +32,7 @@ procedure Test is
 
    type Real is new Long_Long_Float;
    Ephemeris_Code : constant JPL_Ephemeris := DE200;
+   Architecture   : constant String := Ephemeris_Config.Alire_Host_Arch ;
 
    package Test_Resources is
       new Resources (Test_Config.Crate_Name);
@@ -46,7 +48,7 @@ procedure Test is
    Test_File_Name : constant String
       := Test_Resources.Resource_Path & "testpo.200";
    Data_File_Name : constant String
-      := Test_Resources.Resource_Path & "de200.dat";
+      := Test_Resources.Resource_Path & "de200-" & Architecture & ".dat";
 
    Test_File      : File_Type;
 

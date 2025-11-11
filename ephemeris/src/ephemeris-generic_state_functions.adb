@@ -14,7 +14,7 @@ with Ephemeris.Generic_Data_File;
 
 with Resources;
 with Ephemeris_Config;
-
+with Ada.Text_IO;
 package body Ephemeris.Generic_State_Functions is
 
    package Data_File is
@@ -241,7 +241,8 @@ package body Ephemeris.Generic_State_Functions is
    procedure Open_Data
    is
       Default_Data_File : constant String 
-         := Ephemeris_Resources.Resource_Path & "de200.dat";
+         := Ephemeris_Resources.Resource_Path 
+            & "de200-" & Ephemeris_Config.Alire_Host_Arch & ".dat";
    begin
       Open_Data (Default_Data_File);
    end Open_Data;
@@ -250,6 +251,7 @@ package body Ephemeris.Generic_State_Functions is
    is
       Parameters : Parameter_Record;
    begin
+      Ada.Text_IO.Put_Line ("+++ Open file " & Data_File_Name & " +++");
       Data_File.Open (Data_File_Name);
       Get_Parameters (Parameters);
       Start_Date_Value := Parameters.Start_Date;
