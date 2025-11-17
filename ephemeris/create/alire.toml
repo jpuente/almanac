@@ -1,6 +1,6 @@
 name = "create"
 description = "Utility for craeting a binary ephemeris file from a JPL ascii file"
-version = "1.0.0"
+version = "1.2.0"
 
 authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]

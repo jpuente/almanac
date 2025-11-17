@@ -61,7 +61,7 @@ sed -E 's/D(\+|\-)/E\1/g' original_file > edited_file
 
 ### Acknowledgement
 
-The create utility is based on the `asc2eph` program included in
+The `create` utility is based on the `asc2eph` program included in
 the JPL ephemeris export package. 
 
 

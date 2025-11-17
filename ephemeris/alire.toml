@@ -1,6 +1,6 @@
 name = "ephemeris"
 description = "Library for reading astronomical ephemerides from JPL DE200 files"
-version = "1.1.1"
+version = "1.2.0"
 
 authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]

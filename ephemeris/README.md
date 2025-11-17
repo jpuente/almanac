@@ -121,6 +121,8 @@ from the [Jet Propulsion Laboratory Planetary and Lunar Ephemerides](https://ssd
 
 The Ada code is partly based on the Fortran and C software provided at the same server.
 
+Juan Zamorano pointed out the need for separate data files for different hardware architectures.
+
 ---
 ## References
 
