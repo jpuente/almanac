@@ -1,6 +1,6 @@
 name = "examples"
 description = "Examples for the astro library"
-version = "1.3.0"
+version = "1.4.1"
 
 authors = ["Juan A. de la Puente"]
 maintainers = ["Juan A. de la Puente <juan.de.la.puente@upm.es>"]
